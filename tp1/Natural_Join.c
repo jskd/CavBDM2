@@ -57,7 +57,7 @@ void buf_destroy(struct buf* buf) {
  * Ajoute un caractere dans le buffer s'il reste de la place
  * TODO: La flemme
  */
-void buf_put(struct buf* buf, char value) {
+char buf_put(struct buf* buf, char value) {
   if(buf->c >= buf->s)
     return -1;
 
@@ -68,16 +68,13 @@ void buf_put(struct buf* buf, char value) {
 }
 
 /**
- * @brief Store the first letter of each line intro buffer
- * @param[in]  reading file
- * @param[out] output buffer adress
- * @param[in]  output buffer max size
- * @return     size of output buffer
+ * @brief Enregistre un le 1er caractére de chaque ligne d'un fichier dans un buffer
+ * @param[in]  Fichier lu
+ * @param[out] Buffer de sortie
  */
-size_t storeFileBuffer(FILE* fp, struct buf* buf) {
+void storeFileBuffer(FILE* fp, struct buf* buf) {
   char* line = NULL;
   size_t len = 0;
-  size_t wcount= 0;
 
   while((getline(&line, &len, fp)) != -1) {
     buf_put(buf, line[0]);
@@ -85,7 +82,7 @@ size_t storeFileBuffer(FILE* fp, struct buf* buf) {
 }
 
 /**
- * Write buffer in file
+ * Ecrit un buffer dans un fichier
  * TODO: La flemme
  */
 void writeBufferInFile(FILE* fp, struct buf* buf) {

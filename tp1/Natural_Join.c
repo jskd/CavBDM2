@@ -21,6 +21,29 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
+TODO: struct
+
+ buffer 
+   v : value
+   s : size
+   c : count
+
+
+  put_buffer ( struct buffer, value) 
+
+    si c < s  add value return 0
+    sinon return -1
+
+
+  change storefilebuffer ( fp, buffer)
+  write buffer in file (fp, buffer)
+  natural join (buffer a, buffer b, buffer c)
+
+*/
+
+
+
 /**
  * @brief Store the first letter of each line intro buffer
  * @param[in]  reading file
@@ -43,6 +66,37 @@ size_t storeFileBuffer(FILE* fp, char* buffer, size_t buffer_s) {
   return wcount;
 }
 
+/**
+ * Write buffer in file
+ * TODO: La flemme
+ */
+void writeBufferInFile(FILE* fp, char* buffer, size_t size) {
+  for(int i=0; i<size; i++)
+    fprintf(fp, "%c\n", buffer[i]);
+}
+
+/**
+ * Natual join
+ * TODO: La flemme
+ */
+size_t natural_join(char* buf_a, size_t size_a, char* buf_b, size_t size_b, char* buf_out, size_t size_out) {
+  size_t count=0;
+  for(int a=0; a<size_a; a++) {
+    for(int b=0; b<size_b; b++) {
+      if(buf_a[a] == buf_b[b]) {
+        buf_out[count]= buf_a[a];
+        count++;
+        if(count >= buf_out)
+          return count;
+        else
+          break; // pass to next a
+      }
+    }
+  }
+  return count;
+}
+
+
 int main(int argc, char** argv){
 
   FILE* r_file;
@@ -63,33 +117,18 @@ int main(int argc, char** argv){
     exit(1);
 
 
-  char* buf = (char*) malloc( 10 * sizeof(char) );
+  char* a_buf = (char*) malloc( 10 * sizeof(char) );
+  char* b_buf = (char*) malloc( 10 * sizeof(char) );
 
-  size_t k= storeFileBuffer(r_file, buf, 10);
-
-  for(int i=0 ; i < 10; i++)
-    printf("%c", buf[i]); 
+  size_t a_count= storeFileBuffer(r_file, a_buf, 10);
+  size_t b_count= storeFileBuffer(s_file, b_buf, 10);
 
 
-  char* r_line = NULL;
-  char* s_line = NULL;
-  size_t r_len = 0;
-  size_t s_len = 0;
+  char* join_buf = (char*) malloc( 10 * sizeof(char) );
 
-  // Parcours de R
-  while (getline(&r_line, &r_len, r_file) != -1) {
+  size_t join_count= natural_join(a_buf, a_count, b_buf, b_count, join_buf, 10);
 
-    // Parcours de S
-    while (getline(&s_line, &s_len, s_file) != -1) {
-
-      // Si attribut identique
-      if(strcmp(r_line, s_line) == 0){
-        fprintf(rs_file, "%s", r_line);
-      }
-    }
-
-    rewind(s_file); // Replace le curseur du fichier à 0
-  }
+  writeBufferInFile(rs_file, join_buf, join_count);
 
   fclose(r_file);
   fclose(s_file);

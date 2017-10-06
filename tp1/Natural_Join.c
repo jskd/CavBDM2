@@ -14,20 +14,28 @@
 * email : contact@jeromeskoda.fr
 *
 * Remarques : Code Block -> Trash. Makefile <3
+*
+*
+* History: 146488d PASS (avec struct)
+*          7d1b9de PASS (sans struct)
 */
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-
+/**
+ * @brief Structure de donnée repésentant un buffer
+ */
 struct buf {
-  char* v;  // value
-  size_t s; // size
-  size_t c; // count
+  char* v;  //< Valeur
+  size_t s; //< Taille
+  size_t c; //< Nombre de valeur entrée
 };
 
+/**
+ * Creation d'un buffer
+ * TODO: La flemme
+ */
 struct buf* buf_create( size_t size ) {
   struct buf* buf= (struct buf*) malloc(sizeof(struct buf));
   buf->v= (char*) malloc(size);
@@ -36,11 +44,19 @@ struct buf* buf_create( size_t size ) {
   return buf;
 }
 
+/**
+ * Détruit le buffer
+ * TODO: La flemme
+ */
 void buf_destroy(struct buf* buf) {
   free(buf->v);
   free(buf);
 }
 
+/**
+ * Ajoute un caractere dans le buffer s'il reste de la place
+ * TODO: La flemme
+ */
 void buf_put(struct buf* buf, char value) {
   if(buf->c >= buf->s)
     return -1;

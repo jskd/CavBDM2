@@ -21,28 +21,35 @@
 #include <stdlib.h>
 #include <string.h>
 
-/*
-TODO: struct
 
- buffer 
-   v : value
-   s : size
-   c : count
+struct buf {
+  char* v;  // value
+  size_t s; // size
+  size_t c; // count
+};
 
+struct buf* buf_create( size_t size ) {
+  struct buf* buf= (struct buf*) malloc(sizeof(struct buf));
+  buf->v= (char*) malloc(size);
+  buf->s= size;
+  buf->c=0;
+  return buf;
+}
 
-  put_buffer ( struct buffer, value) 
+void buf_destroy(struct buf* buf) {
+  free(buf->v);
+  free(buf);
+}
 
-    si c < s  add value return 0
-    sinon return -1
+void buf_put(struct buf* buf, char value) {
+  if(buf->c >= buf->s)
+    return -1;
 
+  buf->v[buf->c]= value;
+  buf->c++;
 
-  change storefilebuffer ( fp, buffer)
-  write buffer in file (fp, buffer)
-  natural join (buffer a, buffer b, buffer c)
-
-*/
-
-
+  return 0;
+}
 
 /**
  * @brief Store the first letter of each line intro buffer
@@ -51,88 +58,73 @@ TODO: struct
  * @param[in]  output buffer max size
  * @return     size of output buffer
  */
-size_t storeFileBuffer(FILE* fp, char* buffer, size_t buffer_s) {
+size_t storeFileBuffer(FILE* fp, struct buf* buf) {
   char* line = NULL;
   size_t len = 0;
   size_t wcount= 0;
 
   while((getline(&line, &len, fp)) != -1) {
-    buffer[wcount]= line[0];
-    wcount++;
-
-    if(wcount >= buffer_s)
-      break;
+    buf_put(buf, line[0]);
   }
-  return wcount;
 }
 
 /**
  * Write buffer in file
  * TODO: La flemme
  */
-void writeBufferInFile(FILE* fp, char* buffer, size_t size) {
-  for(int i=0; i<size; i++)
-    fprintf(fp, "%c\n", buffer[i]);
+void writeBufferInFile(FILE* fp, struct buf* buf) {
+  for(int i=0; i<buf->c; i++)
+    fprintf(fp, "%c\n", buf->v[i]);
 }
 
 /**
  * Natual join
  * TODO: La flemme
  */
-size_t natural_join(char* buf_a, size_t size_a, char* buf_b, size_t size_b, char* buf_out, size_t size_out) {
-  size_t count=0;
-  for(int a=0; a<size_a; a++) {
-    for(int b=0; b<size_b; b++) {
-      if(buf_a[a] == buf_b[b]) {
-        buf_out[count]= buf_a[a];
-        count++;
-        if(count >= buf_out)
-          return count;
-        else
-          break; // pass to next a
+void natural_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out) {
+  for(int a=0; a< buf_a->c; a++) {
+    for(int b=0; b< buf_b->c; b++) {
+      if(buf_a->v[a] == buf_b->v[b]) {
+        buf_put(buf_out, buf_a->v[a]);
+        break; // pass to next a
       }
     }
   }
-  return count;
 }
-
 
 int main(int argc, char** argv){
 
-  FILE* r_file;
-  FILE* s_file;
-  FILE* rs_file;
-
-  r_file = fopen("R.txt", "r");
+  // Store R.txt file in buf_r
+  FILE* r_file = fopen("R.txt", "r");
   if (r_file == NULL)
     exit(1);
+  struct buf* buf_r= buf_create(16);
+  storeFileBuffer(r_file, buf_r);
+  fclose(r_file);
 
-
-  s_file = fopen("S.txt", "r");
+  // Store S.txt file in buf_s
+  FILE* s_file = fopen("S.txt", "r");
   if (s_file == NULL)
     exit(1);
+  struct buf* buf_s= buf_create(16);
+  storeFileBuffer(s_file, buf_s);
+  fclose(s_file);
 
-  rs_file = fopen("RS.txt", "w");
+  // Store natural join of buf_r and buf_s in buf_rs
+  struct buf* buf_rs= buf_create(16);
+  natural_join(buf_r, buf_s, buf_rs);
+
+  // Write buf_rs in RS.txt file
+  FILE* rs_file = fopen("RS.txt", "w");
   if (rs_file == NULL)
     exit(1);
-
-
-  char* a_buf = (char*) malloc( 10 * sizeof(char) );
-  char* b_buf = (char*) malloc( 10 * sizeof(char) );
-
-  size_t a_count= storeFileBuffer(r_file, a_buf, 10);
-  size_t b_count= storeFileBuffer(s_file, b_buf, 10);
-
-
-  char* join_buf = (char*) malloc( 10 * sizeof(char) );
-
-  size_t join_count= natural_join(a_buf, a_count, b_buf, b_count, join_buf, 10);
-
-  writeBufferInFile(rs_file, join_buf, join_count);
-
-  fclose(r_file);
-  fclose(s_file);
+  writeBufferInFile(rs_file, buf_rs);
   fclose(rs_file);
+
+  // Remove buf
+  buf_destroy(buf_r);
+  buf_destroy(buf_s);
+  buf_destroy(buf_rs);
 
   exit(0);
 }

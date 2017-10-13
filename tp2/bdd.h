@@ -85,7 +85,8 @@ void natural_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out);
 void merge_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out);
 
 /**
- * Quick sort buffer
+ * @brief Quick sort buffer
+ *
  * @param buf Trie le buffer en entrée
  */
 void buf_quicksort(struct buf* buf);

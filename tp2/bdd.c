@@ -119,15 +119,15 @@ void natural_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out) {
 /**
  * @brief Merge join
  *
- * @param[in]  buf_a   relation externe
- * @param[in]  buf_b   relation interne
+ * @param[in]  buf_a   relation a
+ * @param[in]  buf_b   relation b
  * @param[out] buf_out resultat du merge_join
  */
 void merge_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out) {
-  char* buf_a_ptr= buf_a->v;
-  char* buf_b_ptr= buf_b->v;
+  char* buf_a_ptr= buf_a->v; // pointer vers le buffer a
+  char* buf_b_ptr= buf_b->v; // pointer vers le buffer b
 
-  // calculate pointer limit
+  // Calcule la dernier case memoire du buffer + 1
   const char* buf_a_ptr_limit= buf_a->v + buf_a->c;
   const char* buf_b_ptr_limit= buf_b->v + buf_b->c;
 
@@ -146,6 +146,7 @@ void merge_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out) {
 
 /**
  * Quick sort buffer
+ * @param[in] buf buffer à trier
  */
 void buf_quicksort(struct buf* buf) {
   quicksort(buf->v, 0, (buf->c) -1);

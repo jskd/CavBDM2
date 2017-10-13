@@ -15,8 +15,8 @@
 *
 * Remarques :
 *
-* History: 146488d PASS (avec struct)
-*          7d1b9de PASS (sans struct)
+* History: 8871b16 [PASS]
+*          5b1768f [PASS]
 */
 
 #include <stdio.h>
@@ -131,7 +131,7 @@ void merge_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out) {
   const char* buf_a_ptr_limit= buf_a->v + buf_a->c;
   const char* buf_b_ptr_limit= buf_b->v + buf_b->c;
 
-  while( buf_a_ptr < buf_a_ptr_limit && buf_b_ptr_limit)
+  while( buf_a_ptr < buf_a_ptr_limit && buf_b_ptr < buf_b_ptr_limit)
   {
     if(*buf_a_ptr == *buf_b_ptr) {
       buf_put(buf_out, *buf_a_ptr);

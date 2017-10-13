@@ -14,9 +14,6 @@
 * email : contact@jeromeskoda.fr
 *
 * Remarques :
-*
-* History: 146488d PASS (avec struct)
-*          7d1b9de PASS (sans struct)
 */
 #include <stdio.h>
 #include "quicksort.h"

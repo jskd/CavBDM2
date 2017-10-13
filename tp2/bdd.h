@@ -19,6 +19,7 @@
 *          7d1b9de PASS (sans struct)
 */
 #include <stdio.h>
+#include "quicksort.h"
 
 /**
  * @brief Structure de donnée repésentant un buffer
@@ -82,3 +83,9 @@ void natural_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out);
  * @param[out] buf_out resultat du merge_join
  */
 void merge_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out);
+
+/**
+ * Quick sort buffer
+ * @param buf Trie le buffer en entrée
+ */
+void buf_quicksort(struct buf* buf);

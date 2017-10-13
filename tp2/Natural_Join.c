@@ -38,9 +38,12 @@ int main(int argc, char** argv){
   storeFileBuffer(s_file, buf_s);
   fclose(s_file);
 
+  buf_quicksort(buf_r);
+  buf_quicksort(buf_s);
+
   // Store natural join of buf_r and buf_s in buf_rs
   struct buf* buf_rs= buf_create(16);
-  natural_join(buf_r, buf_s, buf_rs);
+  merge_join(buf_r, buf_s, buf_rs);
 
   // Write buf_rs in RS.txt file
   FILE* rs_file = fopen("RS.txt", "w");

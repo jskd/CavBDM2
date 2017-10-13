@@ -124,6 +124,29 @@ void natural_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out) {
  * @param[out] buf_out resultat du merge_join
  */
 void merge_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out) {
-  
+  char* buf_a_ptr= buf_a->v;
+  char* buf_b_ptr= buf_b->v;
+
+  // calculate pointer limit
+  const char* buf_a_ptr_limit= buf_a->v + buf_a->c;
+  const char* buf_b_ptr_limit= buf_b->v + buf_b->c;
+
+  while( buf_a_ptr < buf_a_ptr_limit && buf_b_ptr_limit)
+  {
+    if(*buf_a_ptr == *buf_b_ptr) {
+      buf_put(buf_out, *buf_a_ptr);
+      buf_a_ptr++;
+    } else if (*buf_a_ptr < *buf_b_ptr) {
+      buf_a_ptr++;
+    } else {
+      buf_b_ptr++;
+    }
+  }
 }
 
+/**
+ * Quick sort buffer
+ */
+void buf_quicksort(struct buf* buf) {
+  quicksort(buf->v, 0, (buf->c) -1);
+}

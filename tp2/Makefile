@@ -4,10 +4,10 @@ EXEC=Natural_Join
 
 all: $(EXEC)
 
-Natural_Join: Natural_Join.o
+Natural_Join: %.o
 	$(CC) -o $@ $^
 
-Natural_Join.o: Natural_Join.c
+%.o: %.c
 	$(CC) -o $@ -c $< $(CFLAGS)
 
 run:

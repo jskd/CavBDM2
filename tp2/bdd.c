@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "bdd.h"
 
 /**
  * @brief Structure de donnée repésentant un buffer
@@ -34,7 +35,7 @@ struct buf {
 
 /**
  * Creation d'un buffer
- * TODO: La flemme
+ * @param[in] size Taille du buffer
  */
 struct buf* buf_create( size_t size ) {
   struct buf* buf= (struct buf*) malloc(sizeof(struct buf));
@@ -46,7 +47,7 @@ struct buf* buf_create( size_t size ) {
 
 /**
  * Détruit le buffer
- * TODO: La flemme
+ * @param[in] buf buffer à détruire
  */
 void buf_destroy(struct buf* buf) {
   free(buf->v);
@@ -55,7 +56,10 @@ void buf_destroy(struct buf* buf) {
 
 /**
  * Ajoute un caractere dans le buffer s'il reste de la place
- * TODO: La flemme
+ * @param[in] buf   buffer d'entrée
+ * @param[in] value valeur à entrer
+ * @return    0   succès
+ *            -1  erreur: buffer plein
  */
 char buf_put(struct buf* buf, char value) {
   if(buf->c >= buf->s)
@@ -68,8 +72,10 @@ char buf_put(struct buf* buf, char value) {
 }
 
 /**
- * @brief Enregistre un le 1er caractére de chaque ligne d'un fichier dans un buffer
- * @param[in]  Fichier lu
+ * @brief Enregistre un le 1er caractére de chaque
+ *        ligne d'un fichier dans un buffer
+ *
+ * @param[in]  Fichier d'entrée
  * @param[out] Buffer de sortie
  */
 void storeFileBuffer(FILE* fp, struct buf* buf) {
@@ -83,7 +89,9 @@ void storeFileBuffer(FILE* fp, struct buf* buf) {
 
 /**
  * Ecrit un buffer dans un fichier
- * TODO: La flemme
+ *
+ * @param[out] fp  fichier de sortie
+ * @param[in]  buf fichier d'entrée
  */
 void writeBufferInFile(FILE* fp, struct buf* buf) {
   for(int i=0; i<buf->c; i++)
@@ -92,7 +100,10 @@ void writeBufferInFile(FILE* fp, struct buf* buf) {
 
 /**
  * Natual join
- * TODO: La flemme
+ *
+ * @param[in]  buf_a   relation externe
+ * @param[in]  buf_b   relation interne
+ * @param[out] buf_out resultat du natural join de buf_a et buf_b
  */
 void natural_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out) {
   for(int a=0; a< buf_a->c; a++) {
@@ -104,3 +115,15 @@ void natural_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out) {
     }
   }
 }
+
+/**
+ * @brief Merge join
+ *
+ * @param[in]  buf_a   relation externe
+ * @param[in]  buf_b   relation interne
+ * @param[out] buf_out resultat du merge_join
+ */
+void merge_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out) {
+  
+}
+

@@ -19,8 +19,6 @@
 *          7d1b9de PASS (sans struct)
 */
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 /**
  * @brief Structure de donnée repésentant un buffer

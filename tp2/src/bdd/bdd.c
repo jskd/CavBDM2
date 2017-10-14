@@ -32,9 +32,12 @@
  * @brief Structure de donnée repésentant un buffer
  */
 struct buf {
-  char* v;  //< Valeur
-  size_t s; //< Taille
-  size_t c; //< Nombre de valeur entrée
+  /// Value: Valeur
+  char* v;
+  /// Size: Taille
+  size_t s;
+  /// Count: Nombre de valeur entrée
+  size_t c;
 };
 
 /**

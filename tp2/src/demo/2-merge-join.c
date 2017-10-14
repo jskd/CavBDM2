@@ -40,9 +40,12 @@ int main(int argc, char** argv){
   // buffer de sortie
   struct buf* buf_rs= buf_create( buf_size);
 
+  // Trie
+  buf_quicksort(buf_r);
+  buf_quicksort(buf_s);
 
   // Jointure
-  natural_join(buf_r, buf_s, buf_rs);
+  merge_join(buf_r, buf_s, buf_rs);
 
 
   // Ecriture du resultat dans RS.txt

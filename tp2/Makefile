@@ -1,3 +1,5 @@
+.PHONY: clean doc rapport
+
 CC=gcc
 CFLAGS= -Wall
 
@@ -70,5 +72,9 @@ clean:
 test: all
 	@./script/test.sh
 
-docs:
+doc:
 	@doxygen doc/doxyfile
+
+rapport:
+	@cd rapport && $(MAKE) 
+	@cp rapport/rapport.pdf rapport.pdf 

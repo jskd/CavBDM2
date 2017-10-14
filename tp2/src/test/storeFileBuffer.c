@@ -1,9 +1,9 @@
 /**
-* TP n°: 1
+* TP n°: 2
 *
-* Titre du TP : Join Array
+* Titre du TP : Merge Join
 *
-* Date : 06/10/17
+* Date : 13/10/17
 *
 * Nom : Lefranc
 * Prenom : Joaquim
@@ -13,7 +13,7 @@
 * Prenom : Jérôme
 * email : contact@jeromeskoda.fr
 *
-* Remarques : Code Block -> Trash. Makefile <3
+* Remarques :
 */
 
 #include "../bdd/bdd.h"

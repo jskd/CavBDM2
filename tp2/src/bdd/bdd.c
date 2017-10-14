@@ -14,11 +14,7 @@
 * email : contact@jeromeskoda.fr
 *
 * Remarques :
-*
-* History: 8871b16 [PASS]
-*          5b1768f [PASS]
 */
-
 #include "bdd.h"
 #include "hexdump.h"
 #include <stdio.h>
@@ -44,6 +40,7 @@ struct buf {
 struct buf* buf_create( size_t size ) {
   struct buf* buf= (struct buf*) malloc(sizeof(struct buf));
   buf->v= (char*) malloc(size);
+
   buf->s= size;
   buf->c=0;
   return buf;
@@ -210,5 +207,5 @@ void buf_quicksort(struct buf* buf) {
 void buf_dump(const struct buf* buf) {
   printf ("buffer count: %zu\n", buf->c);
   printf ("buffer size: %zu\n", buf->s);
-  hexDump("buffer value:", buf->v, (buf->s) -1);
+  hexDump("buffer value:", buf->v, buf->c);
 }

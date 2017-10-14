@@ -1,4 +1,4 @@
-\documentclass[twoside]{book}
+\documentclass[twoside]{article}
 
 % Packages required by doxygen
 \usepackage{fixltx2e}
@@ -79,9 +79,6 @@
 \fancyfoot[CO]{\fancyplain{}{}}
 \fancyfoot[RO]{\fancyplain{}{}}
 \renewcommand{\footrulewidth}{0.4pt}
-\renewcommand{\chaptermark}[1]{%
-  \markboth{#1}{}%
-}
 \renewcommand{\sectionmark}[1]{%
   \markright{\thesection\ #1}%
 }
@@ -133,25 +130,23 @@
 {\large Généré par Doxygen 1.8.13}\\
 \end{center}
 \end{titlepage}
-\clearemptydoublepage
 \pagenumbering{roman}
 \tableofcontents
-\clearemptydoublepage
 \pagenumbering{arabic}
 \hypersetup{pageanchor=true}
 
 %--- Begin generated contents ---
-\chapter{Navigation}
+\section{Navigation}
 \label{md_src_README}
 \Hypertarget{md_src_README}
 \input{md_src_README}
-\chapter{Index des classes}
+\section{Index des classes}
 \input{annotated}
-\chapter{Index des fichiers}
+\section{Index des fichiers}
 \input{files}
-\chapter{Documentation des classes}
+\section{Documentation des classes}
 \input{structbuf}
-\chapter{Documentation des fichiers}
+\section{Documentation des fichiers}
 \input{bdd_8c}
 \input{bdd_8h}
 \input{hexdump_8c}
@@ -165,11 +160,10 @@
 %--- End generated contents ---
 
 % Index
-\backmatter
 \newpage
 \phantomsection
 \clearemptydoublepage
-\addcontentsline{toc}{chapter}{Index}
+\addcontentsline{toc}{section}{Index}
 \printindex
 
 \end{document}

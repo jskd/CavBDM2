@@ -71,4 +71,4 @@ test: all
 	@./script/test.sh
 
 docs:
-	doxygen doc/doxyfile
+	@doxygen doc/doxyfile

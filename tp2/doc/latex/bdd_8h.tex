@@ -1,4 +1,4 @@
-\hypertarget{bdd_8h}{}\section{Référence du fichier src/bdd/bdd.h}
+\hypertarget{bdd_8h}{}\subsection{Référence du fichier src/bdd/bdd.h}
 \label{bdd_8h}\index{src/bdd/bdd.\+h@{src/bdd/bdd.\+h}}
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}quicksort.\+h\char`\"{}}\newline
@@ -6,7 +6,7 @@ Graphe des dépendances par inclusion de bdd.\+h\+:
 % FIG 0
 Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier \+:
 % FIG 1
-\subsection*{Fonctions}
+\subsubsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{structbuf}{buf} $\ast$ \hyperlink{bdd_8h_af118ea2efee9628885de1dd08efd0d21}{buf\+\_\+create} (size\+\_\+t size)
@@ -33,11 +33,11 @@ char \hyperlink{bdd_8h_ac868457bc94326deb656db591c204d3d}{write\+Buffer\+In\+Fil
 \begin{DoxyCompactList}\small\item\em Ouvre un fichier Ecrit le contenu du buffer dans le fichier Ferme le fichier. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Documentation des fonctions}
+\subsubsection{Documentation des fonctions}
 \mbox{\Hypertarget{bdd_8h_af118ea2efee9628885de1dd08efd0d21}\label{bdd_8h_af118ea2efee9628885de1dd08efd0d21}} 
 \index{bdd.\+h@{bdd.\+h}!buf\+\_\+create@{buf\+\_\+create}}
 \index{buf\+\_\+create@{buf\+\_\+create}!bdd.\+h@{bdd.\+h}}
-\subsubsection{\texorpdfstring{buf\+\_\+create()}{buf\_create()}}
+\paragraph{\texorpdfstring{buf\+\_\+create()}{buf\_create()}}
 {\footnotesize\ttfamily struct \hyperlink{structbuf}{buf}$\ast$ buf\+\_\+create (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
 
 Creation d\textquotesingle{}un buffer 
@@ -48,7 +48,7 @@ Creation d\textquotesingle{}un buffer
 \mbox{\Hypertarget{bdd_8h_ab3de2ea2c5bb6d39e1e25406a71e9d46}\label{bdd_8h_ab3de2ea2c5bb6d39e1e25406a71e9d46}} 
 \index{bdd.\+h@{bdd.\+h}!buf\+\_\+destroy@{buf\+\_\+destroy}}
 \index{buf\+\_\+destroy@{buf\+\_\+destroy}!bdd.\+h@{bdd.\+h}}
-\subsubsection{\texorpdfstring{buf\+\_\+destroy()}{buf\_destroy()}}
+\paragraph{\texorpdfstring{buf\+\_\+destroy()}{buf\_destroy()}}
 {\footnotesize\ttfamily void buf\+\_\+destroy (\begin{DoxyParamCaption}\item[{struct \hyperlink{structbuf}{buf} $\ast$}]{buf }\end{DoxyParamCaption})}
 
 Détruit le buffer 
@@ -59,7 +59,7 @@ Détruit le buffer
 \mbox{\Hypertarget{bdd_8h_a6d89518f3a40d020f8b0353a7c450b41}\label{bdd_8h_a6d89518f3a40d020f8b0353a7c450b41}} 
 \index{bdd.\+h@{bdd.\+h}!buf\+\_\+dump@{buf\+\_\+dump}}
 \index{buf\+\_\+dump@{buf\+\_\+dump}!bdd.\+h@{bdd.\+h}}
-\subsubsection{\texorpdfstring{buf\+\_\+dump()}{buf\_dump()}}
+\paragraph{\texorpdfstring{buf\+\_\+dump()}{buf\_dump()}}
 {\footnotesize\ttfamily void buf\+\_\+dump (\begin{DoxyParamCaption}\item[{const struct \hyperlink{structbuf}{buf} $\ast$}]{buf }\end{DoxyParamCaption})}
 
 
@@ -74,7 +74,7 @@ Hex dump buffer.
 \mbox{\Hypertarget{bdd_8h_a995bd4f3c9d30d7d8841ce9640ed6dbf}\label{bdd_8h_a995bd4f3c9d30d7d8841ce9640ed6dbf}} 
 \index{bdd.\+h@{bdd.\+h}!buf\+\_\+put@{buf\+\_\+put}}
 \index{buf\+\_\+put@{buf\+\_\+put}!bdd.\+h@{bdd.\+h}}
-\subsubsection{\texorpdfstring{buf\+\_\+put()}{buf\_put()}}
+\paragraph{\texorpdfstring{buf\+\_\+put()}{buf\_put()}}
 {\footnotesize\ttfamily char buf\+\_\+put (\begin{DoxyParamCaption}\item[{struct \hyperlink{structbuf}{buf} $\ast$}]{buf,  }\item[{char}]{value }\end{DoxyParamCaption})}
 
 Ajoute un caractere dans le buffer s\textquotesingle{}il reste de la place 
@@ -90,7 +90,7 @@ Ajoute un caractere dans le buffer s\textquotesingle{}il reste de la place
 \mbox{\Hypertarget{bdd_8h_aaf4b0cbdb16049b807ffac9b98cedd54}\label{bdd_8h_aaf4b0cbdb16049b807ffac9b98cedd54}} 
 \index{bdd.\+h@{bdd.\+h}!buf\+\_\+quicksort@{buf\+\_\+quicksort}}
 \index{buf\+\_\+quicksort@{buf\+\_\+quicksort}!bdd.\+h@{bdd.\+h}}
-\subsubsection{\texorpdfstring{buf\+\_\+quicksort()}{buf\_quicksort()}}
+\paragraph{\texorpdfstring{buf\+\_\+quicksort()}{buf\_quicksort()}}
 {\footnotesize\ttfamily void buf\+\_\+quicksort (\begin{DoxyParamCaption}\item[{struct \hyperlink{structbuf}{buf} $\ast$}]{buf }\end{DoxyParamCaption})}
 
 
@@ -107,7 +107,7 @@ Quick sort buffer.
 \mbox{\Hypertarget{bdd_8h_a2c89cfe88d2531b23e92f4435032b650}\label{bdd_8h_a2c89cfe88d2531b23e92f4435032b650}} 
 \index{bdd.\+h@{bdd.\+h}!merge\+\_\+join@{merge\+\_\+join}}
 \index{merge\+\_\+join@{merge\+\_\+join}!bdd.\+h@{bdd.\+h}}
-\subsubsection{\texorpdfstring{merge\+\_\+join()}{merge\_join()}}
+\paragraph{\texorpdfstring{merge\+\_\+join()}{merge\_join()}}
 {\footnotesize\ttfamily void merge\+\_\+join (\begin{DoxyParamCaption}\item[{const struct \hyperlink{structbuf}{buf} $\ast$}]{buf\+\_\+a,  }\item[{const struct \hyperlink{structbuf}{buf} $\ast$}]{buf\+\_\+b,  }\item[{struct \hyperlink{structbuf}{buf} $\ast$}]{buf\+\_\+out }\end{DoxyParamCaption})}
 
 
@@ -132,7 +132,7 @@ Merge join.
 \mbox{\Hypertarget{bdd_8h_a47663e52ec01d5e1fd6d6a0c318b7a6b}\label{bdd_8h_a47663e52ec01d5e1fd6d6a0c318b7a6b}} 
 \index{bdd.\+h@{bdd.\+h}!natural\+\_\+join@{natural\+\_\+join}}
 \index{natural\+\_\+join@{natural\+\_\+join}!bdd.\+h@{bdd.\+h}}
-\subsubsection{\texorpdfstring{natural\+\_\+join()}{natural\_join()}}
+\paragraph{\texorpdfstring{natural\+\_\+join()}{natural\_join()}}
 {\footnotesize\ttfamily void natural\+\_\+join (\begin{DoxyParamCaption}\item[{const struct \hyperlink{structbuf}{buf} $\ast$}]{buf\+\_\+a,  }\item[{const struct \hyperlink{structbuf}{buf} $\ast$}]{buf\+\_\+b,  }\item[{struct \hyperlink{structbuf}{buf} $\ast$}]{buf\+\_\+out }\end{DoxyParamCaption})}
 
 Natual join
@@ -149,7 +149,7 @@ Natual join
 \mbox{\Hypertarget{bdd_8h_a97f857e28fbc337928cd952de29497b5}\label{bdd_8h_a97f857e28fbc337928cd952de29497b5}} 
 \index{bdd.\+h@{bdd.\+h}!store\+File\+Buffer@{store\+File\+Buffer}}
 \index{store\+File\+Buffer@{store\+File\+Buffer}!bdd.\+h@{bdd.\+h}}
-\subsubsection{\texorpdfstring{store\+File\+Buffer()}{storeFileBuffer()}}
+\paragraph{\texorpdfstring{store\+File\+Buffer()}{storeFileBuffer()}}
 {\footnotesize\ttfamily void store\+File\+Buffer (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{struct \hyperlink{structbuf}{buf} $\ast$}]{buf }\end{DoxyParamCaption})}
 
 
@@ -166,7 +166,7 @@ Enregistre un le 1er caractére de chaque ligne d\textquotesingle{}un fichier da
 \mbox{\Hypertarget{bdd_8h_a1eb4b75f700d864dca5cbf6d51713f15}\label{bdd_8h_a1eb4b75f700d864dca5cbf6d51713f15}} 
 \index{bdd.\+h@{bdd.\+h}!store\+File\+Buffer\+OC@{store\+File\+Buffer\+OC}}
 \index{store\+File\+Buffer\+OC@{store\+File\+Buffer\+OC}!bdd.\+h@{bdd.\+h}}
-\subsubsection{\texorpdfstring{store\+File\+Buffer\+O\+C()}{storeFileBufferOC()}}
+\paragraph{\texorpdfstring{store\+File\+Buffer\+O\+C()}{storeFileBufferOC()}}
 {\footnotesize\ttfamily struct \hyperlink{structbuf}{buf}$\ast$ store\+File\+Buffer\+OC (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file\+\_\+name,  }\item[{size\+\_\+t}]{buffer\+\_\+size }\end{DoxyParamCaption})}
 
 
@@ -186,7 +186,7 @@ buffer si N\+U\+LL alors erreur de lecture du fichier
 \mbox{\Hypertarget{bdd_8h_a28b99b13e958fa0d0d034e10c1f40252}\label{bdd_8h_a28b99b13e958fa0d0d034e10c1f40252}} 
 \index{bdd.\+h@{bdd.\+h}!write\+Buffer\+In\+File@{write\+Buffer\+In\+File}}
 \index{write\+Buffer\+In\+File@{write\+Buffer\+In\+File}!bdd.\+h@{bdd.\+h}}
-\subsubsection{\texorpdfstring{write\+Buffer\+In\+File()}{writeBufferInFile()}}
+\paragraph{\texorpdfstring{write\+Buffer\+In\+File()}{writeBufferInFile()}}
 {\footnotesize\ttfamily void write\+Buffer\+In\+File (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{const struct \hyperlink{structbuf}{buf} $\ast$}]{buf }\end{DoxyParamCaption})}
 
 Ecrit un buffer dans un fichier
@@ -201,7 +201,7 @@ Ecrit un buffer dans un fichier
 \mbox{\Hypertarget{bdd_8h_ac868457bc94326deb656db591c204d3d}\label{bdd_8h_ac868457bc94326deb656db591c204d3d}} 
 \index{bdd.\+h@{bdd.\+h}!write\+Buffer\+In\+File\+OC@{write\+Buffer\+In\+File\+OC}}
 \index{write\+Buffer\+In\+File\+OC@{write\+Buffer\+In\+File\+OC}!bdd.\+h@{bdd.\+h}}
-\subsubsection{\texorpdfstring{write\+Buffer\+In\+File\+O\+C()}{writeBufferInFileOC()}}
+\paragraph{\texorpdfstring{write\+Buffer\+In\+File\+O\+C()}{writeBufferInFileOC()}}
 {\footnotesize\ttfamily char write\+Buffer\+In\+File\+OC (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file\+\_\+name,  }\item[{const struct \hyperlink{structbuf}{buf} $\ast$}]{buf }\end{DoxyParamCaption})}
 
 

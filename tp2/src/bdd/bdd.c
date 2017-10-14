@@ -211,7 +211,7 @@ void buf_quicksort(struct buf* buf) {
  * @param[in] buf buffer à trier
  */
 void buf_dump(const struct buf* buf) {
-  printf ("buffer count: %d\n", buf->c);
-  printf ("buffer size: %d\n", buf->s);
+  printf ("buffer count: %zu\n", buf->c);
+  printf ("buffer size: %zu\n", buf->s);
   hexDump("buffer value:", buf->v, (buf->s) -1);
 }

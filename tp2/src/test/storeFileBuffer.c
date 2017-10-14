@@ -29,29 +29,8 @@ int main(int argc, char** argv){
     return -1;
   }
 
-  // buffer S.txt
-  struct buf* buf_s= storeFileBufferOC("res/S.txt", buf_size);
-  if(buf_s == NULL) {
-    printf("Erreur lors de la lecture de S.txt.\n");
-    return -1;
-  }
+  buf_dump(buf_r);
 
-  // buffer de sortie
-  struct buf* buf_rs= buf_create( buf_size);
-
-  // Jointure
-  natural_join(buf_r, buf_s, buf_rs);
-
-  // Ecriture du resultat dans RS.txt
-  if(writeBufferInFileOC("res/RS.txt", buf_rs))
-    printf("Erreur lors de la lecture de RS.txt.\n");
-
-  printf("Terminé, fichier dans res/RS.txt\n");
-
-  // Remove buf
   buf_destroy(buf_r);
-  buf_destroy(buf_s);
-  buf_destroy(buf_rs);
-
   return 0;
 }

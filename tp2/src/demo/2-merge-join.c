@@ -20,18 +20,17 @@
 
 static const size_t buf_size= 16;
 
-
 int main(int argc, char** argv){
 
   // buffer R.txt
-  struct buf* buf_r= storeFileBufferOC("res/R.txt", 16);
+  struct buf* buf_r= storeFileBufferOC("res/R.txt", buf_size);
   if(buf_r == NULL) {
     printf("Erreur lors de la lecture de R.txt.\n");
     return -1;
   }
 
   // buffer S.txt
-  struct buf* buf_s= storeFileBufferOC("res/S.txt", 16);
+  struct buf* buf_s= storeFileBufferOC("res/S.txt", buf_size);
   if(buf_s == NULL) {
     printf("Erreur lors de la lecture de S.txt.\n");
     return -1;
@@ -46,7 +45,6 @@ int main(int argc, char** argv){
 
   // Jointure
   merge_join(buf_r, buf_s, buf_rs);
-
 
   // Ecriture du resultat dans RS.txt
   if(writeBufferInFileOC("res/RS.txt", buf_rs))

@@ -1,8 +1,5 @@
 CC=gcc
-
 CFLAGS= -Wall
-
-
 
 BDD_SOURCES = $(wildcard src/bdd/*.c)
 BDD_HEADERS = $(wildcard src/bdd/*.h)
@@ -33,15 +30,11 @@ SOURCES_TEST  := $(wildcard $(SRCDIR_TEST)/*.c)
 HEADERS_TEST  := $(wildcard $(SRCDIR_TEST)/*.h)
 OBJECTS_TEST  := $(SOURCES_TEST:$(SRCDIR_TEST)/%.c=$(OBJDIR_TEST)/%.o)
 
-
-
 BINDIR_DEMO   := $(BINDIR)/$(DEMO_DIR)
 BIN_DEMO      := $(patsubst $(SRCDIR_DEMO)/%.c,$(BINDIR_DEMO)/%,$(SOURCES_DEMO))
 
-
 BINDIR_TEST   := $(BINDIR)/$(TEST_DIR)
 BIN_TEST      := $(patsubst $(SRCDIR_TEST)/%.c,$(BINDIR_TEST)/%,$(SOURCES_TEST))
-
 
 all: $(OBJECTS_BDD) $(OBJECTS_DEMO) $(OBJECTS_TEST) $(BIN_DEMO) $(BIN_TEST)
 
@@ -63,18 +56,17 @@ $(OBJDIR_BDD)/%.o : $(SRCDIR_BDD)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 	echo "Compiled "$<" successfully!"
 
-$(BINDIR_TEST)/%: $(OBJDIR_TEST)/%.o 
+$(BINDIR_TEST)/%: $(OBJDIR_TEST)/%.o
 	echo "5"
 	mkdir -p $(dir $@)
 	$(CC) $(OBJECTS_BDD) $(subst $(BINDIR_TEST)/,$(OBJDIR_TEST)/,$@).o -o $@
 	echo "Compiled "$<" successfully!"
 
-$(BINDIR_DEMO)/%: $(OBJDIR_DEMO)/%.o 
+$(BINDIR_DEMO)/%: $(OBJDIR_DEMO)/%.o
 	echo "4"
 	mkdir -p $(dir $@)
 	$(CC) $(OBJECTS_BDD) $(subst $(BINDIR_DEMO)/,$(OBJDIR_DEMO)/,$@).o -o $@
 	echo "Compiled "$<" successfully!"
-
 
 clean:
 	rm -rf $(OBJDIR)
@@ -82,3 +74,6 @@ clean:
 
 test:
 	./script/test.sh
+
+docs:
+	doxygen doc/doxyfile

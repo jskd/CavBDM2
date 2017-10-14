@@ -39,41 +39,36 @@ BIN_TEST      := $(patsubst $(SRCDIR_TEST)/%.c,$(BINDIR_TEST)/%,$(SOURCES_TEST))
 all: $(OBJECTS_BDD) $(OBJECTS_DEMO) $(OBJECTS_TEST) $(BIN_DEMO) $(BIN_TEST)
 
 $(OBJDIR_DEMO)/%.o : $(SRCDIR_DEMO)/%.c
-	echo "1"
-	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c -o $@ $<
-	echo "Compiled "$<" successfully!"
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c -o $@ $<
+	@echo "Compiled "$<" successfully!"
 
 $(OBJDIR_TEST)/%.o : $(SRCDIR_TEST)/%.c
-	echo "2"
-	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c -o $@ $<
-	echo "Compiled "$<" successfully!"
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c -o $@ $<
+	@echo "Compiled "$<" successfully!"
 
 $(OBJDIR_BDD)/%.o : $(SRCDIR_BDD)/%.c
-	echo "3"
-	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c -o $@ $<
-	echo "Compiled "$<" successfully!"
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c -o $@ $<
+	@echo "Compiled "$<" successfully!"
 
 $(BINDIR_TEST)/%: $(OBJDIR_TEST)/%.o
-	echo "5"
-	mkdir -p $(dir $@)
-	$(CC) $(OBJECTS_BDD) $(subst $(BINDIR_TEST)/,$(OBJDIR_TEST)/,$@).o -o $@
-	echo "Compiled "$<" successfully!"
+	@mkdir -p $(dir $@)
+	@$(CC) $(OBJECTS_BDD) $(subst $(BINDIR_TEST)/,$(OBJDIR_TEST)/,$@).o -o $@
+	@echo "Compiled "$<" successfully!"
 
 $(BINDIR_DEMO)/%: $(OBJDIR_DEMO)/%.o
-	echo "4"
-	mkdir -p $(dir $@)
-	$(CC) $(OBJECTS_BDD) $(subst $(BINDIR_DEMO)/,$(OBJDIR_DEMO)/,$@).o -o $@
-	echo "Compiled "$<" successfully!"
+	@mkdir -p $(dir $@)
+	@$(CC) $(OBJECTS_BDD) $(subst $(BINDIR_DEMO)/,$(OBJDIR_DEMO)/,$@).o -o $@
+	@echo "Compiled "$<" successfully!"
 
 clean:
-	rm -rf $(OBJDIR)
-	rm -rf $(BINDIR)
+	@rm -rf $(OBJDIR)
+	@rm -rf $(BINDIR)
 
-test:
-	./script/test.sh
+test: all
+	@./script/test.sh
 
 docs:
 	doxygen doc/doxyfile

@@ -16,7 +16,7 @@
 * Remarques : Code Block -> Trash. Makefile <3
 */
 
-#include "bdd.h"
+#include "../bdd/bdd.h"
 
 static const size_t buf_size= 16;
 

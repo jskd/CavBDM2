@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['navigation',['Navigation',['../md_src_README.html',1,'']]],
-  ['natural_5fjoin',['natural_join',['../bdd_8c.html#a47663e52ec01d5e1fd6d6a0c318b7a6b',1,'natural_join(const struct buf *buf_a, const struct buf *buf_b, struct buf *buf_out):&#160;bdd.c'],['../bdd_8h.html#a47663e52ec01d5e1fd6d6a0c318b7a6b',1,'natural_join(const struct buf *buf_a, const struct buf *buf_b, struct buf *buf_out):&#160;bdd.c']]]
+  ['hexdump',['hexDump',['../hexdump_8c.html#a7a02ca94c343743d18f333f18c0a2cc0',1,'hexDump(char *desc, const void *addr, int len):&#160;hexdump.c'],['../hexdump_8h.html#a7a02ca94c343743d18f333f18c0a2cc0',1,'hexDump(char *desc, const void *addr, int len):&#160;hexdump.c']]],
+  ['hexdump_2ec',['hexdump.c',['../hexdump_8c.html',1,'']]],
+  ['hexdump_2eh',['hexdump.h',['../hexdump_8h.html',1,'']]]
 ];

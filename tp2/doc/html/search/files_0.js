@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['bdd_2ec',['bdd.c',['../bdd_8c.html',1,'']]],
-  ['bdd_2eh',['bdd.h',['../bdd_8h.html',1,'']]]
+  ['1_2dnatural_2djoin_2ec',['1-natural-join.c',['../1-natural-join_8c.html',1,'']]]
 ];

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['quicksort',['quicksort',['../quicksort_8c.html#a4817fb64b567c7f2666518a2dcd14e77',1,'quicksort(char *list, int m, int n):&#160;quicksort.c'],['../quicksort_8h.html#a83d624a079dfc3fec1c33e1e787dbb90',1,'quicksort(char *list, char m, char n):&#160;quicksort.h']]],
-  ['quicksort_2ec',['quicksort.c',['../quicksort_8c.html',1,'']]],
-  ['quicksort_2eh',['quicksort.h',['../quicksort_8h.html',1,'']]]
+  ['main',['main',['../1-natural-join_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;1-natural-join.c'],['../2-merge-join_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;2-merge-join.c'],['../storeFileBuffer_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;storeFileBuffer.c']]],
+  ['merge_5fjoin',['merge_join',['../bdd_8c.html#a2c89cfe88d2531b23e92f4435032b650',1,'merge_join(const struct buf *buf_a, const struct buf *buf_b, struct buf *buf_out):&#160;bdd.c'],['../bdd_8h.html#a2c89cfe88d2531b23e92f4435032b650',1,'merge_join(const struct buf *buf_a, const struct buf *buf_b, struct buf *buf_out):&#160;bdd.c']]]
 ];

@@ -61,7 +61,7 @@ void storeFileBuffer(FILE* fp, struct buf* buf);
  * @param[out] fp  fichier de sortie
  * @param[in]  buf fichier d'entrée
  */
-void writeBufferInFile(FILE* fp, struct buf* buf);
+void writeBufferInFile(FILE* fp, const struct buf* buf);
 
 /**
  * Natual join
@@ -70,7 +70,7 @@ void writeBufferInFile(FILE* fp, struct buf* buf);
  * @param[in]  buf_b   relation interne
  * @param[out] buf_out resultat du natural join de buf_a et buf_b
  */
-void natural_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out);
+void natural_join(const struct buf* buf_a, const struct buf* buf_b, struct buf* buf_out);
 
 /**
  * @brief Merge join
@@ -79,7 +79,7 @@ void natural_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out);
  * @param[in]  buf_b   relation interne
  * @param[out] buf_out resultat du merge_join
  */
-void merge_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out);
+void merge_join(const struct buf* buf_a, const struct buf* buf_b, struct buf* buf_out);
 
 /**
  * @brief Quick sort buffer
@@ -92,4 +92,33 @@ void buf_quicksort(struct buf* buf);
  * @brief Hex dump buffer
  * @param[in] buf buffer à trier
  */
-void buf_dump(struct buf* buf);
+void buf_dump(const struct buf* buf);
+
+/**
+ * @brief Ouvre un fichier
+ *        Stoque son contenu dans un buffer
+ *        Ferme le fichier
+ *
+ * @param[in]  File_name Fichier
+ * @param[in] buffer_size Taille du buffer,
+ *             si trop petit pour contenir le fichier entirerement
+ *             alors le reste du fichier est ignoré
+ *
+ * @return buffer si NULL alors erreur de lecture du fichier
+ *
+ */
+struct buf* storeFileBufferOC(const char* file_name, size_t buffer_size);
+
+
+/**
+ * @brief Ouvre un fichier
+ *        Ecrit le contenu du buffer dans le fichier
+ *        Ferme le fichier
+ *
+ * @param[in]  File_name Fichier
+ * @param[in]  buf       Buffer à écrire dans le fichier
+ *
+ * @return -1 si erreur dans l'ouverture du fichier
+ *
+ */
+char writeBufferInFileOC(const char* file_name, const struct buf*);

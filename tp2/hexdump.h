@@ -4,4 +4,4 @@
 *   il a été réadapté dans le cadre du projet
 */
 
-void hexDump (char *desc, void *addr, int len);
+void hexDump (char *desc, const void *addr, int len);

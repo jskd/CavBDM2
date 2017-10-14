@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 
-void hexDump (char *desc, void *addr, int len) {
+void hexDump (char *desc, const void *addr, int len) {
   int i;
   unsigned char buff[17];
   unsigned char *pc = (unsigned char*)addr;

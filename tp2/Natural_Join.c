@@ -15,42 +15,40 @@
 *
 * Remarques : Code Block -> Trash. Makefile <3
 */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
 #include "bdd.h"
+
+static const size_t buf_size= 16;
+
 
 int main(int argc, char** argv){
 
-  // Store R.txt file in buf_r
-  FILE* r_file = fopen("R.txt", "r");
-  if (r_file == NULL)
-    exit(1);
-  struct buf* buf_r= buf_create(16);
-  storeFileBuffer(r_file, buf_r);
-  fclose(r_file);
+  struct buf* buf_r= storeFileBufferOC("R.txt", 16);
+  if(buf_r == NULL) {
+    printf("Erreur lors de la lecture de R.txt.\n");
+    return -1;
+  }
+  buf_dump(buf_r);
 
-  // Store S.txt file in buf_s
-  FILE* s_file = fopen("S.txt", "r");
-  if (s_file == NULL)
-    exit(1);
-  struct buf* buf_s= buf_create(16);
-  storeFileBuffer(s_file, buf_s);
-  fclose(s_file);
+  struct buf* buf_s= storeFileBufferOC("S.txt", 16);
+  if(buf_s == NULL) {
+    printf("Erreur lors de la lecture de R.txt.\n");
+    return -1;
+  }
+  buf_dump(buf_r);
+
 
   buf_quicksort(buf_r);
   buf_quicksort(buf_s);
+  buf_dump(buf_s);
 
   // Store natural join of buf_r and buf_s in buf_rs
-  struct buf* buf_rs= buf_create(16);
+  struct buf* buf_rs= buf_create( buf_size);
   merge_join(buf_r, buf_s, buf_rs);
 
-  // Write buf_rs in RS.txt file
-  FILE* rs_file = fopen("RS.txt", "w");
-  if (rs_file == NULL)
-    exit(1);
-  writeBufferInFile(rs_file, buf_rs);
-  fclose(rs_file);
+
+  if(writeBufferInFileOC("RS.txt", buf_rs))
+    printf("Erreur lors de la lecture de RS.txt.\n");
 
   buf_dump(buf_rs);
 
@@ -59,5 +57,5 @@ int main(int argc, char** argv){
   buf_destroy(buf_s);
   buf_destroy(buf_rs);
 
-  exit(0);
+  return 0;
 }

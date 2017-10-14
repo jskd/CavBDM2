@@ -87,3 +87,9 @@ void merge_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out);
  * @param buf Trie le buffer en entrée
  */
 void buf_quicksort(struct buf* buf);
+
+/**
+ * @brief Hex dump buffer
+ * @param[in] buf buffer à trier
+ */
+void buf_dump(struct buf* buf);

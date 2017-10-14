@@ -12,7 +12,9 @@
 * Nom : Skoda
 * Prenom : Jérôme
 * email : contact@jeromeskoda.fr
-*
+*/
+
+/*
 * Remarques : Ce fichier a été récuprer du site:
 *   http://www.zentut.com/c-tutorial/c-quicksort-algorithm/
 *   il a été réadapté dans le cadre du projet
@@ -21,9 +23,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/**
- * From internet
- */
 void swap(char *x, char *y)
 {
   char temp;

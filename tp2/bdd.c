@@ -23,6 +23,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "bdd.h"
+#include "hexdump.h"
 
 /**
  * @brief Structure de donnée repésentant un buffer
@@ -145,9 +146,19 @@ void merge_join(struct buf* buf_a, struct buf* buf_b, struct buf* buf_out) {
 }
 
 /**
- * Quick sort buffer
+ * @brief Quick sort buffer
  * @param[in] buf buffer à trier
  */
 void buf_quicksort(struct buf* buf) {
   quicksort(buf->v, 0, (buf->c) -1);
+}
+
+/**
+ * @brief Hex dump buffer
+ * @param[in] buf buffer à trier
+ */
+void buf_dump(struct buf* buf) {
+  printf ("buffer count: %d\n", buf->c);
+  printf ("buffer size: %d\n", buf->s);
+  hexDump("buffer value:", buf->v, (buf->s) -1);
 }

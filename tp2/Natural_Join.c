@@ -52,6 +52,8 @@ int main(int argc, char** argv){
   writeBufferInFile(rs_file, buf_rs);
   fclose(rs_file);
 
+  buf_dump(buf_rs);
+
   // Remove buf
   buf_destroy(buf_r);
   buf_destroy(buf_s);

@@ -80,3 +80,5 @@ clean:
 	rm -rf $(OBJDIR)
 	rm -rf $(BINDIR)
 
+test:
+	./script/test.sh

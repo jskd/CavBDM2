@@ -19,9 +19,6 @@
 *          5b1768f [PASS]
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "bdd.h"
 #include "hexdump.h"
 #include <stdio.h>

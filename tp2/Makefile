@@ -85,6 +85,7 @@ clean:
 
 # Lancement de script de test
 test: all
+	@chmod +x script/test.sh
 	@./script/test.sh
 	@echo "\n\nScript de test terminé"
 

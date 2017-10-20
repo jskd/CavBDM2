@@ -114,3 +114,7 @@ demo-tp2: bin/demo/2-merge-join
 rm-rs:
 	@rm -rf $(RS_TXT) 
 	@echo "Fichier "$(RS_TXT)" supprimé"
+
+
+zip: clean
+	zip -r ${name}TP${n}.zip .

@@ -1,0 +1,220 @@
+\hypertarget{bdd_8h}{}\subsection{Référence du fichier src/bdd/bdd.h}
+\label{bdd_8h}\index{src/bdd/bdd.\+h@{src/bdd/bdd.\+h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}quicksort.\+h\char`\"{}}\newline
+Graphe des dépendances par inclusion de bdd.\+h\+:
+% FIG 0
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier \+:
+% FIG 1
+\subsubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structbuf}{buf} $\ast$ \hyperlink{bdd_8h_af118ea2efee9628885de1dd08efd0d21}{buf\+\_\+create} (size\+\_\+t size)
+\item 
+void \hyperlink{bdd_8h_ab3de2ea2c5bb6d39e1e25406a71e9d46}{buf\+\_\+destroy} (struct \hyperlink{structbuf}{buf} $\ast$\hyperlink{structbuf}{buf})
+\item 
+char \hyperlink{bdd_8h_a995bd4f3c9d30d7d8841ce9640ed6dbf}{buf\+\_\+put} (struct \hyperlink{structbuf}{buf} $\ast$\hyperlink{structbuf}{buf}, char value)
+\item 
+void \hyperlink{bdd_8h_a97f857e28fbc337928cd952de29497b5}{store\+File\+Buffer} (F\+I\+LE $\ast$fp, struct \hyperlink{structbuf}{buf} $\ast$\hyperlink{structbuf}{buf})
+\begin{DoxyCompactList}\small\item\em Enregistre un le 1er caractére de chaque ligne d\textquotesingle{}un fichier dans un buffer. \end{DoxyCompactList}\item 
+void \hyperlink{bdd_8h_a28b99b13e958fa0d0d034e10c1f40252}{write\+Buffer\+In\+File} (F\+I\+LE $\ast$fp, const struct \hyperlink{structbuf}{buf} $\ast$\hyperlink{structbuf}{buf})
+\item 
+void \hyperlink{bdd_8h_a47663e52ec01d5e1fd6d6a0c318b7a6b}{natural\+\_\+join} (const struct \hyperlink{structbuf}{buf} $\ast$buf\+\_\+a, const struct \hyperlink{structbuf}{buf} $\ast$buf\+\_\+b, struct \hyperlink{structbuf}{buf} $\ast$buf\+\_\+out)
+\item 
+void \hyperlink{bdd_8h_a2c89cfe88d2531b23e92f4435032b650}{merge\+\_\+join} (const struct \hyperlink{structbuf}{buf} $\ast$buf\+\_\+a, const struct \hyperlink{structbuf}{buf} $\ast$buf\+\_\+b, struct \hyperlink{structbuf}{buf} $\ast$buf\+\_\+out)
+\begin{DoxyCompactList}\small\item\em Merge join. \end{DoxyCompactList}\item 
+void \hyperlink{bdd_8h_aaf4b0cbdb16049b807ffac9b98cedd54}{buf\+\_\+quicksort} (struct \hyperlink{structbuf}{buf} $\ast$\hyperlink{structbuf}{buf})
+\begin{DoxyCompactList}\small\item\em Quick sort buffer. \end{DoxyCompactList}\item 
+void \hyperlink{bdd_8h_a6d89518f3a40d020f8b0353a7c450b41}{buf\+\_\+dump} (const struct \hyperlink{structbuf}{buf} $\ast$\hyperlink{structbuf}{buf})
+\begin{DoxyCompactList}\small\item\em Hex dump buffer. \end{DoxyCompactList}\item 
+struct \hyperlink{structbuf}{buf} $\ast$ \hyperlink{bdd_8h_a1eb4b75f700d864dca5cbf6d51713f15}{store\+File\+Buffer\+OC} (const char $\ast$file\+\_\+name, size\+\_\+t buffer\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Ouvre un fichier Stoque son contenu dans un buffer Ferme le fichier. \end{DoxyCompactList}\item 
+char \hyperlink{bdd_8h_ac868457bc94326deb656db591c204d3d}{write\+Buffer\+In\+File\+OC} (const char $\ast$file\+\_\+name, const struct \hyperlink{structbuf}{buf} $\ast$)
+\begin{DoxyCompactList}\small\item\em Ouvre un fichier Ecrit le contenu du buffer dans le fichier Ferme le fichier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Documentation des fonctions}
+\mbox{\Hypertarget{bdd_8h_af118ea2efee9628885de1dd08efd0d21}\label{bdd_8h_af118ea2efee9628885de1dd08efd0d21}} 
+\index{bdd.\+h@{bdd.\+h}!buf\+\_\+create@{buf\+\_\+create}}
+\index{buf\+\_\+create@{buf\+\_\+create}!bdd.\+h@{bdd.\+h}}
+\paragraph{\texorpdfstring{buf\+\_\+create()}{buf\_create()}}
+{\footnotesize\ttfamily struct \hyperlink{structbuf}{buf}$\ast$ buf\+\_\+create (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+Creation d\textquotesingle{}un buffer 
+\begin{DoxyParams}[1]{Paramètres}
+\mbox{\tt in}  & {\em size} & Taille du buffer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bdd_8h_ab3de2ea2c5bb6d39e1e25406a71e9d46}\label{bdd_8h_ab3de2ea2c5bb6d39e1e25406a71e9d46}} 
+\index{bdd.\+h@{bdd.\+h}!buf\+\_\+destroy@{buf\+\_\+destroy}}
+\index{buf\+\_\+destroy@{buf\+\_\+destroy}!bdd.\+h@{bdd.\+h}}
+\paragraph{\texorpdfstring{buf\+\_\+destroy()}{buf\_destroy()}}
+{\footnotesize\ttfamily void buf\+\_\+destroy (\begin{DoxyParamCaption}\item[{struct \hyperlink{structbuf}{buf} $\ast$}]{buf }\end{DoxyParamCaption})}
+
+Détruit le buffer 
+\begin{DoxyParams}[1]{Paramètres}
+\mbox{\tt in}  & {\em buf} & buffer à détruire \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bdd_8h_a6d89518f3a40d020f8b0353a7c450b41}\label{bdd_8h_a6d89518f3a40d020f8b0353a7c450b41}} 
+\index{bdd.\+h@{bdd.\+h}!buf\+\_\+dump@{buf\+\_\+dump}}
+\index{buf\+\_\+dump@{buf\+\_\+dump}!bdd.\+h@{bdd.\+h}}
+\paragraph{\texorpdfstring{buf\+\_\+dump()}{buf\_dump()}}
+{\footnotesize\ttfamily void buf\+\_\+dump (\begin{DoxyParamCaption}\item[{const struct \hyperlink{structbuf}{buf} $\ast$}]{buf }\end{DoxyParamCaption})}
+
+
+
+Hex dump buffer. 
+
+
+\begin{DoxyParams}[1]{Paramètres}
+\mbox{\tt in}  & {\em buf} & buffer à trier \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bdd_8h_a995bd4f3c9d30d7d8841ce9640ed6dbf}\label{bdd_8h_a995bd4f3c9d30d7d8841ce9640ed6dbf}} 
+\index{bdd.\+h@{bdd.\+h}!buf\+\_\+put@{buf\+\_\+put}}
+\index{buf\+\_\+put@{buf\+\_\+put}!bdd.\+h@{bdd.\+h}}
+\paragraph{\texorpdfstring{buf\+\_\+put()}{buf\_put()}}
+{\footnotesize\ttfamily char buf\+\_\+put (\begin{DoxyParamCaption}\item[{struct \hyperlink{structbuf}{buf} $\ast$}]{buf,  }\item[{char}]{value }\end{DoxyParamCaption})}
+
+Ajoute un caractere dans le buffer s\textquotesingle{}il reste de la place 
+\begin{DoxyParams}[1]{Paramètres}
+\mbox{\tt in}  & {\em buf} & buffer d\textquotesingle{}entrée \\
+\hline
+\mbox{\tt in}  & {\em value} & valeur à entrer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+0 succès -\/1 erreur\+: buffer plein 
+\end{DoxyReturn}
+\mbox{\Hypertarget{bdd_8h_aaf4b0cbdb16049b807ffac9b98cedd54}\label{bdd_8h_aaf4b0cbdb16049b807ffac9b98cedd54}} 
+\index{bdd.\+h@{bdd.\+h}!buf\+\_\+quicksort@{buf\+\_\+quicksort}}
+\index{buf\+\_\+quicksort@{buf\+\_\+quicksort}!bdd.\+h@{bdd.\+h}}
+\paragraph{\texorpdfstring{buf\+\_\+quicksort()}{buf\_quicksort()}}
+{\footnotesize\ttfamily void buf\+\_\+quicksort (\begin{DoxyParamCaption}\item[{struct \hyperlink{structbuf}{buf} $\ast$}]{buf }\end{DoxyParamCaption})}
+
+
+
+Quick sort buffer. 
+
+
+\begin{DoxyParams}[1]{Paramètres}
+ & {\em buf} & Trie le buffer en entrée\\
+\hline
+\mbox{\tt in}  & {\em buf} & buffer à trier \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bdd_8h_a2c89cfe88d2531b23e92f4435032b650}\label{bdd_8h_a2c89cfe88d2531b23e92f4435032b650}} 
+\index{bdd.\+h@{bdd.\+h}!merge\+\_\+join@{merge\+\_\+join}}
+\index{merge\+\_\+join@{merge\+\_\+join}!bdd.\+h@{bdd.\+h}}
+\paragraph{\texorpdfstring{merge\+\_\+join()}{merge\_join()}}
+{\footnotesize\ttfamily void merge\+\_\+join (\begin{DoxyParamCaption}\item[{const struct \hyperlink{structbuf}{buf} $\ast$}]{buf\+\_\+a,  }\item[{const struct \hyperlink{structbuf}{buf} $\ast$}]{buf\+\_\+b,  }\item[{struct \hyperlink{structbuf}{buf} $\ast$}]{buf\+\_\+out }\end{DoxyParamCaption})}
+
+
+
+Merge join. 
+
+
+\begin{DoxyParams}[1]{Paramètres}
+\mbox{\tt in}  & {\em buf\+\_\+a} & relation externe \\
+\hline
+\mbox{\tt in}  & {\em buf\+\_\+b} & relation interne \\
+\hline
+\mbox{\tt out}  & {\em buf\+\_\+out} & resultat du merge\+\_\+join\\
+\hline
+\mbox{\tt in}  & {\em buf\+\_\+a} & relation a \\
+\hline
+\mbox{\tt in}  & {\em buf\+\_\+b} & relation b \\
+\hline
+\mbox{\tt out}  & {\em buf\+\_\+out} & resultat du merge\+\_\+join \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bdd_8h_a47663e52ec01d5e1fd6d6a0c318b7a6b}\label{bdd_8h_a47663e52ec01d5e1fd6d6a0c318b7a6b}} 
+\index{bdd.\+h@{bdd.\+h}!natural\+\_\+join@{natural\+\_\+join}}
+\index{natural\+\_\+join@{natural\+\_\+join}!bdd.\+h@{bdd.\+h}}
+\paragraph{\texorpdfstring{natural\+\_\+join()}{natural\_join()}}
+{\footnotesize\ttfamily void natural\+\_\+join (\begin{DoxyParamCaption}\item[{const struct \hyperlink{structbuf}{buf} $\ast$}]{buf\+\_\+a,  }\item[{const struct \hyperlink{structbuf}{buf} $\ast$}]{buf\+\_\+b,  }\item[{struct \hyperlink{structbuf}{buf} $\ast$}]{buf\+\_\+out }\end{DoxyParamCaption})}
+
+Natual join
+
+
+\begin{DoxyParams}[1]{Paramètres}
+\mbox{\tt in}  & {\em buf\+\_\+a} & relation externe \\
+\hline
+\mbox{\tt in}  & {\em buf\+\_\+b} & relation interne \\
+\hline
+\mbox{\tt out}  & {\em buf\+\_\+out} & resultat du natural join de buf\+\_\+a et buf\+\_\+b \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bdd_8h_a97f857e28fbc337928cd952de29497b5}\label{bdd_8h_a97f857e28fbc337928cd952de29497b5}} 
+\index{bdd.\+h@{bdd.\+h}!store\+File\+Buffer@{store\+File\+Buffer}}
+\index{store\+File\+Buffer@{store\+File\+Buffer}!bdd.\+h@{bdd.\+h}}
+\paragraph{\texorpdfstring{store\+File\+Buffer()}{storeFileBuffer()}}
+{\footnotesize\ttfamily void store\+File\+Buffer (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{struct \hyperlink{structbuf}{buf} $\ast$}]{buf }\end{DoxyParamCaption})}
+
+
+
+Enregistre un le 1er caractére de chaque ligne d\textquotesingle{}un fichier dans un buffer. 
+
+
+\begin{DoxyParams}[1]{Paramètres}
+\mbox{\tt in}  & {\em Fichier} & d\textquotesingle{}entrée \\
+\hline
+\mbox{\tt out}  & {\em Buffer} & de sortie \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bdd_8h_a1eb4b75f700d864dca5cbf6d51713f15}\label{bdd_8h_a1eb4b75f700d864dca5cbf6d51713f15}} 
+\index{bdd.\+h@{bdd.\+h}!store\+File\+Buffer\+OC@{store\+File\+Buffer\+OC}}
+\index{store\+File\+Buffer\+OC@{store\+File\+Buffer\+OC}!bdd.\+h@{bdd.\+h}}
+\paragraph{\texorpdfstring{store\+File\+Buffer\+O\+C()}{storeFileBufferOC()}}
+{\footnotesize\ttfamily struct \hyperlink{structbuf}{buf}$\ast$ store\+File\+Buffer\+OC (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file\+\_\+name,  }\item[{size\+\_\+t}]{buffer\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Ouvre un fichier Stoque son contenu dans un buffer Ferme le fichier. 
+
+
+\begin{DoxyParams}[1]{Paramètres}
+\mbox{\tt in}  & {\em File\+\_\+name} & Fichier \\
+\hline
+\mbox{\tt in}  & {\em buffer\+\_\+size} & Taille du buffer, si trop petit pour contenir le fichier entirerement alors le reste du fichier est ignoré\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+buffer si N\+U\+LL alors erreur de lecture du fichier 
+\end{DoxyReturn}
+\mbox{\Hypertarget{bdd_8h_a28b99b13e958fa0d0d034e10c1f40252}\label{bdd_8h_a28b99b13e958fa0d0d034e10c1f40252}} 
+\index{bdd.\+h@{bdd.\+h}!write\+Buffer\+In\+File@{write\+Buffer\+In\+File}}
+\index{write\+Buffer\+In\+File@{write\+Buffer\+In\+File}!bdd.\+h@{bdd.\+h}}
+\paragraph{\texorpdfstring{write\+Buffer\+In\+File()}{writeBufferInFile()}}
+{\footnotesize\ttfamily void write\+Buffer\+In\+File (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{const struct \hyperlink{structbuf}{buf} $\ast$}]{buf }\end{DoxyParamCaption})}
+
+Ecrit un buffer dans un fichier
+
+
+\begin{DoxyParams}[1]{Paramètres}
+\mbox{\tt out}  & {\em fp} & fichier de sortie \\
+\hline
+\mbox{\tt in}  & {\em buf} & fichier d\textquotesingle{}entrée \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bdd_8h_ac868457bc94326deb656db591c204d3d}\label{bdd_8h_ac868457bc94326deb656db591c204d3d}} 
+\index{bdd.\+h@{bdd.\+h}!write\+Buffer\+In\+File\+OC@{write\+Buffer\+In\+File\+OC}}
+\index{write\+Buffer\+In\+File\+OC@{write\+Buffer\+In\+File\+OC}!bdd.\+h@{bdd.\+h}}
+\paragraph{\texorpdfstring{write\+Buffer\+In\+File\+O\+C()}{writeBufferInFileOC()}}
+{\footnotesize\ttfamily char write\+Buffer\+In\+File\+OC (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file\+\_\+name,  }\item[{const struct \hyperlink{structbuf}{buf} $\ast$}]{buf }\end{DoxyParamCaption})}
+
+
+
+Ouvre un fichier Ecrit le contenu du buffer dans le fichier Ferme le fichier. 
+
+
+\begin{DoxyParams}[1]{Paramètres}
+\mbox{\tt in}  & {\em File\+\_\+name} & Fichier \\
+\hline
+\mbox{\tt in}  & {\em buf} & Buffer à écrire dans le fichier\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+-\/1 si erreur dans l\textquotesingle{}ouverture du fichier 
+\end{DoxyReturn}

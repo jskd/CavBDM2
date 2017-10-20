@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>CavBDM2 - BDD:  Fichier source de src/bdd/bdd.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">CavBDM2 - BDD
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_530584a44dee1d0441044fd655f8cc06.html">bdd</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">bdd.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="bdd_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="quicksort_8h.html">quicksort.h</a>&quot;</span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">struct </span><a class="code" href="structbuf.html">buf</a>;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">struct </span><a class="code" href="structbuf.html">buf</a>* <a class="code" href="bdd_8h.html#af118ea2efee9628885de1dd08efd0d21">buf_create</a>( <span class="keywordtype">size_t</span> size );</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">void</span> <a class="code" href="bdd_8h.html#ab3de2ea2c5bb6d39e1e25406a71e9d46">buf_destroy</a>(<span class="keyword">struct</span> <a class="code" href="structbuf.html">buf</a>* <a class="code" href="structbuf.html">buf</a>);</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordtype">char</span> <a class="code" href="bdd_8h.html#a995bd4f3c9d30d7d8841ce9640ed6dbf">buf_put</a>(<span class="keyword">struct</span> <a class="code" href="structbuf.html">buf</a>* <a class="code" href="structbuf.html">buf</a>, <span class="keywordtype">char</span> value);</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordtype">void</span> <a class="code" href="bdd_8h.html#a97f857e28fbc337928cd952de29497b5">storeFileBuffer</a>(FILE* fp, <span class="keyword">struct</span> <a class="code" href="structbuf.html">buf</a>* <a class="code" href="structbuf.html">buf</a>);</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordtype">void</span> <a class="code" href="bdd_8h.html#a28b99b13e958fa0d0d034e10c1f40252">writeBufferInFile</a>(FILE* fp, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code" href="structbuf.html">buf</a>* <a class="code" href="structbuf.html">buf</a>);</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordtype">void</span> <a class="code" href="bdd_8h.html#a47663e52ec01d5e1fd6d6a0c318b7a6b">natural_join</a>(<span class="keyword">const</span> <span class="keyword">struct</span> <a class="code" href="structbuf.html">buf</a>* buf_a, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code" href="structbuf.html">buf</a>* buf_b, <span class="keyword">struct</span> <a class="code" href="structbuf.html">buf</a>* buf_out);</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keywordtype">void</span> <a class="code" href="bdd_8h.html#a2c89cfe88d2531b23e92f4435032b650">merge_join</a>(<span class="keyword">const</span> <span class="keyword">struct</span> <a class="code" href="structbuf.html">buf</a>* buf_a, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code" href="structbuf.html">buf</a>* buf_b, <span class="keyword">struct</span> <a class="code" href="structbuf.html">buf</a>* buf_out);</div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> <a class="code" href="bdd_8h.html#aaf4b0cbdb16049b807ffac9b98cedd54">buf_quicksort</a>(<span class="keyword">struct</span> <a class="code" href="structbuf.html">buf</a>* <a class="code" href="structbuf.html">buf</a>);</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">void</span> <a class="code" href="bdd_8h.html#a6d89518f3a40d020f8b0353a7c450b41">buf_dump</a>(<span class="keyword">const</span> <span class="keyword">struct</span> <a class="code" href="structbuf.html">buf</a>* <a class="code" href="structbuf.html">buf</a>);</div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">struct </span><a class="code" href="structbuf.html">buf</a>* <a class="code" href="bdd_8h.html#a1eb4b75f700d864dca5cbf6d51713f15">storeFileBufferOC</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* file_name, <span class="keywordtype">size_t</span> buffer_size);</div><div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div><div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keywordtype">char</span> <a class="code" href="bdd_8h.html#ac868457bc94326deb656db591c204d3d">writeBufferInFileOC</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* file_name, <span class="keyword">const</span> <span class="keyword">struct</span> <a class="code" href="structbuf.html">buf</a>*);</div><div class="ttc" id="bdd_8h_html_af118ea2efee9628885de1dd08efd0d21"><div class="ttname"><a href="bdd_8h.html#af118ea2efee9628885de1dd08efd0d21">buf_create</a></div><div class="ttdeci">struct buf * buf_create(size_t size)</div><div class="ttdef"><b>Definition:</b> bdd.c:47</div></div>
+<div class="ttc" id="bdd_8h_html_ab3de2ea2c5bb6d39e1e25406a71e9d46"><div class="ttname"><a href="bdd_8h.html#ab3de2ea2c5bb6d39e1e25406a71e9d46">buf_destroy</a></div><div class="ttdeci">void buf_destroy(struct buf *buf)</div><div class="ttdef"><b>Definition:</b> bdd.c:59</div></div>
+<div class="ttc" id="bdd_8h_html_a995bd4f3c9d30d7d8841ce9640ed6dbf"><div class="ttname"><a href="bdd_8h.html#a995bd4f3c9d30d7d8841ce9640ed6dbf">buf_put</a></div><div class="ttdeci">char buf_put(struct buf *buf, char value)</div><div class="ttdef"><b>Definition:</b> bdd.c:71</div></div>
+<div class="ttc" id="structbuf_html"><div class="ttname"><a href="structbuf.html">buf</a></div><div class="ttdoc">Structure de donnée repésentant un buffer. </div><div class="ttdef"><b>Definition:</b> bdd.c:34</div></div>
+<div class="ttc" id="bdd_8h_html_a47663e52ec01d5e1fd6d6a0c318b7a6b"><div class="ttname"><a href="bdd_8h.html#a47663e52ec01d5e1fd6d6a0c318b7a6b">natural_join</a></div><div class="ttdeci">void natural_join(const struct buf *buf_a, const struct buf *buf_b, struct buf *buf_out)</div><div class="ttdef"><b>Definition:</b> bdd.c:162</div></div>
+<div class="ttc" id="bdd_8h_html_a1eb4b75f700d864dca5cbf6d51713f15"><div class="ttname"><a href="bdd_8h.html#a1eb4b75f700d864dca5cbf6d51713f15">storeFileBufferOC</a></div><div class="ttdeci">struct buf * storeFileBufferOC(const char *file_name, size_t buffer_size)</div><div class="ttdoc">Ouvre un fichier Stoque son contenu dans un buffer Ferme le fichier. </div><div class="ttdef"><b>Definition:</b> bdd.c:110</div></div>
+<div class="ttc" id="bdd_8h_html_a2c89cfe88d2531b23e92f4435032b650"><div class="ttname"><a href="bdd_8h.html#a2c89cfe88d2531b23e92f4435032b650">merge_join</a></div><div class="ttdeci">void merge_join(const struct buf *buf_a, const struct buf *buf_b, struct buf *buf_out)</div><div class="ttdoc">Merge join. </div><div class="ttdef"><b>Definition:</b> bdd.c:180</div></div>
+<div class="ttc" id="bdd_8h_html_ac868457bc94326deb656db591c204d3d"><div class="ttname"><a href="bdd_8h.html#ac868457bc94326deb656db591c204d3d">writeBufferInFileOC</a></div><div class="ttdeci">char writeBufferInFileOC(const char *file_name, const struct buf *)</div><div class="ttdoc">Ouvre un fichier Ecrit le contenu du buffer dans le fichier Ferme le fichier. </div><div class="ttdef"><b>Definition:</b> bdd.c:144</div></div>
+<div class="ttc" id="bdd_8h_html_a6d89518f3a40d020f8b0353a7c450b41"><div class="ttname"><a href="bdd_8h.html#a6d89518f3a40d020f8b0353a7c450b41">buf_dump</a></div><div class="ttdeci">void buf_dump(const struct buf *buf)</div><div class="ttdoc">Hex dump buffer. </div><div class="ttdef"><b>Definition:</b> bdd.c:213</div></div>
+<div class="ttc" id="quicksort_8h_html"><div class="ttname"><a href="quicksort_8h.html">quicksort.h</a></div></div>
+<div class="ttc" id="bdd_8h_html_a97f857e28fbc337928cd952de29497b5"><div class="ttname"><a href="bdd_8h.html#a97f857e28fbc337928cd952de29497b5">storeFileBuffer</a></div><div class="ttdeci">void storeFileBuffer(FILE *fp, struct buf *buf)</div><div class="ttdoc">Enregistre un le 1er caractére de chaque ligne d&amp;#39;un fichier dans un buffer. </div><div class="ttdef"><b>Definition:</b> bdd.c:88</div></div>
+<div class="ttc" id="bdd_8h_html_aaf4b0cbdb16049b807ffac9b98cedd54"><div class="ttname"><a href="bdd_8h.html#aaf4b0cbdb16049b807ffac9b98cedd54">buf_quicksort</a></div><div class="ttdeci">void buf_quicksort(struct buf *buf)</div><div class="ttdoc">Quick sort buffer. </div><div class="ttdef"><b>Definition:</b> bdd.c:205</div></div>
+<div class="ttc" id="bdd_8h_html_a28b99b13e958fa0d0d034e10c1f40252"><div class="ttname"><a href="bdd_8h.html#a28b99b13e958fa0d0d034e10c1f40252">writeBufferInFile</a></div><div class="ttdeci">void writeBufferInFile(FILE *fp, const struct buf *buf)</div><div class="ttdef"><b>Definition:</b> bdd.c:128</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

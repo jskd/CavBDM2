@@ -16,6 +16,9 @@
 * Remarques :
 */
 
+#ifndef SRC_BDD_QUICKSORT_H
+#define SRC_BDD_QUICKSORT_H
+
 /**
  * Remarques : Ce fichier a été récuprer du site:
  *   http://www.zentut.com/c-tutorial/c-quicksort-algorithm/
@@ -23,3 +26,5 @@
  */
 
 void quicksort(char *list, char m, char n);
+
+#endif

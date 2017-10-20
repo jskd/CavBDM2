@@ -20,5 +20,9 @@
 *   https://stackoverflow.com/questions/7775991/how-to-get-hexdump-of-a-structure-data#7776146
 *   il a été réadapté dans le cadre du projet
 */
+#ifndef SRC_BDD_HEXDUMP_H
+#define SRC_BDD_HEXDUMP_H
 
 void hexDump (char *desc, const void *addr, int len);
+
+#endif

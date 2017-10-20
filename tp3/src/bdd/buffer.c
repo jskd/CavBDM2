@@ -15,8 +15,9 @@
 *
 * Remarques :
 */
-#include "bdd.h"
+#include "buffer.h"
 #include "hexdump.h"
+#include "quicksort.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -147,52 +148,6 @@ char writeBufferInFileOC(const char* file_name, const struct buf* buf) {
 }
 
 /**
- * Natual join
- *
- * @param[in]  buf_a   relation externe
- * @param[in]  buf_b   relation interne
- * @param[out] buf_out resultat du natural join de buf_a et buf_b
- */
-void natural_join(const struct buf* buf_a, const struct buf* buf_b, struct buf* buf_out) {
-  for(int a=0; a< buf_a->c; a++) {
-    for(int b=0; b< buf_b->c; b++) {
-      if(buf_a->v[a] == buf_b->v[b]) {
-        buf_put(buf_out, buf_a->v[a]);
-        break; // pass to next a
-      }
-    }
-  }
-}
-
-/**
- * @brief Merge join
- *
- * @param[in]  buf_a   relation a
- * @param[in]  buf_b   relation b
- * @param[out] buf_out resultat du merge_join
- */
-void merge_join(const struct buf* buf_a, const struct buf* buf_b, struct buf* buf_out) {
-  char* buf_a_ptr= buf_a->v; // pointer vers le buffer a
-  char* buf_b_ptr= buf_b->v; // pointer vers le buffer b
-
-  // Calcule la dernier case memoire du buffer + 1
-  const char* buf_a_ptr_limit= buf_a->v + buf_a->c;
-  const char* buf_b_ptr_limit= buf_b->v + buf_b->c;
-
-  while( buf_a_ptr < buf_a_ptr_limit && buf_b_ptr < buf_b_ptr_limit)
-  {
-    if(*buf_a_ptr == *buf_b_ptr) {
-      buf_put(buf_out, *buf_a_ptr);
-      buf_a_ptr++;
-    } else if (*buf_a_ptr < *buf_b_ptr) {
-      buf_a_ptr++;
-    } else {
-      buf_b_ptr++;
-    }
-  }
-}
-
-/**
  * @brief Quick sort buffer
  * @param[in] buf buffer à trier
  */
@@ -208,4 +163,32 @@ void buf_dump(const struct buf* buf) {
   printf ("buffer count: %zu\n", buf->c);
   printf ("buffer size: %zu\n", buf->s);
   hexDump("buffer value:", buf->v, buf->c);
+}
+
+/**
+ * @brief Retourne la valeur à la position d'un buffer
+ *
+ * @param[in]  buf   Buffer
+ * @param[in]  index Index of value
+ *
+ * @return Value
+ *         Si -1: Erreur index > count
+ */
+char buf_val(const struct buf* buf, int index)
+{
+  if(index < buf->c)
+    return buf->v[index];
+  return -1;
+}
+
+/**
+ * @brief Retourne le nombre de caractere enregistré dans le buffer
+ *
+ * @param[in]  buf       Buffer
+ *
+ * @return Nombre de caractere enregistré
+ */
+size_t buf_count(const struct buf* buf)
+{
+  return buf->c;
 }

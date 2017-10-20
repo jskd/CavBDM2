@@ -15,8 +15,10 @@
 *
 * Remarques :
 */
+#ifndef SRC_BDD_BUFFER_H
+#define SRC_BDD_BUFFER_H
+
 #include <stdio.h>
-#include "quicksort.h"
 
 /**
  * @brief Structure de donnée repésentant un buffer
@@ -64,24 +66,6 @@ void storeFileBuffer(FILE* fp, struct buf* buf);
 void writeBufferInFile(FILE* fp, const struct buf* buf);
 
 /**
- * Natual join
- *
- * @param[in]  buf_a   relation externe
- * @param[in]  buf_b   relation interne
- * @param[out] buf_out resultat du natural join de buf_a et buf_b
- */
-void natural_join(const struct buf* buf_a, const struct buf* buf_b, struct buf* buf_out);
-
-/**
- * @brief Merge join
- *
- * @param[in]  buf_a   relation externe
- * @param[in]  buf_b   relation interne
- * @param[out] buf_out resultat du merge_join
- */
-void merge_join(const struct buf* buf_a, const struct buf* buf_b, struct buf* buf_out);
-
-/**
  * @brief Quick sort buffer
  *
  * @param buf Trie le buffer en entrée
@@ -122,3 +106,24 @@ struct buf* storeFileBufferOC(const char* file_name, size_t buffer_size);
  *
  */
 char writeBufferInFileOC(const char* file_name, const struct buf*);
+
+/**
+ * @brief Retourne la valeur à la position d'un buffer
+ *
+ * @param[in]  buf   Buffer
+ * @param[in]  index Index of value
+ *
+ * @return Value
+ */
+char buf_val(const struct buf* buf, int index);
+
+/**
+ * @brief Retourne le nombre de caractere enregistré dans le buffer
+ *
+ * @param[in]  buf       Buffer
+ *
+ * @return Nombre de caractere enregistré
+ */
+size_t buf_count(const struct buf* buf);
+
+#endif

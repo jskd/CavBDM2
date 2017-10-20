@@ -16,7 +16,7 @@
 * Remarques :
 */
 
-#include "../bdd/bdd.h"
+#include "../bdd/buffer.h"
 
 static const size_t buf_size= 16;
 

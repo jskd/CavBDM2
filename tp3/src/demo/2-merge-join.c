@@ -16,7 +16,7 @@
 * Remarques :
 */
 
-#include "../bdd/bdd.h"
+#include "../bdd/mergeJoinWithoutDuplicate.h"
 
 static const size_t buf_size= 16;
 
@@ -44,7 +44,7 @@ int main(int argc, char** argv){
   buf_quicksort(buf_s);
 
   // Jointure
-  merge_join(buf_r, buf_s, buf_rs);
+  merge_join_without_duplicate(buf_r, buf_s, buf_rs);
 
   // Ecriture du resultat dans RS.txt
   if(writeBufferInFileOC("res/RS.txt", buf_rs))

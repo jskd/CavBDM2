@@ -16,26 +16,23 @@
 * Remarques :
 */
 
-#include "../bdd/bdd.h"
+#include "../bdd/buffer.h"
 
 static const size_t buf_size= 16;
 
 int main(int argc, char** argv){
 
-	  // buffer R.txt
-	  struct buf* buf_r= storeFileBufferOC("res/R.txt", buf_size);
-	  if(buf_r == NULL) {
-	    printf("Erreur lors de la lecture de R.txt.\n");
-	    return -1;
-	  }
+    // buffer R.txt
+    struct buf* buf_r= storeFileBufferOC("res/R.txt", buf_size);
+    if(buf_r == NULL) {
+      printf("Erreur lors de la lecture de R.txt.\n");
+      return -1;
+    }
 
-	  // buffer de sortie
-	  struct buf* buf_rs= buf_create( buf_size);
+    buf_quicksort(buf_r);
 
-	  buf_quicksort(buf_r);
+    buf_dump(buf_r);
 
-	  buf_dump(buf_r);
-
-	  // Remove buf
-	  buf_destroy(buf_r);
+    // Remove buf
+    buf_destroy(buf_r);
 }

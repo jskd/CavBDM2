@@ -32,24 +32,15 @@ Comment avons nous pu écrire autant de chose sur seulement deux boucles imbriqu
 	\item make clean : Nettoyage du projet (supression des objets et binaires)
 	\item make demo-tp1 : Lancer la démo tp1
 	\item make demo-tp2 : Lancer la démo tp2
+	\item make demo-tp3 : Lancer la démo tp2
 	\item make rm-rs : Supprime le fichier res/RS.txt
 \end{itemize}
 
 \subsection{Avec ECLIPSE}
 
-Pour lancer une commande utiliser les boutons magique build targets.
+Pour lancer une commande utiliser les builds targets.
 
-\begin{figure}[h!] 
-\centering
-\includegraphics[width=0.5\textwidth]{bouton-magique.png}
-\caption{Double clique ici!}
-\end{figure}
-
-
-\subsection{Avec code:block}
-
-Aucun portage sur code:block de prévu. 
-Nous avons passé une longue heure à configurer eclipse et nous en avons assez!
+\includegraphics[width=0.5\textwidth]{builds-target.png}
 
 \section{Arborescence}
 
@@ -73,6 +64,7 @@ Nous avons passé une longue heure à configurer eclipse et nous en avons assez!
 \item sujet.pdf  : Sujet du projet
 \item README.md  : Le readme du projet 
 \item rappot.pdf : C'est moi
+\item refman.pdf : Documentation format pdf
 \end{itemize}
 
 \section{Caracteristiques}
@@ -85,12 +77,37 @@ Nous avons passé une longue heure à configurer eclipse et nous en avons assez!
 	\item Et il y a pleins d'autre chose
 \end{itemize}
 
+\section{Démonstration}
+
+Les sources de demosntration sont diponible dans: src/demo
+Les exécutables de test sont généré dans: bin/demo
+La commande make pour lancer les demo sont: make demo-tp1, make demo-tp2, make demo-tp3
+
+\begin{itemize}
+  \item tp1-natural-join: Natural join R et S
+  \item tp2-merge-join-without-duplicate: Merge join sans duplication 
+  \item tp3-merge-join-with-duplicate: Merge join avec duplication 
+\end{itemize}
+
 \section{Test unitaire}
 
+Les sources de test sont diponible dans: src/test
+Les exécutables de test sont généré dans: bin/test
+Le script de test est dans script/test.sh
+La commande make pour lancer les test est: make test
+
+\begin{itemize}
+  \item 0-storeFileBuffer: Ecriture d'un buffer dans un fichier
+  \item 1-natural-join-1: Natural join R et S
+  \item 2-natural-join-2: Natural join S et R
+  \item 3-buf-quick-sort: Fonction de trie d'un buffer
+  \item 4-merge-join-without-duplicate-1: Merge join sans duplication R et S
+  \item 5-merge-join-without-duplicate-2: Merge join sans duplication S et R
+  \item 6-merge-join-with-duplicate-1: Merge join avec duplication R et S
+  \item 7-merge-join-with-duplicate-2: Merge join avec duplication S et R
+\end{itemize}
 
 \includegraphics[width=0.8\textwidth]{test.png}
-
-
 
 \includepdf[pages=3-12]{refman.pdf}
 

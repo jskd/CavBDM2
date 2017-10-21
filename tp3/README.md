@@ -6,7 +6,7 @@ Il est recommandé pour les utilisateurs n'aimant pas le terminal
 de manipuler le projet uniquement avec **eclipse** 
 
 Des *builds targets* sont configurés, il suffit de double cliquer dessus
-pour lancer la commande make correspondante
+pour lancer la commande make correspondante (voir rapport)
 
 # Commandes
 
@@ -39,14 +39,19 @@ pour lancer la commande make correspondante
 
 # Tests disponibles
 
-*
-*
-*
-*
-*
-*
+* 0-storeFileBuffer: Ecriture d'un buffer dans un fichier
+* 1-natural-join-1: Natural join R et S
+* 2-natural-join-2: Natural join S et R
+* 3-buf-quick-sort: Fonction de trie d'un buffer
+* 4-merge-join-without-duplicate-1: Merge join sans duplication R et S
+* 5-merge-join-without-duplicate-2: Merge join sans duplication S et R
+* 6-merge-join-with-duplicate-1: Merge join avec duplication R et S
+* 7-merge-join-with-duplicate-2: Merge join avec duplication S et R
 
+# Démonstration disponibles
 
-
+* tp1-natural-join: Natural join R et S
+* tp2-merge-join-without-duplicate: Merge join sans duplication 
+* tp3-merge-join-with-duplicate: Merge join avec duplication 
 
 

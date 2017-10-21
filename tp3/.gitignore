@@ -1,3 +1,6 @@
 bin
 obj
 *.out
+doc/html
+doc/html
+doc/rtf

@@ -37,7 +37,23 @@ pour lancer la commande make correspondante (voir rapport)
 * *README.md*  : C'est moi
 * *rappot.pdf* : Le rapport du projet 
 
+
+# Démonstration disponibles
+
+Les sources de demosntration sont diponible dans: src/demo
+Les exécutables de test sont généré dans: bin/demo
+La commande make pour lancer les demo sont: make demo-tp1, make demo-tp2, make demo-tp3
+
+* tp1-natural-join: Natural join R et S
+* tp2-merge-join-without-duplicate: Merge join sans duplication 
+* tp3-merge-join-with-duplicate: Merge join avec duplication 
+
 # Tests disponibles
+
+Les sources de test sont diponible dans: src/test
+Les exécutables de test sont généré dans: bin/test
+Le script de test est dans script/test.sh
+La commande make pour lancer les test est: make test
 
 * 0-storeFileBuffer: Ecriture d'un buffer dans un fichier
 * 1-natural-join-1: Natural join R et S
@@ -47,11 +63,3 @@ pour lancer la commande make correspondante (voir rapport)
 * 5-merge-join-without-duplicate-2: Merge join sans duplication S et R
 * 6-merge-join-with-duplicate-1: Merge join avec duplication R et S
 * 7-merge-join-with-duplicate-2: Merge join avec duplication S et R
-
-# Démonstration disponibles
-
-* tp1-natural-join: Natural join R et S
-* tp2-merge-join-without-duplicate: Merge join sans duplication 
-* tp3-merge-join-with-duplicate: Merge join avec duplication 
-
-

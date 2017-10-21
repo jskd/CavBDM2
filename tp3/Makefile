@@ -84,37 +84,41 @@ clean:
 	@echo "Répertoire "$(BINDIR)" supprimé"
 
 # Lancement de script de test
-test: all
+test: $(BIN_TEST)
 	@chmod +x script/test.sh
 	@./script/test.sh
-	@echo "\n\nScript de test terminé"
+	@echo "Script de test terminé"
 
 # Lancement du générateur de document
 doc:
 	@doxygen doc/doxyfile
-	@echo "\n\nGénération de la doc terminé"
+	@echo "Génération de la doc terminé"
 
 # Lancement du générateur de rapport
 rapport:
 	@cd rapport && $(MAKE) 
 	@cp rapport/rapport.pdf rapport.pdf 
-	@echo "\n\nGénération du rapport terminé"
+	@echo "Génération du rapport terminé"
 
 # Lancement de la démo 1
-demo-tp1: bin/demo/1-natural-join
-	./bin/demo/1-natural-join
-	@echo "\n\nDémonstration terminé"
+demo-tp1: bin/demo/tp1-natural-join
+	./bin/demo/tp1-natural-join
+	@echo "Démonstration terminé"
 
 # Lancement de la démo 2
-demo-tp2: bin/demo/2-merge-join
-	./bin/demo/2-merge-join
-	@echo "\n\nDémonstration terminé"
-	
+demo-tp2: bin/demo/tp2-merge-join-without-duplicate
+	./bin/demo/tp2-merge-join-without-duplicate
+	@echo "Démonstration terminé"
+
+# Lancement de la démo 3
+demo-tp3: bin/demo/tp3-merge-join-with-duplicate
+	./bin/demo/tp3-merge-join-with-duplicate
+	@echo "Démonstration terminé"
+
 # Supression de RS.txt
 rm-rs:
-	@rm -rf $(RS_TXT) 
+	@rm -rf $(RS_TXT)
 	@echo "Fichier "$(RS_TXT)" supprimé"
-
 
 zip: clean
 	zip -r ${name}TP${n}.zip .

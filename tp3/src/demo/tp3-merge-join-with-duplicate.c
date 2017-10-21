@@ -1,9 +1,9 @@
 /**
-* TP n°: 2
+* TP n°: 3
 *
-* Titre du TP : Merge Join
+* Titre du TP : Merge Join Duplicate
 *
-* Date : 13/10/17
+* Date : 21/10/17
 *
 * Nom : Lefranc
 * Prenom : Joaquim
@@ -16,21 +16,21 @@
 * Remarques :
 */
 
-#include "../bdd/naturalJoin.h"
+#include "../bdd/mergeJoinWithDuplicate.h"
 
 static const size_t buf_size= 10;
 
 int main(int argc, char** argv){
 
   // buffer R.txt
-  struct buf* buf_r= storeFileBufferOC("res/R.txt", buf_size);
+  struct buf* buf_r= storeFileBufferOC("res/Rduplicate.txt", buf_size);
   if(buf_r == NULL) {
     printf("Erreur lors de la lecture de R.txt.\n");
     return -1;
   }
 
   // buffer S.txt
-  struct buf* buf_s= storeFileBufferOC("res/S.txt", buf_size);
+  struct buf* buf_s= storeFileBufferOC("res/Sduplicate.txt", buf_size);
   if(buf_s == NULL) {
     printf("Erreur lors de la lecture de S.txt.\n");
     return -1;
@@ -40,7 +40,7 @@ int main(int argc, char** argv){
   struct buf* buf_rs= buf_create( buf_size);
 
   // Jointure
-  natural_join(buf_r, buf_s, buf_rs);
+  merge_join_with_duplicate(buf_r, buf_s, buf_rs);
 
   // Ecriture du resultat dans RS.txt
   if(writeBufferInFileOC("res/RS.txt", buf_rs))

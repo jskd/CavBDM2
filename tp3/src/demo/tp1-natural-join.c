@@ -1,9 +1,9 @@
 /**
-* TP n°: 2
+* TP n°: 3
 *
-* Titre du TP : Merge Join
+* Titre du TP : Merge Join Duplicate
 *
-* Date : 13/10/17
+* Date : 21/10/17
 *
 * Nom : Lefranc
 * Prenom : Joaquim
@@ -16,7 +16,7 @@
 * Remarques :
 */
 
-#include "../bdd/mergeJoinWithoutDuplicate.h"
+#include "../bdd/naturalJoin.h"
 
 static const size_t buf_size= 10;
 
@@ -39,12 +39,8 @@ int main(int argc, char** argv){
   // buffer de sortie
   struct buf* buf_rs= buf_create( buf_size);
 
-  // Trie
-  buf_quicksort(buf_r);
-  buf_quicksort(buf_s);
-
   // Jointure
-  merge_join_without_duplicate(buf_r, buf_s, buf_rs);
+  natural_join(buf_r, buf_s, buf_rs);
 
   // Ecriture du resultat dans RS.txt
   if(writeBufferInFileOC("res/RS.txt", buf_rs))

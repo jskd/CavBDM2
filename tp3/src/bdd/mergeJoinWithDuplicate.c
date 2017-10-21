@@ -1,9 +1,9 @@
 /**
-* TP n°: 2
+* TP n°: 3
 *
-* Titre du TP : Merge Join
+* Titre du TP : Merge Join Duplicate
 *
-* Date : 13/10/17
+* Date : 21/10/17
 *
 * Nom : Lefranc
 * Prenom : Joaquim
@@ -19,11 +19,11 @@
 #include "buffer.h"
 
 /**
- * @brief Merge join
+ * @brief Merge join with duplicate
  *
- * @param[in]  buf_a   relation externe
- * @param[in]  buf_b   relation interne
- * @param[out] buf_out resultat du merge_join
+ * @param[in]  buf_a   relation a
+ * @param[in]  buf_b   relation b
+ * @param[out] buf_out resultat du merge join avec duplication de la relation a et b
  */
 void merge_join_with_duplicate(const struct buf* buf_a, const struct buf* buf_b, struct buf* buf_out) {
   int index_a=0; // pointer vers le buffer a
@@ -49,4 +49,3 @@ void merge_join_with_duplicate(const struct buf* buf_a, const struct buf* buf_b,
     }
   }
 }
-

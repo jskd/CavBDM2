@@ -1,9 +1,9 @@
 /**
-* TP n°: 2
+* TP n°: 3
 *
-* Titre du TP : Merge Join
+* Titre du TP : Merge Join Duplicate
 *
-* Date : 13/10/17
+* Date : 21/10/17
 *
 * Nom : Lefranc
 * Prenom : Joaquim

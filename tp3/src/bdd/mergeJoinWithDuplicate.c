@@ -29,12 +29,18 @@ void merge_join_with_duplicate(const struct buf* buf_a, const struct buf* buf_b,
   int index_a=0; // pointer vers le buffer a
   int index_b=0; // pointer vers le buffer b
 
-  while( index_a < buf_count(buf_a) && index_b < buf_count(buf_b))
+  while(index_a < buf_count(buf_a) && index_b < buf_count(buf_b))
   {
     const char val_a= buf_val(buf_a, index_a);
-    const char val_b= buf_val(buf_b, index_b);
-    if(val_a == val_b ) {
-      buf_put(buf_out, val_a );
+    char val_b= buf_val(buf_b, index_b);
+    if(val_a == val_b) {
+      int index_b_before= index_b;
+      do {
+        buf_put(buf_out, val_a);
+        index_b++;
+        val_b= buf_val(buf_b, index_b);
+      } while(val_a == val_b);
+      index_b= index_b_before;
       index_a++;
     } else if (val_a < val_b) {
       index_a++;

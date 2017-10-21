@@ -1,6 +1,6 @@
 bin
 obj
 *.out
-doc/html
+doc/latex
 doc/html
 doc/rtf

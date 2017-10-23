@@ -18,6 +18,8 @@
 #ifndef SRC_BDD_BUFFER_H
 #define SRC_BDD_BUFFER_H
 
+#define _GNU_SOURCE
+
 #include <stdio.h>
 
 /**

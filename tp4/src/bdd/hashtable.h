@@ -47,5 +47,6 @@ char hashtable_get(struct hashtable* ht, char key);
 
 // Not implemented
 // void hashtable_remove(struct hashtable* ht, char key);
+char storeBufferToHashtable(struct buf* buf, struct hashtable* ht);
 
 #endif

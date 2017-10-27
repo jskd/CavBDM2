@@ -15,6 +15,9 @@
 *
 * Remarques :
 */
+// Pour getline (standard GNU)
+#define _GNU_SOURCE
+
 #include "buffer.h"
 #include "hexdump.h"
 #include "quicksort.h"

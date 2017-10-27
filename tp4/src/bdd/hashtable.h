@@ -39,4 +39,13 @@ struct hashtable* hashtable_create( size_t m );
  */
 void hashtable_destroy( struct hashtable* ht );
 
+char hashtable_is_full(struct hashtable* ht);
+
+void hashtable_put(struct hashtable* ht, char key, char val);
+
+char hashtable_get(struct hashtable* ht, char key);
+
+// Not implemented
+// void hashtable_remove(struct hashtable* ht, char key);
+
 #endif

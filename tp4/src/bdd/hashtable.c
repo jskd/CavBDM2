@@ -16,6 +16,7 @@
 *
 * Remarques :
 */
+#include "buffer.h"
 #include "hashtable.h"
 #include "hexdump.h"
 #include <stdio.h>
@@ -105,5 +106,24 @@ char hashtable_get(struct hashtable* ht, char key) {
     return NOT_IN_HASHTABLE;
 }
 
-//void hashtable_remove(struct hashtable* ht, char key) {
-//}
+
+
+char storeBufferToHashtable(struct buf* buf, struct hashtable* ht) {
+  // Erreur buffer trop grand
+  if(buf_count(buf) >= ht->m-1)
+    return -1;
+
+  for(int index=0; index< buf_count(buf); index++)
+    hashtable_put(ht, index, buf_val(buf, index)); 
+
+  return 0;
+}
+
+void hashtable_print(struct hashtable* ht) {
+  for(int index=0; index < ht->m; index++)
+    printf("Key: %d Val: %d", ht->v[index].key, ht->v[index].val);
+}
+
+// Not implemented
+// void hashtable_remove(struct hashtable* ht, char key) {
+// }

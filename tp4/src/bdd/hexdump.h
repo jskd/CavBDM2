@@ -25,4 +25,6 @@
 
 void hexDump (char *desc, const void *addr, int len);
 
+char printable_or_dot(char c);
+
 #endif

@@ -19,7 +19,7 @@
 #define SRC_BDD_HASHTABLE_H
 
 #include <stdio.h>
-
+#include "buffer.h"
 /**
  * @brief Structure de donnée repésentant une table de hash
  * Remarque: Structure caché! Ne pas initilialiser autrement
@@ -41,12 +41,14 @@ void hashtable_destroy( struct hashtable* ht );
 
 char hashtable_is_full(struct hashtable* ht);
 
-void hashtable_put(struct hashtable* ht, char key, char val);
+char hashtable_put(struct hashtable* ht, char key, char val);
 
 char hashtable_get(struct hashtable* ht, char key);
 
-// Not implemented
-// void hashtable_remove(struct hashtable* ht, char key);
+void hashtable_remove(struct hashtable* ht, char key);
+
+void hashtable_print(struct hashtable* ht);
+
 char storeBufferToHashtable(struct buf* buf, struct hashtable* ht);
 
 #endif

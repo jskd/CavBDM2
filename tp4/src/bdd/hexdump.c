@@ -74,3 +74,10 @@ void hexDump (char *desc, const void *addr, int len) {
   // And print the final ASCII bit.
   printf ("  %s\n", buff);
 }
+
+char printable_or_dot( char c ) {
+  if (c < 0x20 || c > 0x7e)
+    return '.';
+  else
+    return c;
+}

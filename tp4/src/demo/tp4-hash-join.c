@@ -1,9 +1,9 @@
 /**
-* TP n°: 3
+* TP n°: 4
 *
-* Titre du TP : Merge Join Duplicate
+* Titre du TP : Hash Join
 *
-* Date : 21/10/17
+* Date : 27/10/17
 *
 * Nom : Lefranc
 * Prenom : Joaquim
@@ -37,7 +37,7 @@ int main(int argc, char** argv){
   }
 
   // buffer de sortie
-  struct buf* buf_rs= buf_create( buf_size);
+  //struct buf* buf_rs= buf_create( buf_size);
 
   struct hashtable* ht= hashtable_create( buf_count(buf_r) );
 

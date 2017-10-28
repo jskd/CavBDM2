@@ -44,7 +44,7 @@ int main(int argc, char** argv){
 
   // Ecriture du resultat dans RS.txt
   if(writeBufferInFile("res/RS.txt", buf_rs))
-    printf("Erreur lors de la lecture de RS.txt.\n");
+    printf("Erreur lors de l'ecriture de RS.txt.\n");
 
   printf("Terminé, fichier dans res/RS.txt\n");
 

@@ -115,6 +115,11 @@ demo-tp3: bin/demo/tp3-merge-join-with-duplicate
 	./bin/demo/tp3-merge-join-with-duplicate
 	@echo "Démonstration terminé"
 
+# Lancement de la démo 4
+demo-tp4: bin/demo/tp4-hash-join
+	./bin/demo/tp4-hash-join
+	@echo "Démonstration terminé"
+
 # Supression de RS.txt
 rm-rs:
 	@rm -rf $(RS_TXT)

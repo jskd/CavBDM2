@@ -41,7 +41,11 @@ int main(int argc, char** argv){
 
   hash_join(ht_r, buf_s, buf_rs);
 
-  writeBufferInFile("res/RS.txt", buf_rs);
+  // Ecriture du resultat dans RS.txt
+  if(writeBufferInFile("res/RS.txt", buf_rs))
+    printf("Erreur lors de l'ecriture de RS.txt.\n");
+
+  printf("Terminé, fichier dans res/RS.txt\n");
 
   hashtable_destroy(ht_r);
   buf_destroy(buf_rs);

@@ -1,7 +1,7 @@
 /**
 * TP n°: 4
 *
-* Titre du TP : Hash Merge
+* Titre du TP : Hash Join
 *
 * Date : 27/10/17
 *
@@ -31,5 +31,6 @@ int main(int argc, char** argv){
   printf("hashtable_put 4 return: %d\n", hashtable_put(ht, 4, 4));
 
   hashtable_print(ht);
-    
+
+  hashtable_destroy(ht);
 }

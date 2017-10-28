@@ -27,7 +27,6 @@ int main(int argc, char** argv){
   printf("hashtable_put k:5  v:20 return: %d\n", hashtable_put(ht, 5, 20));
   printf("hashtable_put k:15 v:0  return: %d\n", hashtable_put(ht, 15, 0));
 
-
   hashtable_print(ht);
 
   printf("hashtable_get  5 return: %d\n", hashtable_get(ht, 5));
@@ -35,4 +34,5 @@ int main(int argc, char** argv){
   printf("hashtable_get 15 return: %d\n", hashtable_get(ht, 15));
   printf("hashtable_get 20 return: %d\n", hashtable_get(ht, 20));
 
+  hashtable_destroy(ht);
 }

@@ -47,6 +47,7 @@ La commande make pour lancer les demo sont: make demo-tp1, make demo-tp2, make d
 * tp1-natural-join: Natural join R et S
 * tp2-merge-join-without-duplicate: Merge join sans duplication 
 * tp3-merge-join-with-duplicate: Merge join avec duplication 
+* tp4-hash-join: Hash join
 
 # Tests disponibles
 
@@ -55,11 +56,18 @@ Les exécutables de test sont généré dans: bin/test
 Le script de test est dans script/test.sh
 La commande make pour lancer les test est: make test
 
-* 0-storeFileBuffer: Ecriture d'un buffer dans un fichier
-* 1-natural-join-1: Natural join R et S
-* 2-natural-join-2: Natural join S et R
-* 3-buf-quick-sort: Fonction de trie d'un buffer
-* 4-merge-join-without-duplicate-1: Merge join sans duplication R et S
-* 5-merge-join-without-duplicate-2: Merge join sans duplication S et R
-* 6-merge-join-with-duplicate-1: Merge join avec duplication R et S
-* 7-merge-join-with-duplicate-2: Merge join avec duplication S et R
+* 00-storeFileBuffer: Ecriture d'un buffer dans un fichier
+* 01-natural-join-1: Natural join R et S
+* 02-natural-join-2: Natural join S et R
+* 03-buf-quick-sort: Fonction de trie d'un buffer
+* 04-merge-join-without-duplicate-1: Merge join sans duplication R et S
+* 05-merge-join-without-duplicate-2: Merge join sans duplication S et R
+* 06-merge-join-with-duplicate-1: Merge join avec duplication R et S
+* 07-merge-join-with-duplicate-2: Merge join avec duplication S et R
+* 08-hash-put-equilibre : Test ajout equilibré dans une table de hash
+* 09-hash-put-desequilibre : Test ajout déséquilibré dans une table de hash
+* 10-hash-full : Test remplissage complet dans une table de hash
+* 11-hash-get : Test recupreration d'une entrée dans la table de hash
+* 12-hash-remove : Test supression / rehash dans une table de hash
+* 13-hash-join : Test hash join
+

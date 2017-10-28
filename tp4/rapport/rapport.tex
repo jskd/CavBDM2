@@ -16,9 +16,14 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
-Comment avons nous pu écrire autant de chose sur seulement deux boucles imbriqués et une fonction de merge de moins de 20 lignes?
-\end{abstract}
+
+\section{Nouveauté depuis le TP3}
+
+\begin{itemize}
+	\item 6 test en plus (table de hash + hash join)
+	\item 1 demo (make demo-tp4)
+	\item Nouvelle structure de donnée hashtable (réutilisable et encapsulé)
+\end{itemize}
 
 \section{Comment compiler le projet}
 
@@ -32,7 +37,8 @@ Comment avons nous pu écrire autant de chose sur seulement deux boucles imbriqu
 	\item make clean : Nettoyage du projet (supression des objets et binaires)
 	\item make demo-tp1 : Lancer la démo tp1
 	\item make demo-tp2 : Lancer la démo tp2
-	\item make demo-tp3 : Lancer la démo tp2
+	\item make demo-tp3 : Lancer la démo tp3
+	\item make demo-tp4 : Lancer la démo tp4 (Nouveau)
 	\item make rm-rs : Supprime le fichier res/RS.txt
 \end{itemize}
 
@@ -81,12 +87,13 @@ Pour lancer une commande utiliser les builds targets.
 
 Les sources de demosntration sont diponible dans: src/demo
 Les exécutables de test sont généré dans: bin/demo
-La commande make pour lancer les demo sont: make demo-tp1, make demo-tp2, make demo-tp3
+La commande make pour lancer les demo sont: make demo-tp1, make demo-tp2, make demo-tp3 etc...
 
 \begin{itemize}
   \item tp1-natural-join: Natural join R et S
   \item tp2-merge-join-without-duplicate: Merge join sans duplication 
   \item tp3-merge-join-with-duplicate: Merge join avec duplication 
+  \item tp4-hash-join : Hash join (Nouveau)
 \end{itemize}
 
 \section{Test unitaire}
@@ -97,19 +104,23 @@ Le script de test est dans script/test.sh
 La commande make pour lancer les test est: make test
 
 \begin{itemize}
-  \item 0-storeFileBuffer: Ecriture d'un buffer dans un fichier
-  \item 1-natural-join-1: Natural join R et S
-  \item 2-natural-join-2: Natural join S et R
-  \item 3-buf-quick-sort: Fonction de trie d'un buffer
-  \item 4-merge-join-without-duplicate-1: Merge join sans duplication R et S
-  \item 5-merge-join-without-duplicate-2: Merge join sans duplication S et R
-  \item 6-merge-join-with-duplicate-1: Merge join avec duplication R et S
-  \item 7-merge-join-with-duplicate-2: Merge join avec duplication S et R
+  \item 00-storeFileBuffer: Ecriture d'un buffer dans un fichier
+  \item 01-natural-join-1: Natural join R et S
+  \item 02-natural-join-2: Natural join S et R
+  \item 03-buf-quick-sort: Fonction de trie d'un buffer
+  \item 04-merge-join-without-duplicate-1: Merge join sans duplication R et S
+  \item 05-merge-join-without-duplicate-2: Merge join sans duplication S et R
+  \item 06-merge-join-with-duplicate-1: Merge join avec duplication R et S
+  \item 07-merge-join-with-duplicate-2: Merge join avec duplication S et R
+  \item 08-hash-put-equilibre : Test ajout equilibré dans une table de hash (Nouveau)
+  \item 09-hash-put-desequilibre : Test ajout déséquilibré dans une table de hash (Nouveau)
+  \item 10-hash-full : Test remplissage complet dans une table de hash (Nouveau)
+  \item 11-hash-get : Test recupreration d'une entrée dans la table de hash (Nouveau)
+  \item 12-hash-remove : Test supression / rehash dans une table de hash (Nouveau)
+  \item 13-hash-join : Test hash join (Nouveau)
 \end{itemize}
 
 \includegraphics[width=0.8\textwidth]{test.png}
-
-\includepdf[pages=3-12]{refman.pdf}
 
 \end{document}
               

@@ -23,8 +23,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define HASH_EMPTY -1
-#define NOT_IN_HASHTABLE -1
+// Set global
+static const char _HASHSET_EMPTY= -1;
+const char VAL_NOT_IN_HASHTABLE= -1;
 
 struct hashset {
   char key;
@@ -57,7 +58,7 @@ static int _hash(struct hashtable* ht,char key) {
  * @param[in] hs hashset
  */
 static void _set_empty_hashset(struct hashset* hs) {
-  memset(hs, HASH_EMPTY, sizeof(struct hashset));
+  memset(hs, _HASHSET_EMPTY, sizeof(struct hashset));
 }
 
 /**
@@ -68,7 +69,7 @@ struct hashtable* hashtable_create( size_t m ) {
   struct hashtable* hashtable= (struct hashtable*) malloc(sizeof(struct hashtable));
   hashtable->v= (struct hashset*) malloc(m*sizeof(struct hashset));
   // Set all set value as HASH_EMPTY (pour le debug)
-  memset(hashtable->v, HASH_EMPTY, m*sizeof(struct hashset));
+  memset(hashtable->v, _HASHSET_EMPTY, m*sizeof(struct hashset));
   hashtable->m= m;
   hashtable->c=0;
   return hashtable;
@@ -96,7 +97,7 @@ char hashtable_put(struct hashtable* ht, char key, char val) {
     return -1;
 
   int index= _hash(ht, key);
-  while(ht->v[index].key != HASH_EMPTY) {
+  while(ht->v[index].key != _HASHSET_EMPTY) {
     index= (index+1) % ht->m;
   }
   ht->v[index].val = val;
@@ -108,13 +109,13 @@ char hashtable_put(struct hashtable* ht, char key, char val) {
 
 char hashtable_get(struct hashtable* ht, char key) {
   int index= _hash(ht, key);
-  while(ht->v[index].key != HASH_EMPTY && ht->v[index].key != key) {
+  while(ht->v[index].key != _HASHSET_EMPTY && ht->v[index].key != key) {
     index= (index+1) % ht->m;
   }
   if(ht->v[index].key == key)
     return ht->v[index].val;
   else
-    return NOT_IN_HASHTABLE;
+    return VAL_NOT_IN_HASHTABLE;
 }
 
 
@@ -141,12 +142,12 @@ void hashtable_print(struct hashtable* ht) {
 void hashtable_remove(struct hashtable* ht, char key) {
   // Remove hashset
   int index= _hash(ht, key);
-  while(ht->v[index].key != HASH_EMPTY && ht->v[index].key != key) {
+  while(ht->v[index].key != _HASHSET_EMPTY && ht->v[index].key != key) {
     index= (index+1) % ht->m;
   }
 
   // Key inexistante fin du remove
-  if(ht->v[index].key == HASH_EMPTY)
+  if(ht->v[index].key == _HASHSET_EMPTY)
     return;
 
   _set_empty_hashset(&ht->v[index]);
@@ -154,7 +155,7 @@ void hashtable_remove(struct hashtable* ht, char key) {
 
   // Rehash
   index= (index+1) % ht->m;
-  while(ht->v[index].key != HASH_EMPTY) {
+  while(ht->v[index].key != _HASHSET_EMPTY) {
     struct hashset hs= ht->v[index];
     _set_empty_hashset(&ht->v[index]);
     hashtable_put(ht, hs.key, hs.val);

@@ -18,6 +18,8 @@
 #ifndef SRC_BDD_HASHTABLE_H
 #define SRC_BDD_HASHTABLE_H
 
+extern const char VAL_NOT_IN_HASHTABLE;
+
 #include <stdio.h>
 #include "buffer.h"
 /**

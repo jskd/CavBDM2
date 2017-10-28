@@ -53,4 +53,6 @@ void hashtable_print(struct hashtable* ht);
 
 char storeBufferToHashtable(struct buf* buf, struct hashtable* ht);
 
+struct hashtable* storeFileInHashtable(const char* filename, size_t m);
+
 #endif

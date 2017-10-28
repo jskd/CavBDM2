@@ -49,23 +49,6 @@ void buf_destroy(struct buf* buf);
 char buf_put(struct buf* buf, char value);
 
 /**
- * @brief Enregistre un le 1er caractére de chaque
- *        ligne d'un fichier dans un buffer
- *
- * @param[in]  Fichier d'entrée
- * @param[out] Buffer de sortie
- */
-void storeFileBuffer(FILE* fp, struct buf* buf);
-
-/**
- * Ecrit un buffer dans un fichier
- *
- * @param[out] fp  fichier de sortie
- * @param[in]  buf fichier d'entrée
- */
-void writeBufferInFile(FILE* fp, const struct buf* buf);
-
-/**
  * @brief Quick sort buffer
  *
  * @param buf Trie le buffer en entrée
@@ -91,7 +74,7 @@ void buf_dump(const struct buf* buf);
  * @return buffer si NULL alors erreur de lecture du fichier
  *
  */
-struct buf* storeFileBufferOC(const char* file_name, size_t buffer_size);
+struct buf* storeFileBuffer(const char* file_name, size_t buffer_size);
 
 
 /**
@@ -105,7 +88,7 @@ struct buf* storeFileBufferOC(const char* file_name, size_t buffer_size);
  * @return -1 si erreur dans l'ouverture du fichier
  *
  */
-char writeBufferInFileOC(const char* file_name, const struct buf*);
+char writeBufferInFile(const char* file_name, const struct buf*);
 
 /**
  * @brief Retourne la valeur à la position d'un buffer

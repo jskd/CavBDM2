@@ -16,6 +16,9 @@
 *
 * Remarques :
 */
+// Pour getline (standard GNU)
+#define _GNU_SOURCE
+
 #include "buffer.h"
 #include "hashtable.h"
 #include "hexdump.h"
@@ -161,4 +164,24 @@ void hashtable_remove(struct hashtable* ht, char key) {
     hashtable_put(ht, hs.key, hs.val);
     index= (index+1)%ht->m;
   }
+}
+
+
+
+struct hashtable* storeFileInHashtable(const char* filename, size_t m) {
+
+  FILE* file = fopen(filename, "r");
+  if (file == NULL)
+    return NULL;
+
+  char* line = NULL;
+  size_t len = 0;
+  char rid   = 0;
+  struct hashtable* ht= hashtable_create(m);
+  while((getline(&line, &len, file)) != -1) {
+    hashtable_put(ht, line[0], rid);
+    rid++;
+  }
+  fclose(file);
+  return ht;
 }

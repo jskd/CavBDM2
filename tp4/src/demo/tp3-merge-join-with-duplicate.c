@@ -23,14 +23,14 @@ static const size_t buf_size= 10;
 int main(int argc, char** argv){
 
   // buffer R.txt
-  struct buf* buf_r= storeFileBufferOC("res/Rduplicate.txt", buf_size);
+  struct buf* buf_r= storeFileBuffer("res/Rduplicate.txt", buf_size);
   if(buf_r == NULL) {
     printf("Erreur lors de la lecture de R.txt.\n");
     return -1;
   }
 
   // buffer S.txt
-  struct buf* buf_s= storeFileBufferOC("res/Sduplicate.txt", buf_size);
+  struct buf* buf_s= storeFileBuffer("res/Sduplicate.txt", buf_size);
   if(buf_s == NULL) {
     printf("Erreur lors de la lecture de S.txt.\n");
     return -1;
@@ -43,7 +43,7 @@ int main(int argc, char** argv){
   merge_join_with_duplicate(buf_r, buf_s, buf_rs);
 
   // Ecriture du resultat dans RS.txt
-  if(writeBufferInFileOC("res/RS.txt", buf_rs))
+  if(writeBufferInFile("res/RS.txt", buf_rs))
     printf("Erreur lors de la lecture de RS.txt.\n");
 
   printf("Terminé, fichier dans res/RS.txt\n");

@@ -23,7 +23,7 @@ static const size_t buf_size= 16;
 int main(int argc, char** argv){
 
     // buffer R.txt
-    struct buf* buf_r= storeFileBufferOC("res/R.txt", buf_size);
+    struct buf* buf_r= storeFileBuffer("res/R.txt", buf_size);
     if(buf_r == NULL) {
       printf("Erreur lors de la lecture de R.txt.\n");
       return -1;

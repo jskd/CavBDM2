@@ -23,14 +23,14 @@ static const size_t buf_size= 16;
 int main(int argc, char** argv){
 
     // buffer R.txt
-    struct buf* buf_r= storeFileBufferOC("res/Sduplicate.txt", buf_size);
+    struct buf* buf_r= storeFileBuffer("res/Sduplicate.txt", buf_size);
     if(buf_r == NULL) {
       printf("Erreur lors de la lecture de Rduplicate.txt.\n");
       return -1;
     }
 
     // buffer S.txt
-    struct buf* buf_s= storeFileBufferOC("res/Rduplicate.txt", buf_size);
+    struct buf* buf_s= storeFileBuffer("res/Rduplicate.txt", buf_size);
     if(buf_s == NULL) {
       printf("Erreur lors de la lecture de Sduplicate.txt.\n");
       return -1;

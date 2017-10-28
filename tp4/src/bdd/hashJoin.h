@@ -18,7 +18,8 @@
 #ifndef SRC_BDD_HASHJOIN_H
 #define SRC_BDD_HASHJOIN_H
 
-#include "hash_join.h"
+#include "buffer.h"
+#include "hashtable.h"
 
 /**
  * @brief Merge join with duplicate

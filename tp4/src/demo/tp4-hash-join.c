@@ -16,7 +16,7 @@
 * Remarques :
 */
 
-#include "../bdd/hashtable.h"
+#include "../bdd/hashJoin.h"
 
 static const size_t buf_size= 10;
 
@@ -39,7 +39,7 @@ int main(int argc, char** argv){
   // buffer de sortie
   struct buf* buf_rs= buf_create( buf_size);
 
-  hashjoin(ht_r, buf_s, buf_rs);
+  hash_join(ht_r, buf_s, buf_rs);
 
   writeBufferInFile("res/RS.txt", buf_rs);
 

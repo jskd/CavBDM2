@@ -45,13 +45,20 @@ char hashtable_is_full(struct hashtable* ht);
 
 char hashtable_put(struct hashtable* ht, char key, char val);
 
-char hashtable_get(struct hashtable* ht, char key);
+char hashtable_get(const struct hashtable* ht, char key);
 
 void hashtable_remove(struct hashtable* ht, char key);
 
 void hashtable_print(struct hashtable* ht);
 
 char storeBufferToHashtable(struct buf* buf, struct hashtable* ht);
+
+/**
+ * Hash fonction (linear)
+ * @param[in] ht table de hash cible
+ * @param[in] key clef
+ */
+int hash(const struct hashtable* ht,char key);
 
 struct hashtable* storeFileInHashtable(const char* filename, size_t m);
 

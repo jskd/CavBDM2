@@ -22,8 +22,7 @@
 #include "hashtable.h"
 
 /**
- * @brief Merge join with duplicate
- *
+ * @brief Hash join
  * @param[in]  ht      hashtable de la relation a
  * @param[in]  buf_in  relation b
  * @param[out] buf_out resultat du hash join avec la relation a et b

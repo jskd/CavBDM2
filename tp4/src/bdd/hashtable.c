@@ -52,7 +52,7 @@ struct hashtable {
  * @param[in] ht table de hash cible
  * @param[in] key clef
  */
-static int _hash(struct hashtable* ht,char key) {
+int hash(const struct hashtable* ht,char key) {
   return key % ht->m;
 }
 
@@ -99,7 +99,7 @@ char hashtable_put(struct hashtable* ht, char key, char val) {
   if(hashtable_is_full(ht))
     return -1;
 
-  int index= _hash(ht, key);
+  int index= hash(ht, key);
   while(ht->v[index].key != _HASHSET_EMPTY) {
     index= (index+1) % ht->m;
   }
@@ -110,8 +110,8 @@ char hashtable_put(struct hashtable* ht, char key, char val) {
   return 0;
 }
 
-char hashtable_get(struct hashtable* ht, char key) {
-  int index= _hash(ht, key);
+char hashtable_get(const struct hashtable* ht, char key) {
+  int index= hash(ht, key);
   while(ht->v[index].key != _HASHSET_EMPTY && ht->v[index].key != key) {
     index= (index+1) % ht->m;
   }
@@ -144,7 +144,7 @@ void hashtable_print(struct hashtable* ht) {
 
 void hashtable_remove(struct hashtable* ht, char key) {
   // Remove hashset
-  int index= _hash(ht, key);
+  int index= hash(ht, key);
   while(ht->v[index].key != _HASHSET_EMPTY && ht->v[index].key != key) {
     index= (index+1) % ht->m;
   }

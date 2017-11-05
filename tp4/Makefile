@@ -126,4 +126,4 @@ rm-rs:
 	@echo "Fichier "$(RS_TXT)" supprimé"
 
 zip: clean
-	zip -r ${name}TP${n}.zip .
+	zip -r ${name}TP${n}.zip Makefile README.md doc/ rapport/ rapport.pdf refman.pdf res/ script/ src/ sujet.pdf

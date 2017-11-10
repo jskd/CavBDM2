@@ -20,7 +20,7 @@ i=0
 filename="shuff.txt"
 while read -r line
 do
-  echo $line >> "$rep/$outname.txt"
+  echo $line >> "$rep/R$outname.txt"
   i=$((i+1))
   if [ "$i" = "10" ]; then
     i=0

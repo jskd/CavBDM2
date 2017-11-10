@@ -1,8 +1,8 @@
 #!/bin/bash
 rep=res/disk/R
 
-rm all.txt
-rm shuff.txt
+rm -rf all.txt
+rm -rf shuff.txt
 rm -rf $rep
 
 mkdir -p $rep

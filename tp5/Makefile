@@ -3,7 +3,7 @@
 CC=gcc
 CFLAGS= -g -Wall --std=gnu99
 RS_TXT := res/RS.txt
-
+RS_DISK_TXT := res/disk/RS.txt
 # Repertoire global
 SRCDIR     := src
 OBJDIR     := obj
@@ -78,6 +78,8 @@ $(BINDIR_DEMO)/%: $(OBJDIR_DEMO)/%.o $(OBJECTS_BDD)
 clean:
 	@rm -rf $(RS_TXT)
 	@echo "Fichier "$(RS_TXT)" supprimé"
+	@rm -rf $(RS_DISK_TXT)
+	@echo "Fichier "$(RS_DISK_TXT)" supprimé"
 	@rm -rf $(OBJDIR)
 	@echo "Répertoire "$(OBJDIR)" supprimé"
 	@rm -rf $(BINDIR)

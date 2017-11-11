@@ -1,9 +1,9 @@
 /**
-* TP n°: 3
+* TP n°: 5
 *
-* Titre du TP : Merge Join Duplicate
+* Titre du TP : Nested loop join disk
 *
-* Date : 21/10/17
+* Date : 10 Nov 2017
 *
 * Nom : Lefranc
 * Prenom : Joaquim

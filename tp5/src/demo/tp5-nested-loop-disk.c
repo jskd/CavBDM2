@@ -1,9 +1,9 @@
 /**
-* TP n°: 4
+* TP n°: 5
 *
-* Titre du TP : Hash Join
+* Titre du TP : Nested loop join disk
 *
-* Date : 27/10/17
+* Date : 10 Nov 2017
 *
 * Nom : Lefranc
 * Prenom : Joaquim

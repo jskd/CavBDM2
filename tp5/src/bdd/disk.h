@@ -1,3 +1,20 @@
+/**
+* TP n°: 5
+*
+* Titre du TP : Nested loop join disk
+*
+* Date : 10 Nov 2017
+*
+* Nom : Lefranc
+* Prenom : Joaquim
+* email : lefrancjoaquim@gmail.com
+*
+* Nom : Skoda
+* Prenom : Jérôme
+* email : contact@jeromeskoda.fr
+*
+* Remarques :
+*/
 
 #ifndef SRC_BDD_DISK_H
 #define SRC_BDD_DISK_H

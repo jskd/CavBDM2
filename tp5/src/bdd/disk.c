@@ -23,7 +23,15 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+
+#ifdef __linux__
 #include <linux/limits.h>
+#elif __APPLE__
+#include <limits.h>
+#endif
+
+
 
 struct disk {
   FILE** v;

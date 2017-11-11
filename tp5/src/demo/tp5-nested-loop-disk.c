@@ -48,6 +48,8 @@ int main(int argc, char** argv){
   if(buffer_count(buf_out) > 0)
     buffer_write_file_from_descriptor(_output_file, buf_out);
 
+  printf("Terminé, fichier dans %s.\n", _output_file_name);
+
   buffer_destroy(buf_r);
   buffer_destroy(buf_s);
   buffer_destroy(buf_out);

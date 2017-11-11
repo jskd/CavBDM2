@@ -1,0 +1,14 @@
+hashtable_put k:10 v:10 return: 0
+hashtable_put k:5  v:20 return: 0
+hashtable_put k:15 v:0  return: 0
+Hashtable c: 003, m: 005, v: [
+  [key:010(.),val:010]
+  [key:005(.),val:020]
+  [key:015(.),val:000]
+  [key:-01(.),val:-01]
+  [key:-01(.),val:-01]
+]
+hashtable_get  5 return: 20
+hashtable_get 10 return: 10
+hashtable_get 15 return: 0
+hashtable_get 20 return: -1

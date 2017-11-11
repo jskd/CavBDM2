@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.10.14)  28 OCT 2017 14:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.10.29)  11 NOV 2017 14:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -786,22 +786,26 @@ File: pppdftex.def 2017/01/14 v0.5h Pdfpages driver for pdfTeX (AM)
 \AM@toc@title=\toks37
 \c@AM@survey=\count125
 \AM@templatesizebox=\box40
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/alltt.sty
+Package: alltt 1997/06/16 v2.0g defines alltt environment
 ) (./rapport.aux)
 \openout1 = `rapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
- (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count126
 \scratchdimen=\dimen165
@@ -874,48 +878,84 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 (/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 ))
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 23.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 24.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 23.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
 
-<builds-target.png, id=4, 514.92375pt x 477.785pt>
-File: builds-target.png Graphic file (type png)
- <use builds-target.png>
-Package pdftex.def Info: builds-target.png used on input line 49.
-(pdftex.def)             Requested size: 172.5pt x 160.0535pt.
+Overfull \hbox (22.24724pt too wide) in paragraph at lines 37--37
+ []\OT1/cmtt/m/n/10 buffer value::                                             
+D2[] 
+ []
+
+
+Overfull \hbox (85.24669pt too wide) in paragraph at lines 38--38
+ []  \OT1/cmtt/m/n/10 0000  41 43 41 41 41 44 41 42 42 44 42 42 42 41 42 43  AC
+AAADABBDBBBABC[] 
+ []
+
+
+Overfull \hbox (32.74715pt too wide) in paragraph at lines 39--39
+ []       \OT1/cmtt/m/n/10 ^ D1  ^  D2 ^                                     D1
+  D3[] 
+ []
+
+
+Overfull \hbox (11.74733pt too wide) in paragraph at lines 46--46
+ []\OT1/cmtt/m/n/10 buffer value::                                            2
+[] 
+ []
+
+
+Overfull \hbox (53.74696pt too wide) in paragraph at lines 47--47
+ []  \OT1/cmtt/m/n/10 0000  41 5a 47 4a 55 4b 45 42 56 44                    AZ
+GJUKEBVD[] 
+ []
+
+
+Overfull \hbox (16.99728pt too wide) in paragraph at lines 48--48
+ []        \OT1/cmtt/m/n/10 D1 D2 D3                                         1 
+3[] 
+ []
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2 <./builds-target.png>] 
-<test.png, id=21, 338.26375pt x 233.87375pt>
-File: test.png Graphic file (type png)
- <use test.png>
-Package pdftex.def Info: test.png used on input line 123.
-(pdftex.def)             Requested size: 276.00105pt x 190.832pt.
- [3] [4 <./test.png>] (./rapport.aux) ) 
-Here is how much of TeX's memory you used:
- 13963 strings out of 494945
- 269273 string characters out of 6181031
- 314370 words of memory out of 5000000
- 16959 multiletter control sequences out of 15000+600000
- 8569 words of font info for 31 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
- 62i,7n,56p,438b,200s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+<builds-target.png, id=16, 514.92375pt x 477.785pt>
+File: builds-target.png Graphic file (type png)
+ <use builds-target.png>
+Package pdftex.def Info: builds-target.png used on input line 78.
+(pdftex.def)             Requested size: 172.5pt x 160.0535pt.
 
-Output written on rapport.pdf (4 pages, 116233 bytes).
+[2 <./builds-target.png>] [3] <test.png, id=25, 338.26375pt x 233.87375pt>
+File: test.png Graphic file (type png)
+
+<use test.png>
+Package pdftex.def Info: test.png used on input line 158.
+(pdftex.def)             Requested size: 276.00105pt x 190.832pt.
+ [4 <./test.png>] (./rapport.aux) ) 
+Here is how much of TeX's memory you used:
+ 13980 strings out of 494945
+ 269547 string characters out of 6181031
+ 316589 words of memory out of 5000000
+ 16972 multiletter control sequences out of 15000+600000
+ 8737 words of font info for 32 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 62i,7n,56p,438b,259s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on rapport.pdf (4 pages, 133296 bytes).
 PDF statistics:
- 49 PDF objects out of 1000 (max. 8388607)
- 32 compressed objects within 1 object stream
+ 53 PDF objects out of 1000 (max. 8388607)
+ 35 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  23 words of extra memory for PDF output out of 10000 (max. 10000000)
 

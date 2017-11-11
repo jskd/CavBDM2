@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{pdfpages}
+\usepackage{alltt}
 
 \title{Concepts Avancés de Bases de données}
 
@@ -17,12 +18,39 @@
 \maketitle
 
 
-\section{Nouveauté depuis le TP3}
+\section{Nouveauté depuis le TP4}
 
 \begin{itemize}
-	\item 6 test en plus (table de hash + hash join)
-	\item 1 demo (make demo-tp4)
-	\item Nouvelle structure de donnée hashtable (réutilisable et encapsulé)
+  \item 5 test en plus (buffer extended + disk + nested loop disk)
+  \item 1 demo (make demo-tp5)
+  \item Nouvelle script pour générer le disque r (script/file-generation-tp5.sh)
+  \item Nouvelle structure de donnée bufferExtended (fork de buffer)
+    \begin{itemize}
+      \item Nouvelle fonctions: buffer\_flush (vidage), buffer\_cmp (comparaison), 
+         buffer\_put (adapté), buffer\_put\_cpy et lecture/ecriture avec le file descriptor
+      \item Taille des données variable (fixé à la creation) testé sur 1 et 2 octects
+      \item Donnée toujour allouée dynamiquement et contiguë 
+         \begin{alltt}
+Exemple buffer de longueur 2
+buffer count: 8
+buffer size: 270
+buffer value::                                             D2
+  0000  41 43 41 41 41 44 41 42 42 44 42 42 42 41 42 43  ACAAADABBDBBBABC
+       ^ D1  ^  D2 ^                                     D1  D3          
+
+Les 3 premieres données: AC AA AD
+
+Exemple buffer de longueur 1
+buffer count: 10
+buffer size: 16
+buffer value::                                            2
+  0000  41 5a 47 4a 55 4b 45 42 56 44                    AZGJUKEBVD
+        D1 D2 D3                                         1 3
+       
+Les 3 premieres donnée: A Z G
+\end{alltt}
+    \end{itemize}
+  \item Nouvelle structure de donnée disk (liste de file descriptor)
 \end{itemize}
 
 \section{Comment compiler le projet}
@@ -38,11 +66,12 @@
 	\item make demo-tp1 : Lancer la démo tp1
 	\item make demo-tp2 : Lancer la démo tp2
 	\item make demo-tp3 : Lancer la démo tp3
-	\item make demo-tp4 : Lancer la démo tp4 (Nouveau)
-	\item make rm-rs : Supprime le fichier res/RS.txt
+	\item make demo-tp4 : Lancer la démo tp4 
+	\item make demo-tp5 : Lancer la démo tp5 (Nouveau)
+	\item make rm-rs : Supprime le fichier res/RS.txt et res/disk/RS.txt
 \end{itemize}
 
-\subsection{Avec ECLIPSE}
+\subsection{Avec ECLIPSE (non maintenu) }
 
 Pour lancer une commande utiliser les builds targets.
 
@@ -93,7 +122,8 @@ La commande make pour lancer les demo sont: make demo-tp1, make demo-tp2, make d
   \item tp1-natural-join: Natural join R et S
   \item tp2-merge-join-without-duplicate: Merge join sans duplication 
   \item tp3-merge-join-with-duplicate: Merge join avec duplication 
-  \item tp4-hash-join : Hash join (Nouveau)
+  \item tp4-hash-join : Hash join 
+  \item tp5-nested-loop-disk: Nested loop sur disque  (Nouveau)
 \end{itemize}
 
 \section{Test unitaire}
@@ -112,12 +142,17 @@ La commande make pour lancer les test est: make test
   \item 05-merge-join-without-duplicate-2: Merge join sans duplication S et R
   \item 06-merge-join-with-duplicate-1: Merge join avec duplication R et S
   \item 07-merge-join-with-duplicate-2: Merge join avec duplication S et R
-  \item 08-hash-put-equilibre : Test ajout equilibré dans une table de hash (Nouveau)
-  \item 09-hash-put-desequilibre : Test ajout déséquilibré dans une table de hash (Nouveau)
-  \item 10-hash-full : Test remplissage complet dans une table de hash (Nouveau)
-  \item 11-hash-get : Test recupreration d'une entrée dans la table de hash (Nouveau)
-  \item 12-hash-remove : Test supression / rehash dans une table de hash (Nouveau)
-  \item 13-hash-join : Test hash join (Nouveau)
+  \item 08-hash-put-equilibre : Test ajout equilibré dans une table de hash 
+  \item 09-hash-put-desequilibre : Test ajout déséquilibré dans une table de hash 
+  \item 10-hash-full : Test remplissage complet dans une table de hash
+  \item 11-hash-get : Test recupreration d'une entrée dans la table de hash 
+  \item 12-hash-remove : Test supression / rehash dans une table de hash 
+  \item 13-hash-join : Test hash join 
+  \item 14-buffer-read-file: test la lecture avec un buffer extended (Nouveau)
+  \item 15-buffer-read-file-2: test la lecture avec un buffer extended  (Nouveau)
+  \item 16-disk-buffer-dump: test la lecture d'un disque (Nouveau)
+  \item 17-disk-nested-loop-r-to-s-test: test le nested loop sur disque r to s (Nouveau)
+  \item 18-disk-nested-loop-s-to-r-test: test le nested loop sur disque s to r (Nouveau)
 \end{itemize}
 
 \includegraphics[width=0.8\textwidth]{test.png}

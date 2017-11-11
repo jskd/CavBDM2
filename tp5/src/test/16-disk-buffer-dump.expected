@@ -1,0 +1,10 @@
+buffer count: 10
+buffer size: 10
+buffer value::
+  0000  4f 48 49 47 59 44 46 48 55 47 42 42 43 46 50 44  OHIGYDFHUGBBCFPD
+  0010  47 42 57 41                                      GBWA
+buffer count: 10
+buffer size: 10
+buffer value::
+  0000  42 47 46 47 4b 46 57 48 5a 44 49 41 43 48 53 45  BGFGKFWHZDIACHSE
+  0010  4f 42 4f 41                                      OBOA

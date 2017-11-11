@@ -1,7 +1,7 @@
 .PHONY: clean doc rapport rm-rs
 
 CC=gcc
-CFLAGS= -g -Wall --std=c11
+CFLAGS= -g -Wall --std=gnu99
 RS_TXT := res/RS.txt
 
 # Repertoire global

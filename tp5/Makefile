@@ -120,6 +120,11 @@ demo-tp4: bin/demo/tp4-hash-join
 	./bin/demo/tp4-hash-join
 	@echo "Démonstration terminé"
 
+# Lancement de la démo 4
+demo-tp5: bin/demo/tp5-nested-loop-disk
+	./bin/demo/tp5-nested-loop-disk
+	@echo "Démonstration terminé"
+
 # Supression de RS.txt
 rm-rs:
 	@rm -rf $(RS_TXT)

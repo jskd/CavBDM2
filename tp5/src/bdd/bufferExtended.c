@@ -77,7 +77,7 @@ static char * _buffer_val_offset( const struct buffer* buf, int index) {
  *            -1  erreur: buffer incompatible
  *            -2  erreur: buffer plein
  */
-char buffer_cpy(struct buffer* buf_dst, struct buffer* buf_src, int src_index) {
+char buffer_put_cpy(struct buffer* buf_dst, const struct buffer* buf_src, int src_index) {
   if(buf_dst->data_size != buf_src->data_size)
     return -1;
 
@@ -163,11 +163,17 @@ char buffer_write_file(const char* file_name, const struct buffer* buf) {
   if (file == NULL)
     return -1;
 
-  for(int i=0; i<buf->c; i++)
-    fprintf(file, "%.*s\n", (int) buf->data_size, _buffer_val_offset(buf, i));
+  buffer_write_file_from_descriptor(file, buf);
 
   fclose(file);
   return 0;
+}
+
+
+
+void buffer_write_file_from_descriptor(FILE* file, const struct buffer* buf) {
+  for(int i=0; i<buf->c; i++)
+    fprintf(file, "%.*s\n", (int) buf->data_size, _buffer_val_offset(buf, i));
 }
 
 /**
@@ -198,4 +204,13 @@ void buffer_dump(const struct buffer* buf) {
 size_t buffer_count(const struct buffer* buf)
 {
   return buf->c;
+}
+
+size_t buffer_size(const struct buffer* buf)
+{
+  return buf->s;
+}
+int buffer_cmp(const struct buffer* buf_a, int index_a, const struct buffer* buf_b, int index_b) {
+  return memcmp( _buffer_val_offset(buf_a, index_a),
+     _buffer_val_offset(buf_b, index_b), buf_a->data_size);
 }

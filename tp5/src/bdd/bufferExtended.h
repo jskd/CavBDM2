@@ -95,6 +95,10 @@ void buffer_read_file_from_descriptor(FILE* fp, struct buffer* buf);
  */
 char buffer_write_file(const char* file_name, const struct buffer*);
 
+
+
+void buffer_write_file_from_descriptor(FILE* file, const struct buffer* buf);
+
 /**
  * @brief Retourne la valeur à la position d'un buffer
  *
@@ -114,4 +118,9 @@ char buffer_val(const struct buffer* buf, int index);
  */
 size_t buffer_count(const struct buffer* buf);
 
+size_t buffer_size(const struct buffer* buf);
+char buffer_put_cpy(struct buffer* buf_dst, const struct buffer* buf_src, int src_index);
+void buffer_flush(struct buffer* buf);
+
+int buffer_cmp(const struct buffer* buf_a, int index_a, const struct buffer* buf_b, int index_b);
 #endif

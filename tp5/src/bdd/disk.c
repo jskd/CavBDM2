@@ -69,11 +69,11 @@ struct disk* disk_create( const char * dir, const char* mode) {
   return disk;
 }
 
-size_t disk_count(struct disk* disk) {
+size_t disk_count(const struct disk* disk) {
   return disk->c;
 }
 
-FILE* disk_item(struct disk* disk, int index) {
+FILE* disk_item(const struct disk* disk, int index) {
   return disk->v[index];
 }
 

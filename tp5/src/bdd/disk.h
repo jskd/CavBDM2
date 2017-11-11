@@ -11,12 +11,12 @@
  */
 struct disk;
 
-size_t disk_count(struct disk* disk);
+size_t disk_count(const struct disk* disk);
 
 struct disk* disk_create( const char * dir, const char* mode);
 
 void disk_destroy(struct disk* disk);
 
-FILE* disk_item(struct disk* disk, int index);
+FILE* disk_item(const struct disk* disk, int index);
 
 #endif

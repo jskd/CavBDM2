@@ -1,4 +1,4 @@
-buffer count: 8
+buffer count: 4
 buffer size: 270
 buffer value::
-  0000  41 43 41 41 41 44 41 42 42 44 42 42 42 41 42 43  ACAAADABBDBBBABC
+  0000  41 43 41 41 41 44 41 42                          ACAAADAB

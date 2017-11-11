@@ -53,6 +53,20 @@ Les 3 premieres donnée: A Z G
   \item Nouvelle structure de donnée disk (liste de file descriptor)
 \end{itemize}
 
+\section{Optimisation de lecture}
+
+Avec une itération en va-et-vient, une lecture est économisée par boucle sur BR après la 1ére lecture complete 
+car le 1er bloque est déjà en mémoire et il n'est pas utile de refaire un opération de lecture.
+
+$boucle 0: BR$ 
+
+$boucle 1: BR - 1$ 
+
+$boucle 2: BR - 1$ 
+
+
+$Donc\ nombre\ de\ lecture = BR + (BS-1) * (BR-1)$
+
 \section{Comment compiler le projet}
 
 \subsection{Avec le terminal}

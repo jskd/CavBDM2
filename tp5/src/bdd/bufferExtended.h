@@ -96,7 +96,9 @@ void buffer_read_file_from_descriptor(FILE* fp, struct buffer* buf);
 char buffer_write_file(const char* file_name, const struct buffer*);
 
 
-
+/**
+ * Ecrit le contenu d'un buffer dans un fichier
+ */
 void buffer_write_file_from_descriptor(FILE* file, const struct buffer* buf);
 
 /**
@@ -118,9 +120,33 @@ char buffer_val(const struct buffer* buf, int index);
  */
 size_t buffer_count(const struct buffer* buf);
 
+/**
+ * Retourne la taille du buffer
+ */
 size_t buffer_size(const struct buffer* buf);
+
+/**
+ * Copy la src_index valeur de buf_src et la stoque dans buf_dst (à la dernière position)
+ *
+ * @param[out] buf_dst  buffer de destination
+ * @param[in] buf_src  buffer source
+ * @param[in] src_index  index du buffer source à copier
+ * @return    0   succès
+ *            -1  erreur: buffer incompatible
+ *            -2  erreur: buffer plein
+ */
 char buffer_put_cpy(struct buffer* buf_dst, const struct buffer* buf_src, int src_index);
+
+/**
+ * Vide le buffer
+ */
 void buffer_flush(struct buffer* buf);
 
+/**
+ *  Compares 2 buffer value:
+ *  <0 lower value in buf_a than in buf_b
+ *  0 equal
+ *  >0 greater value in buf_a than in buf_b
+ */
 int buffer_cmp(const struct buffer* buf_a, int index_a, const struct buffer* buf_b, int index_b);
 #endif

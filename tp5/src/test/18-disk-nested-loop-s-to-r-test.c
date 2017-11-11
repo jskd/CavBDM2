@@ -18,6 +18,7 @@
 
 #include "../bdd/bufferExtended.h"
 #include "../bdd/disk.h"
+#include "../bdd/nestedLoopJoin.h"
 
 static const size_t _buf_size=   10;
 static const size_t _data_lenght= 2;

@@ -1,0 +1,11 @@
+hashtable_put 0 return: 0
+hashtable_put 1 return: 0
+hashtable_put 2 return: 0
+hashtable_put 3 return: -1
+hashtable_put 4 return: -1
+Hashtable c: 003, m: 004, v: [
+  [key:000(.),val:000]
+  [key:001(.),val:001]
+  [key:002(.),val:002]
+  [key:-01(.),val:-01]
+]

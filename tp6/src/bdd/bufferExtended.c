@@ -82,7 +82,7 @@ static void _printValue(FILE* stream, const struct buffer* buf, int index) {
         fprintf(stream, "%d\n",  (int) value);
         break;
       default:
-        printf(stream, "Print value decimimal lenght %d not implemented\n", buf->data_size);
+        fprintf(stream, "Print value decimimal lenght %ld not implemented\n", buf->data_size);
         break;
     }
   }
@@ -256,4 +256,18 @@ void buffer_printValue(const struct buffer* buf) {
   for(int index=0; index< buf->c; index++) {
     _printValue(stdout, buf, index);
   }
+}
+
+/**
+ * Retourne le mode de fonctionnement du buffer
+ */
+int buffer_mode(const struct buffer* buf) {
+  return buf->mode;
+}
+
+/**
+ * Retourne la taille en octet de chaque données
+ */
+size_t buffer_datasize(const struct buffer* buf) {
+  return buf->data_size;
 }

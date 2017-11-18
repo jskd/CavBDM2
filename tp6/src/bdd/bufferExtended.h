@@ -177,4 +177,14 @@ char buffer_isEmpty(const struct buffer* buf);
  */
 void buffer_printValue(const struct buffer* buf);
 
+/**
+ * Retourne le mode de fonctionnement du buffer
+ */
+int buffer_mode(const struct buffer* buf);
+
+/**
+ * Retourne la taille en octet de chaque données
+ */
+size_t buffer_datasize(const struct buffer* buf);
+
 #endif

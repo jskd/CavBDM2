@@ -53,13 +53,19 @@ struct table* table_create(size_t n_bucket, const char* directory) {
   return tab;
 }
 
-void table_insertbuffer(struct table* tab, const struct buffer* buf) {
-  for(int index_buf=0; index_buf< buffer_count(buf); index_buf++) {
-    short key=0;
-    char str[100];
-    buffer_get(buf, index_buf, &key);
-    sprintf(str, "%d", key);
-    bucket_puts( tab->b[ _table_hash(tab, key) ], str);
+void table_putBuffer(struct table* tab, const struct buffer* buf) {
+  if(buffer_mode(buf) == BUFFER_DECIMALS
+    && buffer_datasize(buf) == sizeof(short))
+  {
+    for(int index_buf=0; index_buf< buffer_count(buf); index_buf++) {
+      short key=0;
+      char str[100];
+      sprintf(str, "%d", key);
+      bucket_puts( tab->b[ _table_hash(tab, key) ], str);
+    }
   }
-
+  else
+  {
+    printf("Erreur, table put non implementé pour ce type de buffer\n");
+  }
 }

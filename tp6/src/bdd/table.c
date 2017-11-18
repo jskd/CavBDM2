@@ -34,6 +34,8 @@ struct table {
   struct bucket** b;
   /// n bucket
   size_t n_bucket;
+  /// bench
+  int write_counter;
 };
 
 static int _table_hash(const struct table* tab, short key) {
@@ -49,6 +51,7 @@ struct table* table_create(size_t n_bucket, const char* directory) {
     sprintf(filename, "%s/%d.bucket.txt", directory, indexBucket);
     tab->b[indexBucket]= bucket_create(filename);
   }
+  tab->write_counter= 0;
   tab->n_bucket= n_bucket;
   return tab;
 }
@@ -63,6 +66,7 @@ void table_putBuffer(struct table* tab, const struct buffer* buf) {
       buffer_get(buf, index_buf, &key);
       sprintf(str, "%d", key);
       bucket_puts( tab->b[ _table_hash(tab, key) ], str);
+      tab->write_counter++;
     }
   }
   else
@@ -85,4 +89,12 @@ void table_destroy(struct table* tab) {
   for(int indexBucket=0; indexBucket<tab->n_bucket; indexBucket++)
     free(tab->b[indexBucket]);
   free(tab);
+}
+
+int table_get_write_stat(const struct table* tab) {
+  return  tab->write_counter;
+}
+
+void table_fprint_stat(FILE* stream, const struct table* tab) {
+  fprintf(stream, "- Write in file: %d lines\n", tab->write_counter);
 }

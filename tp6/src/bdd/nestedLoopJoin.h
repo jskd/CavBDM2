@@ -30,7 +30,7 @@
  * @param[out] buf_out resultat du natural join de buf_a et buf_b
  */
 void natural_join(const struct buffer* buf_a, const struct buffer* buf_b,
-    struct buffer* buf_out);
+  struct buffer* buf_out);
 
 /**
  * nested_loop_join (TP5) Supporte les overflow (ecrit dans un fichier)
@@ -42,7 +42,7 @@ void natural_join(const struct buffer* buf_a, const struct buffer* buf_b,
  *                     (autorisation d'ecriture necessaire)
  */
 void nested_loop_join(const struct buffer* buf_a, const struct buffer* buf_b,
-    struct buffer* buf_out, FILE* overflow_file);
+  struct buffer* buf_out, FILE* overflow_file);
 
 /**
  * nested_loop_join sur disk (TP5)
@@ -57,7 +57,23 @@ void nested_loop_join(const struct buffer* buf_a, const struct buffer* buf_b,
  *                     (autorisation d'ecriture necessaire)
  */
 void nested_loop_join_disk( const struct disk* disk_a, struct buffer* buf_a,
-    const struct disk* disk_b, struct buffer* buf_b, struct buffer* buf_out,
-    FILE* overflow_file);
+  const struct disk* disk_b, struct buffer* buf_b, struct buffer* buf_out,
+  FILE* overflow_file);
+
+/**
+ * table_bucket_join (TP6)
+ * Fait la jointure de deux table
+ *
+ * @param[in]  tab_a   table a
+ * @param[in]  buf_a   buffer de sauvegarde utilisé par la table a
+ * @param[in]  tab_b   table b
+ * @param[in]  buf_b   buffer de sauvegarde utilisé par le table b
+ * @param[out] buf_out resultat du nested_loop_join du tab_a et tab_b
+ * @param[out] file    fichier de vidage de buf_out si overflow
+ *                     (autorisation d'ecriture necessaire)
+ */
+void table_bucket_join(const struct table* tab_a, struct buffer* buf_a,
+  const struct table* tab_b, struct buffer* buf_b,
+  struct buffer* buf_out, FILE* overflow_file);
 
 #endif

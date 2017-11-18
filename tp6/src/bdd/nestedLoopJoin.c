@@ -67,3 +67,18 @@ void nested_loop_join_disk( const struct disk* disk_a, struct buffer* buf_a,
     skip_reading= 1; // activate skip
   }
 }
+
+void table_bucket_join(const struct table* tab_a, struct buffer* buf_a,
+  const struct table* tab_b, struct buffer* buf_b,
+  struct buffer* buf_out, FILE* overflow_file) {
+    if(table_get_n_bucket(tab_a) != table_get_n_bucket(tab_b)) {
+      printf("Impossible de faire le table join sur des table n'ayant pas\
+        le même nombre de bucket\n");
+      return;
+    }
+    for(int bucket_index=0; bucket_index< table_get_n_bucket(tab_a); bucket_index++) {
+       table_storeBucketInBuffer(tab_a, bucket_index, buf_a);
+       table_storeBucketInBuffer(tab_b, bucket_index, buf_b);
+       nested_loop_join(buf_a, buf_b, buf_out, overflow_file);
+    }
+}

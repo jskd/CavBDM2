@@ -102,3 +102,10 @@ void disk_destroy(struct disk* disk) {
   free(disk->v);
   free(disk);
 }
+
+void disk_storeContentInTable(const struct disk* disk, struct buffer* buf, struct table* tab) {
+  for(int index_disk=0; index_disk<disk_count(disk); index_disk++) {
+    buffer_read_file_from_descriptor( disk_item(disk, index_disk),  buf);
+    table_putBuffer(tab, buf);
+  }
+}

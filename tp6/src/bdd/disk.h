@@ -20,6 +20,8 @@
 #define SRC_BDD_DISK_H
 
 #include <stdio.h>
+#include "bufferExtended.h"
+#include "table.h"
 
 /**
  * @brief Structure de donnée repésentant un buffer
@@ -35,5 +37,7 @@ struct disk* disk_create( const char * dir, const char* mode);
 void disk_destroy(struct disk* disk);
 
 FILE* disk_item(const struct disk* disk, int index);
+
+void disk_storeContentInTable(const struct disk* disk, struct buffer* buf, struct table* tab);
 
 #endif

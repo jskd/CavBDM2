@@ -1,12 +1,8 @@
-#include "../bdd/table.h"
-
-
+#include "../bdd/bufferExtended.h"
 
 int main(int argc, char** argv){
 
-  struct table* tab= table_create(10, "test");
-
-  struct buffer* buf= buffer_read_file("test.num", 10, sizeof(int), BUFFER_DECIMALS);
+  struct buffer* buf= buffer_read_file("res/test/19-buffer-short.txt", 10, sizeof(short), BUFFER_DECIMALS);
 
   buffer_printValue(buf);
 }

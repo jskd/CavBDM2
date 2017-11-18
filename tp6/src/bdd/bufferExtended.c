@@ -39,9 +39,9 @@ struct buffer {
   // mode des sortie fichier
   buffer_file_mode mode;
   /// compteur de Lecture (en octet)
-  long read_counter;
+  int read_counter;
   /// compteur d'écriture (en octet)
-  long write_counter;
+  int write_counter;
 };
 
 // See Header
@@ -93,9 +93,8 @@ static void _printValue(FILE* stream, struct buffer* buf, int index) {
         break;
     }
   }
-  if(stream != stderr && stream != stdout)
-    buf->read_counter= buf->read_counter + buf->data_size;
 }
+
 /**
  * Ajoute un caractere dans le buffer s'il reste de la place
  * @param[out] buf_dst  buffer de destination
@@ -118,12 +117,9 @@ char buffer_put(struct buffer* buf, const void * data) {
 
   memcpy ( _buffer_val_offset(buf, buf->c), data, buf->data_size );
   buf->c++;
-  buf->write_counter= buf->write_counter + buf->data_size;
 
   return 0;
 }
-
-
 
 /**
  * @brief Ouvre un fichier
@@ -170,13 +166,13 @@ void buffer_read_file_from_descriptor(FILE* file, struct buffer* buf)
   while((getline(&line, &len, file)) != -1) {
     if(buf->mode == BUFFER_CHARACTERS) {
       buffer_put(buf, line);
-
     }
     else if(buf->mode == BUFFER_DECIMALS) {
       int value= atoi(line);
       buffer_put(buf, &value);
     }
   }
+  buf->read_counter++;
 }
 
 /**
@@ -208,6 +204,8 @@ void buffer_write_file_from_descriptor(FILE* file, struct buffer* buf) {
   for(int index=0; index<buf->c; index++) {
     _printValue(file, buf, index);
   }
+  if(file != stderr && file != stdout)
+    buf->write_counter++;
 }
 
 /**
@@ -282,4 +280,19 @@ int buffer_mode(const struct buffer* buf) {
  */
 size_t buffer_datasize(const struct buffer* buf) {
   return buf->data_size;
+}
+
+
+long long buffer_get_read_stat(const struct buffer* buf) {
+  return  buf->read_counter;
+}
+
+long long buffer_get_write_stat(const struct buffer* buf) {
+  return  buf->write_counter;
+}
+
+
+void buffer_fprint_stat(FILE* stream, const struct buffer* buf) {
+  fprintf(stream, "Read file: %d\n", buf->read_counter);
+  fprintf(stream, "Write file: %d\n", buf->write_counter);
 }

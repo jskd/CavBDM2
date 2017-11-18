@@ -187,4 +187,10 @@ int buffer_mode(const struct buffer* buf);
  */
 size_t buffer_datasize(const struct buffer* buf);
 
+long long buffer_get_read_stat(const struct buffer* buf);
+
+long long buffer_get_write_stat(const struct buffer* buf);
+
+void buffer_fprint_stat(FILE* stream, const struct buffer* buf);
+
 #endif

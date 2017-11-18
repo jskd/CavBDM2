@@ -296,3 +296,8 @@ void buffer_fprint_stat(FILE* stream, const struct buffer* buf) {
   fprintf(stream, "- Read in file: %d lines\n", buf->read_counter);
   fprintf(stream, "- Write in file: %d lines\n", buf->write_counter);
 }
+
+void buffer_stat_reset(struct buffer* buf) {
+  buf->read_counter=0;
+  buf->write_counter=0;
+}

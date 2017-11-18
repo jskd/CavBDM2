@@ -193,4 +193,6 @@ int buffer_get_write_stat(const struct buffer* buf);
 
 void buffer_fprint_stat(FILE* stream, const struct buffer* buf);
 
+void buffer_stat_reset(struct buffer* buf);
+
 #endif

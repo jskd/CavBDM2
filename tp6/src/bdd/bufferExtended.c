@@ -88,7 +88,8 @@ static void _printValue(FILE* stream, struct buffer* buf, int index) {
         fprintf(stream, "%d\n",  (int) value);
         break;
       default:
-        fprintf(stream, "Print value decimimal lenght %ld not implemented\n", buf->data_size);
+        printf("Print value decimimal lenght %ld not implemented\n", buf->data_size);
+        return;
         break;
     }
   }

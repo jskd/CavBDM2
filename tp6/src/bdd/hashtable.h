@@ -21,7 +21,7 @@
 extern const char VAL_NOT_IN_HASHTABLE;
 
 #include <stdio.h>
-#include "buffer.h"
+#include "bufferExtended.h"
 /**
  * @brief Structure de donnée repésentant une table de hash
  * Remarque: Structure caché! Ne pas initilialiser autrement
@@ -51,7 +51,7 @@ void hashtable_remove(struct hashtable* ht, char key);
 
 void hashtable_print(struct hashtable* ht);
 
-char storeBufferToHashtable(struct buf* buf, struct hashtable* ht);
+char storeBufferToHashtable(struct buffer* buf, struct hashtable* ht);
 
 /**
  * Hash fonction (linear)

@@ -19,7 +19,7 @@
 // Pour getline (standard GNU)
 #define _GNU_SOURCE
 
-#include "buffer.h"
+#include "bufferExtended.h"
 #include "hashtable.h"
 #include "hexdump.h"
 #include <stdio.h>
@@ -123,12 +123,14 @@ char hashtable_get(const struct hashtable* ht, char key) {
 
 
 
-char storeBufferToHashtable(struct buf* buf, struct hashtable* ht) {
-  if(buf_count(buf)+1 <= ht->m)
+char storeBufferToHashtable(struct buffer* buf, struct hashtable* ht) {
+  if(buffer_count(buf)+1 <= ht->m)
     return -1;
 
-  for(int index=0; index< buf_count(buf); index++) {
-    hashtable_put(ht, buf_val(buf, index), index);
+  for(int index=0; index< buffer_count(buf); index++) {
+    char val= 0;
+    buffer_get(buf, index, &val);
+    hashtable_put(ht, val, index);
   }
   return 0;
 }

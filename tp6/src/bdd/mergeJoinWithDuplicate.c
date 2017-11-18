@@ -16,7 +16,7 @@
 * Remarques :
 */
 #include "mergeJoinWithDuplicate.h"
-#include "buffer.h"
+#include "bufferExtended.h"
 
 /**
  * @brief Merge join with duplicate
@@ -25,24 +25,21 @@
  * @param[in]  buf_b   relation b
  * @param[out] buf_out resultat du merge join avec duplication de la relation a et b
  */
-void merge_join_with_duplicate(const struct buf* buf_a, const struct buf* buf_b, struct buf* buf_out) {
-  int index_a=0; // pointer vers le buffer a
-  int index_b=0; // pointer vers le buffer b
+void merge_join_with_duplicate(const struct buffer* buf_a, const struct buffer* buf_b, struct buffer* buf_out) {
+  int index_a=0;
+  int index_b=0;
 
-  while(index_a < buf_count(buf_a) && index_b < buf_count(buf_b))
+  while(index_a < buffer_count(buf_a) && index_b < buffer_count(buf_b))
   {
-    const char val_a= buf_val(buf_a, index_a);
-    char val_b= buf_val(buf_b, index_b);
-    if(val_a == val_b) {
+    if( buffer_cmp(buf_a, index_a, buf_b, index_b) == 0 ) {
       int index_b_before= index_b;
       do {
-        buf_put(buf_out, val_a);
+        buffer_put_cpy(buf_out, buf_a, index_a);
         index_b++;
-        val_b= buf_val(buf_b, index_b);
-      } while(val_a == val_b);
+      } while( buffer_cmp(buf_a, index_a, buf_b, index_b) == 0 );
       index_b= index_b_before;
       index_a++;
-    } else if (val_a < val_b) {
+    } else if ( buffer_cmp(buf_a, index_a, buf_b, index_b) < 0 ) {
       index_a++;
     } else {
       index_b++;

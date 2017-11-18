@@ -18,7 +18,7 @@
 #ifndef SRC_BDD_HASHJOIN_H
 #define SRC_BDD_HASHJOIN_H
 
-#include "buffer.h"
+#include "bufferExtended.h"
 #include "hashtable.h"
 
 /**
@@ -27,6 +27,6 @@
  * @param[in]  buf_in  relation b
  * @param[out] buf_out resultat du hash join avec la relation a et b
  */
-void hash_join(const struct hashtable* ht, const struct buf* buf_in, struct buf* buf_out);
+void hash_join(const struct hashtable* ht, const struct buffer* buf_in, struct buffer* buf_out);
 
 #endif

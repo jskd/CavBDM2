@@ -6,23 +6,28 @@
 static const size_t _buf_size=   10;
 static const size_t _out_size= 10;
 static const size_t _data_lenght= sizeof(short);
+static const char* _file_r= "res/test/21/R";
+static const char* _file_s= "res/test/21/S";
+
+static const char* _file_table_r= "res/test/21/tableR";
+static const char* _file_table_s= "res/test/21/tableS";
 
 int main(int argc, char** argv){
 
-  struct disk* disk_r= disk_create("res/test/disk-short/R", "r");
+  struct disk* disk_r= disk_create(_file_r, "r");
   if(disk_r == NULL) {
-    printf("Erreur lors de la lecture de res/test/disk-short/R.\n");
+    printf("Erreur lors de la lecture de %s.\n", _file_r);
     return -1;
   }
 
-  struct disk* disk_s= disk_create("res/test/disk-short/S", "r");
+  struct disk* disk_s= disk_create(_file_s, "r");
   if(disk_s == NULL) {
-    printf("Erreur lors de la lecture de res/test/disk-short/S.\n");
+    printf("Erreur lors de la lecture de %s.\n", _file_s);
     return -1;
   }
 
-  struct table* tab_r= table_create(4, "res/test/21-bucket-r-4");
-  struct table* tab_s= table_create(4, "res/test/21-bucket-s-4");
+  struct table* tab_r= table_create(4, _file_table_r);
+  struct table* tab_s= table_create(4, _file_table_s);
 
   struct buffer* buf_r  = buffer_create(_buf_size, _data_lenght, BUFFER_DECIMALS);
   struct buffer* buf_s  = buffer_create(_buf_size, _data_lenght, BUFFER_DECIMALS);

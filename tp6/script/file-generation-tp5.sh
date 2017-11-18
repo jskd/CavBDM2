@@ -1,23 +1,20 @@
 #!/bin/bash
-rep=res/disk/R
+rep=res/demo/tp5/R
+f_all=$rep/all.txt
+f_shuff=$rep/shuff.txt
 
-rm -rf all.txt
-rm -rf shuff.txt
 rm -rf $rep
-
 mkdir -p $rep
 
 for pre in {A..Z}; do
   for sous in {A..H}; do
-    echo "$pre$sous" >> all.txt
+    echo "$pre$sous" >> $f_all
   done
 done
-shuf all.txt >> shuff.txt
-
+shuf $f_all >> $f_shuff
 
 outname=0
 i=0
-filename="shuff.txt"
 while read -r line
 do
   echo $line >> "$rep/R$outname.txt"
@@ -26,7 +23,7 @@ do
     i=0
     outname=$((outname+1))
   fi
-done < "$filename"
+done < "$f_shuff"
 
-rm all.txt
-rm shuff.txt
+rm $f_all
+rm $f_shuff

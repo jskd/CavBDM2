@@ -27,4 +27,7 @@ struct table* table_create(size_t bucket, const char* directory);
 
 void table_insertbuffer(struct table* tab, const struct buffer* buf);
 
+void table_putBuffer(struct table* tab, const struct buffer* buf);
+void table_storeBucketInBuffer(struct table* tab, int indexBucket, struct buffer* buf);
+
 #endif

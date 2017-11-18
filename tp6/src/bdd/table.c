@@ -60,6 +60,7 @@ void table_putBuffer(struct table* tab, const struct buffer* buf) {
     for(int index_buf=0; index_buf< buffer_count(buf); index_buf++) {
       short key=0;
       char str[100];
+      buffer_get(buf, index_buf, &key);
       sprintf(str, "%d", key);
       bucket_puts( tab->b[ _table_hash(tab, key) ], str);
     }
@@ -70,8 +71,8 @@ void table_putBuffer(struct table* tab, const struct buffer* buf) {
   }
 }
 
-void table_storeBucketInBuffer(struct table* tab, int index, struct buffer* buf)
+void table_storeBucketInBuffer(struct table* tab, int indexBucket, struct buffer* buf)
 {
-  if(index > 0 && index < tab->n_bucket)
-    buffer_read_file_from_descriptor(  bucket_getFile(tab->b[index]), buf);
+  if(indexBucket >= 0 && indexBucket < tab->n_bucket)
+    buffer_read_file_from_descriptor(  bucket_getFile(tab->b[indexBucket]), buf);
 }

@@ -71,8 +71,18 @@ void table_putBuffer(struct table* tab, const struct buffer* buf) {
   }
 }
 
-void table_storeBucketInBuffer(struct table* tab, int indexBucket, struct buffer* buf)
+void table_storeBucketInBuffer(const struct table* tab, int indexBucket, struct buffer* buf)
 {
   if(indexBucket >= 0 && indexBucket < tab->n_bucket)
     buffer_read_file_from_descriptor(  bucket_getFile(tab->b[indexBucket]), buf);
+}
+
+size_t table_get_n_bucket(const struct table* tab) {
+  return tab->n_bucket;
+}
+
+void table_destroy(struct table* tab) {
+  for(int indexBucket=0; indexBucket<tab->n_bucket; indexBucket++)
+    free(tab->b[indexBucket]);
+  free(tab);
 }

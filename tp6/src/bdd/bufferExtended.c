@@ -283,11 +283,11 @@ size_t buffer_datasize(const struct buffer* buf) {
 }
 
 
-long long buffer_get_read_stat(const struct buffer* buf) {
+int buffer_get_read_stat(const struct buffer* buf) {
   return  buf->read_counter;
 }
 
-long long buffer_get_write_stat(const struct buffer* buf) {
+int buffer_get_write_stat(const struct buffer* buf) {
   return  buf->write_counter;
 }
 

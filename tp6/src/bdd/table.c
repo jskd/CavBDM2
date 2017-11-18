@@ -69,3 +69,9 @@ void table_putBuffer(struct table* tab, const struct buffer* buf) {
     printf("Erreur, table put non implementé pour ce type de buffer\n");
   }
 }
+
+void table_storeBucketInBuffer(struct table* tab, int index, struct buffer* buf)
+{
+  if(index > 0 && index < tab->n_bucket)
+    buffer_read_file_from_descriptor(  bucket_getFile(tab->b[index]), buf);
+}

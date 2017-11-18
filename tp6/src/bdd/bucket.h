@@ -26,4 +26,6 @@ struct bucket* bucket_create(const char* filename);
 
 void bucket_puts( struct bucket* bucket, const char* str);
 
+FILE* bucket_getFile(struct bucket* bucket);
+
 #endif

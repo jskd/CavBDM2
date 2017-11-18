@@ -37,3 +37,8 @@ struct bucket* bucket_create(const char* filename, int mode) {
 void bucket_puts( struct bucket* bucket, const char* str) {
   printf("%s", str);
 }
+
+
+FILE* bucket_getFile(struct bucket* bucket) {
+  return bucket->file;
+}

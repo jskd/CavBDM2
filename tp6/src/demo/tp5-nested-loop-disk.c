@@ -55,20 +55,28 @@ int main(int argc, char** argv){
 
   struct buffer* buf_r  = buffer_create(_buf_size, _buf_data_lenght, BUFFER_CHARACTERS);
   struct buffer* buf_s  = buffer_create(_buf_size, _buf_data_lenght, BUFFER_CHARACTERS);
-  struct buffer* buf_out= buffer_create(_buf_size, _buf_data_lenght, BUFFER_CHARACTERS);
+  struct buffer* buf_rs= buffer_create(_buf_size, _buf_data_lenght, BUFFER_CHARACTERS);
 
-  nested_loop_join_disk( disk_r, buf_r, disk_s, buf_s, buf_out, disk_o);
+  nested_loop_join_disk( disk_r, buf_r, disk_s, buf_s, buf_rs, disk_o);
 
   // Si n'est pas vide alors ecriture
-  if(!buffer_isEmpty(buf_out))
+  if(!buffer_isEmpty(buf_rs))
     buffer_write_file_from_descriptor(
-      disk_output_get_current_file_descriptor(disk_o), buf_out);
+      disk_output_get_current_file_descriptor(disk_o), buf_rs);
 
   printf("Terminé, fichier dans %s.\n", _dir_rs);
 
+  printf("Stat Buffer R:\n");
+  buffer_fprint_stat(stdout, buf_r);
+  printf("Stat Buffer S:\n");
+  buffer_fprint_stat(stdout, buf_s);
+  printf("Stat Buffer RS:\n");
+  buffer_fprint_stat(stdout, buf_rs);
+
+
   buffer_destroy(buf_r);
   buffer_destroy(buf_s);
-  buffer_destroy(buf_out);
+  buffer_destroy(buf_rs);
   disk_destroy(disk_r);
   disk_destroy(disk_s);
 

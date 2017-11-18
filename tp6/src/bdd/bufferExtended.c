@@ -171,8 +171,8 @@ void buffer_read_file_from_descriptor(FILE* file, struct buffer* buf)
       int value= atoi(line);
       buffer_put(buf, &value);
     }
+    buf->read_counter++;
   }
-  buf->read_counter++;
 }
 
 /**
@@ -203,9 +203,9 @@ char buffer_write_file(const char* file_name, struct buffer* buf) {
 void buffer_write_file_from_descriptor(FILE* file, struct buffer* buf) {
   for(int index=0; index<buf->c; index++) {
     _printValue(file, buf, index);
+    if(file != stderr && file != stdout)
+      buf->write_counter++;
   }
-  if(file != stderr && file != stdout)
-    buf->write_counter++;
 }
 
 /**
@@ -293,6 +293,6 @@ long long buffer_get_write_stat(const struct buffer* buf) {
 
 
 void buffer_fprint_stat(FILE* stream, const struct buffer* buf) {
-  fprintf(stream, "Read file: %d\n", buf->read_counter);
-  fprintf(stream, "Write file: %d\n", buf->write_counter);
+  fprintf(stream, "- Read in file: %d lines\n", buf->read_counter);
+  fprintf(stream, "- Write in file: %d lines\n", buf->write_counter);
 }

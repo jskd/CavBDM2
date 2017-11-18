@@ -100,13 +100,13 @@ void buffer_read_file_from_descriptor(FILE* fp, struct buffer* buf);
  * @return -1 si erreur dans l'ouverture du fichier
  *
  */
-char buffer_write_file(const char* file_name, const struct buffer*);
+char buffer_write_file(const char* file_name, struct buffer*);
 
 
 /**
  * Ecrit le contenu d'un buffer dans un fichier
  */
-void buffer_write_file_from_descriptor(FILE* file, const struct buffer* buf);
+void buffer_write_file_from_descriptor(FILE* file, struct buffer* buf);
 
 /**
  * @brief Copie la valeur d'une entrée d'un buffer dans le block memoire
@@ -175,7 +175,7 @@ char buffer_isEmpty(const struct buffer* buf);
 /**
  * Affiche les valeurs
  */
-void buffer_printValue(const struct buffer* buf);
+void buffer_printValue(struct buffer* buf);
 
 /**
  * Retourne le mode de fonctionnement du buffer

@@ -38,6 +38,10 @@ struct buffer {
   size_t data_size;
   // mode des sortie fichier
   buffer_file_mode mode;
+  /// compteur de Lecture (en octet)
+  long read_counter;
+  /// compteur d'écriture (en octet)
+  long write_counter;
 };
 
 // See Header
@@ -48,6 +52,8 @@ struct buffer* buffer_create( size_t size , size_t num, buffer_file_mode mode ){
   buf->data_size= num;
   buf->c=0;
   buf->mode = mode;
+  buf->read_counter = 0;
+  buf->write_counter = 0;
   return buf;
 }
 
@@ -65,10 +71,10 @@ static char * _buffer_val_offset( const struct buffer* buf, int index) {
   return buf->v+index*buf->data_size;
 }
 
-static void _printValue(FILE* stream, const struct buffer* buf, int index) {
-  if(buf->mode == BUFFER_CHARACTERS)
-    printf("%.*s\n", (int) buf->data_size, _buffer_val_offset(buf, index));
-  else if(buf->mode == BUFFER_DECIMALS) {
+static void _printValue(FILE* stream, struct buffer* buf, int index) {
+  if(buf->mode == BUFFER_CHARACTERS) {
+    fprintf(stream, "%.*s\n", (int) buf->data_size, _buffer_val_offset(buf, index));
+  } else if(buf->mode == BUFFER_DECIMALS) {
     long long value=0;
     buffer_get(buf, index, &value);
     switch(buf->data_size) {
@@ -86,6 +92,8 @@ static void _printValue(FILE* stream, const struct buffer* buf, int index) {
         break;
     }
   }
+  if(stream != stderr && stream != stdout)
+    buf->read_counter= buf->read_counter + buf->data_size;
 }
 /**
  * Ajoute un caractere dans le buffer s'il reste de la place
@@ -109,6 +117,7 @@ char buffer_put(struct buffer* buf, const void * data) {
 
   memcpy ( _buffer_val_offset(buf, buf->c), data, buf->data_size );
   buf->c++;
+  buf->write_counter= buf->write_counter + buf->data_size;
 
   return 0;
 }
@@ -158,8 +167,10 @@ void buffer_read_file_from_descriptor(FILE* file, struct buffer* buf)
   size_t len = 0;
 
   while((getline(&line, &len, file)) != -1) {
-    if(buf->mode == BUFFER_CHARACTERS)
+    if(buf->mode == BUFFER_CHARACTERS) {
       buffer_put(buf, line);
+
+    }
     else if(buf->mode == BUFFER_DECIMALS) {
       int value= atoi(line);
       buffer_put(buf, &value);
@@ -178,7 +189,7 @@ void buffer_read_file_from_descriptor(FILE* file, struct buffer* buf)
  * @return -1 si erreur dans l'ouverture du fichier
  *
  */
-char buffer_write_file(const char* file_name, const struct buffer* buf) {
+char buffer_write_file(const char* file_name, struct buffer* buf) {
 
   FILE* file = fopen( file_name, "w");
   if (file == NULL)
@@ -192,9 +203,9 @@ char buffer_write_file(const char* file_name, const struct buffer* buf) {
 
 
 
-void buffer_write_file_from_descriptor(FILE* file, const struct buffer* buf) {
+void buffer_write_file_from_descriptor(FILE* file, struct buffer* buf) {
   for(int index=0; index<buf->c; index++) {
-    _printValue(stdout, buf, index);
+    _printValue(file, buf, index);
   }
 }
 
@@ -252,7 +263,7 @@ void buffer_get(const struct buffer* buf, int index, void* destination) {
 /**
  * Affiche les valeurs
  */
-void buffer_printValue(const struct buffer* buf) {
+void buffer_printValue(struct buffer* buf) {
   for(int index=0; index< buf->c; index++) {
     _printValue(stdout, buf, index);
   }

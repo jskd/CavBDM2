@@ -24,12 +24,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <string.h>
+
 
 struct disk {
   FILE** v;
   size_t s;
   size_t c;
-  int n_lecture;
 };
 
 static int _count_regular_file(DIR * dirp) {
@@ -75,7 +76,6 @@ struct disk* disk_create( const char * dir, const char* mode) {
   disk->s=  _count_regular_file(dirp);
   disk->v= (FILE**) malloc( sizeof(FILE*) * disk->s );
   disk->c= 0;
-  disk->n_lecture= 0;
 
   char error= _store_file_descriptor(disk, dir, dirp, mode);
   closedir(dirp);

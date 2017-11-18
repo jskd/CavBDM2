@@ -22,7 +22,11 @@ static const size_t _buf_size= 10;
 static const size_t _buf_data_lenght= 2;
 static const char* _file_r= "res/demo/tp5/R";
 static const char* _file_s= "res/demo/tp5/S";
-static const char* _file_rs= "res/demo/tp5/RS.txt";
+
+static const char* _dir_rs= "res/demo/tp5/RS";
+static const char* _prefix_rs= "RS";
+static const char* _ext_rs= ".txt";
+static const int   _offset_rs= 0;
 
 int main(int argc, char** argv){
 
@@ -38,23 +42,29 @@ int main(int argc, char** argv){
     return -1;
   }
 
-  FILE* _output_file= fopen(_file_rs, "w+");
+/*  FILE* _output_file= fopen(_file_rs, "w+");
   if(_output_file == NULL) {
     printf("Erreur lors de la lecture de %s.\n", _file_rs);
     return -1;
-  }
+  }*/
+
+
+  struct disk_output* disk_o= disk_output_create(_dir_rs, _prefix_rs, _ext_rs, _offset_rs);
+
+
 
   struct buffer* buf_r  = buffer_create(_buf_size, _buf_data_lenght, BUFFER_CHARACTERS);
   struct buffer* buf_s  = buffer_create(_buf_size, _buf_data_lenght, BUFFER_CHARACTERS);
   struct buffer* buf_out= buffer_create(_buf_size, _buf_data_lenght, BUFFER_CHARACTERS);
 
-  nested_loop_join_disk( disk_r, buf_r, disk_s, buf_s, buf_out, _output_file);
+  nested_loop_join_disk( disk_r, buf_r, disk_s, buf_s, buf_out, disk_o);
 
   // Si n'est pas vide alors ecriture
   if(!buffer_isEmpty(buf_out))
-    buffer_write_file_from_descriptor(_output_file, buf_out);
+    buffer_write_file_from_descriptor(
+      disk_output_get_current_file_descriptor(disk_o), buf_out);
 
-  printf("Terminé, fichier dans %s.\n", _file_rs);
+  printf("Terminé, fichier dans %s.\n", _dir_rs);
 
   buffer_destroy(buf_r);
   buffer_destroy(buf_s);

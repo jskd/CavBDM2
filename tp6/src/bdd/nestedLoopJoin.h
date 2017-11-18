@@ -21,6 +21,7 @@
 
 #include "bufferExtended.h"
 #include "disk.h"
+#include "diskOutput.h"
 
 /**
  * Natual join (TP 1) Ne supporte pas les overflow
@@ -42,7 +43,7 @@ void natural_join(const struct buffer* buf_a, const struct buffer* buf_b,
  *                     (autorisation d'ecriture necessaire)
  */
 void nested_loop_join(const struct buffer* buf_a, const struct buffer* buf_b,
-  struct buffer* buf_out, FILE* overflow_file);
+  struct buffer* buf_out, struct disk_output* overflow_disk);
 
 /**
  * nested_loop_join sur disk (TP5)
@@ -58,7 +59,7 @@ void nested_loop_join(const struct buffer* buf_a, const struct buffer* buf_b,
  */
 void nested_loop_join_disk( const struct disk* disk_a, struct buffer* buf_a,
   const struct disk* disk_b, struct buffer* buf_b, struct buffer* buf_out,
-  FILE* overflow_file);
+  struct disk_output* overflow_disk);
 
 /**
  * table_bucket_join (TP6)
@@ -74,6 +75,6 @@ void nested_loop_join_disk( const struct disk* disk_a, struct buffer* buf_a,
  */
 void table_bucket_join(const struct table* tab_a, struct buffer* buf_a,
   const struct table* tab_b, struct buffer* buf_b,
-  struct buffer* buf_out, FILE* overflow_file);
+  struct buffer* buf_out, struct disk_output* overflow_disk);
 
 #endif

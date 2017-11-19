@@ -98,8 +98,8 @@ doc:
 
 # Lancement du générateur de rapport
 rapport:
-	@cd rapport && $(MAKE) 
-	@cp rapport/rapport.pdf rapport.pdf 
+	@cd rapport && $(MAKE)
+	@cp rapport/rapport.pdf rapport.pdf
 	@echo "Génération du rapport terminé"
 
 # Lancement de la démo 1
@@ -129,8 +129,11 @@ demo-tp5: bin/demo/tp5-nested-loop-disk
 
 # Supression de RS.txt
 rm-rs:
-	@rm -rf $(RS_TXT)
-	@echo "Fichier "$(RS_TXT)" supprimé"
+	@rm -rf $(find -name "RS")
+	@rm -rf $(find -name "RS.txt")
+	@rm -rf $(find -name "tableR")
+	@rm -rf $(find -name "tableS")
+	@echo "Fichier RS et table supprimé"
 
 zip: clean
 	zip -r ${name}TP${n}.zip Makefile README.md doc/ rapport/ rapport.pdf refman.pdf res/ script/ src/ sujet.pdf

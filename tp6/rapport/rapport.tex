@@ -21,7 +21,8 @@
 \section{Nouveauté depuis le TP5}
 
 \begin{itemize}
-  \item bufferExtended supporte maintenant les nombres
+  \item bufferExtended supporte maintenant les nombres (Mode BUFFER\_DECIMAL)
+  \item Supression du vieux buffer (toutes ces fonctionnalités sont incluse dans bufferExtended)
   \item Nouvelle structure: DiskOutput (gestion des ecriture sur disque)
   \item Nouvelle structure: Table  (table de Hash sur disque)
   \item Nouvelle structure: Bucket (bucket de table)
@@ -29,12 +30,15 @@
   \item Nouveau tests
   \item Nouvelle démo
   \item Nouvelle commande make gen-tp5 et gen-tp6 (pour generer R et S)
+  \item Ajout de couleur pour les tests
+  \item Mise à jour de make rm-rs
+  \item Nouveau scripts (file-generation-tp6.py)
 \end{itemize}
 
 \section{Comparaison de Disque Nested loop join avec Disk Block Hash Join}
 
 La comparaison s'effecture sur les même disque R et S contenant chacun 256
-valeurs. Les buffers sont de taille 10 supportant des données de taille
+short. Les buffers sont de taille 10 supportant des données de taille
 décimales sur 2 octets. La table de hash a 10 bucket avec un hash linaire.
 
 \subsection{Hash join}
@@ -55,11 +59,12 @@ décimales sur 2 octets. La table de hash a 10 bucket avec un hash linaire.
       \item Disque RS: Ecriture de 32 lines sur 4 fichiers
       \item Total opération: 882 ligne sur 106 fichiers
   \end{itemize}
-  \item Total opération: 1906 ligne sur 219 fichiers
+  \item Total opération (creation table + jointure): 1906 ligne sur 219 fichiers
 \end{itemize}
 
-Remarque: Les opeations de lecture sur Table de S peuvent être minimisé
-jusqu'à 256 lecture s'il n'y a pas de collision.
+Remarque: Les opeations de lecture sur Table de S lors de la jointure peuvent
+être minimisé jusqu'à 256 ligne lecture s'il n'y a pas de collision
+(implique de mettre plus de bucket).
 
 \subsection{Nested Loop join}
 
@@ -69,6 +74,9 @@ jusqu'à 256 lecture s'il n'y a pas de collision.
   \item Disque RS: Ecriture de 32 lines sur 4 fichiers
   \item Total d'operation: 6694 ligne sur 681 fichier
 \end{itemize}
+
+3 fois plus d'operation par rapport au hash join (creation de table + jointure).
+7,5 fois plus d'operation si nous comptons uniquement la jointure.
 
 \section{Comment compiler le projet}
 
@@ -85,8 +93,10 @@ jusqu'à 256 lecture s'il n'y a pas de collision.
 	\item make demo-tp3 : Lancer la démo tp3
 	\item make demo-tp4 : Lancer la démo tp4
 	\item make demo-tp5 : Lancer la démo tp5
-  \item make demo-tp5 : Lancer la démo tp6 (Nouveau)
-	\item make rm-rs : Supprime le fichier res/RS.txt et res/disk/RS.txt
+  \item make demo-tp6 : Lancer la démo tp6 (Nouveau)
+	\item make rm-rs : Supprime le fichier res/RS.txt et res/disk/RS.txt (Mis à jour)
+  \item make gen-tp5 : Génération de R pour tp5 (Nouveau)
+  \item make gen-tp6 : Génération de R et S pour tp5 (Nouveau)
 \end{itemize}
 
 \section{Arborescence}
@@ -135,7 +145,8 @@ La commande make pour lancer les demo sont: make demo-tp1, make demo-tp2, make d
   \item tp2-merge-join-without-duplicate: Merge join sans duplication
   \item tp3-merge-join-with-duplicate: Merge join avec duplication
   \item tp4-hash-join : Hash join
-  \item tp5-nested-loop-disk: Nested loop sur disque  (Nouveau)
+  \item tp5-nested-loop-disk: Nested loop sur disque
+  \item tp6 nested loop join + hash join (Nouveau)
 \end{itemize}
 
 \section{Test unitaire}
@@ -160,11 +171,14 @@ La commande make pour lancer les test est: make test
   \item 11-hash-get : Test recupreration d'une entrée dans la table de hash
   \item 12-hash-remove : Test supression / rehash dans une table de hash
   \item 13-hash-join : Test hash join
-  \item 14-buffer-read-file: test la lecture avec un buffer extended (Nouveau)
-  \item 15-buffer-read-file-2: test la lecture avec un buffer extended  (Nouveau)
-  \item 16-disk-buffer-dump: test la lecture d'un disque (Nouveau)
-  \item 17-disk-nested-loop-r-to-s-test: test le nested loop sur disque r to s (Nouveau)
-  \item 18-disk-nested-loop-s-to-r-test: test le nested loop sur disque s to r (Nouveau)
+  \item 14-buffer-read-file: test la lecture avec un buffer extended
+  \item 15-buffer-read-file-2: test la lecture avec un buffer extended
+  \item 16-disk-buffer-dump: test la lecture d'un disque
+  \item 17-disk-nested-loop-r-to-s-test: test le nested loop sur disque r to s
+  \item 18-disk-nested-loop-s-to-r-test: test le nested loop sur disque s to r
+  \item 19-buffer-decimal (nouveau)
+  \item 20-table-puts (nouveau)
+  \item 21-disk-block-hash-join (nouveau)
 \end{itemize}
 
 \includegraphics[width=0.8\textwidth]{test.png}

@@ -142,5 +142,11 @@ rm-rs:
 	@find . -path '*/RS.txt' -delete
 	@echo "Supression des fichier généré terminé"
 
+gen-tp5:
+	./script/file-generation-tp5.sh
+
+gen-tp6:
+	python3 ./script/file-generation-tp6.py
+
 zip: clean
 	zip -r ${name}TP${n}.zip Makefile README.md doc/ rapport/ rapport.pdf refman.pdf res/ script/ src/ sujet.pdf

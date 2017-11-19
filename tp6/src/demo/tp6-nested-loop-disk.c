@@ -18,14 +18,17 @@
 
 #include "../bdd/nestedLoopJoin.h"
 
+// Buffer config
 static const size_t _buf_size= 10;
 static const size_t _data_lenght= sizeof(short);
 static const int _buffer_type= BUFFER_DECIMALS;
 
+// input disk config
 static const char* _file_r= "res/demo/tp6/R";
 static const char* _file_s= "res/demo/tp6/S";
-static const char* _dir_rs= "res/demo/tp6/RS";
 
+// output disk config
+static const char* _dir_rs= "res/demo/tp6/RS";
 static const char* _prefix_rs= "RS";
 static const char* _ext_rs= ".txt";
 static const int   _offset_rs= 0;
@@ -46,14 +49,13 @@ int main(int argc, char** argv){
 
   struct disk_output* disk_o= disk_output_create(_dir_rs, _prefix_rs, _ext_rs, _offset_rs);
 
-
   struct buffer* buf_r  = buffer_create(_buf_size, _data_lenght, _buffer_type);
   struct buffer* buf_s  = buffer_create(_buf_size, _data_lenght, _buffer_type);
   struct buffer* buf_rs= buffer_create(_buf_size, _data_lenght, _buffer_type);
 
   nested_loop_join_disk( disk_r, buf_r, disk_s, buf_s, buf_rs, disk_o);
 
-  // Si n'est pas vide alors ecriture
+  // Si buffer non vide alors vidage dans disk_o
   if(!buffer_isEmpty(buf_rs))
     buffer_write_file_from_descriptor(
       disk_output_get_current_file_descriptor(disk_o), buf_rs);

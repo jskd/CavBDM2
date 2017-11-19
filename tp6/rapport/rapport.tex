@@ -10,7 +10,7 @@
 
 \title{Concepts Avancés de Bases de données}
 
-\author{Joaquim LEFRANC et Jérôme Skoda}
+\author{Joaquim LEFRANC et Jérôme SKODA}
 
 \date{\today}
 
@@ -18,54 +18,57 @@
 \maketitle
 
 
-\section{Nouveauté depuis le TP4}
+\section{Nouveauté depuis le TP5}
 
 \begin{itemize}
-  \item 5 test en plus (buffer extended + disk + nested loop disk)
-  \item 1 demo (make demo-tp5)
-  \item Nouvelle script pour générer le disque r (script/file-generation-tp5.sh)
-  \item Nouvelle structure de donnée bufferExtended (fork de buffer)
-    \begin{itemize}
-      \item Nouvelle fonctions: buffer\_flush (vidage), buffer\_cmp (comparaison), 
-         buffer\_put (adapté), buffer\_put\_cpy et lecture/ecriture avec le file descriptor
-      \item Taille des données variable (fixé à la creation) testé sur 1 et 2 octects
-      \item Donnée toujour allouée dynamiquement et contiguë 
-         \begin{alltt}
-Exemple buffer de longueur 2
-buffer count: 8
-buffer size: 270
-buffer value::                                             D2
-  0000  41 43 41 41 41 44 41 42 42 44 42 42 42 41 42 43  ACAAADABBDBBBABC
-       ^ D1  ^  D2 ^                                     D1  D3          
-
-Les 3 premieres données: AC AA AD
-
-Exemple buffer de longueur 1
-buffer count: 10
-buffer size: 16
-buffer value::                                            2
-  0000  41 5a 47 4a 55 4b 45 42 56 44                    AZGJUKEBVD
-        D1 D2 D3                                         1 3
-       
-Les 3 premieres donnée: A Z G
-\end{alltt}
-    \end{itemize}
-  \item Nouvelle structure de donnée disk (liste de file descriptor)
+  \item bufferExtended supporte maintenant les nombres
+  \item Nouvelle structure: DiskOutput (gestion des ecriture sur disque)
+  \item Nouvelle structure: Table  (table de Hash sur disque)
+  \item Nouvelle structure: Bucket (bucket de table)
+  \item Ajout de fonction de benchmark Lecture/ecriture dans Buffer et Table
+  \item Nouveau tests
+  \item Nouvelle démo
+  \item Nouvelle commande make gen-tp5 et gen-tp6 (pour generer R et S)
 \end{itemize}
 
-\section{Optimisation de lecture}
+\section{Comparaison de Disque Nested loop join avec Disk Block Hash Join}
 
-Avec une itération en va-et-vient, une lecture est économisée par boucle sur BR après la 1ére lecture complete 
-car le 1er bloque est déjà en mémoire et il n'est pas utile de refaire un opération de lecture.
+La comparaison s'effecture sur les même disque R et S contenant chacun 256
+valeurs. Les buffers sont de taille 10 supportant des données de taille
+décimales sur 2 octets. La table de hash a 10 bucket avec un hash linaire.
 
-$boucle 0: BR$ 
+\subsection{Hash join}
 
-$boucle 1: BR - 1$ 
+\begin{itemize}
+  \item Création de table:
+  \begin{itemize}
+    \item Disque R: Lecture de 256 lignes sur 26 fichiers
+    \item Disque S: Lecture de 256 lignes sur 26 fichiers
+    \item Table R: Ecriture de 256 lines sur 29 fichiers
+    \item Table S: Ecriture de 256 lines sur 32 fichiers
+    \item Total opération: 1024 ligne sur 113 fichiers
+  \end{itemize}
+  \item Jointure:
+  \begin{itemize}
+      \item Table R: Lecture de 256 lignes sur 29 fichiers
+      \item Table S: Lecture de 594 lignes sur 73 fichiers
+      \item Disque RS: Ecriture de 32 lines sur 4 fichiers
+      \item Total opération: 882 ligne sur 106 fichiers
+  \end{itemize}
+  \item Total opération: 1906 ligne sur 219 fichiers
+\end{itemize}
 
-$boucle 2: BR - 1$ 
+Remarque: Les opeations de lecture sur Table de S peuvent être minimisé
+jusqu'à 256 lecture s'il n'y a pas de collision.
 
+\subsection{Nested Loop join}
 
-$Donc\ nombre\ de\ lecture = BR + (BS-1) * (BR-1)$
+\begin{itemize}
+  \item Disque R: Lecture de 256 lignes sur 26 fichiers
+  \item Disque S: Lecture de 6406 lignes sur 651 fichiers
+  \item Disque RS: Ecriture de 32 lines sur 4 fichiers
+  \item Total d'operation: 6694 ligne sur 681 fichier
+\end{itemize}
 
 \section{Comment compiler le projet}
 
@@ -80,16 +83,11 @@ $Donc\ nombre\ de\ lecture = BR + (BS-1) * (BR-1)$
 	\item make demo-tp1 : Lancer la démo tp1
 	\item make demo-tp2 : Lancer la démo tp2
 	\item make demo-tp3 : Lancer la démo tp3
-	\item make demo-tp4 : Lancer la démo tp4 
-	\item make demo-tp5 : Lancer la démo tp5 (Nouveau)
+	\item make demo-tp4 : Lancer la démo tp4
+	\item make demo-tp5 : Lancer la démo tp5
+  \item make demo-tp5 : Lancer la démo tp6 (Nouveau)
 	\item make rm-rs : Supprime le fichier res/RS.txt et res/disk/RS.txt
 \end{itemize}
-
-\subsection{Avec ECLIPSE (non maintenu) }
-
-Pour lancer une commande utiliser les builds targets.
-
-\includegraphics[width=0.5\textwidth]{builds-target.png}
 
 \section{Arborescence}
 
@@ -111,7 +109,7 @@ Pour lancer une commande utiliser les builds targets.
 \end{itemize}
 
 \item sujet.pdf  : Sujet du projet
-\item README.md  : Le readme du projet 
+\item README.md  : Le readme du projet
 \item rappot.pdf : C'est moi
 \item refman.pdf : Documentation format pdf
 \end{itemize}
@@ -134,9 +132,9 @@ La commande make pour lancer les demo sont: make demo-tp1, make demo-tp2, make d
 
 \begin{itemize}
   \item tp1-natural-join: Natural join R et S
-  \item tp2-merge-join-without-duplicate: Merge join sans duplication 
-  \item tp3-merge-join-with-duplicate: Merge join avec duplication 
-  \item tp4-hash-join : Hash join 
+  \item tp2-merge-join-without-duplicate: Merge join sans duplication
+  \item tp3-merge-join-with-duplicate: Merge join avec duplication
+  \item tp4-hash-join : Hash join
   \item tp5-nested-loop-disk: Nested loop sur disque  (Nouveau)
 \end{itemize}
 
@@ -156,12 +154,12 @@ La commande make pour lancer les test est: make test
   \item 05-merge-join-without-duplicate-2: Merge join sans duplication S et R
   \item 06-merge-join-with-duplicate-1: Merge join avec duplication R et S
   \item 07-merge-join-with-duplicate-2: Merge join avec duplication S et R
-  \item 08-hash-put-equilibre : Test ajout equilibré dans une table de hash 
-  \item 09-hash-put-desequilibre : Test ajout déséquilibré dans une table de hash 
+  \item 08-hash-put-equilibre : Test ajout equilibré dans une table de hash
+  \item 09-hash-put-desequilibre : Test ajout déséquilibré dans une table de hash
   \item 10-hash-full : Test remplissage complet dans une table de hash
-  \item 11-hash-get : Test recupreration d'une entrée dans la table de hash 
-  \item 12-hash-remove : Test supression / rehash dans une table de hash 
-  \item 13-hash-join : Test hash join 
+  \item 11-hash-get : Test recupreration d'une entrée dans la table de hash
+  \item 12-hash-remove : Test supression / rehash dans une table de hash
+  \item 13-hash-join : Test hash join
   \item 14-buffer-read-file: test la lecture avec un buffer extended (Nouveau)
   \item 15-buffer-read-file-2: test la lecture avec un buffer extended  (Nouveau)
   \item 16-disk-buffer-dump: test la lecture d'un disque (Nouveau)
@@ -172,4 +170,3 @@ La commande make pour lancer les test est: make test
 \includegraphics[width=0.8\textwidth]{test.png}
 
 \end{document}
-              

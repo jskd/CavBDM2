@@ -31,14 +31,6 @@ void nested_loop_join(const struct buffer* buf_a, const struct buffer* buf_b, st
   for(int a=0; a< buffer_count(buf_a); a++) {
     for(int b=0; b< buffer_count(buf_b); b++) {
       if(buffer_cmp(buf_a, a, buf_b, b) == 0) {
-
-          printf("\n\nBuf a\n");
-          buffer_printValue(buf_a);
-                    printf("Buf b\n");
-
-          buffer_printValue(buf_b);
-
-
         // Overflow vidage dans overflow_file
         if(buffer_isFull(buf_out) && overflow_disk != NULL) {
           buffer_write_file_from_descriptor( disk_output_get_current_file_descriptor(overflow_disk), buf_out);

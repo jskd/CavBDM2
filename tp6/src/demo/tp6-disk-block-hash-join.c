@@ -59,25 +59,26 @@ int main(int argc, char** argv){
   disk_storeContentInTable(disk_s, buf_s, tab_s);
   disk_storeContentInTable(disk_r, buf_r, tab_r);
 
-
-
-
-  printf("Creation de la table: stat Buffer R:\n");
+  printf("Creation de la table\n");
+  printf("Buffer R:\n");
   buffer_fprint_stat(stdout, buf_r);
-  printf("Creation de la table: stat Buffer S:\n");
+  printf("Buffer S:\n");
   buffer_fprint_stat(stdout, buf_s);
-  printf("Creation de la table: stat Buffer RS:\n");
+  printf("Buffer RS:\n");
   buffer_fprint_stat(stdout, buf_rs);
+  printf("Table R:\n");
+  table_fprint_stat(stdout, tab_r);
+  printf("Table S:\n");
+  table_fprint_stat(stdout, tab_s);
+  printf("\n");
 
-
-
-  printf("\nRemive à zero des compteurs\n\n");
+  printf("Remise à zero des compteurs\n");
   buffer_stat_reset(buf_r);
   buffer_stat_reset(buf_s);
   buffer_stat_reset(buf_rs);
+  printf("\n");
 
   struct disk_output* disk_o= disk_output_create(_dir_rs, _prefix_rs, _ext_rs, _offset_rs);
-
   table_bucket_join(tab_r, buf_r, tab_s, buf_s, buf_rs, disk_o);
 
   // Si n'est pas vide alors ecriture
@@ -85,12 +86,16 @@ int main(int argc, char** argv){
     buffer_write_file_from_descriptor(
       disk_output_get_current_file_descriptor(disk_o), buf_rs);
 
-  printf("Jointure: stat Buffer R:\n");
+  printf("Jointure\n");
+  printf("Buffer R:\n");
   buffer_fprint_stat(stdout, buf_r);
-  printf("Jointure: stat Buffer S:\n");
+  printf("Buffer S:\n");
   buffer_fprint_stat(stdout, buf_s);
-  printf("Jointure: stat Buffer RS:\n");
+  printf("Buffer RS:\n");
   buffer_fprint_stat(stdout, buf_rs);
+  printf("\n");
+
+  printf("Terminé, fichier dans %s.\n", _dir_rs);
 
   buffer_destroy(buf_r);
   buffer_destroy(buf_s);

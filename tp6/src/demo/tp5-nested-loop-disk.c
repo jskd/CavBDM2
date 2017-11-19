@@ -64,15 +64,15 @@ int main(int argc, char** argv){
     buffer_write_file_from_descriptor(
       disk_output_get_current_file_descriptor(disk_o), buf_rs);
 
-  printf("Terminé, fichier dans %s.\n", _dir_rs);
-
   printf("Stat Buffer R:\n");
   buffer_fprint_stat(stdout, buf_r);
   printf("Stat Buffer S:\n");
   buffer_fprint_stat(stdout, buf_s);
   printf("Stat Buffer RS:\n");
   buffer_fprint_stat(stdout, buf_rs);
+  printf("\n");
 
+  printf("Terminé, fichier dans %s.\n", _dir_rs);
 
   buffer_destroy(buf_r);
   buffer_destroy(buf_s);

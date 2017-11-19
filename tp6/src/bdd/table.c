@@ -94,5 +94,5 @@ int table_get_write_stat(const struct table* tab) {
 }
 
 void table_fprint_stat(FILE* stream, const struct table* tab) {
-  fprintf(stream, "- Write in file: %d lines\n", tab->write_counter);
+  fprintf(stream, "- Write in bucket: %d lines\n", tab->write_counter);
 }

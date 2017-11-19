@@ -40,8 +40,10 @@ struct buffer {
   buffer_file_mode mode;
   /// compteur de Lecture (en octet)
   int read_counter;
+  int rfile_counter;
   /// compteur d'écriture (en octet)
   int write_counter;
+  int wfile_counter;
 };
 
 // See Header
@@ -53,7 +55,9 @@ struct buffer* buffer_create( size_t size , size_t num, buffer_file_mode mode ){
   buf->c=0;
   buf->mode = mode;
   buf->read_counter = 0;
+  buf->rfile_counter = 0;
   buf->write_counter = 0;
+  buf->wfile_counter =0;
   return buf;
 }
 
@@ -173,6 +177,7 @@ void buffer_read_file_from_descriptor(FILE* file, struct buffer* buf)
     }
     buf->read_counter++;
   }
+  buf->rfile_counter++;
 }
 
 /**
@@ -206,6 +211,7 @@ void buffer_write_file_from_descriptor(FILE* file, struct buffer* buf) {
     if(file != stderr && file != stdout)
       buf->write_counter++;
   }
+  buf->wfile_counter++;
 }
 
 /**
@@ -293,11 +299,13 @@ int buffer_get_write_stat(const struct buffer* buf) {
 
 
 void buffer_fprint_stat(FILE* stream, const struct buffer* buf) {
-  fprintf(stream, "- Read in file: %d lines\n", buf->read_counter);
-  fprintf(stream, "- Write in file: %d lines\n", buf->write_counter);
+  fprintf(stream, "- Read: %d lines from %d files\n", buf->read_counter, buf->rfile_counter);
+  fprintf(stream, "- Write: %d lines to %d files\n", buf->write_counter, buf->wfile_counter);
 }
 
 void buffer_stat_reset(struct buffer* buf) {
   buf->read_counter=0;
   buf->write_counter=0;
+  buf->rfile_counter=0;
+  buf->wfile_counter=0;
 }

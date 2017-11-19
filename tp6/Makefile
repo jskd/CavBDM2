@@ -98,32 +98,32 @@ rapport:
 	@echo "Génération du rapport terminé"
 
 # Lancement de la démo 1
-demo-tp1: bin/demo/tp1-natural-join
+demo-tp1: bin/demo/tp1-natural-join rm-rs
 	./bin/demo/tp1-natural-join
 	@echo "Démonstration terminé"
 
 # Lancement de la démo 2
-demo-tp2: bin/demo/tp2-merge-join-without-duplicate
+demo-tp2: bin/demo/tp2-merge-join-without-duplicate rm-rs
 	./bin/demo/tp2-merge-join-without-duplicate
 	@echo "Démonstration terminé"
 
 # Lancement de la démo 3
-demo-tp3: bin/demo/tp3-merge-join-with-duplicate
+demo-tp3: bin/demo/tp3-merge-join-with-duplicate rm-rs
 	./bin/demo/tp3-merge-join-with-duplicate
 	@echo "Démonstration terminé"
 
 # Lancement de la démo 4
-demo-tp4: bin/demo/tp4-hash-join
+demo-tp4: bin/demo/tp4-hash-join rm-rs
 	./bin/demo/tp4-hash-join
 	@echo "Démonstration terminé"
 
 # Lancement de la démo 4
-demo-tp5: bin/demo/tp5-nested-loop-disk
+demo-tp5: bin/demo/tp5-nested-loop-disk rm-rs
 	./bin/demo/tp5-nested-loop-disk
 	@echo "Démonstration terminé"
 
 # Lancement de la démo 4
-demo-tp6: bin/demo/tp6-disk-hash-join bin/demo/tp6-disk-nested-join
+demo-tp6: bin/demo/tp6-disk-hash-join bin/demo/tp6-disk-nested-join rm-rs
 	@echo "TP6 avec nested loop join"
 	./bin/demo/tp6-disk-nested-join
 	@echo "==========================="

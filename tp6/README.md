@@ -1,13 +1,3 @@
-# Attention
-
-Ce projet a été conçu pour fonctionner avec make
-
-Il est recommandé pour les utilisateurs n'aimant pas le terminal 
-de manipuler le projet uniquement avec **eclipse** 
-
-Des *builds targets* sont configurés, il suffit de double cliquer dessus
-pour lancer la commande make correspondante (voir rapport)
-
 # Commandes
 
 * __make all__  : Compile tout les fichiers
@@ -17,7 +7,13 @@ pour lancer la commande make correspondante (voir rapport)
 * __make clean__ : Nettoyage du projet (supression des objets et binaires)
 * __make demo-tp1__: Lancer la démo tp1
 * __make demo-tp2__: Lancer la démo tp2
-* __make rm-rs__: Supprime le fichier res/RS.txt
+* __make demo-tp3__: Lancer la démo tp3
+* __make demo-tp4__: Lancer la démo tp4
+* __make demo-tp5__: Lancer la démo tp5
+* __make demo-tp6__: Lancer la démo tp6
+* __make rm-rs__: Supprime le fichier RS / table
+* __make gen-tp5__: Lance le script de génération de fichier R du tp 5
+* __make gen-tp6__: Lance le script de génération de fichier R et S du tp 6
 
 # Arborescence
 
@@ -35,7 +31,7 @@ pour lancer la commande make correspondante (voir rapport)
 
 * *sujet.pdf*  : Sujet du projet
 * *README.md*  : C'est moi
-* *rappot.pdf* : Le rapport du projet 
+* *rappot.pdf* : Le rapport du projet
 
 
 # Démonstration disponibles
@@ -45,9 +41,11 @@ Les exécutables de test sont généré dans: bin/demo
 La commande make pour lancer les demo sont: make demo-tp1, make demo-tp2, make demo-tp3
 
 * tp1-natural-join: Natural join R et S
-* tp2-merge-join-without-duplicate: Merge join sans duplication 
-* tp3-merge-join-with-duplicate: Merge join avec duplication 
+* tp2-merge-join-without-duplicate: Merge join sans duplication
+* tp3-merge-join-with-duplicate: Merge join avec duplication
 * tp4-hash-join: Hash join
+* tp5-nested-loop-disk: Nested loop sur disque
+* tp6-disk-hash-join: Hash join sur disque
 
 # Tests disponibles
 
@@ -70,4 +68,3 @@ La commande make pour lancer les test est: make test
 * 11-hash-get : Test recupreration d'une entrée dans la table de hash
 * 12-hash-remove : Test supression / rehash dans une table de hash
 * 13-hash-join : Test hash join
-

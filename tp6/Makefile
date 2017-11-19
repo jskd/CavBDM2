@@ -75,7 +75,7 @@ $(BINDIR_DEMO)/%: $(OBJDIR_DEMO)/%.o $(OBJECTS_BDD)
 	@echo "Compilation "$<" reussite!"
 
 # Netoyage du projet
-clean:
+clean: rm-rs
 	@rm -rf $(RS_TXT)
 	@echo "Fichier "$(RS_TXT)" supprimé"
 	@rm -rf $(RS_DISK_TXT)
@@ -129,11 +129,14 @@ demo-tp5: bin/demo/tp5-nested-loop-disk
 
 # Supression de RS.txt
 rm-rs:
-	@rm -rf $(find -name "RS")
-	@rm -rf $(find -name "RS.txt")
-	@rm -rf $(find -name "tableR")
-	@rm -rf $(find -name "tableS")
-	@echo "Fichier RS et table supprimé"
+	@find . -path '*/RS/*' -delete
+	@find . -type d -name 'RS' -empty -delete
+	@find . -path '*/tableR/*' -delete
+	@find . -type d -name 'tableR' -empty -delete
+	@find . -path '*/tableS/*' -delete
+	@find . -type d -name 'tableS' -empty -delete
+	@find . -path '*/RS.txt' -delete
+	@echo "Supression des fichier généré terminé"
 
 zip: clean
 	zip -r ${name}TP${n}.zip Makefile README.md doc/ rapport/ rapport.pdf refman.pdf res/ script/ src/ sujet.pdf

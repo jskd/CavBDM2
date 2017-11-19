@@ -36,7 +36,7 @@ static const char* _file_table_s= "res/demo/tp6/tableS";
 static const size_t _n_bucket= 10;
 
 // output disk config
-static const char* _dir_rs= "res/demo/tp6/RS";
+static const char* _dir_rs= "res/demo/tp6/RS-hash";
 static const char* _prefix_rs= "RS";
 static const char* _ext_rs= ".txt";
 static const int   _offset_rs= 0;

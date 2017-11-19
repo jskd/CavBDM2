@@ -28,7 +28,7 @@ static const char* _file_r= "res/demo/tp6/R";
 static const char* _file_s= "res/demo/tp6/S";
 
 // output disk config
-static const char* _dir_rs= "res/demo/tp6/RS";
+static const char* _dir_rs= "res/demo/tp6/RS-nested";
 static const char* _prefix_rs= "RS";
 static const char* _ext_rs= ".txt";
 static const int   _offset_rs= 0;

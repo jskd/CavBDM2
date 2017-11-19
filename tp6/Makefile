@@ -2,8 +2,7 @@
 
 CC=gcc
 CFLAGS= -g -Wall --std=gnu99
-RS_TXT := res/RS.txt
-RS_DISK_TXT := res/disk/RS.txt
+
 # Repertoire global
 SRCDIR     := src
 OBJDIR     := obj
@@ -76,10 +75,6 @@ $(BINDIR_DEMO)/%: $(OBJDIR_DEMO)/%.o $(OBJECTS_BDD)
 
 # Netoyage du projet
 clean: rm-rs
-	@rm -rf $(RS_TXT)
-	@echo "Fichier "$(RS_TXT)" supprimé"
-	@rm -rf $(RS_DISK_TXT)
-	@echo "Fichier "$(RS_DISK_TXT)" supprimé"
 	@rm -rf $(OBJDIR)
 	@echo "Répertoire "$(OBJDIR)" supprimé"
 	@rm -rf $(BINDIR)
@@ -127,10 +122,19 @@ demo-tp5: bin/demo/tp5-nested-loop-disk
 	./bin/demo/tp5-nested-loop-disk
 	@echo "Démonstration terminé"
 
+# Lancement de la démo 4
+demo-tp6: bin/demo/tp6-disk-hash-join bin/demo/tp6-disk-nested-join
+	@echo "TP6 avec nested loop join"
+	./bin/demo/tp6-disk-nested-join
+	@echo "==========================="
+	@echo "\n\nTP6 avec hash join"
+	./bin/demo/tp6-disk-hash-join
+	@echo "Démonstration terminé"
+
 # Supression de RS.txt
 rm-rs:
-	@find . -path '*/RS/*' -delete
-	@find . -type d -name 'RS' -empty -delete
+	@find . -path '*/RS*/*' -delete
+	@find . -type d -name 'RS*' -empty -delete
 	@find . -path '*/tableR/*' -delete
 	@find . -type d -name 'tableR' -empty -delete
 	@find . -path '*/tableS/*' -delete

@@ -85,7 +85,7 @@ size_t table_get_n_bucket(const struct table* tab) {
 
 void table_destroy(struct table* tab) {
   for(int indexBucket=0; indexBucket<tab->n_bucket; indexBucket++)
-    free(tab->b[indexBucket]);
+    bucket_destroy(tab->b[indexBucket]);
   free(tab);
 }
 
@@ -93,6 +93,13 @@ int table_get_write_stat(const struct table* tab) {
   return  tab->write_counter;
 }
 
+int table_get_wfile_stat(const struct table* tab) {
+  int n_file=0;
+  for(int indexBucket=0; indexBucket<tab->n_bucket; indexBucket++)
+    n_file+= bucket_get_n_file(tab->b[indexBucket]);
+  return n_file;
+}
 void table_fprint_stat(FILE* stream, const struct table* tab) {
-  fprintf(stream, "- Write in bucket: %d lines\n", tab->write_counter);
+  fprintf(stream, "- Write in bucket: %d lines to %d files\n", tab->write_counter,
+     table_get_wfile_stat(tab));
 }

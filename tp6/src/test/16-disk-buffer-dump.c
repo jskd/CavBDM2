@@ -26,7 +26,7 @@ int main(int argc, char** argv){
 
   // buffer R.txt
 
-  struct disk* disk= disk_create("res/test/minidisk", "r");
+  struct disk* disk= disk_create("res/test/minidisk");
   if(disk == NULL) {
     printf("Erreur lors de la lecture de res/test/minidisk.\n");
     return -1;

@@ -30,13 +30,13 @@ static const int   _offset_rs= 0;
 
 int main(int argc, char** argv){
 
-  struct disk* disk_r= disk_create(_file_r, "r");
+  struct disk* disk_r= disk_create(_file_r);
   if(disk_r == NULL) {
     printf("Erreur lors de la lecture de %s.\n", _file_r);
     return -1;
   }
 
-  struct disk* disk_s= disk_create(_file_s, "r");
+  struct disk* disk_s= disk_create(_file_s);
   if(disk_s == NULL) {
     printf("Erreur lors de la lecture de %s.\n", _file_s);
     return -1;

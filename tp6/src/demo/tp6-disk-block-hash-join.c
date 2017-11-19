@@ -28,7 +28,7 @@ static const char* _file_s= "res/demo/tp6/S";
 
 static const char* _file_table_r= "res/demo/tp6/tableR";
 static const char* _file_table_s= "res/demo/tp6/tableS";
-static const size_t _n_bucket= 64;
+static const size_t _n_bucket= 10;
 
 static const char* _dir_rs= "res/demo/tp6/RS-join";
 static const char* _prefix_rs= "RS";
@@ -37,13 +37,13 @@ static const int   _offset_rs= 0;
 
 int main(int argc, char** argv){
 
-  struct disk* disk_r= disk_create(_file_r, "r");
+  struct disk* disk_r= disk_create(_file_r);
   if(disk_r == NULL) {
     printf("Erreur lors de la lecture de %s.\n", _file_r);
     return -1;
   }
 
-  struct disk* disk_s= disk_create(_file_s, "r");
+  struct disk* disk_s= disk_create(_file_s);
   if(disk_s == NULL) {
     printf("Erreur lors de la lecture de %s.\n", _file_s);
     return -1;
@@ -58,6 +58,9 @@ int main(int argc, char** argv){
 
   disk_storeContentInTable(disk_s, buf_s, tab_s);
   disk_storeContentInTable(disk_r, buf_r, tab_r);
+
+
+
 
   printf("Creation de la table: stat Buffer R:\n");
   buffer_fprint_stat(stdout, buf_r);
@@ -75,7 +78,7 @@ int main(int argc, char** argv){
 
   struct disk_output* disk_o= disk_output_create(_dir_rs, _prefix_rs, _ext_rs, _offset_rs);
 
-  table_bucket_join(tab_s, buf_s, tab_r, buf_r, buf_rs, disk_o);
+  table_bucket_join(tab_r, buf_r, tab_s, buf_s, buf_rs, disk_o);
 
   // Si n'est pas vide alors ecriture
   if(!buffer_isEmpty(buf_rs))

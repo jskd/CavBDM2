@@ -17,28 +17,36 @@
 */
 #include <stdlib.h>
 #include <stdio.h>
+#include "diskOutput.h"
+#include "disk.h"
+#include <string.h>
 
 struct bucket {
   FILE* file;
   size_t c;
+  struct disk_output* disk_out;
+  int current_line;
+  char* dir;
 };
 
-struct bucket* bucket_create(const char* filename, int mode) {
+struct bucket* bucket_create(const char* dir, int indexBucket) {
   struct bucket* bucket= (struct bucket*) malloc(sizeof(struct bucket));
-  bucket->file= fopen(filename , "w+");
-  if(bucket->file == NULL) {
-    free(bucket);
-    return NULL;
-  }
-  bucket->c= 0;
+  bucket->dir= strdup(dir);
+  bucket->disk_out= disk_output_create(dir, "", ".txt", 0);
+  bucket->current_line= 0;
   return bucket;
 }
 
 void bucket_puts( struct bucket* bucket, const char* str) {
-  fprintf(bucket->file, "%s\n", str);
+  fprintf( disk_output_get_current_file_descriptor( bucket->disk_out ), "%s\n", str);
+  bucket->current_line++;
+  if(bucket->current_line == 10) {
+    disk_output_next_file(bucket->disk_out);
+    bucket->current_line=0;
+  }
 }
 
-
-FILE* bucket_getFile(struct bucket* bucket) {
-  return bucket->file;
+struct disk* bucket_create_disk( struct bucket* bucket ) {
+  fflush(disk_output_get_current_file_descriptor(bucket->disk_out));
+  return disk_create(bucket->dir);
 }

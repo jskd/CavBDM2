@@ -32,7 +32,7 @@ struct disk;
 
 size_t disk_count(const struct disk* disk);
 
-struct disk* disk_create( const char * dir, const char* mode);
+struct disk* disk_create( const char * dir);
 
 void disk_destroy(struct disk* disk);
 

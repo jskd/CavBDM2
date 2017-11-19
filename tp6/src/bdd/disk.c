@@ -45,7 +45,7 @@ static int _count_regular_file(DIR * dirp) {
   return file_count;
 }
 
-static char _store_file_descriptor(struct disk* disk, const char * dir, DIR * dirp, const char* mode) {
+static char _store_file_descriptor(struct disk* disk, const char * dir, DIR * dirp) {
   struct dirent * entry;
   FILE** ptr= disk->v;
   char filename[PATH_MAX];
@@ -55,7 +55,7 @@ static char _store_file_descriptor(struct disk* disk, const char * dir, DIR * di
       if(disk->c == disk->s) // Overflow
         return -1;
       sprintf(filename, "%s/%s", dir, entry->d_name);
-      *ptr= fopen(filename, mode);
+      *ptr= fopen(filename, "r");
       if(*ptr == NULL) // Open error
         return -2;
       ptr++;
@@ -65,7 +65,7 @@ static char _store_file_descriptor(struct disk* disk, const char * dir, DIR * di
   return 0;
 }
 
-struct disk* disk_create( const char * dir, const char* mode) {
+struct disk* disk_create( const char * dir) {
 
   DIR* dirp = opendir(dir);
   if(dirp == NULL)
@@ -77,7 +77,7 @@ struct disk* disk_create( const char * dir, const char* mode) {
   disk->v= (FILE**) malloc( sizeof(FILE*) * disk->s );
   disk->c= 0;
 
-  char error= _store_file_descriptor(disk, dir, dirp, mode);
+  char error= _store_file_descriptor(disk, dir, dirp);
   closedir(dirp);
 
   if(error) {

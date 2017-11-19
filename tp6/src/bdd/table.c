@@ -47,9 +47,9 @@ struct table* table_create(size_t n_bucket, const char* directory) {
   tab->b= (struct bucket**) malloc(n_bucket * sizeof(struct bucket*) );
   mkdir(directory, 0777);
   for(int indexBucket=0; indexBucket<n_bucket; indexBucket++) {
-    char filename[PATH_MAX];
-    sprintf(filename, "%s/%d.bucket.txt", directory, indexBucket);
-    tab->b[indexBucket]= bucket_create(filename);
+    char bucketdir[PATH_MAX];
+    sprintf(bucketdir, "%s/%d", directory, indexBucket);
+    tab->b[indexBucket]= bucket_create(bucketdir);
   }
   tab->write_counter= 0;
   tab->n_bucket= n_bucket;
@@ -75,10 +75,8 @@ void table_putBuffer(struct table* tab, const struct buffer* buf) {
   }
 }
 
-void table_storeBucketInBuffer(const struct table* tab, int indexBucket, struct buffer* buf)
-{
-  if(indexBucket >= 0 && indexBucket < tab->n_bucket)
-    buffer_read_file_from_descriptor(  bucket_getFile(tab->b[indexBucket]), buf);
+struct disk* create_disk_from_bucket(const struct table* tab, int indexBucket) {
+  return bucket_create_disk(tab->b[indexBucket]);
 }
 
 size_t table_get_n_bucket(const struct table* tab) {

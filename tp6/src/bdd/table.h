@@ -28,11 +28,12 @@ struct table* table_create(size_t bucket, const char* directory);
 void table_insertbuffer(struct table* tab, const struct buffer* buf);
 
 void table_putBuffer(struct table* tab, const struct buffer* buf);
-void table_storeBucketInBuffer(const struct table* tab, int indexBucket, struct buffer* buf);
+
 void table_destroy(struct table* tab) ;
 size_t table_get_n_bucket(const struct table* tab);
 
 int table_get_write_stat(const struct table* tab);
 void table_fprint_stat(FILE* stream, const struct table* tab);
 
+struct disk* create_disk_from_bucket(const struct table* tab, int indexBucket) ;
 #endif

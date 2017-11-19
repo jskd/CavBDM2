@@ -19,7 +19,7 @@ int main(int argc, char** argv){
     printf("Erreur lors de la creation de %s.\n", _file_table_r);
     return -1;
   }
-
+/*
   table_putBuffer(tab, buf);
 
   table_storeBucketInBuffer(tab, 0, buf);
@@ -32,6 +32,6 @@ int main(int argc, char** argv){
   printf("bucket 1\n");
   buffer_printValue(buf);
 
-  buffer_destroy(buf);
+  buffer_destroy(buf);*/
 
 }

@@ -1,0 +1,11 @@
+bin
+obj
+*.out
+doc/latex
+doc/html
+doc/rtf
+
+RS.txt
+**/tableR/**
+**/tableS/**
+**/RS*/**

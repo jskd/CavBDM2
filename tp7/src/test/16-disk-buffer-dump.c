@@ -16,7 +16,7 @@
 * Remarques :
 */
 
-#include "../bdd/bufferExtended.h"
+#include "../bdd/buffer.h"
 #include "../bdd/diskReader.h"
 
 static const size_t _buf_size=   10;

@@ -18,7 +18,7 @@
 #ifndef SRC_BDD_MERGEJOINWITHOUTDUPLICATE_H
 #define SRC_BDD_MERGEJOINWITHOUTDUPLICATE_H
 
-#include "bufferExtended.h"
+#include "buffer.h"
 
 /**
  * @brief Merge join without duplicate

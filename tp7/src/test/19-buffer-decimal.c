@@ -1,4 +1,4 @@
-#include "../bdd/bufferExtended.h"
+#include "../bdd/buffer.h"
 
 int main(int argc, char** argv){
 

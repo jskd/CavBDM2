@@ -16,7 +16,7 @@
 * Remarques :
 */
 #include "mergeJoinWithoutDuplicate.h"
-#include "bufferExtended.h"
+#include "buffer.h"
 
 /**
  * @brief Merge join without duplicate

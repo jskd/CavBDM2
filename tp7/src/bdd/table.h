@@ -19,7 +19,7 @@
 #define SRC_BDD_TABLE_H
 
 #include <stdio.h>
-#include "bufferExtended.h"
+#include "buffer.h"
 
 struct table;
 

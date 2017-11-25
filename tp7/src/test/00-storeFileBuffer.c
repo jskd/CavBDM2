@@ -15,7 +15,7 @@
 *
 * Remarques :
 */
-#include "../bdd/bufferExtended.h"
+#include "../bdd/buffer.h"
 
 static const size_t _buf_size= 10;
 static const size_t _buf_data_lenght= 1;

@@ -1,4 +1,4 @@
-#include "../bdd/bufferExtended.h"
+#include "../bdd/buffer.h"
 #include "../bdd/table.h"
 #include "../bdd/diskReader.h"
 #include "../bdd/nestedLoopJoin.h"

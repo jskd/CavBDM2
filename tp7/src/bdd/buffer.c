@@ -18,7 +18,7 @@
 // Pour getline (standard GNU)
 #define _GNU_SOURCE
 
-#include "bufferExtended.h"
+#include "buffer.h"
 #include "hexdump.h"
 #include "quicksort.h"
 #include <stdio.h>

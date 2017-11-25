@@ -16,7 +16,7 @@
 * Remarques :
 */
 #include "nestedLoopJoin.h"
-#include "bufferExtended.h"
+#include "buffer.h"
 #include "table.h"
 #include "diskReader.h"
 #include "diskWriter.h"

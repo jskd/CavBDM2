@@ -16,7 +16,7 @@
  * Remarques :
  */
 #include "table.h"
-#include "bufferExtended.h"
+#include "buffer.h"
 #include "bucket.h"
 #include <limits.h>
 #include <stdlib.h>

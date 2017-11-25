@@ -19,7 +19,7 @@
 // Pour getline (standard GNU)
 #define _GNU_SOURCE
 
-#include "bufferExtended.h"
+#include "buffer.h"
 #include "hashtable.h"
 #include "hexdump.h"
 #include <stdio.h>

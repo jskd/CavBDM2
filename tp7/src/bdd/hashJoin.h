@@ -18,7 +18,7 @@
 #ifndef SRC_BDD_HASHJOIN_H
 #define SRC_BDD_HASHJOIN_H
 
-#include "bufferExtended.h"
+#include "buffer.h"
 #include "hashtable.h"
 
 /**

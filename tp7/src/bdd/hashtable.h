@@ -21,7 +21,7 @@
 extern const char VAL_NOT_IN_HASHTABLE;
 
 #include <stdio.h>
-#include "bufferExtended.h"
+#include "buffer.h"
 /**
  * @brief Structure de donnée repésentant une table de hash
  * Remarque: Structure caché! Ne pas initilialiser autrement

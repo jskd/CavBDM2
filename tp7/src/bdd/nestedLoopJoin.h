@@ -19,7 +19,7 @@
 #ifndef SRC_BDD_NESTEDLOOPJOIN_H
 #define SRC_BDD_NESTEDLOOPJOIN_H
 
-#include "bufferExtended.h"
+#include "buffer.h"
 #include "diskReader.h"
 #include "diskWriter.h"
 

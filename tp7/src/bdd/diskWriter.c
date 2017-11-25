@@ -16,7 +16,7 @@
 * Remarques :
 */
 
-#include "diskOutput.h"
+#include "diskWriter.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>

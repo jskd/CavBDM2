@@ -19,7 +19,7 @@
 #include "bufferExtended.h"
 #include "table.h"
 #include "diskReader.h"
-#include "diskOutput.h"
+#include "diskWriter.h"
 
 // See header
 void natural_join(const struct buffer* buf_a, const struct buffer* buf_b, struct buffer* buf_out) {

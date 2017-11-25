@@ -21,7 +21,7 @@
 
 #include "bufferExtended.h"
 #include "diskReader.h"
-#include "diskOutput.h"
+#include "diskWriter.h"
 
 /**
  * Natual join (TP 1) Ne supporte pas les overflow

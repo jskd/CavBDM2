@@ -17,7 +17,7 @@
 */
 #include <stdlib.h>
 #include <stdio.h>
-#include "diskOutput.h"
+#include "diskWriter.h"
 #include "diskReader.h"
 #include <string.h>
 

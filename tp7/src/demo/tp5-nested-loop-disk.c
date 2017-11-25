@@ -26,7 +26,6 @@ static const char* _file_s= "res/demo/tp5/S";
 static const char* _dir_rs= "res/demo/tp5/RS";
 static const char* _prefix_rs= "RS";
 static const char* _ext_rs= ".txt";
-static const int   _offset_rs= 0;
 
 int main(int argc, char** argv){
 
@@ -49,7 +48,7 @@ int main(int argc, char** argv){
   }*/
 
 
-  struct diskWriter* disk_o= disk_w_create(_dir_rs, _prefix_rs, _ext_rs, _offset_rs);
+  struct diskWriter* disk_o= disk_w_create(_dir_rs, _prefix_rs, _ext_rs);
 
 
 

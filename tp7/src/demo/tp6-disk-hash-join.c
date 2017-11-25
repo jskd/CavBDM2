@@ -39,7 +39,6 @@ static const size_t _n_bucket= 10;
 static const char* _dir_rs= "res/demo/tp6/RS-hash";
 static const char* _prefix_rs= "RS";
 static const char* _ext_rs= ".txt";
-static const int   _offset_rs= 0;
 
 int main(int argc, char** argv){
 
@@ -84,7 +83,7 @@ int main(int argc, char** argv){
   buffer_stat_reset(buf_rs);
   printf("\n");
 
-  struct diskWriter* disk_o= disk_w_create(_dir_rs, _prefix_rs, _ext_rs, _offset_rs);
+  struct diskWriter* disk_o= disk_w_create(_dir_rs, _prefix_rs, _ext_rs);
 
   table_bucket_join(tab_r, buf_r, tab_s, buf_s, buf_rs, disk_o);
 

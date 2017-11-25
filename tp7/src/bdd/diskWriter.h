@@ -25,7 +25,7 @@
 struct diskWriter;
 
 struct diskWriter* disk_w_create(const char* dir, const char* prefix,
-  const char* extension, int offset);
+  const char* extension);
 
 FILE* disk_w_get_current_f( struct diskWriter* disk_o);
 

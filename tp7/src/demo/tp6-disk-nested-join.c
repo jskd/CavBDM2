@@ -31,7 +31,6 @@ static const char* _file_s= "res/demo/tp6/S";
 static const char* _dir_rs= "res/demo/tp6/RS-nested";
 static const char* _prefix_rs= "RS";
 static const char* _ext_rs= ".txt";
-static const int   _offset_rs= 0;
 
 int main(int argc, char** argv){
 
@@ -47,7 +46,7 @@ int main(int argc, char** argv){
     return -1;
   }
 
-  struct diskWriter* disk_o= disk_w_create(_dir_rs, _prefix_rs, _ext_rs, _offset_rs);
+  struct diskWriter* disk_o= disk_w_create(_dir_rs, _prefix_rs, _ext_rs);
 
   struct buffer* buf_r  = buffer_create(_buf_size, _data_lenght, _buffer_type);
   struct buffer* buf_s  = buffer_create(_buf_size, _data_lenght, _buffer_type);

@@ -33,9 +33,11 @@ struct diskManagerWriter;
  * @param[in] dst      Repertoire de destination
  * @param[in] prefixe  Prefixe de nommage des disks
  * @param[in] suffixe  Sufixe de nommage des disks
+ * @param[in] prefixe  Prefixe de nommage des fichier
+ * @param[in] suffixe  Sufixe de nommage des fichier
  */
 struct diskManagerWriter* disk_manager_w_create(const char* dst, const char* prefixe,
-  const char* suffixe);
+  const char* suffixe, const char* file_prefixe,  const char* file_suffixe);
 
 /**
  * @brief     Retourne le diskWriter (écrase le contenu s'il existe déjà)

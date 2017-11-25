@@ -32,7 +32,7 @@ struct bucket {
 struct bucket* bucket_create(const char* dir, int indexBucket) {
   struct bucket* bucket= (struct bucket*) malloc(sizeof(struct bucket));
   bucket->dir= strdup(dir);
-  bucket->disk_out= disk_w_create(dir, "", ".txt", 0);
+  bucket->disk_out= disk_w_create(dir, "", ".txt");
   bucket->current_line= 0;
   bucket->n_file= 1;
   return bucket;

@@ -36,13 +36,12 @@ struct diskWriter {
 };
 
 struct diskWriter* disk_w_create(const char* dir, const char* prefix,
-  const char* extension, int offset)
+  const char* extension)
 {
   struct diskWriter* disk_o= (struct diskWriter*) malloc(sizeof(struct diskWriter));
   disk_o->dir= strdup(dir);
   disk_o->prefix= strdup(prefix);
   disk_o->extension= strdup(extension);
-  disk_o->file_number= offset;
 
   rmrf(dir);
   mkdir(dir, 0777);

@@ -40,16 +40,16 @@ struct bucket* bucket_create(const char* dir, int indexBucket) {
 
 void bucket_puts( struct bucket* bucket, const char* str) {
   if(bucket->current_line == 10) {
-    disk_w_next_file(bucket->disk_out);
+    disk_w_next_f(bucket->disk_out);
     bucket->n_file++;
     bucket->current_line=0;
   }
-  fprintf( disk_w_get_current_file_descriptor( bucket->disk_out ), "%s\n", str);
+  fprintf( disk_w_get_current_f( bucket->disk_out ), "%s\n", str);
   bucket->current_line++;
 }
 
 struct diskReader* bucket_create_disk( struct bucket* bucket ) {
-  fflush(disk_w_get_current_file_descriptor(bucket->disk_out));
+  fflush(disk_w_get_current_f(bucket->disk_out));
   return disk_r_create(bucket->dir);
 }
 

@@ -58,7 +58,7 @@ int main(int argc, char** argv){
   // Si buffer non vide alors vidage dans disk_o
   if(!buffer_isEmpty(buf_rs))
     buffer_write_file_from_descriptor(
-      disk_w_get_current_file_descriptor(disk_o), buf_rs);
+      disk_w_get_current_f(disk_o), buf_rs);
 
   printf("Stat Buffer R:\n");
   buffer_fprint_stat(stdout, buf_r);

@@ -48,7 +48,7 @@ struct diskWriter* disk_manager_w_get_current_dw(struct diskManagerWriter* dmw);
  * @brief     Passage au diskWriter suivant
  * @param[in] dmw      DiskManagerWriter
  */
-void disk_manager_w_next(struct diskManagerWriter* dmw);
+void disk_manager_w_next_dw(struct diskManagerWriter* dmw);
 
 /**
  * @brief     Detruit le diskWriterManger

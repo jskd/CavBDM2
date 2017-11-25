@@ -33,8 +33,8 @@ void nested_loop_join(const struct buffer* buf_a, const struct buffer* buf_b, st
       if(buffer_cmp(buf_a, a, buf_b, b) == 0) {
         // Overflow vidage dans overflow_file
         if(buffer_isFull(buf_out) && overflow_disk != NULL) {
-          buffer_write_file_from_descriptor( disk_w_get_current_file_descriptor(overflow_disk), buf_out);
-          disk_w_next_file(overflow_disk);
+          buffer_write_file_from_descriptor( disk_w_get_current_f(overflow_disk), buf_out);
+          disk_w_next_f(overflow_disk);
           buffer_flush(buf_out);
         }
         buffer_put_cpy(buf_out, buf_a, a);

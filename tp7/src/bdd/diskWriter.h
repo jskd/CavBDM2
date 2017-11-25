@@ -27,9 +27,9 @@ struct diskWriter;
 struct diskWriter* disk_w_create(const char* dir, const char* prefix,
   const char* extension, int offset);
 
-FILE* disk_w_get_current_file_descriptor( struct diskWriter* disk_o);
+FILE* disk_w_get_current_f( struct diskWriter* disk_o);
 
-FILE* disk_w_next_file( struct diskWriter* disk_o);
+FILE* disk_w_next_f( struct diskWriter* disk_o);
 
 void disk_w_destroy( struct diskWriter* disk_o );
 

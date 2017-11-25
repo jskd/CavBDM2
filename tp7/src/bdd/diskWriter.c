@@ -54,11 +54,11 @@ struct diskWriter* disk_w_create(const char* dir, const char* prefix,
   return disk_o;
 }
 
-FILE* disk_w_get_current_file_descriptor( struct diskWriter* disk_o) {
+FILE* disk_w_get_current_f( struct diskWriter* disk_o) {
   return disk_o->current_file;
 }
 
-FILE* disk_w_next_file( struct diskWriter* disk_o) {
+FILE* disk_w_next_f( struct diskWriter* disk_o) {
 
   fclose(disk_o->current_file);
 

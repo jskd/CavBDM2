@@ -15,7 +15,6 @@
 *
 * Remarques :
 */
-#define _XOPEN_SOURCE 500
 #include "diskWriter.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,7 +25,7 @@
 #include <stdio.h>
 #include <ftw.h>
 #include <unistd.h>
-
+#include "rmrf.h"
 
 struct diskWriter {
   char* dir;
@@ -35,22 +34,6 @@ struct diskWriter {
   int file_number;
   FILE* current_file;
 };
-
-// Design patern Copy past
-// from https://stackoverflow.com/questions/5467725/how-to-delete-a-directory-and-its-contents-in-posix-c#5467788
-static int _unlink_cb(const char *fpath, const struct stat *sb, int typeflag, struct FTW *ftwbuf)
-{
-  int rv = remove(fpath);
-  if (rv)
-    perror(fpath);
-  return rv;
-}
-// Design patern Copy past
-// from https://stackoverflow.com/questions/5467725/how-to-delete-a-directory-and-its-contents-in-posix-c#5467788
-static int _rmrf(const char *path)
-{
-  return nftw(path, _unlink_cb, 64, FTW_DEPTH | FTW_PHYS);
-}
 
 struct diskWriter* disk_w_create(const char* dir, const char* prefix,
   const char* extension, int offset)
@@ -61,7 +44,7 @@ struct diskWriter* disk_w_create(const char* dir, const char* prefix,
   disk_o->extension= strdup(extension);
   disk_o->file_number= offset;
 
-  _rmrf(dir);
+  rmrf(dir);
   mkdir(dir, 0777);
 
 

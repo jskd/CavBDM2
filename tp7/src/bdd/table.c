@@ -24,6 +24,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include "rmrf.h"
 
 #define BUCKET_FILE_EXTENSION ".txt"
 /**
@@ -45,6 +46,8 @@ static int _table_hash(const struct table* tab, short key) {
 struct table* table_create(size_t n_bucket, const char* directory) {
   struct table* tab= (struct table*) malloc(sizeof(struct table));
   tab->b= (struct bucket**) malloc(n_bucket * sizeof(struct bucket*) );
+
+  rmrf(directory);
   mkdir(directory, 0777);
   for(int indexBucket=0; indexBucket<n_bucket; indexBucket++) {
     char bucketdir[PATH_MAX];

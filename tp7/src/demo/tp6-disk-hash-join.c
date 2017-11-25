@@ -84,14 +84,14 @@ int main(int argc, char** argv){
   buffer_stat_reset(buf_rs);
   printf("\n");
 
-  struct disk_output* disk_o= disk_output_create(_dir_rs, _prefix_rs, _ext_rs, _offset_rs);
+  struct diskWriter* disk_o= disk_w_create(_dir_rs, _prefix_rs, _ext_rs, _offset_rs);
 
   table_bucket_join(tab_r, buf_r, tab_s, buf_s, buf_rs, disk_o);
 
   // Si buffer non vide alors vidage dans disk_o
   if(!buffer_isEmpty(buf_rs))
     buffer_write_file_from_descriptor(
-      disk_output_get_current_file_descriptor(disk_o), buf_rs);
+      disk_w_get_current_file_descriptor(disk_o), buf_rs);
 
   printf("Jointure\n");
   printf("Buffer R:\n");

@@ -24,7 +24,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-struct disk_output {
+struct diskWriter {
   char* dir;
   char* prefix;
   char* extension;
@@ -32,10 +32,10 @@ struct disk_output {
   FILE* current_file;
 };
 
-struct disk_output* disk_output_create(const char* dir, const char* prefix,
+struct diskWriter* disk_w_create(const char* dir, const char* prefix,
   const char* extension, int offset)
 {
-  struct disk_output* disk_o= (struct disk_output*) malloc(sizeof(struct disk_output));
+  struct diskWriter* disk_o= (struct diskWriter*) malloc(sizeof(struct diskWriter));
   disk_o->dir= strdup(dir);
   disk_o->prefix= strdup(prefix);
   disk_o->extension= strdup(extension);
@@ -49,11 +49,11 @@ struct disk_output* disk_output_create(const char* dir, const char* prefix,
   return disk_o;
 }
 
-FILE* disk_output_get_current_file_descriptor( struct disk_output* disk_o) {
+FILE* disk_w_get_current_file_descriptor( struct diskWriter* disk_o) {
   return disk_o->current_file;
 }
 
-FILE* disk_output_next_file( struct disk_output* disk_o) {
+FILE* disk_w_next_file( struct diskWriter* disk_o) {
 
   fclose(disk_o->current_file);
 
@@ -66,7 +66,7 @@ FILE* disk_output_next_file( struct disk_output* disk_o) {
 }
 
 
-void disk_output_destroy( struct disk_output* disk_o ) {
+void disk_w_destroy( struct diskWriter* disk_o ) {
   free(disk_o->dir);
   free(disk_o->prefix);
   free(disk_o->extension);

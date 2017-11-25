@@ -22,15 +22,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct disk_output;
+struct diskWriter;
 
-struct disk_output* disk_output_create(const char* dir, const char* prefix,
+struct diskWriter* disk_w_create(const char* dir, const char* prefix,
   const char* extension, int offset);
 
-FILE* disk_output_get_current_file_descriptor( struct disk_output* disk_o);
+FILE* disk_w_get_current_file_descriptor( struct diskWriter* disk_o);
 
-FILE* disk_output_next_file( struct disk_output* disk_o);
+FILE* disk_w_next_file( struct diskWriter* disk_o);
 
-void disk_output_destroy( struct disk_output* disk_o );
+void disk_w_destroy( struct diskWriter* disk_o );
 
 #endif

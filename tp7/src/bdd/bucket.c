@@ -23,7 +23,7 @@
 
 struct bucket {
   size_t c;
-  struct disk_output* disk_out;
+  struct diskWriter* disk_out;
   int current_line;
   int n_file;
   char* dir;
@@ -32,24 +32,24 @@ struct bucket {
 struct bucket* bucket_create(const char* dir, int indexBucket) {
   struct bucket* bucket= (struct bucket*) malloc(sizeof(struct bucket));
   bucket->dir= strdup(dir);
-  bucket->disk_out= disk_output_create(dir, "", ".txt", 0);
+  bucket->disk_out= disk_w_create(dir, "", ".txt", 0);
   bucket->current_line= 0;
   bucket->n_file= 1;
   return bucket;
 }
 
 void bucket_puts( struct bucket* bucket, const char* str) {
-  fprintf( disk_output_get_current_file_descriptor( bucket->disk_out ), "%s\n", str);
+  fprintf( disk_w_get_current_file_descriptor( bucket->disk_out ), "%s\n", str);
   bucket->current_line++;
   if(bucket->current_line == 10) {
-    disk_output_next_file(bucket->disk_out);
+    disk_w_next_file(bucket->disk_out);
     bucket->current_line=0;
     bucket->n_file++;
   }
 }
 
 struct diskReader* bucket_create_disk( struct bucket* bucket ) {
-  fflush(disk_output_get_current_file_descriptor(bucket->disk_out));
+  fflush(disk_w_get_current_file_descriptor(bucket->disk_out));
   return disk_r_create(bucket->dir);
 }
 

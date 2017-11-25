@@ -47,7 +47,7 @@ int main(int argc, char** argv){
     return -1;
   }
 
-  struct disk_output* disk_o= disk_output_create(_dir_rs, _prefix_rs, _ext_rs, _offset_rs);
+  struct diskWriter* disk_o= disk_w_create(_dir_rs, _prefix_rs, _ext_rs, _offset_rs);
 
   struct buffer* buf_r  = buffer_create(_buf_size, _data_lenght, _buffer_type);
   struct buffer* buf_s  = buffer_create(_buf_size, _data_lenght, _buffer_type);
@@ -58,7 +58,7 @@ int main(int argc, char** argv){
   // Si buffer non vide alors vidage dans disk_o
   if(!buffer_isEmpty(buf_rs))
     buffer_write_file_from_descriptor(
-      disk_output_get_current_file_descriptor(disk_o), buf_rs);
+      disk_w_get_current_file_descriptor(disk_o), buf_rs);
 
   printf("Stat Buffer R:\n");
   buffer_fprint_stat(stdout, buf_r);

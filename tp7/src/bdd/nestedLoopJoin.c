@@ -27,14 +27,14 @@ void natural_join(const struct buffer* buf_a, const struct buffer* buf_b, struct
 }
 
 // See header
-void nested_loop_join(const struct buffer* buf_a, const struct buffer* buf_b, struct buffer* buf_out, struct disk_output* overflow_disk) {
+void nested_loop_join(const struct buffer* buf_a, const struct buffer* buf_b, struct buffer* buf_out, struct diskWriter* overflow_disk) {
   for(int a=0; a< buffer_count(buf_a); a++) {
     for(int b=0; b< buffer_count(buf_b); b++) {
       if(buffer_cmp(buf_a, a, buf_b, b) == 0) {
         // Overflow vidage dans overflow_file
         if(buffer_isFull(buf_out) && overflow_disk != NULL) {
-          buffer_write_file_from_descriptor( disk_output_get_current_file_descriptor(overflow_disk), buf_out);
-          disk_output_next_file(overflow_disk);
+          buffer_write_file_from_descriptor( disk_w_get_current_file_descriptor(overflow_disk), buf_out);
+          disk_w_next_file(overflow_disk);
           buffer_flush(buf_out);
         }
         buffer_put_cpy(buf_out, buf_a, a);
@@ -47,7 +47,7 @@ void nested_loop_join(const struct buffer* buf_a, const struct buffer* buf_b, st
 // See header
 void nested_loop_join_disk( const struct diskReader* disk_a, struct buffer* buf_a,
     const struct diskReader* disk_b, struct buffer* buf_b,
-    struct buffer* buf_out, struct disk_output* overflow_disk)
+    struct buffer* buf_out, struct diskWriter* overflow_disk)
 {
   char incr= 1;
   int b=0;
@@ -74,7 +74,7 @@ void nested_loop_join_disk( const struct diskReader* disk_a, struct buffer* buf_
 
 void table_bucket_join(const struct table* tab_a, struct buffer* buf_a,
   const struct table* tab_b, struct buffer* buf_b,
-  struct buffer* buf_out, struct disk_output* overflow_disk) {
+  struct buffer* buf_out, struct diskWriter* overflow_disk) {
 
     if(table_get_n_bucket(tab_a) != table_get_n_bucket(tab_b)) {
       printf("Impossible de faire le table join sur des table n'ayant pas\

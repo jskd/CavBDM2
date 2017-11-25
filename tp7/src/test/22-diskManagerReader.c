@@ -19,7 +19,7 @@ int main(int argc, char** argv){
   struct buffer* buf= buffer_create(_buf_size, _buf_data_lenght, _buf_mode);
 
   for(int index_disk=0; index_disk<disk_manager_r_count(dmr); index_disk++) {
-    struct diskReader* dr= disk_manager_r_get_item(dmr, index_disk);
+    struct diskReader* dr= disk_manager_r_item(dmr, index_disk);
     if(dr != NULL)
     for(int index_block=0; index_block<disk_r_count(dr); index_block++) {
       buffer_read_file_from_descriptor( disk_r_item(dr, index_block),  buf);

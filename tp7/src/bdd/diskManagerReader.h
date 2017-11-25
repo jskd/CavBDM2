@@ -40,7 +40,7 @@ struct diskManagerReader* disk_manager_r_create(const char* name);
  * @param[in] index    index
  * @return    Si NULL alors disk inexistant
  */
-struct diskReader* disk_manager_r_get_item( struct diskManagerReader* dmr, int index);
+struct diskReader* disk_manager_r_item( struct diskManagerReader* dmr, int index);
 
 /**
  * @brief     Retourne le nombre de disk

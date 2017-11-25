@@ -98,7 +98,7 @@ struct diskManagerReader* disk_manager_r_create(const char* path) {
  * @param[in] index    index
  * @return    Si NULL alors disk inexistant
  */
-struct diskReader* disk_manager_r_get_item( struct diskManagerReader* dmr, int index) {
+struct diskReader* disk_manager_r_item( struct diskManagerReader* dmr, int index) {
   if(index >= 0 && index < dmr->dr_count )
     return dmr->dr[index];
   else

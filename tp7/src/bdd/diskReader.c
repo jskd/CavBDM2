@@ -19,7 +19,7 @@
 // Pour DT_REG (standard GNU)
 #define _GNU_SOURCE
 
-#include "disk.h"
+#include "diskReader.h"
 #include <dirent.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,7 +27,7 @@
 #include <string.h>
 
 
-struct disk {
+struct diskReader {
   FILE** v;
   size_t s;
   size_t c;
@@ -45,7 +45,7 @@ static int _count_regular_file(DIR * dirp) {
   return file_count;
 }
 
-static char _store_file_descriptor(struct disk* disk, const char * dir, DIR * dirp) {
+static char _store_file_descriptor(struct diskReader* disk, const char * dir, DIR * dirp) {
   struct dirent * entry;
   FILE** ptr= disk->v;
   char filename[PATH_MAX];
@@ -65,13 +65,13 @@ static char _store_file_descriptor(struct disk* disk, const char * dir, DIR * di
   return 0;
 }
 
-struct disk* disk_create( const char * dir) {
+struct diskReader* disk_r_create( const char * dir) {
 
   DIR* dirp = opendir(dir);
   if(dirp == NULL)
     return NULL;
 
-  struct disk* disk= (struct disk*) malloc(sizeof(struct disk));
+  struct diskReader* disk= (struct diskReader*) malloc(sizeof(struct diskReader));
 
   disk->s=  _count_regular_file(dirp);
   disk->v= (FILE**) malloc( sizeof(FILE*) * disk->s );
@@ -81,31 +81,31 @@ struct disk* disk_create( const char * dir) {
   closedir(dirp);
 
   if(error) {
-    disk_destroy(disk);
+    disk_r_destroy(disk);
     return NULL;
   }
 
   return disk;
 }
 
-size_t disk_count(const struct disk* disk) {
+size_t disk_r_count(const struct diskReader* disk) {
   return disk->c;
 }
 
-FILE* disk_item(const struct disk* disk, int index) {
+FILE* disk_r_item(const struct diskReader* disk, int index) {
   return disk->v[index];
 }
 
-void disk_destroy(struct disk* disk) {
-  for(int i=0; i< disk_count(disk); i++)
-    fclose(disk_item(disk, i));
+void disk_r_destroy(struct diskReader* disk) {
+  for(int i=0; i< disk_r_count(disk); i++)
+    fclose(disk_r_item(disk, i));
   free(disk->v);
   free(disk);
 }
 
-void disk_storeContentInTable(const struct disk* disk, struct buffer* buf, struct table* tab) {
-  for(int index_disk=0; index_disk<disk_count(disk); index_disk++) {
-    buffer_read_file_from_descriptor( disk_item(disk, index_disk),  buf);
+void disk_r_storeContentInTable(const struct diskReader* disk, struct buffer* buf, struct table* tab) {
+  for(int index_disk=0; index_disk<disk_r_count(disk); index_disk++) {
+    buffer_read_file_from_descriptor( disk_r_item(disk, index_disk),  buf);
     table_putBuffer(tab, buf);
   }
 }

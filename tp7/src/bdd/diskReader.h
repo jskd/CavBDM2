@@ -16,28 +16,27 @@
 * Remarques :
 */
 
-#ifndef SRC_BDD_DISK_H
-#define SRC_BDD_DISK_H
+#ifndef SRC_BDD_DISK_READER_H
+#define SRC_BDD_DISK_READER_H
 
-#include <stdio.h>
-#include "bufferExtended.h"
 #include "table.h"
+#include <stdio.h>
 
 /**
  * @brief Structure de donnée repésentant un buffer
  * Remarque: Structure caché! Ne pas initilialiser autrement
  * qu'avec les fonctions prévu à cet effet!
  */
-struct disk;
+struct diskReader;
 
-size_t disk_count(const struct disk* disk);
+size_t disk_r_count(const struct diskReader* disk);
 
-struct disk* disk_create( const char * dir);
+struct diskReader* disk_r_create( const char * dir);
 
-void disk_destroy(struct disk* disk);
+void disk_r_destroy(struct diskReader* disk);
 
-FILE* disk_item(const struct disk* disk, int index);
+FILE* disk_r_item(const struct diskReader* disk, int index);
 
-void disk_storeContentInTable(const struct disk* disk, struct buffer* buf, struct table* tab);
+void disk_r_storeContentInTable(const struct diskReader* disk, struct buffer* buf, struct table* tab);
 
 #endif

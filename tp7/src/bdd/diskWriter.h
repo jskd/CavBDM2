@@ -33,4 +33,6 @@ FILE* disk_w_next_f( struct diskWriter* disk_o);
 
 void disk_w_destroy( struct diskWriter* disk_o );
 
+void disk_w_puts( struct diskWriter* dw, const char* str);
+
 #endif

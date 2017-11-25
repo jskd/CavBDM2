@@ -33,46 +33,54 @@ struct diskWriter {
   char* extension;
   int file_number;
   FILE* current_file;
+  int current_line;
 };
 
 struct diskWriter* disk_w_create(const char* dir, const char* prefix,
   const char* extension)
 {
-  struct diskWriter* disk_o= (struct diskWriter*) malloc(sizeof(struct diskWriter));
-  disk_o->dir= strdup(dir);
-  disk_o->prefix= strdup(prefix);
-  disk_o->extension= strdup(extension);
+  struct diskWriter* dw= (struct diskWriter*) malloc(sizeof(struct diskWriter));
+  dw->dir= strdup(dir);
+  dw->prefix= strdup(prefix);
+  dw->extension= strdup(extension);
 
   rmrf(dir);
   mkdir(dir, 0777);
 
-
   char filename[PATH_MAX];
-  sprintf(filename, "%s/%s%d%s", disk_o->dir, disk_o->prefix, disk_o->file_number, disk_o->extension);
-  disk_o->current_file= fopen(filename, "w+");
-  return disk_o;
+  sprintf(filename, "%s/%s%d%s", dw->dir, dw->prefix, dw->file_number, dw->extension);
+  dw->current_file= fopen(filename, "w+");
+  return dw;
 }
 
-FILE* disk_w_get_current_f( struct diskWriter* disk_o) {
-  return disk_o->current_file;
+FILE* disk_w_get_current_f( struct diskWriter* dw) {
+  return dw->current_file;
 }
 
-FILE* disk_w_next_f( struct diskWriter* disk_o) {
+FILE* disk_w_next_f( struct diskWriter* dw) {
 
-  fclose(disk_o->current_file);
+  fclose(dw->current_file);
 
-  disk_o->file_number++;
+  dw->file_number++;
   char filename[PATH_MAX];
-  sprintf(filename, "%s/%s%d%s", disk_o->dir, disk_o->prefix, disk_o->file_number, disk_o->extension);
-  disk_o->current_file= fopen(filename, "w+");
+  sprintf(filename, "%s/%s%d%s", dw->dir, dw->prefix, dw->file_number, dw->extension);
+  dw->current_file= fopen(filename, "w+");
 
-  return disk_o->current_file;
+  return dw->current_file;
 }
 
+void disk_w_puts( struct diskWriter* dw, const char* str) {
+  if(dw->current_line == 10) {
+    disk_w_next_f(dw);
+    dw->current_line=0;
+  }
+  fprintf( dw->current_file, "%s\n", str);
+  dw->current_line++;
+}
 
-void disk_w_destroy( struct diskWriter* disk_o ) {
-  free(disk_o->dir);
-  free(disk_o->prefix);
-  free(disk_o->extension);
-  free(disk_o);
+void disk_w_destroy( struct diskWriter* dw ) {
+  free(dw->dir);
+  free(dw->prefix);
+  free(dw->extension);
+  free(dw);
 }

@@ -25,81 +25,82 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <string.h>
-
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <dirent.h>
 
 struct diskReader {
-  FILE** v;
-  size_t s;
-  size_t c;
+  FILE** f;
+  size_t f_count;
 };
 
-static int _count_regular_file(DIR * dirp) {
-  rewinddir(dirp); // si utilisé deux fois de suite
-  int file_count = 0;
-  struct dirent * entry;
-  while ((entry = readdir(dirp)) != NULL) {
-    if (entry->d_type == DT_REG) {
-      file_count++;
-    }
+static int _count_file_in_path(const char* path, struct dirent** direntList, int count) {
+  int nb_file=0;
+  for (int index = 0; index < count; index++) {
+    char filename[NAME_MAX];
+    struct stat st;
+    snprintf(filename, sizeof(filename), "%s/%s", path, direntList[index]->d_name);
+    stat(filename, &st);
+    if(st.st_mode & S_IFREG)
+      nb_file++;
   }
-  return file_count;
+  return nb_file;
 }
 
-static char _store_file_descriptor(struct diskReader* disk, const char * dir, DIR * dirp) {
-  struct dirent * entry;
-  FILE** ptr= disk->v;
-  char filename[PATH_MAX];
-  rewinddir(dirp); // si utilisé deux fois de suite
-  while ((entry = readdir(dirp)) != NULL) {
-    if (entry->d_type == DT_REG) {
-      if(disk->c == disk->s) // Overflow
-        return -1;
-      sprintf(filename, "%s/%s", dir, entry->d_name);
-      *ptr= fopen(filename, "r");
-      if(*ptr == NULL) // Open error
-        return -2;
-      ptr++;
-      disk->c++;
+static void _alloc_file(FILE** dr, const char* path, struct dirent** direntList, int count) {
+  int nb_file=0;
+  for (int index = 0; index < count; index++) {
+    char filename[NAME_MAX];
+    struct stat st;
+    snprintf(filename, sizeof(filename), "%s/%s", path, direntList[index]->d_name);
+    stat(filename, &st);
+    if(st.st_mode & S_IFREG) {
+      dr[nb_file]= fopen(filename, "r");
+      nb_file++;
     }
   }
-  return 0;
 }
 
-struct diskReader* disk_r_create( const char * dir) {
+struct diskReader* disk_r_create( const char * path) {
 
-  DIR* dirp = opendir(dir);
-  if(dirp == NULL)
-    return NULL;
+  struct dirent** direntList;
+  int direntCount= scandir(path, &direntList, NULL, alphasort);
 
-  struct diskReader* disk= (struct diskReader*) malloc(sizeof(struct diskReader));
-
-  disk->s=  _count_regular_file(dirp);
-  disk->v= (FILE**) malloc( sizeof(FILE*) * disk->s );
-  disk->c= 0;
-
-  char error= _store_file_descriptor(disk, dir, dirp);
-  closedir(dirp);
-
-  if(error) {
-    disk_r_destroy(disk);
+  if(direntCount < 0) {
     return NULL;
   }
 
-  return disk;
+  struct diskReader* dr= (struct diskReader*) malloc(sizeof(struct diskReader));
+  dr->f_count= _count_file_in_path(path, direntList, direntCount);
+
+  if(dr->f_count == 0) {
+    dr->f = NULL;
+    return dr;
+  }
+
+  dr->f = (FILE**) malloc(dr->f_count * sizeof(FILE*));
+
+  _alloc_file(dr->f, path, direntList, direntCount);
+
+  for (int index = 0; index < direntCount; index++) {
+    free(direntList[index]);
+  }
+
+  return dr;
 }
 
 size_t disk_r_count(const struct diskReader* disk) {
-  return disk->c;
+  return disk->f_count;
 }
 
 FILE* disk_r_item(const struct diskReader* disk, int index) {
-  return disk->v[index];
+  return disk->f[index];
 }
 
 void disk_r_destroy(struct diskReader* disk) {
   for(int i=0; i< disk_r_count(disk); i++)
     fclose(disk_r_item(disk, i));
-  free(disk->v);
+  free(disk->f);
   free(disk);
 }
 

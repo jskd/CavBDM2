@@ -20,7 +20,7 @@
 #define SRC_BDD_NESTEDLOOPJOIN_H
 
 #include "bufferExtended.h"
-#include "disk.h"
+#include "diskReader.h"
 #include "diskOutput.h"
 
 /**
@@ -57,8 +57,8 @@ void nested_loop_join(const struct buffer* buf_a, const struct buffer* buf_b,
  * @param[out] file    fichier de vidage de buf_out si overflow
  *                     (autorisation d'ecriture necessaire)
  */
-void nested_loop_join_disk( const struct disk* disk_a, struct buffer* buf_a,
-  const struct disk* disk_b, struct buffer* buf_b, struct buffer* buf_out,
+void nested_loop_join_disk( const struct diskReader* disk_a, struct buffer* buf_a,
+  const struct diskReader* disk_b, struct buffer* buf_b, struct buffer* buf_out,
   struct disk_output* overflow_disk);
 
 /**

@@ -17,7 +17,7 @@
 */
 
 #include "../bdd/bufferExtended.h"
-#include "../bdd/disk.h"
+#include "../bdd/diskReader.h"
 #include "../bdd/nestedLoopJoin.h"
 
 
@@ -27,13 +27,13 @@ static const size_t _out_size= 270;
 
 int main(int argc, char** argv){
 
-  struct disk* disk_r= disk_create("res/test/disk/R");
+  struct diskReader* disk_r= disk_r_create("res/test/disk/R");
   if(disk_r == NULL) {
     printf("Erreur lors de la lecture de res/disk/R.\n");
     return -1;
   }
 
-  struct disk* disk_s= disk_create("res/test/disk/S");
+  struct diskReader* disk_s= disk_r_create("res/test/disk/S");
   if(disk_s == NULL) {
     printf("Erreur lors de la lecture de res/disk/S.\n");
     return -1;
@@ -50,6 +50,6 @@ int main(int argc, char** argv){
   buffer_destroy(buf_r);
   buffer_destroy(buf_s);
   buffer_destroy(buf_out);
-  disk_destroy(disk_r);
-  disk_destroy(disk_s);
+  disk_r_destroy(disk_r);
+  disk_r_destroy(disk_s);
 }

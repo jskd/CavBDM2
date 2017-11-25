@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "diskOutput.h"
-#include "disk.h"
+#include "diskReader.h"
 #include <string.h>
 
 struct bucket {
@@ -48,9 +48,9 @@ void bucket_puts( struct bucket* bucket, const char* str) {
   }
 }
 
-struct disk* bucket_create_disk( struct bucket* bucket ) {
+struct diskReader* bucket_create_disk( struct bucket* bucket ) {
   fflush(disk_output_get_current_file_descriptor(bucket->disk_out));
-  return disk_create(bucket->dir);
+  return disk_r_create(bucket->dir);
 }
 
 int bucket_get_n_file(struct bucket* bucket ) {

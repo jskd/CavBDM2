@@ -75,7 +75,7 @@ void table_putBuffer(struct table* tab, const struct buffer* buf) {
   }
 }
 
-struct disk* create_disk_from_bucket(const struct table* tab, int indexBucket) {
+struct diskReader* create_disk_from_bucket(const struct table* tab, int indexBucket) {
   return bucket_create_disk(tab->b[indexBucket]);
 }
 

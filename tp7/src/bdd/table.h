@@ -35,5 +35,5 @@ size_t table_get_n_bucket(const struct table* tab);
 int table_get_write_stat(const struct table* tab);
 void table_fprint_stat(FILE* stream, const struct table* tab);
 
-struct disk* create_disk_from_bucket(const struct table* tab, int indexBucket) ;
+struct diskReader* create_disk_from_bucket(const struct table* tab, int indexBucket) ;
 #endif

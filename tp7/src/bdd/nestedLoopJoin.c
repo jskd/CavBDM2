@@ -18,7 +18,7 @@
 #include "nestedLoopJoin.h"
 #include "bufferExtended.h"
 #include "table.h"
-#include "disk.h"
+#include "diskReader.h"
 #include "diskOutput.h"
 
 // See header
@@ -45,23 +45,23 @@ void nested_loop_join(const struct buffer* buf_a, const struct buffer* buf_b, st
 }
 
 // See header
-void nested_loop_join_disk( const struct disk* disk_a, struct buffer* buf_a,
-    const struct disk* disk_b, struct buffer* buf_b,
+void nested_loop_join_disk( const struct diskReader* disk_a, struct buffer* buf_a,
+    const struct diskReader* disk_b, struct buffer* buf_b,
     struct buffer* buf_out, struct disk_output* overflow_disk)
 {
   char incr= 1;
   int b=0;
   int skip_reading=0;
 
-  for(int a=0; a<disk_count(disk_a); a++) {
-    buffer_read_file_from_descriptor( disk_item(disk_a, a),  buf_a);
+  for(int a=0; a<disk_r_count(disk_a); a++) {
+    buffer_read_file_from_descriptor( disk_r_item(disk_a, a),  buf_a);
     // Lecture en va-et-vient de disk b
-    while( b < disk_count(disk_b) && b > -1 ) {
+    while( b < disk_r_count(disk_b) && b > -1 ) {
       // Saut de lecture si le contenu est déjà dans le buffer
       if(skip_reading)
         skip_reading= 0;
       else
-        buffer_read_file_from_descriptor( disk_item(disk_b, b),  buf_b);
+        buffer_read_file_from_descriptor( disk_r_item(disk_b, b),  buf_b);
 
       nested_loop_join(buf_a, buf_b, buf_out, overflow_disk);
       b+= incr;
@@ -84,12 +84,12 @@ void table_bucket_join(const struct table* tab_a, struct buffer* buf_a,
 
     for(int bucket_index=0; bucket_index< table_get_n_bucket(tab_a); bucket_index++) {
 
-       struct disk* disk_a= create_disk_from_bucket(tab_a, bucket_index);
-       struct disk* disk_b= create_disk_from_bucket(tab_b, bucket_index);
+       struct diskReader* disk_a= create_disk_from_bucket(tab_a, bucket_index);
+       struct diskReader* disk_b= create_disk_from_bucket(tab_b, bucket_index);
 
        nested_loop_join_disk( disk_a, buf_a, disk_b, buf_b, buf_out, overflow_disk);
 
-       disk_destroy(disk_a);
-       disk_destroy(disk_b);
+       disk_r_destroy(disk_a);
+       disk_r_destroy(disk_b);
     }
 }

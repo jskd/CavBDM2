@@ -35,13 +35,13 @@ static const int   _offset_rs= 0;
 
 int main(int argc, char** argv){
 
-  struct disk* disk_r= disk_create(_file_r);
+  struct diskReader* disk_r= disk_r_create(_file_r);
   if(disk_r == NULL) {
     printf("Erreur lors de la lecture de %s.\n", _file_r);
     return -1;
   }
 
-  struct disk* disk_s= disk_create(_file_s);
+  struct diskReader* disk_s= disk_r_create(_file_s);
   if(disk_s == NULL) {
     printf("Erreur lors de la lecture de %s.\n", _file_s);
     return -1;
@@ -73,8 +73,8 @@ int main(int argc, char** argv){
   buffer_destroy(buf_r);
   buffer_destroy(buf_s);
   buffer_destroy(buf_rs);
-  disk_destroy(disk_r);
-  disk_destroy(disk_s);
+  disk_r_destroy(disk_r);
+  disk_r_destroy(disk_s);
 
   return 0;
 }

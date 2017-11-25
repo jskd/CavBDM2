@@ -19,9 +19,11 @@
 #ifndef SRC_BDD_DISK_MANAGER_READER_H
 #define SRC_BDD_DISK_MANAGER_READER_H
 
+#include "diskReader.h"
 #include <stdio.h>
 #include <stdlib.h>
 
+/// Struct hiding members
 struct diskManagerReader;
 
 /**

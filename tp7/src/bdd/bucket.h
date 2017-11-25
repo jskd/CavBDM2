@@ -26,7 +26,7 @@ struct bucket* bucket_create(const char* filename);
 
 void bucket_puts( struct bucket* bucket, const char* str);
 
-struct disk* bucket_create_disk( struct bucket* bucket );
+struct diskReader* bucket_create_disk( struct bucket* bucket );
 
 int bucket_get_n_file(struct bucket* bucket );
 

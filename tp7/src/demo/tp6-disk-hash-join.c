@@ -18,7 +18,7 @@
 
 #include "../bdd/bufferExtended.h"
 #include "../bdd/table.h"
-#include "../bdd/disk.h"
+#include "../bdd/diskReader.h"
 #include "../bdd/nestedLoopJoin.h"
 
 // Buffer config
@@ -43,13 +43,13 @@ static const int   _offset_rs= 0;
 
 int main(int argc, char** argv){
 
-  struct disk* disk_r= disk_create(_file_r);
+  struct diskReader* disk_r= disk_r_create(_file_r);
   if(disk_r == NULL) {
     printf("Erreur lors de la lecture de %s.\n", _file_r);
     return -1;
   }
 
-  struct disk* disk_s= disk_create(_file_s);
+  struct diskReader* disk_s= disk_r_create(_file_s);
   if(disk_s == NULL) {
     printf("Erreur lors de la lecture de %s.\n", _file_s);
     return -1;
@@ -62,8 +62,8 @@ int main(int argc, char** argv){
   struct buffer* buf_s  = buffer_create(_buf_size, _data_lenght, _buffer_type);
   struct buffer* buf_rs = buffer_create(_buf_size, _data_lenght, _buffer_type);
 
-  disk_storeContentInTable(disk_s, buf_s, tab_s);
-  disk_storeContentInTable(disk_r, buf_r, tab_r);
+  disk_r_storeContentInTable(disk_s, buf_s, tab_s);
+  disk_r_storeContentInTable(disk_r, buf_r, tab_r);
 
   printf("Creation de la table\n");
   printf("Buffer R:\n");
@@ -108,8 +108,8 @@ int main(int argc, char** argv){
   buffer_destroy(buf_s);
   buffer_destroy(buf_rs);
 
-  disk_destroy(disk_r);
-  disk_destroy(disk_s);
+  disk_r_destroy(disk_r);
+  disk_r_destroy(disk_s);
 
   table_destroy(tab_r);
   table_destroy(tab_s);

@@ -30,14 +30,6 @@ struct diskManagerReader {
   size_t dr_count;
 };
 
-// Filtre pour les disk uniquement
-int _disk_filter(const struct dirent *entry){
-    struct stat st;
-    stat(entry->d_name, &st);
-    if(S_ISDIR(st.st_mode) && strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, ".."))
-        return 1;
-    return 0;
-}
 
 /**
  * @brief     Retourne le diskReader à l'index correspondant
@@ -45,32 +37,55 @@ int _disk_filter(const struct dirent *entry){
  * @param[in] index    index
  * @return    Si NULL alors disk inexistant
  */
-struct diskManagerReader* disk_manager_r_create(const char* name) {
+struct diskManagerReader* disk_manager_r_create(const char* path) {
 
-  struct dirent** diskNameList;
-  int diskNameCount;
+  struct dirent** nameList;
+  int nameCount= scandir(path, &nameList, NULL, alphasort);
 
-  diskNameCount = scandir(name, &diskNameList, _disk_filter, alphasort);
-
-  if (diskNameCount < 0) {
+  if(nameCount < 0) {
     return NULL;
   }
 
-  struct diskManagerReader* dmr= (struct diskManagerReader*) malloc(sizeof(struct diskManagerReader));
-  dmr->dr_count = diskNameCount;
 
-  if(diskNameCount == 0) {
+  struct diskManagerReader* dmr= (struct diskManagerReader*) malloc(sizeof(struct diskManagerReader));
+
+
+  dmr->dr_count=0;
+  for (int indexName = 0; indexName < nameCount; indexName++) {
+    char filename[NAME_MAX];
+    struct stat st;
+
+    snprintf(filename, sizeof(filename), "%s/%s", path, nameList[indexName]->d_name);
+    stat(filename, &st);
+
+    if(strcmp( nameList[indexName]->d_name, ".") != 0 && strcmp( nameList[indexName]->d_name, "..") && st.st_mode & S_IFDIR)
+      dmr->dr_count++;
+  }
+
+
+  if(dmr->dr_count == 0) {
     dmr->dr = NULL;
     return dmr;
   }
 
   dmr->dr = (struct diskReader**) malloc(dmr->dr_count * sizeof(struct diskReader*));
+  int index_dr=0;
+  for (int indexName = 0; indexName < nameCount; indexName++) {
+    char filename[NAME_MAX];
+    struct stat st;
 
-  for (int indexName = 0; indexName < diskNameCount; indexName++) {
-    dmr->dr[indexName] = disk_r_create(diskNameList[indexName]->d_name);
-    free(diskNameList[indexName]);
+    snprintf(filename, sizeof(filename), "%s/%s", path, nameList[indexName]->d_name);
+    stat(filename, &st);
+
+    if(strcmp( nameList[indexName]->d_name, ".") != 0 && strcmp( nameList[indexName]->d_name, "..") && st.st_mode & S_IFDIR) {
+      dmr->dr[index_dr]= disk_r_create(filename);
+      index_dr++;
+    }
+    free(nameList[indexName]);
   }
-  free(diskNameList);
+
+
+  free(nameList);
 
   return dmr;
 }

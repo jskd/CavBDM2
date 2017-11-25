@@ -30,6 +30,32 @@ struct diskManagerReader {
   size_t dr_count;
 };
 
+static int _count_dir_in_path(const char* path, struct dirent** direntList, int count) {
+  int nb_dir=0;
+  for (int index = 0; index < count; index++) {
+    char filename[NAME_MAX];
+    struct stat st;
+    snprintf(filename, sizeof(filename), "%s/%s", path, direntList[index]->d_name);
+    stat(filename, &st);
+    if(strcmp(direntList[index]->d_name, ".") != 0 && strcmp( direntList[index]->d_name, "..") && st.st_mode & S_IFDIR)
+      nb_dir++;
+  }
+  return nb_dir;
+}
+
+static void _alloc_disk_reader(struct diskReader** dr, const char* path, struct dirent** direntList, int count) {
+  int nb_dir=0;
+  for (int index = 0; index < count; index++) {
+    char filename[NAME_MAX];
+    struct stat st;
+    snprintf(filename, sizeof(filename), "%s/%s", path, direntList[index]->d_name);
+    stat(filename, &st);
+    if(strcmp(direntList[index]->d_name, ".") != 0 && strcmp( direntList[index]->d_name, "..") && st.st_mode & S_IFDIR) {
+      dr[nb_dir]= disk_r_create(filename);
+      nb_dir++;
+    }
+  }
+}
 
 /**
  * @brief     Retourne le diskReader à l'index correspondant
@@ -39,29 +65,16 @@ struct diskManagerReader {
  */
 struct diskManagerReader* disk_manager_r_create(const char* path) {
 
-  struct dirent** nameList;
-  int nameCount= scandir(path, &nameList, NULL, alphasort);
+  struct dirent** direntList;
+  int direntCount= scandir(path, &direntList, NULL, alphasort);
 
-  if(nameCount < 0) {
+  if(direntCount < 0) {
     return NULL;
   }
 
-
   struct diskManagerReader* dmr= (struct diskManagerReader*) malloc(sizeof(struct diskManagerReader));
 
-
-  dmr->dr_count=0;
-  for (int indexName = 0; indexName < nameCount; indexName++) {
-    char filename[NAME_MAX];
-    struct stat st;
-
-    snprintf(filename, sizeof(filename), "%s/%s", path, nameList[indexName]->d_name);
-    stat(filename, &st);
-
-    if(strcmp( nameList[indexName]->d_name, ".") != 0 && strcmp( nameList[indexName]->d_name, "..") && st.st_mode & S_IFDIR)
-      dmr->dr_count++;
-  }
-
+  dmr->dr_count= _count_dir_in_path(path, direntList, direntCount);
 
   if(dmr->dr_count == 0) {
     dmr->dr = NULL;
@@ -69,23 +82,12 @@ struct diskManagerReader* disk_manager_r_create(const char* path) {
   }
 
   dmr->dr = (struct diskReader**) malloc(dmr->dr_count * sizeof(struct diskReader*));
-  int index_dr=0;
-  for (int indexName = 0; indexName < nameCount; indexName++) {
-    char filename[NAME_MAX];
-    struct stat st;
 
-    snprintf(filename, sizeof(filename), "%s/%s", path, nameList[indexName]->d_name);
-    stat(filename, &st);
+  _alloc_disk_reader(dmr->dr, path,direntList, direntCount);
 
-    if(strcmp( nameList[indexName]->d_name, ".") != 0 && strcmp( nameList[indexName]->d_name, "..") && st.st_mode & S_IFDIR) {
-      dmr->dr[index_dr]= disk_r_create(filename);
-      index_dr++;
-    }
-    free(nameList[indexName]);
+  for (int index = 0; index < direntCount; index++) {
+    free(direntList[index]);
   }
-
-
-  free(nameList);
 
   return dmr;
 }

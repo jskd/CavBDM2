@@ -44,14 +44,11 @@ struct diskWriter* disk_w_create(const char* dir, const char* prefix,
   dw->prefix= strdup(prefix);
   dw->extension= strdup(extension);
   dw->file_number= 0;
+  dw->current_file= NULL;
 
   rmrf(dir);
   mkdir(dir, 0777);
 
-  char filename[PATH_MAX];
-  sprintf(filename, "%s/%s%d%s", dw->dir, dw->prefix, dw->file_number, dw->extension);
-  dw->current_file= fopen(filename, "w+");
-  dw->file_number++;
 
   return dw;
 }
@@ -60,25 +57,19 @@ FILE* disk_w_get_current_f( struct diskWriter* dw) {
   return dw->current_file;
 }
 
-FILE* disk_w_next_f( struct diskWriter* dw) {
+void disk_w_new_f( struct diskWriter* dw) {
 
-  fclose(dw->current_file);
+  if(dw->file_number > 0)
+    fclose(dw->current_file);
 
   char filename[PATH_MAX];
   sprintf(filename, "%s/%s%d%s", dw->dir, dw->prefix, dw->file_number, dw->extension);
   dw->current_file= fopen(filename, "w+");
   dw->file_number++;
-
-  return dw->current_file;
 }
 
-void disk_w_puts( struct diskWriter* dw, const char* str) {
-  if(dw->current_line == 10) {
-    disk_w_next_f(dw);
-    dw->current_line=0;
-  }
-  fprintf( dw->current_file, "%s\n", str);
-  dw->current_line++;
+int disk_w_count(struct diskWriter* dw) {
+  return dw->file_number;
 }
 
 void disk_w_destroy( struct diskWriter* dw ) {

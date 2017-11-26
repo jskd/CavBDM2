@@ -34,13 +34,13 @@ struct bucket* bucket_create(const char* dir, int indexBucket) {
   bucket->dir= strdup(dir);
   bucket->disk_out= disk_w_create(dir, "", ".txt");
   bucket->current_line= 0;
-  bucket->n_file= 1;
+  bucket->n_file= 0;
   return bucket;
 }
 
 void bucket_puts( struct bucket* bucket, const char* str) {
-  if(bucket->current_line == 10) {
-    disk_w_next_f(bucket->disk_out);
+  if(bucket->current_line == 10 || bucket->n_file == 0) {
+    disk_w_new_f(bucket->disk_out);
     bucket->n_file++;
     bucket->current_line=0;
   }

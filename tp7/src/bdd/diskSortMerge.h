@@ -23,11 +23,10 @@
 #include "buffer.h"
 #include "diskManagerWriter.h"
 #include "diskManagerReader.h"
+#include "diskWriter.h"
+#include "diskReader.h"
 
 
-
-void disk_explode_and_sort_to_disk_manager(struct diskReader* dr, struct buffer* buf, struct diskManagerWriter* dmw);
-
-void disk_manager_merge_step(struct DiskManagerReader in, struct diskManagerWriter* out);
+void disk_sort_merge(struct diskReader* dr, struct buffer*buf_a, struct buffer*buf_b, struct buffer*buf_out, const char* path_output);
 
 #endif

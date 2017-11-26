@@ -25,13 +25,7 @@ static const int _buffer_type= BUFFER_DECIMALS;
 
 // input disk config
 static const char* _file_r= "res/demo/tp7/R";
-
-// output disk config
-static const char* _dir_sort_dst= "res/demo/tp7/R-Run0";
-static const char* _dir_sort_prefix= "block";
-static const char* _dir_sort_suffixe= "";
-static const char* _file_prefixe= "R";
-static const char* _file_suffixe= ".txt";
+static const char* _path_output="res/demo/tp7/R-sort";
 
 
 int main(int argc, char** argv){
@@ -42,15 +36,14 @@ int main(int argc, char** argv){
     return -1;
   }
 
-  struct diskWriterManger* dmw= disk_manager_w_create(_dir_sort_dst, _dir_sort_prefix, _dir_sort_suffixe, _file_prefixe, _file_suffixe);
-
 
   struct buffer* buf_a  = buffer_create(_buf_size, _data_lenght, _buffer_type);
   struct buffer* buf_b  = buffer_create(_buf_size, _data_lenght, _buffer_type);
   struct buffer* buf_out= buffer_create(_buf_size, _data_lenght, _buffer_type);
 
 
-  disk_explode_and_sort_to_disk_manager(dr, buf_a, dmw);
+disk_sort_merge(dr, buf_a, buf_b,  buf_out, _path_output);
+
 
 
   return 0;

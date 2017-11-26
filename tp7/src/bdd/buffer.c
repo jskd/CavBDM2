@@ -212,6 +212,7 @@ void buffer_write_file_from_descriptor(FILE* file, struct buffer* buf) {
       buf->write_counter++;
   }
   buf->wfile_counter++;
+  fflush(file);
 }
 
 /**
@@ -222,7 +223,7 @@ void buffer_quicksort(struct buffer* buf) {
   if(buf->data_size == 1)
     char_quicksort(buf->v, 0, (buf->c) -1);
   else if(buf->data_size == 2)
-    short_quicksort(buf->v, 0, (buf->c) -1);
+    short_quicksort( (short *) buf->v, 0, (buf->c) -1);
   else
     printf ("Quicksort not implemented for buffer type.\n");
 }
@@ -254,8 +255,13 @@ size_t buffer_size(const struct buffer* buf)
   return buf->s;
 }
 int buffer_cmp(const struct buffer* buf_a, int index_a, const struct buffer* buf_b, int index_b) {
-  return memcmp( _buffer_val_offset(buf_a, index_a),
-     _buffer_val_offset(buf_b, index_b), buf_a->data_size);
+  if(buf_a->data_size == 2 && buf_a->mode == BUFFER_DECIMALS)
+    return
+      *(short*)_buffer_val_offset(buf_a, index_a) == *(short*)_buffer_val_offset(buf_b, index_b)
+        ? 0 : ( *(short*)_buffer_val_offset(buf_a, index_a) < *(short*)_buffer_val_offset(buf_b, index_b)
+        ? -1 : 1);
+  else
+    return memcmp( _buffer_val_offset(buf_a, index_a), _buffer_val_offset(buf_b, index_b), buf_a->data_size);
 }
 
 char buffer_isFull(const struct buffer* buf) {

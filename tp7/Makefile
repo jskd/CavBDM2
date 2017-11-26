@@ -151,5 +151,8 @@ gen-tp5:
 gen-tp6:
 	python3 ./script/file-generation-tp6.py
 
+gen-tp7:
+	python3 ./script/file-generation-tp7.py
+
 zip: clean
 	zip -r ${name}TP${n}.zip Makefile README.md doc/ rapport/ rapport.pdf refman.pdf res/ script/ src/ sujet.pdf

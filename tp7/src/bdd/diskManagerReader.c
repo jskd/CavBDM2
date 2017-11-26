@@ -127,6 +127,7 @@ void disk_manager_r_destroy( struct diskManagerReader* dmr) {
 
 void disk_manager_r_dump( FILE* f,  struct diskManagerReader* dmr) {
   for(int index=0; index < dmr->dr_count; index++) {
+    fprintf(f,"disk %d:\n", index);
     disk_r_dump(f, dmr->dr[index]);
   }
 }

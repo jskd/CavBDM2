@@ -17,6 +17,7 @@ static const char* _file_suffixe= ".txt";
 static void _make_folder_step(const char* path_output) {
   char dirname[PATH_MAX];
   sprintf(dirname, "%s-%s", path_output, _folder_step);
+  rmrf(dirname);
   mkdir(dirname, 0777);
 }
 
@@ -26,7 +27,7 @@ static void _make_output_dir(const char* path_output) {
 }
 
 static void _sprint_pathname_step(const char* path_step, int step, char* output) {
-  sprintf(output, "%s-%s/%s%d", path_step, _folder_step, _step_prefix, step);
+  sprintf(output, "%s-%s/%s%03d", path_step, _folder_step, _step_prefix, step);
 }
 
 static struct diskManagerWriter* _create_step_dmw(const char* path_output, int step) {
@@ -44,15 +45,13 @@ static struct diskManagerReader* _create_step_dmr(const char* path_output, int s
 
 static void _disk_manager_r_dump_step(struct diskManagerReader* dmr, const char* path_step, int step) {
   char dirname[PATH_MAX];
-  sprintf(dirname, "%s-%s/%s%d/dump.txt", path_step, _folder_step, _step_prefix, step);
+  sprintf(dirname, "%s-%s/%s%03d/dump.txt", path_step, _folder_step, _step_prefix, step);
   printf("%s\n", dirname);
   FILE* outfile= fopen(dirname, "w+");
   disk_manager_r_dump(outfile, dmr);
 }
 
-
-
-void disk_explode_and_sort_to_disk_manager(struct diskReader* dr, struct buffer* buf, struct diskManagerWriter* dmw) {
+static void _disk_explode_and_sort_to_disk_manager(struct diskReader* dr, struct buffer* buf, struct diskManagerWriter* dmw) {
   for(int index=0; index < disk_r_count(dr); index++) {
       buffer_read_file_from_descriptor(disk_r_item(dr, index), buf);
       buffer_quicksort(buf);
@@ -63,28 +62,8 @@ void disk_explode_and_sort_to_disk_manager(struct diskReader* dr, struct buffer*
   }
 }
 
-
-#define IF_BUFFER_A_ENTIRELY_READ_LOAD_NEXT_FILE \
-  if(index_buf_a >= buffer_count(buf_a)) { \
-    buffer_read_file_from_descriptor(disk_r_item(dr_a, index_dr_a), buf_a); \
-    index_buf_a= 0; \
-  } \
-
-#define IF_BUFFER_B_ENTIRELY_READ_LOAD_NEXT_FILE \
-  if(index_buf_b >= buffer_count(buf_b)) { \
-    buffer_read_file_from_descriptor(disk_r_item(dr_b, index_dr_b), buf_b); \
-    index_buf_b= 0; \
-  } \
-
-static void _if_buffer_is_full_flush_buffer_in_disk(struct buffer* buf_out, struct diskWriter* disk_output) {
-  if(buffer_isFull(buf_out)) {
-    disk_w_new_f(disk_output);
-    buffer_write_file_from_descriptor( disk_w_get_current_f(disk_output), buf_out);
-    buffer_flush(buf_out);
-  }
-}
-
-void disk_merge(struct diskReader* dr_a, struct diskReader* dr_b,
+// Fait un merge de deux disk
+static void _disk_merge(struct diskReader* dr_a, struct diskReader* dr_b,
   struct buffer* buf_a, struct buffer* buf_b, struct buffer* buf_out,
   struct diskWriter* disk_output) {
 
@@ -97,106 +76,100 @@ void disk_merge(struct diskReader* dr_a, struct diskReader* dr_b,
   buffer_flush(buf_b);
   buffer_flush(buf_out);
 
-  // Si y a des elment dans les deux disque
-  if(disk_r_count(dr_a) > 0 && disk_r_count(dr_b) > 0)
-  {
+  if(index_dr_a < disk_r_count(dr_a))
     buffer_read_file_from_descriptor(disk_r_item(dr_a, index_dr_a), buf_a);
+
+  if(index_dr_b < disk_r_count(dr_b))
     buffer_read_file_from_descriptor(disk_r_item(dr_b, index_dr_b), buf_b);
 
-    // Comparaison s'il y a des elements dans les deux listes
-    while(index_dr_a < disk_r_count(dr_a) && index_dr_b < disk_r_count(dr_b))
-    {
-
-      IF_BUFFER_A_ENTIRELY_READ_LOAD_NEXT_FILE
-      IF_BUFFER_B_ENTIRELY_READ_LOAD_NEXT_FILE
-
-      // Merge buffer (comparaison et sauvergade dans buffer_out)
-      while( index_buf_a < buffer_count(buf_a) && index_buf_b < buffer_count(buf_b))
-      {
-
-        if( buffer_cmp(buf_a, index_buf_a, buf_b, index_buf_b) < 0) {
-          buffer_put_cpy(buf_out, buf_a, index_buf_a);
-          index_buf_a++;
-        } else {
-          buffer_put_cpy(buf_out, buf_b, index_buf_b);
-          index_buf_b++;
-        }
-        _if_buffer_is_full_flush_buffer_in_disk(buf_out, disk_output);
-      }
-
-      if(index_buf_a >= buffer_count(buf_a))
-        index_dr_a++;
-
-      if(index_buf_b >= buffer_count(buf_b))
-        index_dr_b++;
-    }
-  }
-
-  // Vidage du disk_a s'il reste des elements
-  while(index_dr_a < disk_r_count(dr_a))
+  // Tant que l'on a pas parcourut tout les disque enntiérement
+  while( index_dr_b < disk_r_count(dr_b) || index_dr_a < disk_r_count(dr_a))
   {
-    IF_BUFFER_A_ENTIRELY_READ_LOAD_NEXT_FILE
 
-    while(index_buf_a < buffer_count(buf_a) ) {
+    // Les deux disque ne sont pas entiérement parcourut
+    if( index_dr_a < disk_r_count(dr_a) && index_dr_b < disk_r_count(dr_b))
+    {
+      if( buffer_cmp(buf_a, index_buf_a, buf_b, index_buf_b) < 0) {
+        buffer_put_cpy(buf_out, buf_a, index_buf_a);
+        index_buf_a++;
+      } else {
+        buffer_put_cpy(buf_out, buf_b, index_buf_b);
+        index_buf_b++;
+      }
+    }
+    // Il reste des element non parcourut dans disque a
+    else if( index_dr_a < disk_r_count(dr_a))
+    {
       buffer_put_cpy(buf_out, buf_a, index_buf_a);
       index_buf_a++;
-      _if_buffer_is_full_flush_buffer_in_disk(buf_out, disk_output);
     }
-
-    index_dr_a++;
-  }
-
-  // Vidage du disk_b s'il reste des elements
-  while( index_dr_b < disk_r_count(dr_b) )
-  {
-    IF_BUFFER_B_ENTIRELY_READ_LOAD_NEXT_FILE
-
-    while(index_buf_b < buffer_count(buf_b) ) {
+    // Il reste des element non parcourut dans disque b
+    else if( index_dr_b < disk_r_count(dr_b))
+    {
       buffer_put_cpy(buf_out, buf_b, index_buf_b);
       index_buf_b++;
-      _if_buffer_is_full_flush_buffer_in_disk(buf_out, disk_output);
     }
-    index_dr_b++;
+
+    // Le buffer a à été entirément parcout on charge le prochain bloque
+    if(index_buf_a >= buffer_count(buf_a)) {
+      index_dr_a++;
+      if(index_dr_a < disk_r_count(dr_a)) {
+        buffer_read_file_from_descriptor(disk_r_item(dr_a, index_dr_a), buf_a);
+        index_buf_a= 0;
+      }
+    }
+
+    // Le buffer b à été entirément parcout on charge le prochain bloque
+    if(index_buf_b >= buffer_count(buf_b)) {
+      index_dr_b++;
+      if(index_dr_b < disk_r_count(dr_b)) {
+        buffer_read_file_from_descriptor(disk_r_item(dr_b, index_dr_b), buf_b);
+        index_buf_b= 0;
+      }
+    }
+
+    // Si le buffer d'ecriture est plein, on le vide dans un bloque
+    if(buffer_isFull(buf_out)) {
+      disk_w_new_f(disk_output);
+      buffer_write_file_from_descriptor( disk_w_get_current_f(disk_output), buf_out);
+      buffer_flush(buf_out);
+    }
   }
 
-  // S'il reste des element dans le buffer de sortie
+  // s'il reste des elements dans le buffer de sortie
   if(!buffer_isEmpty(buf_out)) {
     disk_w_new_f(disk_output);
     buffer_write_file_from_descriptor( disk_w_get_current_f(disk_output), buf_out);
     buffer_flush(buf_out);
   }
-
 }
 
-
-void disk_manager_merge_step(struct diskManagerReader* dmr, struct diskManagerWriter* dmw,
+// Fait une step de merge
+static void _disk_manager_merge_step(struct diskManagerReader* dmr, struct diskManagerWriter* dmw,
   struct buffer*buf_a, struct buffer*buf_b, struct buffer*buf_out) {
 
-  char block_impaire= disk_manager_r_count(dmr)%2;
+  int index=0;
 
-  int index_a=0;
-  int index_b=  disk_manager_r_count(dmr)- (block_impaire? 2 : 1 );
+  // Merge deux par deux (parralelisable)
+  while( index+1 < disk_manager_r_count(dmr)) {
 
-  // Merge les premier avec les derniers
-  while( index_a < index_b) {
-
-    if(index_a > 0)
+    if(index > 0)
       disk_manager_w_next_dw(dmw);
 
-    struct diskReader* disk_a= disk_manager_r_item(dmr, index_a);
-    struct diskReader* disk_b= disk_manager_r_item(dmr, index_b);
+    struct diskReader* disk_a= disk_manager_r_item(dmr, index);
+    struct diskReader* disk_b= disk_manager_r_item(dmr, index+1);
     struct diskWriter* disk_output= disk_manager_w_get_current_dw(dmw);
 
-    disk_merge(disk_a, disk_b, buf_a, buf_b, buf_out, disk_output);
+    _disk_merge(disk_a, disk_b, buf_a, buf_b, buf_out, disk_output);
 
-    index_a++;
-    index_b--;
+    index+=2;
   }
 
-  if(block_impaire) {
-    struct diskReader* disk= disk_manager_r_item(dmr, disk_manager_r_count(dmr)-1);
-    disk_manager_w_next_dw(dmw);
-    buffer_flush(buf_out);
+  // S'il reste un bloque
+  if(index < disk_manager_r_count(dmr)) {
+    struct diskReader* disk= disk_manager_r_item(dmr, index);
+    if(index > 0)
+      disk_manager_w_next_dw(dmw);
     disk_w_copy(disk, disk_manager_w_get_current_dw(dmw), buf_out);
   }
 
@@ -216,25 +189,23 @@ void disk_sort_merge(struct diskReader* dr, struct buffer*buf_a, struct buffer*b
 
   dmw= _create_step_dmw(path_output, step);
 
-  disk_explode_and_sort_to_disk_manager(dr, buf_a, dmw);
+  _disk_explode_and_sort_to_disk_manager(dr, buf_a, dmw);
 
   step++;
-
 
   nb_block= disk_manager_w_count(dmw);
 
   disk_manager_w_destroy(dmw);
 
-
-  while(nb_block > 1) {
-
+  while(nb_block > 2)
+  {
     dmr= _create_step_dmr(path_output, step-1);
 
     _disk_manager_r_dump_step(dmr, path_output, step-1);
 
     dmw= _create_step_dmw(path_output, step);
 
-    disk_manager_merge_step(dmr, dmw, buf_a, buf_b, buf_out);
+    _disk_manager_merge_step(dmr, dmw, buf_a, buf_b, buf_out);
 
     nb_block= disk_manager_w_count(dmw);
 
@@ -244,8 +215,26 @@ void disk_sort_merge(struct diskReader* dr, struct buffer*buf_a, struct buffer*b
     step++;
   }
 
+  // Dernier step dans l'ouput dir cette fois
+  if(nb_block == 2)
+  {
+    dmr= _create_step_dmr(path_output, step-1);
 
-  dmr= _create_step_dmr(path_output, step-1);
-  _disk_manager_r_dump_step(dmr, path_output, step-1);
-  disk_manager_r_destroy(dmr);
+    _disk_manager_r_dump_step(dmr, path_output, step-1);
+
+    struct diskReader* disk_a= disk_manager_r_item(dmr, 0);
+    struct diskReader* disk_b= disk_manager_r_item(dmr, 1);
+    struct diskWriter* disk_output= disk_w_create(path_output, _file_prefixe, _file_suffixe);
+
+    _disk_merge(disk_a, disk_b, buf_a, buf_b, buf_out, disk_output);
+
+    struct diskReader* disk_output_r= disk_r_create(path_output);
+
+    char dirname[PATH_MAX];
+    sprintf(dirname, "%s-dump.txt", path_output);
+
+    FILE* f_dump= fopen(dirname ,"w+");
+    disk_r_dump( f_dump,  disk_output_r);
+    fclose(f_dump);
+  }
 }

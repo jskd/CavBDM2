@@ -255,11 +255,27 @@ size_t buffer_size(const struct buffer* buf)
   return buf->s;
 }
 int buffer_cmp(const struct buffer* buf_a, int index_a, const struct buffer* buf_b, int index_b) {
-  if(buf_a->data_size == 2 && buf_a->mode == BUFFER_DECIMALS)
-    return
-      *(short*)_buffer_val_offset(buf_a, index_a) == *(short*)_buffer_val_offset(buf_b, index_b)
-        ? 0 : ( *(short*)_buffer_val_offset(buf_a, index_a) < *(short*)_buffer_val_offset(buf_b, index_b)
-        ? -1 : 1);
+
+  if(buf_a->mode == BUFFER_DECIMALS)
+  {
+    long long value_a=0;
+    buffer_get(buf_a, index_a, &value_a);
+
+    long long value_b=0;
+    buffer_get(buf_b, index_b, &value_b);
+
+    switch(buf_a->data_size) {
+      case 2:
+        return (((short) value_a == (short) value_b )? 0 :
+           ((short) value_a < (short) value_b )? -1 : 1);
+        break;
+      default:
+        printf("Print value decimimal lenght %ld not implemented\n", buf_a->data_size);
+        return;
+        break;
+    }
+
+  }
   else
     return memcmp( _buffer_val_offset(buf_a, index_a), _buffer_val_offset(buf_b, index_b), buf_a->data_size);
 }

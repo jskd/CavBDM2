@@ -69,7 +69,7 @@ struct diskManagerWriter{
 
 static struct diskWriter* _dmw_disk_w_create_from_index(struct diskManagerWriter* dmw, int index) {
   char diskname[PATH_MAX];
-  sprintf(diskname, "%s/%s%d%s", dmw->dir, dmw->d_prefixe, index, dmw->d_suffixe);
+  sprintf(diskname, "%s/%s%03d%s", dmw->dir, dmw->d_prefixe, index, dmw->d_suffixe);
   return disk_w_create(diskname, dmw->f_prefixe, dmw->f_suffixe);
 }
 
@@ -127,6 +127,7 @@ int disk_manager_w_count(struct diskManagerWriter* dmw) {
  * @param[in] dmw        DiskManagerWriter
  */
 void disk_manager_w_destroy(struct diskManagerWriter* dmw) {
+  disk_w_destroy(dmw->current_dw);
   free(dmw->dir);
   free(dmw->d_prefixe);
   free(dmw->d_suffixe);

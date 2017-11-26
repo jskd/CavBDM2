@@ -59,11 +59,13 @@ FILE* disk_w_get_current_f( struct diskWriter* dw) {
 
 void disk_w_new_f( struct diskWriter* dw) {
 
-  if(dw->file_number > 0)
+  if(dw->file_number > 0) {
+    fflush(dw->current_file);
     fclose(dw->current_file);
+  }
 
   char filename[PATH_MAX];
-  sprintf(filename, "%s/%s%d%s", dw->dir, dw->prefix, dw->file_number, dw->extension);
+  sprintf(filename, "%s/%s%03d%s", dw->dir, dw->prefix, dw->file_number, dw->extension);
   dw->current_file= fopen(filename, "w+");
   dw->file_number++;
 }
@@ -73,6 +75,8 @@ int disk_w_count(struct diskWriter* dw) {
 }
 
 void disk_w_destroy( struct diskWriter* dw ) {
+  fflush(dw->current_file);
+  fclose(dw->current_file);
   free(dw->dir);
   free(dw->prefix);
   free(dw->extension);
@@ -85,5 +89,6 @@ void disk_w_copy(struct diskReader* dr, struct diskWriter* dw, struct buffer* bu
     buffer_read_file_from_descriptor( disk_r_item(dr, r),  buf);
     disk_w_new_f(dw);
     buffer_write_file_from_descriptor( disk_w_get_current_f(dw), buf);
+    fflush(dw->current_file);
   }
 }

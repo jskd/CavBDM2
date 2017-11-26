@@ -140,6 +140,9 @@ rm-rs:
 	@find . -path '*/tableS/*' -delete
 	@find . -type d -name 'tableS' -empty -delete
 	@find . -path '*/RS.txt' -delete
+	@find . -path '*/*sort*/*' -delete
+	@find . -type d -name '*sort*' -empty -delete
+	@find . -path '*/*sort-dump.txt' -delete
 	@echo "Supression des fichier généré terminé"
 
 gen-tp5:

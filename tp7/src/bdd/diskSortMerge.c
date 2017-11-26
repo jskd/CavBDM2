@@ -85,7 +85,7 @@ void disk_merge(struct diskReader* dr_a, struct diskReader* dr_b,
       IF_BUFFER_A_ENTIRELY_READ_LOAD_NEXT_FILE
       IF_BUFFER_B_ENTIRELY_READ_LOAD_NEXT_FILE
 
-      // Merge buffer
+      // Merge buffer (comparaison et sauvergade dans buffer_out)
       while( index_buf_a < buffer_count(buf_a) && index_buf_b < buffer_count(buf_b))
       {
         if( buffer_cmp(buf_a, index_buf_a, buf_b, index_buf_b) < 0) {

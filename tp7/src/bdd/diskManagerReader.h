@@ -55,4 +55,6 @@ size_t disk_manager_r_count( struct diskManagerReader* dmr);
  */
 void disk_manager_r_destroy( struct diskManagerReader* dmr);
 
+void disk_manager_r_dump( FILE* f,  struct diskManagerReader* dmr);
+
 #endif

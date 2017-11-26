@@ -118,6 +118,10 @@ void disk_manager_w_next_dw(struct diskManagerWriter* dmw) {
   dmw->dw_number++;
 }
 
+int disk_manager_w_count(struct diskManagerWriter* dmw) {
+  return dmw->dw_number;
+}
+
 /**
  * @brief     Detruit le diskWriterManger
  * @param[in] dmw        DiskManagerWriter

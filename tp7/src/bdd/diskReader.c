@@ -94,6 +94,7 @@ size_t disk_r_count(const struct diskReader* disk) {
 }
 
 FILE* disk_r_item(const struct diskReader* disk, int index) {
+  rewind(disk->f[index]);
   return disk->f[index];
 }
 
@@ -108,5 +109,17 @@ void disk_r_storeContentInTable(const struct diskReader* disk, struct buffer* bu
   for(int index_disk=0; index_disk<disk_r_count(disk); index_disk++) {
     buffer_read_file_from_descriptor( disk_r_item(disk, index_disk),  buf);
     table_putBuffer(tab, buf);
+  }
+}
+
+void disk_r_dump( FILE* f,  struct diskReader* dr) {
+  char ch;
+
+  for(int index=0; index< disk_r_count(dr); index++) {
+    rewind(dr->f[index]);
+    FILE* source= dr->f[index];
+
+    while( ( ch = fgetc(source) ) != EOF )
+      fputc(ch, f);
   }
 }

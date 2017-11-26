@@ -123,3 +123,10 @@ void disk_manager_r_destroy( struct diskManagerReader* dmr) {
     free(dmr->dr);
   free(dmr);
 }
+
+
+void disk_manager_r_dump( FILE* f,  struct diskManagerReader* dmr) {
+  for(int index=0; index < dmr->dr_count; index++) {
+    disk_r_dump(f, dmr->dr[index]);
+  }
+}

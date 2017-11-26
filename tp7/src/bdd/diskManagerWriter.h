@@ -58,4 +58,7 @@ void disk_manager_w_next_dw(struct diskManagerWriter* dmw);
  */
 void disk_manager_w_destroy(struct diskManagerWriter* dmw);
 
+
+int disk_manager_w_count(struct diskManagerWriter* dmw);
+
 #endif

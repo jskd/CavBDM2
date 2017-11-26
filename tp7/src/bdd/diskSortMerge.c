@@ -7,16 +7,16 @@
 #include <sys/stat.h>
 #include "rmrf.h"
 
-static const char* folder_step= "steps";
+static const char* _folder_step= "steps";
 static const char* _step_prefix= "step-";
 static const char* _dir_sort_prefix= "block";
 static const char* _dir_sort_suffixe= "";
 static const char* _file_prefixe= "";
 static const char* _file_suffixe= ".txt";
 
-static void _make_folder_step(const char* path_output) {
+static void _make__folder_step(const char* path_output) {
   char dirname[PATH_MAX];
-  sprintf(dirname, "%s-%s", path_output, folder_step);
+  sprintf(dirname, "%s-%s", path_output, _folder_step);
   mkdir(dirname, 0777);
 }
 
@@ -26,7 +26,7 @@ static void _make_output_dir(const char* path_output) {
 }
 
 static void _sprint_pathname_step(const char* path_step, int step, char* output) {
-  sprintf(output, "%s-%s/%s%d", path_step, folder_step, _step_prefix, step);
+  sprintf(output, "%s-%s/%s%d", path_step, _folder_step, _step_prefix, step);
 }
 
 static struct diskManagerWriter* _create_step_dmw(const char* path_output, int step) {
@@ -40,6 +40,18 @@ static struct diskManagerReader* _create_step_dmr(const char* path_output, int s
   _sprint_pathname_step(path_output, step, dirname);
   return disk_manager_r_create(dirname);
 }
+
+
+static void _disk_manager_r_dump_step(struct diskManagerReader* dmr, char* path_step, int step) {
+  char dirname[PATH_MAX];
+  sprintf(dirname, "%s-%s/%s%d/dump.txt", path_step, _folder_step, _step_prefix, step);
+  printf("%s\n", dirname);
+  FILE* outfile= fopen(dirname, "w+");
+  disk_manager_r_dump(outfile, dmr);
+}
+
+
+
 void disk_explode_and_sort_to_disk_manager(struct diskReader* dr, struct buffer* buf, struct diskManagerWriter* dmw) {
   for(int index=0; index < disk_r_count(dr); index++) {
       buffer_read_file_from_descriptor(disk_r_item(dr, index), buf);
@@ -81,6 +93,9 @@ void disk_merge(struct diskReader* dr_a, struct diskReader* dr_b,
   int index_buf_a=0;
   int index_buf_b=0;
 
+  buffer_flush(buf_a);
+  buffer_flush(buf_b);
+  buffer_flush(buf_out);
 
   // Si y a des elment dans les deux disque
   if(disk_r_count(dr_a) > 0 && disk_r_count(dr_b) > 0)
@@ -98,6 +113,7 @@ void disk_merge(struct diskReader* dr_a, struct diskReader* dr_b,
       // Merge buffer (comparaison et sauvergade dans buffer_out)
       while( index_buf_a < buffer_count(buf_a) && index_buf_b < buffer_count(buf_b))
       {
+
         if( buffer_cmp(buf_a, index_buf_a, buf_b, index_buf_b) < 0) {
           buffer_put_cpy(buf_out, buf_a, index_buf_a);
           index_buf_a++;
@@ -180,9 +196,10 @@ void disk_manager_merge_step(struct diskManagerReader* dmr, struct diskManagerWr
 void disk_sort_merge(struct diskReader* dr, struct buffer*buf_a, struct buffer*buf_b, struct buffer*buf_out, const char* path_output) {
 
   _make_output_dir(path_output);
-  _make_folder_step(path_output);
+  _make__folder_step(path_output);
 
   int step=0;
+  int nb_block=0;
 
   struct diskManagerWriter* dmw= NULL;
   struct diskManagerReader* dmr= NULL;
@@ -191,12 +208,30 @@ void disk_sort_merge(struct diskReader* dr, struct buffer*buf_a, struct buffer*b
 
   disk_explode_and_sort_to_disk_manager(dr, buf_a, dmw);
 
+  nb_block= disk_manager_w_count(dmw);
+
   disk_manager_w_destroy(dmw);
 
+  while(nb_block > 1) {
 
-  dmr= _create_step_dmr(path_output, step);
-  step++;
-  dmw= _create_step_dmw(path_output, step);
+    dmr= _create_step_dmr(path_output, step);
 
-  disk_manager_merge_step(dmr, dmw, buf_a, buf_b, buf_out);
+    _disk_manager_r_dump_step(dmr, path_output, step);
+
+
+    step++;
+    dmw= _create_step_dmw(path_output, step);
+
+    disk_manager_merge_step(dmr, dmw, buf_a, buf_b, buf_out);
+
+    nb_block= disk_manager_w_count(dmw);
+
+
+
+    disk_manager_w_destroy(dmw);
+    disk_manager_r_destroy(dmr);
+
+  }
+
+
 }

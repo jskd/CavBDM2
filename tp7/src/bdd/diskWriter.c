@@ -43,6 +43,7 @@ struct diskWriter* disk_w_create(const char* dir, const char* prefix,
   dw->dir= strdup(dir);
   dw->prefix= strdup(prefix);
   dw->extension= strdup(extension);
+  dw->file_number= 0;
 
   rmrf(dir);
   mkdir(dir, 0777);
@@ -50,6 +51,8 @@ struct diskWriter* disk_w_create(const char* dir, const char* prefix,
   char filename[PATH_MAX];
   sprintf(filename, "%s/%s%d%s", dw->dir, dw->prefix, dw->file_number, dw->extension);
   dw->current_file= fopen(filename, "w+");
+  dw->file_number++;
+
   return dw;
 }
 
@@ -61,10 +64,10 @@ FILE* disk_w_next_f( struct diskWriter* dw) {
 
   fclose(dw->current_file);
 
-  dw->file_number++;
   char filename[PATH_MAX];
   sprintf(filename, "%s/%s%d%s", dw->dir, dw->prefix, dw->file_number, dw->extension);
   dw->current_file= fopen(filename, "w+");
+  dw->file_number++;
 
   return dw->current_file;
 }

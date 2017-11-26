@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void swap(char *x, char *y)
+void char_swap(char *x, char *y)
 {
   char temp;
   temp = *x;
@@ -33,18 +33,32 @@ void swap(char *x, char *y)
   *y = temp;
 }
 
-int choose_pivot(char i,char j)
+void short_swap(short *x, short *y)
+{
+  short temp;
+  temp = *x;
+  *x = *y;
+  *y = temp;
+}
+
+
+int char_choose_pivot(char i,char j)
 {
   return((i+j) /2);
 }
 
-void quicksort(char* list, int m, int n)
+int short_choose_pivot(short i, short j)
+{
+  return((i+j) /2);
+}
+
+void char_quicksort(char* list, int m, int n)
 {
   int key,i,j,k;
   if( m < n)
   {
-    k = choose_pivot(m,n);
-    swap(&list[m],&list[k]);
+    k = char_choose_pivot(m,n);
+    char_swap(&list[m],&list[k]);
     key = list[m];
     i = m+1;
     j = n;
@@ -55,13 +69,42 @@ void quicksort(char* list, int m, int n)
       while((j >= m) && (list[j] > key))
         j--;
       if( i < j)
-        swap(&list[i],&list[j]);
+        char_swap(&list[i],&list[j]);
     }
     /* swap two elements */
-    swap(&list[m],&list[j]);
+    char_swap(&list[m],&list[j]);
 
     /* recursively sort the lesser list */
-    quicksort(list,m,j-1);
-    quicksort(list,j+1,n);
+    char_quicksort(list,m,j-1);
+    char_quicksort(list,j+1,n);
+  }
+}
+
+
+void short_quicksort(short* list, int m, int n)
+{
+  int key,i,j,k;
+  if( m < n)
+  {
+    k = short_choose_pivot(m,n);
+    short_swap(&list[m],&list[k]);
+    key = list[m];
+    i = m+1;
+    j = n;
+    while(i <= j)
+    {
+      while((i <= n) && (list[i] <= key))
+        i++;
+      while((j >= m) && (list[j] > key))
+        j--;
+      if( i < j)
+        short_swap(&list[i],&list[j]);
+    }
+    /* swap two elements */
+    short_swap(&list[m],&list[j]);
+
+    /* recursively sort the lesser list */
+    short_quicksort(list,m,j-1);
+    short_quicksort(list,j+1,n);
   }
 }

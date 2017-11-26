@@ -25,6 +25,8 @@
  *   il a été réadapté dans le cadre du projet
  */
 
-void quicksort(char *list, char m, char n);
+void char_quicksort(char *list, char m, char n);
+
+void short_quicksort(short *list, char m, char n);
 
 #endif

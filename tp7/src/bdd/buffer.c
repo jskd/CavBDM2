@@ -219,7 +219,12 @@ void buffer_write_file_from_descriptor(FILE* file, struct buffer* buf) {
  * @param[in] buf buffer à trier
  */
 void buffer_quicksort(struct buffer* buf) {
-  quicksort(buf->v, 0, (buf->c) -1);
+  if(buf->data_size == 1)
+    char_quicksort(buf->v, 0, (buf->c) -1);
+  else if(buf->data_size == 2)
+    short_quicksort(buf->v, 0, (buf->c) -1);
+  else
+    printf ("Quicksort not implemented for buffer type.\n");
 }
 
 /**

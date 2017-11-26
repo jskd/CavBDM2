@@ -46,7 +46,6 @@ static struct diskManagerReader* _create_step_dmr(const char* path_output, int s
 static void _disk_manager_r_dump_step(struct diskManagerReader* dmr, const char* path_step, int step) {
   char dirname[PATH_MAX];
   sprintf(dirname, "%s-%s/%s%03d/dump.txt", path_step, _folder_step, _step_prefix, step);
-  printf("%s\n", dirname);
   FILE* outfile= fopen(dirname, "w+");
   disk_manager_r_dump(outfile, dmr);
 }

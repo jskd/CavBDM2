@@ -21,6 +21,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "buffer.h"
+#include "diskReader.h"
 
 struct diskWriter;
 
@@ -32,5 +34,7 @@ FILE* disk_w_get_current_f( struct diskWriter* disk_o);
 void disk_w_new_f( struct diskWriter* dw);
 
 void disk_w_destroy( struct diskWriter* disk_o );
+
+void disk_w_copy(struct diskReader* dr, struct diskWriter* dw, struct buffer* buf);
 
 #endif

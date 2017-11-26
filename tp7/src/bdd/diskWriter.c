@@ -78,3 +78,12 @@ void disk_w_destroy( struct diskWriter* dw ) {
   free(dw->extension);
   free(dw);
 }
+
+void disk_w_copy(struct diskReader* dr, struct diskWriter* dw, struct buffer* buf)
+{
+  for(int r=0; r<disk_r_count(dr); r++) {
+    buffer_read_file_from_descriptor( disk_r_item(dr, r),  buf);
+    disk_w_new_f(dw);
+    buffer_write_file_from_descriptor( disk_w_get_current_f(dw), buf);
+  }
+}

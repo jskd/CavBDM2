@@ -131,6 +131,10 @@ demo-tp6: bin/demo/tp6-disk-hash-join bin/demo/tp6-disk-nested-join rm-rs
 	./bin/demo/tp6-disk-hash-join
 	@echo "Démonstration terminé"
 
+demo-tp7: bin/demo/tp7-disk-sort-merge rm-rs
+	./bin/demo/tp7-disk-sort-merge
+	@echo "Démonstration terminé"
+
 # Supression de RS.txt
 rm-rs:
 	@find . -path '*/RS*/*' -delete

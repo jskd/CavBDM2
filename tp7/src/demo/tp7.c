@@ -42,9 +42,17 @@ int main(int argc, char** argv){
   struct buffer* buf_out= buffer_create(_buf_size, _data_lenght, _buffer_type);
 
 
-disk_sort_merge(dr, buf_a, buf_b,  buf_out, _path_output);
+  disk_sort_merge(dr, buf_a, buf_b,  buf_out, _path_output);
 
+  printf("Stat Buffer A:\n");
+  buffer_fprint_stat(stdout, buf_a);
+  printf("Stat Buffer B:\n");
+  buffer_fprint_stat(stdout, buf_b);
+  printf("Stat Buffer Out:\n");
+  buffer_fprint_stat(stdout, buf_out);
+  printf("\n");
 
+  printf("Terminé, fichier dans %s.\n", _path_output);
 
   return 0;
 }

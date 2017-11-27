@@ -25,7 +25,7 @@
   \item Make demo-tp7 : Démonstration pour le TP7
   \item Ajout de diskManager (Writer ou Reader) pour la gestion des partition de disque
   \item Prise en compte de l'ordre alphabétique dans diskManagerReader et diskReader
-  \item Uniformisation des méthodes d'écriture/lecture sur disques
+  \item Uniformisation des structures et fonctions  d'écriture/lecture sur disques
   \begin{itemize}
     \item diskManagerReader : Lecture de partition de disque
     \item diskManagerWriter : Ecriture de partition de disque
@@ -161,9 +161,11 @@ La commande make pour lancer les test est: make test
   \item 16-disk-buffer-dump: test la lecture d'un disque
   \item 17-disk-nested-loop-r-to-s-test: test le nested loop sur disque r to s
   \item 18-disk-nested-loop-s-to-r-test: test le nested loop sur disque s to r
-  \item 19-buffer-decimal (nouveau)
-  \item 20-table-puts (nouveau)
-  \item 21-disk-block-hash-join (nouveau)
+  \item 19-buffer-decimal
+  \item 20-table-puts
+  \item 21-disk-block-hash-join
+  \item \colorbox{yellow}{22-diskManagerReader (Nouveau)}
+  \item \colorbox{yellow}{23-disk-sort-merge (Nouveau)}
 \end{itemize}
 
 \includegraphics[width=0.8\textwidth]{test.png}

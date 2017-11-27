@@ -25,6 +25,15 @@
 #include "diskWriter.h"
 #include "diskReader.h"
 
-void disk_sort_merge(struct diskReader* dr, struct buffer*buf_a, struct buffer*buf_b, struct buffer*buf_out, const char* path_output);
-
+/**
+ *  Trie fusion sur disque
+ *  @param[in] dr disk à trie
+ *  @param[in] buf_a    buffer utilisé pour la lecture majoritairement
+ *  @param[in] buf_b    buffer utilisé pour la lecture majoritairement
+ *  @param[in] buf_out  buffer utilisé pour récuprer les calcules intermédiaire
+ *                      et ecriture
+ */
+void disk_sort_merge(struct diskReader* dr, struct buffer*buf_a,
+  struct buffer*buf_b, struct buffer*buf_out, const char* path_output);
+  
 #endif

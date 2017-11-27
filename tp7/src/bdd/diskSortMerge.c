@@ -14,6 +14,7 @@ static const char* _dir_sort_suffixe= "";
 static const char* _file_prefixe= "";
 static const char* _file_suffixe= ".txt";
 
+// Creation du repertoire de step
 static void _make_folder_step(const char* path_output) {
   char dirname[PATH_MAX];
   sprintf(dirname, "%s-%s", path_output, _folder_step);
@@ -21,28 +22,32 @@ static void _make_folder_step(const char* path_output) {
   mkdir(dirname, 0777);
 }
 
+// creation de l'output dir
 static void _make_output_dir(const char* path_output) {
   rmrf(path_output);
   mkdir(path_output, 0777);
 }
 
+// recuperation du pathname de step
 static void _sprint_pathname_step(const char* path_step, int step, char* output) {
   sprintf(output, "%s-%s/%s%03d", path_step, _folder_step, _step_prefix, step);
 }
 
+// Creation d'un diskManager d'ecriture de step
 static struct diskManagerWriter* _create_step_dmw(const char* path_output, int step) {
   char dirname[PATH_MAX];
   _sprint_pathname_step(path_output, step, dirname);
   return disk_manager_w_create(dirname, _dir_sort_prefix, _dir_sort_suffixe, _file_prefixe, _file_suffixe);
 }
 
+// Creation d'un diskManager de l'ecture d'un step
 static struct diskManagerReader* _create_step_dmr(const char* path_output, int step) {
   char dirname[PATH_MAX];
   _sprint_pathname_step(path_output, step, dirname);
   return disk_manager_r_create(dirname);
 }
 
-
+// Dump d'une step
 static void _disk_manager_r_dump_step(struct diskManagerReader* dmr, const char* path_step, int step) {
   char dirname[PATH_MAX];
   sprintf(dirname, "%s-%s/%s%03d/dump.txt", path_step, _folder_step, _step_prefix, step);
@@ -50,6 +55,7 @@ static void _disk_manager_r_dump_step(struct diskManagerReader* dmr, const char*
   disk_manager_r_dump(outfile, dmr);
 }
 
+// Premiere step (séparation et trie)
 static void _disk_explode_and_sort_to_disk_manager(struct diskReader* dr, struct buffer* buf, struct diskManagerWriter* dmw) {
   for(int index=0; index < disk_r_count(dr); index++) {
       buffer_read_file_from_descriptor(disk_r_item(dr, index), buf);
@@ -174,8 +180,16 @@ static void _disk_manager_merge_step(struct diskManagerReader* dmr, struct diskM
 
 }
 
-
-void disk_sort_merge(struct diskReader* dr, struct buffer*buf_a, struct buffer*buf_b, struct buffer*buf_out, const char* path_output) {
+/**
+ *  Trie fusion sur disque
+ *  @param[in] dr disk à trie
+ *  @param[in] buf_a    buffer utilisé pour la lecture majoritairement
+ *  @param[in] buf_b    buffer utilisé pour la lecture majoritairement
+ *  @param[in] buf_out  buffer utilisé pour récuprer les calcules intermédiaire
+ *                      et ecriture
+ */
+void disk_sort_merge(struct diskReader* dr, struct buffer*buf_a,
+  struct buffer*buf_b, struct buffer*buf_out, const char* path_output) {
 
   _make_output_dir(path_output);
   _make_folder_step(path_output);
@@ -199,14 +213,15 @@ void disk_sort_merge(struct diskReader* dr, struct buffer*buf_a, struct buffer*b
   while(nb_block > 2)
   {
     dmr= _create_step_dmr(path_output, step-1);
-
-    _disk_manager_r_dump_step(dmr, path_output, step-1);
-
     dmw= _create_step_dmw(path_output, step);
 
+    // Merge
     _disk_manager_merge_step(dmr, dmw, buf_a, buf_b, buf_out);
 
     nb_block= disk_manager_w_count(dmw);
+
+    // dump previous step
+    _disk_manager_r_dump_step(dmr, path_output, step-1);
 
     disk_manager_w_destroy(dmw);
     disk_manager_r_destroy(dmr);
@@ -217,8 +232,8 @@ void disk_sort_merge(struct diskReader* dr, struct buffer*buf_a, struct buffer*b
   // Dernier step dans l'ouput dir cette fois
   if(nb_block == 2)
   {
+    // Dump previous step
     dmr= _create_step_dmr(path_output, step-1);
-
     _disk_manager_r_dump_step(dmr, path_output, step-1);
 
     struct diskReader* disk_a= disk_manager_r_item(dmr, 0);
@@ -227,13 +242,18 @@ void disk_sort_merge(struct diskReader* dr, struct buffer*buf_a, struct buffer*b
 
     _disk_merge(disk_a, disk_b, buf_a, buf_b, buf_out, disk_output);
 
-    struct diskReader* disk_output_r= disk_r_create(path_output);
+    disk_r_destroy(disk_a);
+    disk_r_destroy(disk_b);
+    disk_w_destroy(disk_output);
 
+    // Ecriture du dump
     char dirname[PATH_MAX];
     sprintf(dirname, "%s-dump.txt", path_output);
-
     FILE* f_dump= fopen(dirname ,"w+");
+    struct diskReader* disk_output_r= disk_r_create(path_output);
     disk_r_dump( f_dump,  disk_output_r);
+    disk_r_destroy(disk_output_r);
+
     fclose(f_dump);
   }
 }

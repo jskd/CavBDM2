@@ -18,69 +18,51 @@
 \maketitle
 
 
-\section{Nouveauté depuis le TP5}
+\section{Nouveauté depuis le TP6}
 
 \begin{itemize}
-  \item buffer supporte maintenant les nombres (Mode BUFFER\_DECIMAL)
-  \item Supression du vieux buffer (toutes ces fonctionnalités sont incluse dans buffer)
-  \item Nouvelle structure: DiskOutput (gestion des ecriture sur disque)
-  \item Nouvelle structure: Table  (table de Hash sur disque)
-  \item Nouvelle structure: Bucket (bucket de table)
-  \item Ajout de fonction de benchmark Lecture/ecriture dans Buffer et Table
-  \item Nouveau tests
-  \item Nouvelle démo
-  \item Nouvelle commande make gen-tp5 et gen-tp6 (pour generer R et S)
-  \item Ajout de couleur pour les tests
-  \item Mise à jour de make rm-rs
-  \item Nouveau scripts (file-generation-tp6.py)
-\end{itemize}
-
-\section{Comparaison de Disque Nested loop join avec Disk Block Hash Join}
-
-La comparaison s'effecture sur les même disque R et S contenant chacun 256
-short. Les buffers sont de taille 10 supportant des données de taille
-décimales sur 2 octets. La table de hash a 10 bucket avec un hash linaire.
-
-\subsection{Hash join}
-
-\begin{itemize}
-  \item Création de table:
+  \item Make gen-tp7 : Génération du fichier R du tp7 (necessite python3)
+  \item Make demo-tp7 : Démonstration pour le TP7
+  \item Ajout de diskManager (Writer ou Reader) pour la gestion des partition de disque
+  \item Prise en compte de l'ordre alphabétique dans diskManagerReader et diskReader
+  \item Uniformisation des méthodes d'écriture/lecture sur disques
   \begin{itemize}
-    \item Disque R: Lecture de 256 lignes sur 26 fichiers
-    \item Disque S: Lecture de 256 lignes sur 26 fichiers
-    \item Table R: Ecriture de 256 lines sur 29 fichiers
-    \item Table S: Ecriture de 256 lines sur 32 fichiers
-    \item Total opération: 1024 ligne sur 113 fichiers
+    \item diskManagerReader : Lecture de partition de disque
+    \item diskManagerWriter : Ecriture de partition de disque
+    \item diskReader : Lecture de disques
+    \item diskWriter : Ecriture de disque
   \end{itemize}
-  \item Jointure:
+  \item Ajout de methode de dump sur les diskReader et diskManagerReader
   \begin{itemize}
-      \item Table R: Lecture de 256 lignes sur 29 fichiers
-      \item Table S: Lecture de 594 lignes sur 73 fichiers
-      \item Disque RS: Ecriture de 32 lines sur 4 fichiers
-      \item Total opération: 882 ligne sur 106 fichiers
+    \item void disk\_manager\_r\_dump( FILE* f,  struct diskManagerReader* dmr);
+    \item void disk\_r\_dump( FILE* f,  struct diskReader* dr);
   \end{itemize}
-  \item Total opération (creation table + jointure): 1906 ligne sur 219 fichiers
+  \item Ajout de test
 \end{itemize}
 
-Remarque: Les opeations de lecture sur Table de S lors de la jointure peuvent
-être minimisé jusqu'à 256 ligne lecture s'il n'y a pas de collision
-(implique de mettre plus de bucket).
+\section{Comment nous avons perdu betement 2 heures de notre vie}
 
-\subsection{Nested Loop join}
+Lors de ce tp nous avons eu besoin de prendre en compte l'ordre des fichiers
+et nous avons donc choisi d'utiliser la fonction scandir.
+La fonction scandir avec alphasort permet d'obtenir le nom des fichiers contenu
+dans un dossier dans l'ordre alphabétique.
 
-\begin{itemize}
-  \item Disque R: Lecture de 256 lignes sur 26 fichiers
-  \item Disque S: Lecture de 6406 lignes sur 651 fichiers
-  \item Disque RS: Ecriture de 32 lines sur 4 fichiers
-  \item Total d'operation: 6694 ligne sur 681 fichier
-\end{itemize}
+Exemple: 0.txt 1.txt  2.txt  3.txt  4.txt  5.txt  6.txt  7.txt etc.
 
-3 fois plus d'operation par rapport au hash join (creation de table + jointure).
-7,5 fois plus d'operation si nous comptons uniquement la jointure.
+Cependant, nous n'avons pas prévu le cas d'un merge avec plus de 10 fichier dans
+un bloque...
+Ce qui donne: 0.txt 1.txt \textbf{10.txt} 2.txt  3.txt etc.
+
+Du coups, nous avons un algorithme qui fonctionnais dans les premiers steps puis
+dégénére dans les derniers steps.
+
+Pour résoudre le probléme, il faut ajouter remplacer "\%d" par "\%03d" dans le generateur
+de nom de diskManagerWriter et diskWriter. De cette manière les fichiers
+serront nommé: 000.txt 001.txt 003.txt ... 009.txt 010.txt 011.txt
+Ce qui est drole: un fix de 2 caractère pour 2 heures passé.
+Niveau de production exceptionnel!
 
 \section{Comment compiler le projet}
-
-\subsection{Avec le terminal}
 
 \begin{itemize}
 	\item make all : Compile tout les fichiers
@@ -93,10 +75,12 @@ Remarque: Les opeations de lecture sur Table de S lors de la jointure peuvent
 	\item make demo-tp3 : Lancer la démo tp3
 	\item make demo-tp4 : Lancer la démo tp4
 	\item make demo-tp5 : Lancer la démo tp5
-  \item make demo-tp6 : Lancer la démo tp6 (Nouveau)
-	\item make rm-rs : Supprime le fichier res/RS.txt et res/disk/RS.txt (Mis à jour)
-  \item make gen-tp5 : Génération de R pour tp5 (Nouveau)
-  \item make gen-tp6 : Génération de R et S pour tp5 (Nouveau)
+  \item make demo-tp6 : Lancer la démo tp6
+  \item \colorbox{yellow}{make demo-tp7 : Lancer la démo tp7 (Nouveau)}
+	\item make rm-rs : Supprime le fichier res/RS.txt et res/disk/RS.txt
+  \item make gen-tp5 : Génération de R pour tp5
+  \item make gen-tp6 : Génération de R et S pour tp5
+  \item \colorbox{yellow}{make gen-tp7 : Génération de R pour tp7 (Nouveau)}
 \end{itemize}
 
 \section{Arborescence}
@@ -146,7 +130,8 @@ La commande make pour lancer les demo sont: make demo-tp1, make demo-tp2, make d
   \item tp3-merge-join-with-duplicate: Merge join avec duplication
   \item tp4-hash-join : Hash join
   \item tp5-nested-loop-disk: Nested loop sur disque
-  \item tp6 nested loop join + hash join (Nouveau)
+  \item tp6 nested loop join + hash join
+  \item \colorbox{yellow}{tp7-disk-sort-merge (Nouveau)}
 \end{itemize}
 
 \section{Test unitaire}

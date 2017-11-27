@@ -36,11 +36,9 @@ int main(int argc, char** argv){
     return -1;
   }
 
-
   struct buffer* buf_a  = buffer_create(_buf_size, _data_lenght, _buffer_type);
   struct buffer* buf_b  = buffer_create(_buf_size, _data_lenght, _buffer_type);
   struct buffer* buf_out= buffer_create(_buf_size, _data_lenght, _buffer_type);
-
 
   disk_sort_merge(dr, buf_a, buf_b,  buf_out, _path_output);
 
@@ -53,6 +51,11 @@ int main(int argc, char** argv){
   printf("\n");
 
   printf("Terminé, fichier dans %s.\n", _path_output);
+
+  buffer_destroy(buf_a);
+  buffer_destroy(buf_b);
+  buffer_destroy(buf_c);
+  disk_r_destroy(dr);
 
   return 0;
 }

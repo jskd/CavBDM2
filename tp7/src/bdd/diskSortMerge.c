@@ -188,7 +188,7 @@ void disk_sort_merge(struct diskReader* dr, struct buffer*buf_a, struct buffer*b
 
   dmw= _create_step_dmw(path_output, step);
 
-  _disk_explode_and_sort_to_disk_manager(dr, buf_a, dmw);
+  _disk_explode_and_sort_to_disk_manager(dr, buf_out, dmw);
 
   step++;
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.10.29)  19 NOV 2017 16:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.10.24)  27 NOV 2017 16:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -886,39 +886,61 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
 
-Overfull \hbox (21.21182pt too wide) in paragraph at lines 24--25
-[]\OT1/cmr/m/n/10 buffer sup-porte main-tenant les nom-bres (Mode BUFFE
-R[]DECIMAL) 
+Overfull \hbox (20.80614pt too wide) in paragraph at lines 27--28
+[]\OT1/cmr/m/n/10 Prise en compte de l'ordre al-phab^^Setique dans diskMan-ager
+-Reader et diskReader 
+ []
+
+
+Overfull \hbox (7.80069pt too wide) in paragraph at lines 37--38
+[]\OT1/cmr/m/n/10 void disk[]manager[]r[]dump( FILE* f, struct diskMan-ager-Rea
+der* dmr); 
+ []
+
+
+Overfull \hbox (3.06964pt too wide) in paragraph at lines 43--43
+[]\OT1/cmr/bx/n/14.4 Comment nous avons perdu bete-ment 2 heures
  []
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]
-<test.png, id=24, 538.01pt x 463.7325pt>
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (1.02826pt too wide) in paragraph at lines 75--77
+[]\OT1/cmr/m/n/10 Maintenant, il est pos-si-ble de cr^^Seer un re-groupe-ment d
+e disque avec DiskMan-
+ []
+
+<block.png, id=15, 682.55pt x 249.93375pt>
+File: block.png Graphic file (type png)
+ <use block.png>
+Package pdftex.def Info: block.png used on input line 78.
+(pdftex.def)             Requested size: 276.00105pt x 101.06625pt.
+ [2 <./block.png>]
+[3] <test.png, id=24, 538.01pt x 463.7325pt>
 File: test.png Graphic file (type png)
  <use test.png>
-Package pdftex.def Info: test.png used on input line 184.
+Package pdftex.def Info: test.png used on input line 186.
 (pdftex.def)             Requested size: 276.00105pt x 237.89441pt.
- [5 <./test.png>]
-(./rapport.aux) ) 
+ [4] [5 <./test.png>] (./rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 13974 strings out of 494945
- 269430 string characters out of 6181031
+ 13978 strings out of 494945
+ 269479 string characters out of 6181031
  315589 words of memory out of 5000000
- 16968 multiletter control sequences out of 15000+600000
- 8569 words of font info for 31 fonts, out of 8000000 for 9000
+ 16971 multiletter control sequences out of 15000+600000
+ 8262 words of font info for 30 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 62i,7n,56p,438b,245s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on rapport.pdf (5 pages, 110279 bytes).
+ 62i,7n,56p,438b,239s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
+7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+
+Output written on rapport.pdf (5 pages, 138839 bytes).
 PDF statistics:
- 50 PDF objects out of 1000 (max. 8388607)
+ 52 PDF objects out of 1000 (max. 8388607)
  34 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 23 words of extra memory for PDF output out of 10000 (max. 10000000)
 

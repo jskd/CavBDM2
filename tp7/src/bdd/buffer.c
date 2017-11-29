@@ -271,7 +271,7 @@ int buffer_cmp(const struct buffer* buf_a, int index_a, const struct buffer* buf
         break;
       default:
         printf("Print value decimimal lenght %ld not implemented\n", buf_a->data_size);
-        return;
+        return 0;
         break;
     }
 

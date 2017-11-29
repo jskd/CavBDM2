@@ -24,8 +24,8 @@ static const size_t _data_lenght= sizeof(short);
 static const int _buffer_type= BUFFER_DECIMALS;
 
 // input disk config
-static const char* _file_r= "res/demo/tp7/R";
-static const char* _path_output="res/demo/tp7/R-sort";
+static const char* _file_r= "res/test/23/R";
+static const char* _path_output="res/test/23/R-sort";
 
 
 int main(int argc, char** argv){
@@ -41,10 +41,23 @@ int main(int argc, char** argv){
   struct buffer* buf_b  = buffer_create(_buf_size, _data_lenght, _buffer_type);
   struct buffer* buf_out= buffer_create(_buf_size, _data_lenght, _buffer_type);
 
+  disk_sort_merge(dr, buf_a, buf_b,  buf_out, _path_output);
 
-disk_sort_merge(dr, buf_a, buf_b,  buf_out, _path_output);
+  struct diskReader* dr_output= disk_r_create(_path_output);
+  if(dr == NULL) {
+    printf("Erreur lors de la lecture de %s.\n", _path_output);
+    return -1;
+  }
+
+  disk_r_dump(stdout, dr_output);
 
 
+
+  buffer_destroy(buf_a);
+  buffer_destroy(buf_b);
+  buffer_destroy(buf_out);
+  disk_r_destroy(dr);
+  disk_r_destroy(dr_output);
 
   return 0;
 }

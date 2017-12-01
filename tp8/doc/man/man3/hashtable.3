@@ -1,0 +1,46 @@
+.TH "hashtable" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+hashtable \- Structure de donnée repésentant une hashtable\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Attributs publics"
+
+.in +1c
+.ti -1c
+.RI "struct \fBhashset\fP * \fBv\fP"
+.br
+.RI "Value: Valeur (liste de hashset) "
+.ti -1c
+.RI "size_t \fBm\fP"
+.br
+.RI "M: Nombre de bucket\&. "
+.ti -1c
+.RI "size_t \fBc\fP"
+.br
+.RI "Count: Nombre de valeur entrée\&. "
+.in -1c
+.SH "Description détaillée"
+.PP 
+Structure de donnée repésentant une hashtable\&. 
+.SH "Documentation des données membres"
+.PP 
+.SS "size_t hashtable::c"
+
+.PP
+Count: Nombre de valeur entrée\&. 
+.SS "size_t hashtable::m"
+
+.PP
+M: Nombre de bucket\&. 
+.SS "struct \fBhashset\fP* hashtable::v"
+
+.PP
+Value: Valeur (liste de hashset) 
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

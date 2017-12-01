@@ -1,0 +1,75 @@
+.TH "src/bdd/diskWriter.c" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/bdd/diskWriter.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'diskWriter\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <limits\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <ftw\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include 'rmrf\&.h'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBdiskWriter\fP"
+.br
+.in -1c
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBdiskWriter\fP * \fBdisk_w_create\fP (const char *dir, const char *prefix, const char *extension)"
+.br
+.ti -1c
+.RI "FILE * \fBdisk_w_get_current_f\fP (struct \fBdiskWriter\fP *dw)"
+.br
+.ti -1c
+.RI "void \fBdisk_w_new_f\fP (struct \fBdiskWriter\fP *dw)"
+.br
+.ti -1c
+.RI "int \fBdisk_w_count\fP (struct \fBdiskWriter\fP *dw)"
+.br
+.ti -1c
+.RI "void \fBdisk_w_destroy\fP (struct \fBdiskWriter\fP *dw)"
+.br
+.ti -1c
+.RI "void \fBdisk_w_copy\fP (struct \fBdiskReader\fP *dr, struct \fBdiskWriter\fP *dw, struct \fBbuffer\fP *buf)"
+.br
+.in -1c
+.SH "Documentation des fonctions"
+.PP 
+.SS "void disk_w_copy (struct \fBdiskReader\fP * dr, struct \fBdiskWriter\fP * dw, struct \fBbuffer\fP * buf)"
+
+.SS "int disk_w_count (struct \fBdiskWriter\fP * dw)"
+
+.SS "struct \fBdiskWriter\fP* disk_w_create (const char * dir, const char * prefix, const char * extension)"
+
+.SS "void disk_w_destroy (struct \fBdiskWriter\fP * dw)"
+
+.SS "FILE* disk_w_get_current_f (struct \fBdiskWriter\fP * dw)"
+
+.SS "void disk_w_new_f (struct \fBdiskWriter\fP * dw)"
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

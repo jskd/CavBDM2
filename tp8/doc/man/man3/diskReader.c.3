@@ -1,0 +1,92 @@
+.TH "src/bdd/diskReader.c" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/bdd/diskReader.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'diskReader\&.h'\fP
+.br
+\fC#include <dirent\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <limits\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBdiskReader\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_GNU_SOURCE\fP"
+.br
+.in -1c
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBdiskReader\fP * \fBdisk_r_create\fP (const char *path)"
+.br
+.ti -1c
+.RI "size_t \fBdisk_r_count\fP (const struct \fBdiskReader\fP *disk)"
+.br
+.ti -1c
+.RI "FILE * \fBdisk_r_item\fP (const struct \fBdiskReader\fP *disk, int index)"
+.br
+.ti -1c
+.RI "void \fBdisk_r_destroy\fP (struct \fBdiskReader\fP *disk)"
+.br
+.ti -1c
+.RI "void \fBdisk_r_storeContentInTable\fP (const struct \fBdiskReader\fP *disk, struct \fBbuffer\fP *buf, struct \fBtable\fP *tab)"
+.br
+.ti -1c
+.RI "void \fBdisk_r_dump\fP (FILE *f, struct \fBdiskReader\fP *dr)"
+.br
+.in -1c
+.SH "Documentation des macros"
+.PP 
+.SS "#define _GNU_SOURCE"
+TP n°: 5
+.PP
+Titre du TP : Nested loop join disk
+.PP
+Date : 10 Nov 2017
+.PP
+Nom : Lefranc Prenom : Joaquim email : lefrancjoaquim@gmail.com
+.PP
+Nom : Skoda Prenom : Jérôme email : contact@jeromeskoda.fr
+.PP
+Remarques : 
+.SH "Documentation des fonctions"
+.PP 
+.SS "size_t disk_r_count (const struct \fBdiskReader\fP * disk)"
+
+.SS "struct \fBdiskReader\fP* disk_r_create (const char * path)"
+
+.SS "void disk_r_destroy (struct \fBdiskReader\fP * disk)"
+
+.SS "void disk_r_dump (FILE * f, struct \fBdiskReader\fP * dr)"
+
+.SS "FILE* disk_r_item (const struct \fBdiskReader\fP * disk, int index)"
+
+.SS "void disk_r_storeContentInTable (const struct \fBdiskReader\fP * disk, struct \fBbuffer\fP * buf, struct \fBtable\fP * tab)"
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

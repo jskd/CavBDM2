@@ -1,0 +1,120 @@
+.TH "src/bdd/diskManagerWriter.c" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/bdd/diskManagerWriter.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'diskWriter\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <limits\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <ftw\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include 'rmrf\&.h'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBdiskManagerWriter\fP"
+.br
+.RI "Structure caché des données repésentant un \fBdiskManagerWriter\fP\&. "
+.in -1c
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBdiskManagerWriter\fP * \fBdisk_manager_w_create\fP (const char *dir, const char *disk_prefixe, const char *disk_suffixe, const char *file_prefixe, const char *file_suffixe)"
+.br
+.RI "Creation d'un \fBdiskManagerWriter\fP Les disk écrit sont dans le format '{dst} / {prefix} + {index} + {suffixe}'\&. "
+.ti -1c
+.RI "struct \fBdiskWriter\fP * \fBdisk_manager_w_get_current_dw\fP (struct \fBdiskManagerWriter\fP *dmw)"
+.br
+.RI "Retourne le \fBdiskWriter\fP (écrase le contenu s'il existe déjà) "
+.ti -1c
+.RI "void \fBdisk_manager_w_next_dw\fP (struct \fBdiskManagerWriter\fP *dmw)"
+.br
+.RI "Passage au \fBdiskWriter\fP suivant\&. "
+.ti -1c
+.RI "int \fBdisk_manager_w_count\fP (struct \fBdiskManagerWriter\fP *dmw)"
+.br
+.ti -1c
+.RI "void \fBdisk_manager_w_destroy\fP (struct \fBdiskManagerWriter\fP *dmw)"
+.br
+.RI "Detruit le diskWriterManger\&. "
+.in -1c
+.SH "Documentation des fonctions"
+.PP 
+.SS "int disk_manager_w_count (struct \fBdiskManagerWriter\fP * dmw)"
+
+.SS "struct \fBdiskManagerWriter\fP* disk_manager_w_create (const char * dir, const char * disk_prefixe, const char * disk_suffixe, const char * file_prefixe, const char * file_suffixe)"
+
+.PP
+Creation d'un \fBdiskManagerWriter\fP Les disk écrit sont dans le format '{dst} / {prefix} + {index} + {suffixe}'\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIdst\fP Repertoire de destination 
+.br
+\fIprefixe\fP Prefixe de nommage des disks 
+.br
+\fIsuffixe\fP Sufixe de nommage des disks 
+.RE
+.PP
+
+.SS "void disk_manager_w_destroy (struct \fBdiskManagerWriter\fP * dmw)"
+
+.PP
+Detruit le diskWriterManger\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIdmw\fP DiskManagerWriter 
+.RE
+.PP
+
+.SS "struct \fBdiskWriter\fP* disk_manager_w_get_current_dw (struct \fBdiskManagerWriter\fP * dmw)"
+
+.PP
+Retourne le \fBdiskWriter\fP (écrase le contenu s'il existe déjà) 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIdmw\fP DiskManagerWriter 
+.RE
+.PP
+\fBRenvoie:\fP
+.RS 4
+\fBdiskWriter\fP 
+.RE
+.PP
+
+.SS "void disk_manager_w_next_dw (struct \fBdiskManagerWriter\fP * dmw)"
+
+.PP
+Passage au \fBdiskWriter\fP suivant\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIdmw\fP DiskManagerWriter 
+.RE
+.PP
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

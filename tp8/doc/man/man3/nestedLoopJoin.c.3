@@ -1,0 +1,105 @@
+.TH "src/bdd/nestedLoopJoin.c" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/bdd/nestedLoopJoin.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'nestedLoopJoin\&.h'\fP
+.br
+\fC#include 'buffer\&.h'\fP
+.br
+\fC#include 'table\&.h'\fP
+.br
+\fC#include 'diskReader\&.h'\fP
+.br
+\fC#include 'diskWriter\&.h'\fP
+.br
+
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "void \fBnatural_join\fP (const struct \fBbuffer\fP *buf_a, const struct \fBbuffer\fP *buf_b, struct \fBbuffer\fP *buf_out)"
+.br
+.ti -1c
+.RI "void \fBnested_loop_join\fP (const struct \fBbuffer\fP *buf_a, const struct \fBbuffer\fP *buf_b, struct \fBbuffer\fP *buf_out, struct \fBdiskWriter\fP *overflow_disk)"
+.br
+.ti -1c
+.RI "void \fBnested_loop_join_disk\fP (const struct \fBdiskReader\fP *disk_a, struct \fBbuffer\fP *buf_a, const struct \fBdiskReader\fP *disk_b, struct \fBbuffer\fP *buf_b, struct \fBbuffer\fP *buf_out, struct \fBdiskWriter\fP *overflow_disk)"
+.br
+.ti -1c
+.RI "void \fBtable_bucket_join\fP (const struct \fBtable\fP *tab_a, struct \fBbuffer\fP *buf_a, const struct \fBtable\fP *tab_b, struct \fBbuffer\fP *buf_b, struct \fBbuffer\fP *buf_out, struct \fBdiskWriter\fP *overflow_disk)"
+.br
+.in -1c
+.SH "Documentation des fonctions"
+.PP 
+.SS "void natural_join (const struct \fBbuffer\fP * buf_a, const struct \fBbuffer\fP * buf_b, struct \fBbuffer\fP * buf_out)"
+TP n°: 5
+.PP
+Titre du TP : Nested loop join disk
+.PP
+Date : 10 Nov 2017
+.PP
+Nom : Lefranc Prenom : Joaquim email : lefrancjoaquim@gmail.com
+.PP
+Nom : Skoda Prenom : Jérôme email : contact@jeromeskoda.fr
+.PP
+Remarques : 
+.SS "void nested_loop_join (const struct \fBbuffer\fP * buf_a, const struct \fBbuffer\fP * buf_b, struct \fBbuffer\fP * buf_out, struct \fBdiskWriter\fP * overflow_disk)"
+nested_loop_join (TP5) Supporte les overflow (ecrit dans un fichier)
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIbuf_a\fP relation externe 
+.br
+\fIbuf_b\fP relation interne 
+.br
+\fIbuf_out\fP resultat du nested_loop_join de buf_a et buf_b 
+.br
+\fIfile\fP fichier de vidage de buf_out si overflow (autorisation d'ecriture necessaire) 
+.RE
+.PP
+
+.SS "void nested_loop_join_disk (const struct \fBdiskReader\fP * disk_a, struct \fBbuffer\fP * buf_a, const struct \fBdiskReader\fP * disk_b, struct \fBbuffer\fP * buf_b, struct \fBbuffer\fP * buf_out, struct \fBdiskWriter\fP * overflow_disk)"
+nested_loop_join sur disk (TP5) Supporte les overflow (ecrit dans un fichier)
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIdisk_a\fP relation externe 
+.br
+\fIbuf_a\fP buffer de sauvegarde utilisé par le disk a 
+.br
+\fIdisk_b\fP relation interne 
+.br
+\fIbuf_b\fP buffer de sauvegarde utilisé par le disk b 
+.br
+\fIbuf_out\fP resultat du nested_loop_join du disk_a et disk_b 
+.br
+\fIfile\fP fichier de vidage de buf_out si overflow (autorisation d'ecriture necessaire) 
+.RE
+.PP
+
+.SS "void table_bucket_join (const struct \fBtable\fP * tab_a, struct \fBbuffer\fP * buf_a, const struct \fBtable\fP * tab_b, struct \fBbuffer\fP * buf_b, struct \fBbuffer\fP * buf_out, struct \fBdiskWriter\fP * overflow_disk)"
+table_bucket_join (TP6) Fait la jointure de deux table
+.PP
+\fBParamètres:\fP
+.RS 4
+\fItab_a\fP table a 
+.br
+\fIbuf_a\fP buffer de sauvegarde utilisé par la table a 
+.br
+\fItab_b\fP table b 
+.br
+\fIbuf_b\fP buffer de sauvegarde utilisé par le table b 
+.br
+\fIbuf_out\fP resultat du nested_loop_join du tab_a et tab_b 
+.br
+\fIfile\fP fichier de vidage de buf_out si overflow (autorisation d'ecriture necessaire) 
+.RE
+.PP
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

@@ -1,0 +1,107 @@
+.TH "src/bdd/table.c" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/bdd/table.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'table\&.h'\fP
+.br
+\fC#include 'buffer\&.h'\fP
+.br
+\fC#include 'bucket\&.h'\fP
+.br
+\fC#include <limits\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include 'rmrf\&.h'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBtable\fP"
+.br
+.RI "Structure de donnée repésentant un buffer\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBBUCKET_FILE_EXTENSION\fP   '\&.txt'"
+.br
+.in -1c
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBtable\fP * \fBtable_create\fP (size_t n_bucket, const char *directory)"
+.br
+.ti -1c
+.RI "void \fBtable_putBuffer\fP (struct \fBtable\fP *tab, const struct \fBbuffer\fP *buf)"
+.br
+.ti -1c
+.RI "struct \fBdiskReader\fP * \fBcreate_disk_from_bucket\fP (const struct \fBtable\fP *tab, int indexBucket)"
+.br
+.ti -1c
+.RI "size_t \fBtable_get_n_bucket\fP (const struct \fBtable\fP *tab)"
+.br
+.ti -1c
+.RI "void \fBtable_destroy\fP (struct \fBtable\fP *tab)"
+.br
+.ti -1c
+.RI "int \fBtable_get_write_stat\fP (const struct \fBtable\fP *tab)"
+.br
+.ti -1c
+.RI "int \fBtable_get_wfile_stat\fP (const struct \fBtable\fP *tab)"
+.br
+.ti -1c
+.RI "void \fBtable_fprint_stat\fP (FILE *stream, const struct \fBtable\fP *tab)"
+.br
+.in -1c
+.SH "Documentation des macros"
+.PP 
+.SS "#define BUCKET_FILE_EXTENSION   '\&.txt'"
+TP n°: 6
+.PP
+Titre du TP :
+.PP
+Date : 21/10/17
+.PP
+Nom : Lefranc Prenom : Joaquim email : lefrancjoaquim@gmail.com
+.PP
+Nom : Skoda Prenom : Jérôme email : contact@jeromeskoda.fr
+.PP
+Remarques : 
+.SH "Documentation des fonctions"
+.PP 
+.SS "struct \fBdiskReader\fP* create_disk_from_bucket (const struct \fBtable\fP * tab, int indexBucket)"
+
+.SS "struct \fBtable\fP* table_create (size_t n_bucket, const char * directory)"
+
+.SS "void table_destroy (struct \fBtable\fP * tab)"
+
+.SS "void table_fprint_stat (FILE * stream, const struct \fBtable\fP * tab)"
+
+.SS "size_t table_get_n_bucket (const struct \fBtable\fP * tab)"
+
+.SS "int table_get_wfile_stat (const struct \fBtable\fP * tab)"
+
+.SS "int table_get_write_stat (const struct \fBtable\fP * tab)"
+
+.SS "void table_putBuffer (struct \fBtable\fP * tab, const struct \fBbuffer\fP * buf)"
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

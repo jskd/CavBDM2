@@ -1,0 +1,45 @@
+.TH "src/bdd/bucket.h" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/bdd/bucket.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBbucket\fP * \fBbucket_create\fP (const char *filename)"
+.br
+.ti -1c
+.RI "void \fBbucket_puts\fP (struct \fBbucket\fP *\fBbucket\fP, const char *str)"
+.br
+.ti -1c
+.RI "struct \fBdiskReader\fP * \fBbucket_create_disk\fP (struct \fBbucket\fP *\fBbucket\fP)"
+.br
+.ti -1c
+.RI "int \fBbucket_get_n_file\fP (struct \fBbucket\fP *\fBbucket\fP)"
+.br
+.ti -1c
+.RI "void \fBbucket_destroy\fP (struct \fBbucket\fP *\fBbucket\fP)"
+.br
+.in -1c
+.SH "Documentation des fonctions"
+.PP 
+.SS "struct \fBbucket\fP* bucket_create (const char * filename)"
+
+.SS "struct \fBdiskReader\fP* bucket_create_disk (struct \fBbucket\fP * bucket)"
+
+.SS "void bucket_destroy (struct \fBbucket\fP * bucket)"
+
+.SS "int bucket_get_n_file (struct \fBbucket\fP * bucket)"
+
+.SS "void bucket_puts (struct \fBbucket\fP * bucket, const char * str)"
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

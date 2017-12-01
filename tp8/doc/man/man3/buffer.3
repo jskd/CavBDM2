@@ -1,0 +1,85 @@
+.TH "buffer" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+buffer \- Structure de donnée repésentant un buffer\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Attributs publics"
+
+.in +1c
+.ti -1c
+.RI "char * \fBv\fP"
+.br
+.RI "Valeur\&. "
+.ti -1c
+.RI "size_t \fBs\fP"
+.br
+.RI "Taille\&. "
+.ti -1c
+.RI "size_t \fBc\fP"
+.br
+.RI "Nombre de valeur entrée\&. "
+.ti -1c
+.RI "size_t \fBdata_size\fP"
+.br
+.RI "Taille des données\&. "
+.ti -1c
+.RI "\fBbuffer_file_mode\fP \fBmode\fP"
+.br
+.ti -1c
+.RI "int \fBread_counter\fP"
+.br
+.RI "compteur de Lecture (en octet) "
+.ti -1c
+.RI "int \fBrfile_counter\fP"
+.br
+.ti -1c
+.RI "int \fBwrite_counter\fP"
+.br
+.RI "compteur d'écriture (en octet) "
+.ti -1c
+.RI "int \fBwfile_counter\fP"
+.br
+.in -1c
+.SH "Description détaillée"
+.PP 
+Structure de donnée repésentant un buffer\&. 
+.SH "Documentation des données membres"
+.PP 
+.SS "size_t buffer::c"
+
+.PP
+Nombre de valeur entrée\&. 
+.SS "size_t buffer::data_size"
+
+.PP
+Taille des données\&. 
+.SS "\fBbuffer_file_mode\fP buffer::mode"
+
+.SS "int buffer::read_counter"
+
+.PP
+compteur de Lecture (en octet) 
+.SS "int buffer::rfile_counter"
+
+.SS "size_t buffer::s"
+
+.PP
+Taille\&. 
+.SS "char* buffer::v"
+
+.PP
+Valeur\&. 
+.SS "int buffer::wfile_counter"
+
+.SS "int buffer::write_counter"
+
+.PP
+compteur d'écriture (en octet) 
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

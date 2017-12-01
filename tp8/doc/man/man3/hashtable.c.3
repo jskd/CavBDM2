@@ -1,0 +1,156 @@
+.TH "src/bdd/hashtable.c" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/bdd/hashtable.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'buffer\&.h'\fP
+.br
+\fC#include 'hashtable\&.h'\fP
+.br
+\fC#include 'hexdump\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBhashset\fP"
+.br
+.ti -1c
+.RI "struct \fBhashtable\fP"
+.br
+.RI "Structure de donnée repésentant une hashtable\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_GNU_SOURCE\fP"
+.br
+.in -1c
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "int \fBhash\fP (const struct \fBhashtable\fP *ht, char key)"
+.br
+.ti -1c
+.RI "struct \fBhashtable\fP * \fBhashtable_create\fP (size_t m)"
+.br
+.ti -1c
+.RI "void \fBhashtable_destroy\fP (struct \fBhashtable\fP *ht)"
+.br
+.ti -1c
+.RI "char \fBhashtable_is_full\fP (struct \fBhashtable\fP *ht)"
+.br
+.ti -1c
+.RI "char \fBhashtable_put\fP (struct \fBhashtable\fP *ht, char key, char val)"
+.br
+.ti -1c
+.RI "char \fBhashtable_get\fP (const struct \fBhashtable\fP *ht, char key)"
+.br
+.ti -1c
+.RI "char \fBstoreBufferToHashtable\fP (struct \fBbuffer\fP *buf, struct \fBhashtable\fP *ht)"
+.br
+.ti -1c
+.RI "void \fBhashtable_print\fP (struct \fBhashtable\fP *ht)"
+.br
+.ti -1c
+.RI "void \fBhashtable_remove\fP (struct \fBhashtable\fP *ht, char key)"
+.br
+.ti -1c
+.RI "struct \fBhashtable\fP * \fBstoreFileInHashtable\fP (const char *filename, size_t m)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "const char \fBVAL_NOT_IN_HASHTABLE\fP = \-1"
+.br
+.in -1c
+.SH "Documentation des macros"
+.PP 
+.SS "#define _GNU_SOURCE"
+TP n°: 4
+.PP
+Titre du TP : Hash Join
+.PP
+Date : 27/10/17
+.PP
+Nom : Lefranc Prenom : Joaquim email : lefrancjoaquim@gmail.com
+.PP
+Nom : Skoda Prenom : Jérôme email : contact@jeromeskoda.fr
+.PP
+Remarques : 
+.SH "Documentation des fonctions"
+.PP 
+.SS "int hash (const struct \fBhashtable\fP * ht, char key)"
+Hash fonction (linear) 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIht\fP table de hash cible 
+.br
+\fIkey\fP clef 
+.RE
+.PP
+
+.SS "struct \fBhashtable\fP* hashtable_create (size_t m)"
+Creation d'une hashtable 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIm\fP Nombre de bucket 
+.RE
+.PP
+
+.SS "void hashtable_destroy (struct \fBhashtable\fP * ht)"
+Détruit le buffer 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIbuf\fP buffer à détruire 
+.RE
+.PP
+
+.SS "char hashtable_get (const struct \fBhashtable\fP * ht, char key)"
+
+.SS "char hashtable_is_full (struct \fBhashtable\fP * ht)"
+
+.SS "void hashtable_print (struct \fBhashtable\fP * ht)"
+
+.SS "char hashtable_put (struct \fBhashtable\fP * ht, char key, char val)"
+
+.SS "void hashtable_remove (struct \fBhashtable\fP * ht, char key)"
+
+.SS "char storeBufferToHashtable (struct \fBbuffer\fP * buf, struct \fBhashtable\fP * ht)"
+
+.SS "struct \fBhashtable\fP* storeFileInHashtable (const char * filename, size_t m)"
+
+.SH "Documentation des variables"
+.PP 
+.SS "const char VAL_NOT_IN_HASHTABLE = \-1"
+TP n°: 4
+.PP
+Titre du TP : Hash Join
+.PP
+Date : 27/10/17
+.PP
+Nom : Lefranc Prenom : Joaquim email : lefrancjoaquim@gmail.com
+.PP
+Nom : Skoda Prenom : Jérôme email : contact@jeromeskoda.fr
+.PP
+Remarques : 
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

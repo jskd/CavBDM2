@@ -1,0 +1,69 @@
+.TH "src/bdd/diskSortMerge.h" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/bdd/diskSortMerge.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'buffer\&.h'\fP
+.br
+\fC#include 'diskManagerWriter\&.h'\fP
+.br
+\fC#include 'diskManagerReader\&.h'\fP
+.br
+\fC#include 'diskWriter\&.h'\fP
+.br
+\fC#include 'diskReader\&.h'\fP
+.br
+
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "void \fBdisk_sort_merge\fP (struct \fBdiskReader\fP *dr, struct \fBbuffer\fP *buf_a, struct \fBbuffer\fP *buf_b, struct \fBbuffer\fP *buf_out, const char *path_output)"
+.br
+.in -1c
+.SH "Documentation des fonctions"
+.PP 
+.SS "void disk_sort_merge (struct \fBdiskReader\fP * dr, struct \fBbuffer\fP * buf_a, struct \fBbuffer\fP * buf_b, struct \fBbuffer\fP * buf_out, const char * path_output)"
+TP n°: 7
+.PP
+Titre du TP : Disk Merge Join
+.PP
+Date : 24 Nov 2017
+.PP
+Nom : Lefranc Prenom : Joaquim email : lefrancjoaquim@gmail.com
+.PP
+Nom : Skoda Prenom : Jérôme email : contact@jeromeskoda.fr
+.PP
+Remarques : Trie fusion sur disque 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIdr\fP disk à trie 
+.br
+\fIbuf_a\fP buffer utilisé pour la lecture majoritairement 
+.br
+\fIbuf_b\fP buffer utilisé pour la lecture majoritairement 
+.br
+\fIbuf_out\fP buffer utilisé pour récuprer les calcules intermédiaire et ecriture
+.RE
+.PP
+Trie fusion sur disque 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIdr\fP disk à trie 
+.br
+\fIbuf_a\fP buffer utilisé pour la lecture majoritairement 
+.br
+\fIbuf_b\fP buffer utilisé pour la lecture majoritairement 
+.br
+\fIbuf_out\fP buffer utilisé pour récuprer les calcules intermédiaire et ecriture 
+.RE
+.PP
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

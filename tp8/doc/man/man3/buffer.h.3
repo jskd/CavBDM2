@@ -1,0 +1,333 @@
+.TH "src/bdd/buffer.h" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/bdd/buffer.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+
+.SS "Énumérations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBbuffer_file_mode\fP { \fBBUFFER_CHARACTERS\fP, \fBBUFFER_DECIMALS\fP }"
+.br
+.in -1c
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBbuffer\fP * \fBbuffer_create\fP (size_t size, size_t num, \fBbuffer_file_mode\fP mode)"
+.br
+.ti -1c
+.RI "void \fBbuffer_destroy\fP (struct \fBbuffer\fP *buf)"
+.br
+.ti -1c
+.RI "char \fBbuffer_put\fP (struct \fBbuffer\fP *buf, const void *data)"
+.br
+.ti -1c
+.RI "void \fBbuffer_quicksort\fP (struct \fBbuffer\fP *buf)"
+.br
+.RI "Quick sort buffer\&. "
+.ti -1c
+.RI "void \fBbuffer_dump\fP (const struct \fBbuffer\fP *buf)"
+.br
+.RI "Hex dump buffer\&. "
+.ti -1c
+.RI "struct \fBbuffer\fP * \fBbuffer_read_file\fP (const char *file_name, size_t \fBbuffer_size\fP, size_t data_lenght, \fBbuffer_file_mode\fP mode)"
+.br
+.RI "Ouvre un fichier Stoque son contenu dans un buffer Ferme le fichier\&. "
+.ti -1c
+.RI "void \fBbuffer_read_file_from_descriptor\fP (FILE *fp, struct \fBbuffer\fP *buf)"
+.br
+.RI "Remplis le buffer du contenu du fichier N'alloue pas de buffer et vide de buffer avant d'effectuer l'operation\&. "
+.ti -1c
+.RI "char \fBbuffer_write_file\fP (const char *file_name, struct \fBbuffer\fP *)"
+.br
+.RI "Ouvre un fichier Ecrit le contenu du buffer dans le fichier Ferme le fichier\&. "
+.ti -1c
+.RI "void \fBbuffer_write_file_from_descriptor\fP (FILE *file, struct \fBbuffer\fP *buf)"
+.br
+.ti -1c
+.RI "void \fBbuffer_get\fP (const struct \fBbuffer\fP *buf, int index, void *destination)"
+.br
+.RI "Copie la valeur d'une entrée d'un buffer dans le block memoire destination\&. "
+.ti -1c
+.RI "size_t \fBbuffer_count\fP (const struct \fBbuffer\fP *buf)"
+.br
+.RI "Retourne le nombre de caractere enregistré dans le buffer\&. "
+.ti -1c
+.RI "size_t \fBbuffer_size\fP (const struct \fBbuffer\fP *buf)"
+.br
+.ti -1c
+.RI "char \fBbuffer_put_cpy\fP (struct \fBbuffer\fP *buf_dst, const struct \fBbuffer\fP *buf_src, int src_index)"
+.br
+.ti -1c
+.RI "void \fBbuffer_flush\fP (struct \fBbuffer\fP *buf)"
+.br
+.ti -1c
+.RI "int \fBbuffer_cmp\fP (const struct \fBbuffer\fP *buf_a, int index_a, const struct \fBbuffer\fP *buf_b, int index_b)"
+.br
+.ti -1c
+.RI "char \fBbuffer_isFull\fP (const struct \fBbuffer\fP *buf)"
+.br
+.ti -1c
+.RI "char \fBbuffer_isEmpty\fP (const struct \fBbuffer\fP *buf)"
+.br
+.ti -1c
+.RI "void \fBbuffer_printValue\fP (struct \fBbuffer\fP *buf)"
+.br
+.ti -1c
+.RI "int \fBbuffer_mode\fP (const struct \fBbuffer\fP *buf)"
+.br
+.ti -1c
+.RI "size_t \fBbuffer_datasize\fP (const struct \fBbuffer\fP *buf)"
+.br
+.ti -1c
+.RI "int \fBbuffer_get_read_stat\fP (const struct \fBbuffer\fP *buf)"
+.br
+.ti -1c
+.RI "int \fBbuffer_get_write_stat\fP (const struct \fBbuffer\fP *buf)"
+.br
+.ti -1c
+.RI "void \fBbuffer_fprint_stat\fP (FILE *stream, const struct \fBbuffer\fP *buf)"
+.br
+.ti -1c
+.RI "void \fBbuffer_stat_reset\fP (struct \fBbuffer\fP *buf)"
+.br
+.in -1c
+.SH "Documentation du type de l'énumération"
+.PP 
+.SS "enum \fBbuffer_file_mode\fP"
+
+.PP
+\fBValeurs énumérées\fP
+.in +1c
+.TP
+\fB\fIBUFFER_CHARACTERS \fP\fP
+.TP
+\fB\fIBUFFER_DECIMALS \fP\fP
+.SH "Documentation des fonctions"
+.PP 
+.SS "int buffer_cmp (const struct \fBbuffer\fP * buf_a, int index_a, const struct \fBbuffer\fP * buf_b, int index_b)"
+Compares 2 buffer value: <0 lower value in buf_a than in buf_b 0 equal >0 greater value in buf_a than in buf_b 
+.SS "size_t buffer_count (const struct \fBbuffer\fP * buf)"
+
+.PP
+Retourne le nombre de caractere enregistré dans le buffer\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIbuf\fP Buffer
+.RE
+.PP
+\fBRenvoie:\fP
+.RS 4
+Nombre de caractere enregistré 
+.RE
+.PP
+
+.SS "struct \fBbuffer\fP* buffer_create (size_t size, size_t num, \fBbuffer_file_mode\fP mode)"
+Creation d'un buffer contigue 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIsize\fP Taille du buffer 
+.br
+\fInum\fP Taille des données en octet 
+.br
+\fImode\fP Mode de fonctionnement des sortie fichier 
+.RE
+.PP
+
+.SS "size_t buffer_datasize (const struct \fBbuffer\fP * buf)"
+Retourne la taille en octet de chaque données 
+.SS "void buffer_destroy (struct \fBbuffer\fP * buf)"
+Détruit le buffer 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIbuf\fP buffer à détruire 
+.RE
+.PP
+
+.SS "void buffer_dump (const struct \fBbuffer\fP * buf)"
+
+.PP
+Hex dump buffer\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIbuf\fP buffer à trier 
+.RE
+.PP
+
+.SS "void buffer_flush (struct \fBbuffer\fP * buf)"
+Vide le buffer 
+.SS "void buffer_fprint_stat (FILE * stream, const struct \fBbuffer\fP * buf)"
+
+.SS "void buffer_get (const struct \fBbuffer\fP * buf, int index, void * destination)"
+
+.PP
+Copie la valeur d'une entrée d'un buffer dans le block memoire destination\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIbuf\fP Buffer 
+.br
+\fIindex\fP Index of value 
+.br
+\fIdestination\fP 
+.RE
+.PP
+
+.SS "int buffer_get_read_stat (const struct \fBbuffer\fP * buf)"
+
+.SS "int buffer_get_write_stat (const struct \fBbuffer\fP * buf)"
+
+.SS "char buffer_isEmpty (const struct \fBbuffer\fP * buf)"
+Retourne si le buffer est vide 
+.PP
+\fBRenvoie:\fP
+.RS 4
+0 vide 1 contien des données 
+.RE
+.PP
+
+.SS "char buffer_isFull (const struct \fBbuffer\fP * buf)"
+Retourne si le buffer est complet 
+.PP
+\fBRenvoie:\fP
+.RS 4
+1 complet 0 non complet 
+.RE
+.PP
+
+.SS "int buffer_mode (const struct \fBbuffer\fP * buf)"
+Retourne le mode de fonctionnement du buffer 
+.SS "void buffer_printValue (struct \fBbuffer\fP * buf)"
+Affiche les valeurs 
+.SS "char buffer_put (struct \fBbuffer\fP * buf, const void * data)"
+
+.SS "char buffer_put_cpy (struct \fBbuffer\fP * buf_dst, const struct \fBbuffer\fP * buf_src, int src_index)"
+Copy la src_index valeur de buf_src et la stoque dans buf_dst (à la dernière position)
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIbuf_dst\fP buffer de destination 
+.br
+\fIbuf_src\fP buffer source 
+.br
+\fIsrc_index\fP index du buffer source à copier 
+.RE
+.PP
+\fBRenvoie:\fP
+.RS 4
+0 succès -1 erreur: buffer incompatible -2 erreur: buffer plein
+.RE
+.PP
+Ajoute un caractere dans le buffer s'il reste de la place 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIbuf_dst\fP buffer de destination 
+.br
+\fIbuf_src\fP buffer source 
+.br
+\fIsrc_index\fP index du buffer source à copier 
+.RE
+.PP
+\fBRenvoie:\fP
+.RS 4
+0 succès -1 erreur: buffer incompatible -2 erreur: buffer plein 
+.RE
+.PP
+
+.SS "void buffer_quicksort (struct \fBbuffer\fP * buf)"
+
+.PP
+Quick sort buffer\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIbuf\fP Trie le buffer en entrée
+.br
+\fIbuf\fP buffer à trier 
+.RE
+.PP
+
+.SS "struct \fBbuffer\fP* buffer_read_file (const char * file_name, size_t buffer_size, size_t data_lenght, \fBbuffer_file_mode\fP mode)"
+
+.PP
+Ouvre un fichier Stoque son contenu dans un buffer Ferme le fichier\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIFile_name\fP Fichier 
+.br
+\fIbuffer_size\fP Taille du buffer, si trop petit pour contenir le fichier entirerement alors le reste du fichier est ignoré 
+.br
+\fIdata_lenght\fP Taille des données ajouté
+.RE
+.PP
+\fBRenvoie:\fP
+.RS 4
+buffer si NULL alors erreur de lecture du fichier
+.RE
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIFile_name\fP Fichier 
+.br
+\fIbuffer_size\fP Taille du buffer, si trop petit pour contenir le fichier entirerement alors le reste du fichier est ignoré
+.RE
+.PP
+\fBRenvoie:\fP
+.RS 4
+buffer si NULL alors erreur de lecture du fichier 
+.RE
+.PP
+
+.SS "void buffer_read_file_from_descriptor (FILE * fp, struct \fBbuffer\fP * buf)"
+
+.PP
+Remplis le buffer du contenu du fichier N'alloue pas de buffer et vide de buffer avant d'effectuer l'operation\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIFile_name\fP Fichier 
+.br
+\fIbuffer\fP 
+.RE
+.PP
+
+.SS "size_t buffer_size (const struct \fBbuffer\fP * buf)"
+Retourne la taille du buffer 
+.SS "void buffer_stat_reset (struct \fBbuffer\fP * buf)"
+
+.SS "char buffer_write_file (const char * file_name, struct \fBbuffer\fP * buf)"
+
+.PP
+Ouvre un fichier Ecrit le contenu du buffer dans le fichier Ferme le fichier\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIFile_name\fP Fichier 
+.br
+\fIbuf\fP Buffer à écrire dans le fichier
+.RE
+.PP
+\fBRenvoie:\fP
+.RS 4
+-1 si erreur dans l'ouverture du fichier 
+.RE
+.PP
+
+.SS "void buffer_write_file_from_descriptor (FILE * file, struct \fBbuffer\fP * buf)"
+Ecrit le contenu d'un buffer dans un fichier 
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

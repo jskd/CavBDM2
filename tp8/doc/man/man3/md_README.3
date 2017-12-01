@@ -1,0 +1,127 @@
+.TH "md_README" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_READMECommandes 
+ \- 
+.IP "\(bu" 2
+\fBmake all\fP : Compile tout les fichiers
+.IP "\(bu" 2
+\fBmake test\fP : Lancement de la série de tests automatiques
+.IP "\(bu" 2
+\fBmake doc\fP : Génération de la documentation (doxygen)
+.IP "\(bu" 2
+\fBmake rapport\fP : Génération du rapport (latex)
+.IP "\(bu" 2
+\fBmake clean\fP : Nettoyage du projet (supression des objets et binaires)
+.IP "\(bu" 2
+\fBmake demo-tp1\fP: Lancer la démo tp1
+.IP "\(bu" 2
+\fBmake demo-tp2\fP: Lancer la démo tp2
+.IP "\(bu" 2
+\fBmake demo-tp3\fP: Lancer la démo tp3
+.IP "\(bu" 2
+\fBmake demo-tp4\fP: Lancer la démo tp4
+.IP "\(bu" 2
+\fBmake demo-tp5\fP: Lancer la démo tp5
+.IP "\(bu" 2
+\fBmake demo-tp6\fP: Lancer la démo tp6
+.IP "\(bu" 2
+\fBmake rm-rs\fP: Supprime le fichier RS / table
+.IP "\(bu" 2
+\fBmake gen-tp5\fP: Lance le script de génération de fichier R du tp 5
+.IP "\(bu" 2
+\fBmake gen-tp6\fP: Lance le script de génération de fichier R et S du tp 6
+.PP
+.PP
+.SH "Arborescence"
+.PP
+.PP
+.IP "\(bu" 2
+\fBbin\fP : Binaire exécutable
+.IP "  \(bu" 4
+\fBdemo\fP : Exécutable de démonstration
+.IP "  \(bu" 4
+\fBtest\fP : Exécutable de test
+.PP
+
+.IP "\(bu" 2
+\fBdoc\fP : Documentation doxygen sous differents formats
+.IP "\(bu" 2
+\fBrapport\fP : Source du rapport
+.IP "\(bu" 2
+\fBres\fP : Ressources necessaire au projet (fichier de bdd)
+.IP "\(bu" 2
+\fBscript\fP : Script utilisé pour les test
+.IP "\(bu" 2
+\fBsrc\fP : Source du projet
+.IP "  \(bu" 4
+\fBbdd\fP : Source de la bibliothéque
+.IP "  \(bu" 4
+\fBdemo\fP : Sources des differentes démonstrations d'utilisation
+.IP "  \(bu" 4
+\fBtest\fP : Sources des dufferents tests
+.PP
+
+.IP "\(bu" 2
+\fIsujet\&.pdf\fP : Sujet du projet
+.IP "\(bu" 2
+\fIREADME\&.md\fP : C'est moi
+.IP "\(bu" 2
+\fIrappot\&.pdf\fP : Le rapport du projet
+.PP
+.PP
+.SH "Démonstration disponibles"
+.PP
+.PP
+Les sources de demosntration sont diponible dans: src/demo Les exécutables de test sont généré dans: bin/demo La commande make pour lancer les demo sont: make demo-tp1, make demo-tp2, make demo-tp3
+.PP
+.IP "\(bu" 2
+tp1-natural-join: Natural join R et S
+.IP "\(bu" 2
+tp2-merge-join-without-duplicate: Merge join sans duplication
+.IP "\(bu" 2
+tp3-merge-join-with-duplicate: Merge join avec duplication
+.IP "\(bu" 2
+tp4-hash-join: Hash join
+.IP "\(bu" 2
+tp5-nested-loop-disk: Nested loop sur disque
+.IP "\(bu" 2
+tp6-disk-hash-join: Hash join sur disque
+.PP
+.PP
+.SH "Tests disponibles"
+.PP
+.PP
+Les sources de test sont diponible dans: src/test Les exécutables de test sont généré dans: bin/test Le script de test est dans script/test\&.sh La commande make pour lancer les test est: make test
+.PP
+.IP "\(bu" 2
+00-storeFileBuffer: Ecriture d'un buffer dans un fichier
+.IP "\(bu" 2
+01-natural-join-1: Natural join R et S
+.IP "\(bu" 2
+02-natural-join-2: Natural join S et R
+.IP "\(bu" 2
+03-buf-quick-sort: Fonction de trie d'un buffer
+.IP "\(bu" 2
+04-merge-join-without-duplicate-1: Merge join sans duplication R et S
+.IP "\(bu" 2
+05-merge-join-without-duplicate-2: Merge join sans duplication S et R
+.IP "\(bu" 2
+06-merge-join-with-duplicate-1: Merge join avec duplication R et S
+.IP "\(bu" 2
+07-merge-join-with-duplicate-2: Merge join avec duplication S et R
+.IP "\(bu" 2
+08-hash-put-equilibre : Test ajout equilibré dans une table de hash
+.IP "\(bu" 2
+09-hash-put-desequilibre : Test ajout déséquilibré dans une table de hash
+.IP "\(bu" 2
+10-hash-full : Test remplissage complet dans une table de hash
+.IP "\(bu" 2
+11-hash-get : Test recupreration d'une entrée dans la table de hash
+.IP "\(bu" 2
+12-hash-remove : Test supression / rehash dans une table de hash
+.IP "\(bu" 2
+13-hash-join : Test hash join 
+.PP
+

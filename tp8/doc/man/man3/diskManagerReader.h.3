@@ -1,0 +1,108 @@
+.TH "src/bdd/diskManagerReader.h" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/bdd/diskManagerReader.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'diskReader\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBdiskManagerReader\fP * \fBdisk_manager_r_create\fP (const char *name)"
+.br
+.RI "Retourne le \fBdiskReader\fP à l'index correspondant\&. "
+.ti -1c
+.RI "struct \fBdiskReader\fP * \fBdisk_manager_r_item\fP (struct \fBdiskManagerReader\fP *dmr, int index)"
+.br
+.RI "Retourne le \fBdiskReader\fP à l'index correspondant\&. "
+.ti -1c
+.RI "size_t \fBdisk_manager_r_count\fP (struct \fBdiskManagerReader\fP *dmr)"
+.br
+.RI "Retourne le nombre de disk\&. "
+.ti -1c
+.RI "void \fBdisk_manager_r_destroy\fP (struct \fBdiskManagerReader\fP *dmr)"
+.br
+.RI "Detruit le diskWriterManger\&. "
+.ti -1c
+.RI "void \fBdisk_manager_r_dump\fP (FILE *f, struct \fBdiskManagerReader\fP *dmr)"
+.br
+.in -1c
+.SH "Documentation des fonctions"
+.PP 
+.SS "size_t disk_manager_r_count (struct \fBdiskManagerReader\fP * dmr)"
+
+.PP
+Retourne le nombre de disk\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIdmr\fP \fBdiskManagerReader\fP 
+.RE
+.PP
+\fBRenvoie:\fP
+.RS 4
+nombre de disk 
+.RE
+.PP
+
+.SS "struct \fBdiskManagerReader\fP* disk_manager_r_create (const char * path)"
+
+.PP
+Retourne le \fBdiskReader\fP à l'index correspondant\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIdmr\fP \fBdiskManagerReader\fP 
+.br
+\fIindex\fP index 
+.RE
+.PP
+\fBRenvoie:\fP
+.RS 4
+Si NULL alors disk inexistant 
+.RE
+.PP
+
+.SS "void disk_manager_r_destroy (struct \fBdiskManagerReader\fP * dmr)"
+
+.PP
+Detruit le diskWriterManger\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIdmr\fP \fBdiskManagerReader\fP 
+.RE
+.PP
+
+.SS "void disk_manager_r_dump (FILE * f, struct \fBdiskManagerReader\fP * dmr)"
+
+.SS "struct \fBdiskReader\fP* disk_manager_r_item (struct \fBdiskManagerReader\fP * dmr, int index)"
+
+.PP
+Retourne le \fBdiskReader\fP à l'index correspondant\&. 
+.PP
+\fBParamètres:\fP
+.RS 4
+\fIdmr\fP \fBdiskManagerReader\fP 
+.br
+\fIindex\fP index 
+.RE
+.PP
+\fBRenvoie:\fP
+.RS 4
+Si NULL alors disk inexistant 
+.RE
+.PP
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

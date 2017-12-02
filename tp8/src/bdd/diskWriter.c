@@ -32,6 +32,7 @@ struct diskWriter {
   char* prefix;
   char* extension;
   int file_number;
+  char* current_path;
   FILE* current_file;
   int current_line;
 };
@@ -45,16 +46,20 @@ struct diskWriter* disk_w_create(const char* dir, const char* prefix,
   dw->extension= strdup(extension);
   dw->file_number= 0;
   dw->current_file= NULL;
+  dw->current_path= (char*) malloc( PATH_MAX * sizeof(char) );
 
   rmrf(dir);
   mkdir(dir, 0777);
-
 
   return dw;
 }
 
 FILE* disk_w_get_current_f( struct diskWriter* dw) {
   return dw->current_file;
+}
+
+char* disk_w_get_current_path( struct diskWriter* dw) {
+  return dw->current_path;
 }
 
 void disk_w_new_f( struct diskWriter* dw) {
@@ -64,9 +69,8 @@ void disk_w_new_f( struct diskWriter* dw) {
     fclose(dw->current_file);
   }
 
-  char filename[PATH_MAX];
-  sprintf(filename, "%s/%s%03d%s", dw->dir, dw->prefix, dw->file_number, dw->extension);
-  dw->current_file= fopen(filename, "w+");
+  sprintf(dw->current_path, "%s/%s%03d%s", dw->dir, dw->prefix, dw->file_number, dw->extension);
+  dw->current_file= fopen(dw->current_path, "w+");
   dw->file_number++;
 }
 
@@ -77,6 +81,7 @@ int disk_w_count(struct diskWriter* dw) {
 void disk_w_destroy( struct diskWriter* dw ) {
   fflush(dw->current_file);
   fclose(dw->current_file);
+  free(dw->current_path);
   free(dw->dir);
   free(dw->prefix);
   free(dw->extension);

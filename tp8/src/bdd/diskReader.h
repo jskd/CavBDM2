@@ -37,6 +37,8 @@ void disk_r_destroy(struct diskReader* disk);
 
 FILE* disk_r_item(const struct diskReader* disk, int index);
 
+char* disk_r_item_path(const struct diskReader* disk, int index);
+
 void disk_r_storeContentInTable(const struct diskReader* disk, struct buffer* buf, struct table* tab);
 
 void disk_r_dump( FILE* f,  struct diskReader* dr);

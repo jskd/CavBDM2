@@ -31,6 +31,7 @@
 
 struct diskReader {
   FILE** f;
+  char** fp;
   size_t f_count;
 };
 
@@ -47,7 +48,7 @@ static int _count_file_in_path(const char* path, struct dirent** direntList, int
   return nb_file;
 }
 
-static void _alloc_file(FILE** dr, const char* path, struct dirent** direntList, int count) {
+static void _alloc_file(FILE** dr, char** fp, const char* path, struct dirent** direntList, int count) {
   int nb_file=0;
   for (int index = 0; index < count; index++) {
     char filename[NAME_MAX];
@@ -56,6 +57,7 @@ static void _alloc_file(FILE** dr, const char* path, struct dirent** direntList,
     stat(filename, &st);
     if(st.st_mode & S_IFREG) {
       dr[nb_file]= fopen(filename, "r");
+      fp[nb_file]= strdup(filename);
       nb_file++;
     }
   }
@@ -78,9 +80,10 @@ struct diskReader* disk_r_create( const char * path) {
     return dr;
   }
 
-  dr->f = (FILE**) malloc(dr->f_count * sizeof(FILE*));
+  dr->f =  (FILE**) malloc(dr->f_count * sizeof(FILE*));
+  dr->fp = (char**) malloc(dr->f_count * sizeof(char*));
 
-  _alloc_file(dr->f, path, direntList, direntCount);
+  _alloc_file(dr->f, dr->fp, path, direntList, direntCount);
 
   for (int index = 0; index < direntCount; index++) {
     free(direntList[index]);
@@ -98,9 +101,15 @@ FILE* disk_r_item(const struct diskReader* disk, int index) {
   return disk->f[index];
 }
 
+char* disk_r_item_path(const struct diskReader* disk, int index) {
+  return disk->fp[index];
+}
 void disk_r_destroy(struct diskReader* disk) {
-  for(int i=0; i< disk_r_count(disk); i++)
+  for(int i=0; i< disk_r_count(disk); i++) {
     fclose(disk_r_item(disk, i));
+    free(disk->fp[i]);
+  }
+
   free(disk->f);
   free(disk);
 }

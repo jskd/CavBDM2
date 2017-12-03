@@ -1,12 +1,12 @@
-Leaf: 1
-N_Value: 0
+Leaf: 0
+N_Value: 2
 Key:
 AA
-
+GA
 
 Value:
-res/demo/tp8/R/0.txt
-
+res/demo/tp8/R-slit2
+res/demo/tp8/R-slit3
 
 Parent: 
 

@@ -1,12 +1,12 @@
 Leaf: 1
-N_Value: 2
+N_Value: 3
 Key:
-GA
-JE
-
+NA
+QB
+SF
 Value:
-res/demo/tp8/R/2.txt
-res/demo/tp8/R/3.txt
-
+res/demo/tp8/R/4.txt
+res/demo/tp8/R/5.txt
+res/demo/tp8/R/6.txt
 Parent: 
-res/demo/tp8/R-btree/002.node
+res/demo/tp8/R-btree/000.node

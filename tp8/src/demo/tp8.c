@@ -54,13 +54,14 @@ printf("%d\n", ch );
 */
 
 ;
-struct btree_node* root= btreenode_create("res/demo/tp8/R-btreerdf");
+  struct btree_node* root= btreenode_create(dw);
 
-btreenode_insert( root, "res/demo/tp8/R/0.txt");
-btreenode_insert( root, "res/demo/tp8/R/1.txt");
-btreenode_insert( root, "res/demo/tp8/R/2.txt");
-btreenode_insert( root, "res/demo/tp8/R/3.txt");
-btreenode_insert( root, "res/demo/tp8/R/4.txt");
+  btreenode_insert( root, "res/demo/tp8/R/0.txt", dw);
+  btreenode_insert( root, "res/demo/tp8/R/1.txt", dw);
+  btreenode_insert( root, "res/demo/tp8/R/2.txt", dw);
+  btreenode_insert( root, "res/demo/tp8/R/3.txt", dw);
+  btreenode_insert( root, "res/demo/tp8/R/4.txt", dw);
+  btreenode_insert( root, "res/demo/tp8/R/5.txt", dw);
 /*  disk_w_destroy(dw);
   disk_r_destroy(dr);*/
 

@@ -20,8 +20,8 @@
 
 struct btree_node;
 
-struct btree_node* btreenode_create(const char* savefile);
+struct btree_node* btreenode_create(struct diskWriter* dw);
 
-void btreenode_insert(struct btree_node* root, const char* filepath);
+void btreenode_insert(struct btree_node* root, const char* filepath, struct diskWriter* dw);
 
 #endif

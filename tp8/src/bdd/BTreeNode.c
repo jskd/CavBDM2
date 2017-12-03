@@ -91,14 +91,16 @@ static struct btree_node* _btreenode_read_file(const char* file) {
 
 
 
-struct btree_node* btreenode_create(const char* savefile) {
+struct btree_node* btreenode_create(struct diskWriter* dw) {
 
   struct btree_node* node= (struct btree_node*) malloc( sizeof(struct btree_node));
+
+  disk_w_new_f(dw);
+  strcpy(node->savefile, disk_w_get_current_path(dw));
 
   node->isLeaf= 1;
   strcpy(node->parent, "");
   node->n_value= 0;
-  strcpy(node->savefile, savefile);
   for(int i=0; i<NODE_MAX; i++) {
     strcpy(node->key[i], "");
     strcpy(node->value[i], "");
@@ -117,7 +119,7 @@ struct btree_node* btreenode_create(const char* savefile) {
 
 
 
-void btreenode_insert(struct btree_node* root, const char* filepath)
+void btreenode_insert(struct btree_node* root, const char* filepath, struct diskWriter* dw)
 {
 
   struct buffer* buf= buffer_read_file(filepath, _buf_size, _buf_data_lenght, _buf_mode);
@@ -132,7 +134,6 @@ void btreenode_insert(struct btree_node* root, const char* filepath)
 
   if(current->isLeaf == 0) {
       current= _btreenode_read_file(current->value[ current->n_value-1 ] );
-      _btreenode_print(stdout, current);
   }
 
 
@@ -144,54 +145,53 @@ void btreenode_insert(struct btree_node* root, const char* filepath)
     strcpy( current->value[current->n_value], filepath);
     current->n_value++;
   }
-  else
+  else if(current->isLeaf)
   {
 
+     struct btree_node* left= btreenode_create( dw );
+
+     memcpy(left->key[0],   current->key[0]  , BUF_DATA_LENGHT*2);
+     memcpy(left->value[0], current->value[0], PATH_MAX*2       );
+     left->n_value+=2;
+     memcpy(left->parent, current->savefile, PATH_MAX);
+     _btreenode_store(left);
 
 
+     struct btree_node* right= btreenode_create( dw);
+     memcpy(right->parent, current->savefile, PATH_MAX);
+     memcpy(right->key[0],   current->key[2]  , BUF_DATA_LENGHT);
+     memcpy(right->value[0], current->value[2], PATH_MAX);
+     right->n_value++;
 
+     buffer_get(buf, 0, right->key[right->n_value]);
+     strcpy( right->value[right->n_value], filepath);
+     right->n_value++;
 
-     struct btree_node* slit1= btreenode_create("res/demo/tp8/R-slit2");
+     _btreenode_store(right);
 
-     memcpy(slit1->key[0],   current->key[0]  , BUF_DATA_LENGHT*2);
-     memcpy(slit1->value[0], current->value[0], PATH_MAX*2       );
-     slit1->n_value+=2;
-     memcpy(slit1->parent, current->savefile, PATH_MAX);
-     _btreenode_store(slit1);
-
-
-     struct btree_node* slit2= btreenode_create("res/demo/tp8/R-slit3");
-     memcpy(slit2->parent, current->savefile, PATH_MAX);
-     memcpy(slit2->key[0],   current->key[2]  , BUF_DATA_LENGHT);
-     memcpy(slit2->value[0], current->value[2], PATH_MAX);
-     slit2->n_value++;
-
-     buffer_get(buf, 0, slit2->key[slit2->n_value]);
-     strcpy( slit2->value[slit2->n_value], filepath);
-     slit2->n_value++;
-
-     _btreenode_store(slit2);
-
-
-
-
-
-
-
-    //       current
-    //  slit1   slit2
+    //    current
+    //  left   right
     //
     memset(current->key[1],  0, BUF_DATA_LENGHT * 2);
     memset(current->value[1],0, PATH_MAX * 2);
 
-    memcpy(current->key[0],   slit1->key[0]  , BUF_DATA_LENGHT);
-    memcpy(current->value[0], slit1->savefile, PATH_MAX);
+    memcpy(current->key[0],   left->key[0]  , BUF_DATA_LENGHT);
+    memcpy(current->value[0], left->savefile, PATH_MAX);
 
-    memcpy(current->key[1],   slit2->key[0]  , BUF_DATA_LENGHT);
-    memcpy(current->value[1], slit2->savefile, PATH_MAX);
+    memcpy(current->key[1],   right->key[0]  , BUF_DATA_LENGHT);
+    memcpy(current->value[1], right->savefile, PATH_MAX);
     current->n_value= 2;
 
     current->isLeaf= 0;
+
+
+  }
+  else
+  {
+
+
+printf("merde\n");
+
 
 
   }

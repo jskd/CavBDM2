@@ -10,4 +10,5 @@ value: [
 	
 	
 ]
+root: 0
 parent: res/demo/tp8/R-btree/000.node

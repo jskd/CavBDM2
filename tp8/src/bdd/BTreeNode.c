@@ -47,6 +47,10 @@ char btreenode_node_is_root(struct btree_node* node) {
 }
 
 void _btreenode_print(FILE* stream, const struct btree_node* node) {
+
+  fflush(stream);
+  rewind (stream);
+
   fprintf(stream, "leaf: %d\n", node->isLeaf);
   fprintf(stream, "n_value: %d\n", node->n_value);
   fprintf(stream, "key: [\n");
@@ -59,11 +63,12 @@ void _btreenode_print(FILE* stream, const struct btree_node* node) {
     fprintf(stream, "\t%.*s\n", PATH_MAX, node->value[i]);
   }
   fprintf(stream, "]\n");
+  fprintf(stream, "root: %d\n", btreenode_node_is_root(node));
   fprintf(stream, "parent: %.*s\n", PATH_MAX, node->parent);
 }
 
 static void _btreenode_store(const struct btree_node* node) {
-  FILE * pFile= fopen(node->savefile, "w+");
+  FILE * pFile= fopen(node->savefile, "w");
   _btreenode_print(pFile, node);
   fflush(pFile);
   fclose(pFile);
@@ -75,8 +80,13 @@ static void _btreenode_store(const struct btree_node* node) {
 
   struct btree_node* node= (struct btree_node*) malloc( sizeof(struct btree_node));
 
-  FILE * stream= fopen(file, "r+");
+  FILE * stream= fopen(file, "r");
+  fflush(stream);
+  rewind (stream);
+  fflush(stream);
+  rewind (stream);
 
+  int isRoot =0;
   fscanf(stream, "leaf: %d\n", &node->isLeaf);
   fscanf(stream, "n_value: %d\n", &node->n_value);
   fscanf(stream, "key: [\n");
@@ -91,8 +101,12 @@ static void _btreenode_store(const struct btree_node* node) {
     else                  fscanf(stream, "\t\n");
   }
   fscanf(stream, "]\n");
-  fscanf(stream, "parent: %s\n", node->parent);
-  fflush(stream);
+  fscanf(stream, "root: %d\n", &isRoot);
+  if(!isRoot)
+    fscanf(stream, "parent: %s\n", node->parent);
+
+
+
   fclose(stream);
 
   strcpy(node->savefile, file);
@@ -226,52 +240,11 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
   }
   else
   {
-    printf("========1=======\n");
-    _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/000.node"));
-      printf("===============\n");
-
-
-
 
     if(btreenode_node_is_root(current)) {
       btreenode_slit_root(current, dw);
     }
 
-
-
-
-    /*
-    if(btreenode_node_is_root(current)) {
-      btreenode_slit_root(current, dw);
-    }
-
-        printf("result: \n");
-                                      printf("==============1\n");
-                                  _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/000.node"));
-
-                                                                printf("==============2\n");
-                                                        _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/001.node"));
-
-                                                                                      printf("==============3\n");
-        _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/002.node"));
-    current= root;
-
-    while(current->isLeaf != 1) {
-        current= _btreenode_read_file(current->value[ current->n_value-1 ] );
-    }
-
-
-    //btreenode_insert_value_in_node(current, key, filepath);
-
-    printf("result: \n");
-                                  printf("==============1\n");
-                              _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/000.node"));
-
-                                                            printf("==============2\n");
-                                                    _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/001.node"));
-
-                                                                                  printf("==============3\n");
-    _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/002.node"));*/
   }
 
 }

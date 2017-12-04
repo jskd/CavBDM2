@@ -229,6 +229,11 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
   {
     printf("========1=======\n");
     _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/000.node"));
+      printf("===============\n");
+
+
+
+
     if(btreenode_node_is_root(current)) {
       btreenode_slit_root(current, dw);
     }
@@ -237,10 +242,13 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
 
     printf("========1=======\n");
     _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/000.node"));
+      printf("===============\n");
     printf("========2=======\n");
     _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/001.node"));
+      printf("===============\n");
     printf("========3=======\n");
     _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/002.node"));
+      printf("===============\n");
 
     /*
     if(btreenode_node_is_root(current)) {

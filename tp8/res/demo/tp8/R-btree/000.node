@@ -1,12 +1,15 @@
-Leaf: 0
-N_Value: 3
-Key:
-AA
-GA
-NA
-Value:
-res/demo/tp8/R-btree/001.node
-res/demo/tp8/R-btree/002.node
-res/demo/tp8/R-btree/003.node
-Parent: 
-
+{
+	"leaf": 0,
+	"n_value": 2,
+	"key": [
+		"AA",
+		"GA",
+		"" 
+	],
+	"value": [
+		"res/demo/tp8/R-btree/001.node",
+		"res/demo/tp8/R-btree/002.node",
+		"" 
+	],
+	"parent": ""
+}

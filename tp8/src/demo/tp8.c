@@ -60,11 +60,10 @@ printf("%d\n", ch );
   btreenode_insert( root, "res/demo/tp8/R/1.txt", dw);
   btreenode_insert( root, "res/demo/tp8/R/2.txt", dw);
   btreenode_insert( root, "res/demo/tp8/R/3.txt", dw);
-  btreenode_insert( root, "res/demo/tp8/R/4.txt", dw);
-  btreenode_insert( root, "res/demo/tp8/R/5.txt", dw);
-
-  printf("insertion 6\n");
-  btreenode_insert( root, "res/demo/tp8/R/6.txt", dw);
+  //btreenode_insert( root, "res/demo/tp8/R/4.txt", dw);
+  //btreenode_insert( root, "res/demo/tp8/R/5.txt", dw);
+  //btreenode_insert( root, "res/demo/tp8/R/6.txt", dw);
+  //btreenode_insert( root, "res/demo/tp8/R/7.txt", dw);
 /*  disk_w_destroy(dw);
   disk_r_destroy(dr);*/
 

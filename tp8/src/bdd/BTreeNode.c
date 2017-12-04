@@ -78,15 +78,15 @@ static struct btree_node* _btreenode_read_file(const char* file) {
   fscanf(stream, "\t\"n_value\": %d,\n", &node->n_value);
   fscanf(stream, "\t\"key\": [\n");
   for(int i=0; i< NODE_MAX; i++){
-    fscanf(stream, "\t\t\"%s\"%c\n", node->key[i], NULL);
+    fscanf(stream, "\t\t\"%[^\"]\"%c\n", node->key[i], NULL);
   }
   fscanf(stream, "\t],\n");
   fscanf(stream, "\t\"value\": [\n");
   for(int i=0; i< NODE_MAX; i++){
-    fscanf(stream, "\t\t\"%s\"%c\n", node->value[i], NULL);
+    fscanf(stream, "\t\t\"%[^\"]\"%c\n", node->value[i], NULL);
   }
   fscanf(stream, "\t],\n");
-  fscanf(stream, "\t\"parent\": \"%s\"\n", &node->parent);
+  fscanf(stream, "\t\"parent\": \"%[^\"]\"\n", &node->parent);
   fscanf(stream, "}\n");
 
   fclose(stream);
@@ -232,6 +232,9 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
     if(btreenode_node_is_root(current)) {
       btreenode_slit_root(current, dw);
     }
+
+
+
     printf("========1=======\n");
     _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/000.node"));
     printf("========2=======\n");

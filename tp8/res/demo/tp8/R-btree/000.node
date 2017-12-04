@@ -1,15 +1,13 @@
-{
-	"leaf": 0,
-	"n_value": 2,
-	"key": [
-		"AA",
-		"GA",
-		"" 
-	],
-	"value": [
-		"res/demo/tp8/R-btree/001.node",
-		"res/demo/tp8/R-btree/002.node",
-		"" 
-	],
-	"parent": ""
-}
+leaf: 0
+n_value: 2
+key: [
+	AA
+	GA
+	
+]
+value: [
+	res/demo/tp8/R-btree/001.node
+	res/demo/tp8/R-btree/002.node
+	
+]
+parent: 

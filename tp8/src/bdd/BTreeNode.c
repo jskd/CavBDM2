@@ -23,8 +23,6 @@
 #include <limits.h>
 
 
-
-
 static const size_t _buf_size=   10;
 static const size_t _buf_data_lenght= 2;
 static const size_t _buf_mode= BUFFER_CHARACTERS;
@@ -41,26 +39,31 @@ struct btree_node {
   char  savefile [PATH_MAX];
 };
 
-static void _btreenode_print(FILE* stream, const struct btree_node* node) {
-  fprintf(stream, "{\n");
-  fprintf(stream, "\t\"leaf\": %d,\n", node->isLeaf);
-  fprintf(stream, "\t\"n_value\": %d,\n", node->n_value);
-  fprintf(stream, "\t\"key\": [\n");
+char btreenode_can_insert_value_in_node(struct btree_node* node) {
+  return node->n_value < NODE_MAX;
+}
+char btreenode_node_is_root(struct btree_node* node) {
+  return strcmp(node->parent, "") == 0;
+}
+
+void _btreenode_print(FILE* stream, const struct btree_node* node) {
+  fprintf(stream, "leaf: %d\n", node->isLeaf);
+  fprintf(stream, "n_value: %d\n", node->n_value);
+  fprintf(stream, "key: [\n");
   for(int i=0; i< NODE_MAX; i++){
-    fprintf(stream, "\t\t\"%.*s\"%c\n", BUF_DATA_LENGHT, node->key[i], i<NODE_MAX-1 ? ',' : ' ');
+    fprintf(stream, "\t%.*s\n", BUF_DATA_LENGHT, node->key[i]);
   }
-  fprintf(stream, "\t],\n");
-  fprintf(stream, "\t\"value\": [\n");
+  fprintf(stream, "]\n");
+  fprintf(stream, "value: [\n");
   for(int i=0; i< NODE_MAX; i++){
-    fprintf(stream, "\t\t\"%.*s\"%c\n", PATH_MAX, node->value[i], i<NODE_MAX-1 ? ',' : ' ');
+    fprintf(stream, "\t%.*s\n", PATH_MAX, node->value[i]);
   }
-  fprintf(stream, "\t],\n");
-  fprintf(stream, "\t\"parent\": \"%.*s\"\n", PATH_MAX, node->parent);
-  fprintf(stream, "}\n");
+  fprintf(stream, "]\n");
+  fprintf(stream, "parent: %.*s\n", PATH_MAX, node->parent);
 }
 
 static void _btreenode_store(const struct btree_node* node) {
-  FILE * pFile= fopen(node->savefile, "w");
+  FILE * pFile= fopen(node->savefile, "w+");
   _btreenode_print(pFile, node);
   fflush(pFile);
   fclose(pFile);
@@ -68,27 +71,28 @@ static void _btreenode_store(const struct btree_node* node) {
 
 
 
-static struct btree_node* _btreenode_read_file(const char* file) {
+ struct btree_node* _btreenode_read_file(const char* file) {
 
   struct btree_node* node= (struct btree_node*) malloc( sizeof(struct btree_node));
 
-  FILE * stream= fopen(file, "r");
-  fscanf(stream, "{\n");
-  fscanf(stream, "\t\"leaf\": %d,\n", &node->isLeaf);
-  fscanf(stream, "\t\"n_value\": %d,\n", &node->n_value);
-  fscanf(stream, "\t\"key\": [\n");
-  for(int i=0; i< NODE_MAX; i++){
-    fscanf(stream, "\t\t\"%[^\"]\"%c\n", node->key[i], NULL);
-  }
-  fscanf(stream, "\t],\n");
-  fscanf(stream, "\t\"value\": [\n");
-  for(int i=0; i< NODE_MAX; i++){
-    fscanf(stream, "\t\t\"%[^\"]\"%c\n", node->value[i], NULL);
-  }
-  fscanf(stream, "\t],\n");
-  fscanf(stream, "\t\"parent\": \"%[^\"]\"\n", &node->parent);
-  fscanf(stream, "}\n");
+  FILE * stream= fopen(file, "r+");
 
+  fscanf(stream, "leaf: %d\n", &node->isLeaf);
+  fscanf(stream, "n_value: %d\n", &node->n_value);
+  fscanf(stream, "key: [\n");
+  for(int i=0; i< NODE_MAX; i++){
+    if(i < node->n_value) fscanf(stream, "\t%s\n", node->key[i]);
+    else                  fscanf(stream, "\t\n");
+  }
+  fscanf(stream, "]\n");
+  fscanf(stream, "value: [\n");
+  for(int i=0; i< NODE_MAX; i++){
+    if(i < node->n_value) fscanf(stream, "\t%s\n", node->value[i]);
+    else                  fscanf(stream, "\t\n");
+  }
+  fscanf(stream, "]\n");
+  fscanf(stream, "parent: %s\n", node->parent);
+  fflush(stream);
   fclose(stream);
 
   strcpy(node->savefile, file);
@@ -187,12 +191,7 @@ struct btree_node* btreenode_slit_root(struct btree_node* root, struct diskWrite
   return root;
 }
 
-char btreenode_can_insert_value_in_node(struct btree_node* node) {
-  return node->n_value < NODE_MAX;
-}
-char btreenode_node_is_root(struct btree_node* node) {
-  return strcmp(node->parent, "") == 0;
-}
+
 
 void btreenode_insert_value_in_node(struct btree_node* node, const char* key, const char* value) {
   strncpy(node->key[node->n_value], key, BUF_DATA_LENGHT);
@@ -240,15 +239,6 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
 
 
 
-    printf("========1=======\n");
-    _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/000.node"));
-      printf("===============\n");
-    printf("========2=======\n");
-    _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/001.node"));
-      printf("===============\n");
-    printf("========3=======\n");
-    _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/002.node"));
-      printf("===============\n");
 
     /*
     if(btreenode_node_is_root(current)) {

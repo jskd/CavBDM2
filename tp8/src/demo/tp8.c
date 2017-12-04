@@ -26,7 +26,8 @@ static const char* _path_output="res/demo/tp8/R-btree";
 
 int main(int argc, char** argv){
 
-  struct diskReader* dr= disk_r_create(_file_r);
+
+ struct diskReader* dr= disk_r_create(_file_r);
   if(dr == NULL) {
     printf("Erreur lors de la lecture de %s.\n", _file_r);
     return -1;
@@ -68,4 +69,15 @@ printf("%d\n", ch );
   disk_r_destroy(dr);*/
 
 //  return 0;
+
+printf("========1=======\n");
+_btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/000.node"));
+  printf("===============\n");
+printf("========2=======\n");
+_btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/001.node"));
+  printf("===============\n");
+printf("========3=======\n");
+_btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/002.node"));
+  printf("===============\n");
+
 }

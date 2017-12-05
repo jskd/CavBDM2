@@ -308,13 +308,16 @@ void btreenode_search(struct btree_node* root, const char* value, char* file) {
 
   while(1)
   {
+    // Parcour les noeuds jusqu'à dépassement de la clef
     for(index=0; index < current->n_value; index++)
       if(strcmp(value, current->key[ index ] ) < 0)
         break;
 
+    // Decrement de l'index pour avoir la derniere key inferieur
     if(index > 0)
       index--;
 
+    // Si ce n'est pas une feuille on retitére l'operation sur le noeuf fils
     if(current->isLeaf == 0)
       current= _btreenode_read_file(current->value[ index ]);
     else

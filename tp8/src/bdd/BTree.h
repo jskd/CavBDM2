@@ -24,4 +24,6 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
 
 void print_btree(FILE* stream, const struct btree_node* node);
 
+void btreenode_search(struct btree_node* root, const char* value, char* file);
+
 #endif

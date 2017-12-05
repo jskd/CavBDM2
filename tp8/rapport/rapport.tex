@@ -24,6 +24,11 @@
   \item Ajout de demo : Démonstration pour le TP8 (Creation et recherche)
   \item Ajout de test : Creation et Recherche sur B+tree
   \item Man pages généré (dans doc/man3)
+  \item Spécificité: Les index sont entiérement enregistré sur disque,
+    l'algorithme peut charger en mémoire uniquement 1 à 3 noeuds pour effectuer
+    des operations et n'a pas besoin d'avoir l'arbre entier en mémoire.
+  \item Persistance: Il est possible de charger en mémoire un arbre à partir du disque,
+    si un programme plante, l'arbre est toujour conservé sur disque et peux être relu à tout moment
 \end{itemize}
 
 \section{Etape de creation de B+Tree}

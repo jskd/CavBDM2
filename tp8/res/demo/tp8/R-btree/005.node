@@ -1,13 +1,13 @@
 leaf: 1
 n_value: 2
 key: [
-	NA
-	QB
+	AA
+	GA
 	
 ]
 value: [
-	res/demo/tp8/R/4.txt
-	res/demo/tp8/R/5.txt
+	res/demo/tp8/R-btree/001.node
+	res/demo/tp8/R-btree/002.node
 	
 ]
 root: 0

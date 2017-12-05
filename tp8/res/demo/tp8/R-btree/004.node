@@ -1,0 +1,14 @@
+leaf: 1
+n_value: 2
+key: [
+	SF
+	WH
+	
+]
+value: [
+	res/demo/tp8/R/6.txt
+	res/demo/tp8/R/7.txt
+	
+]
+root: 0
+parent: res/demo/tp8/R-btree/006.node

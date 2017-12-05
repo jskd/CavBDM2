@@ -64,14 +64,17 @@ printf("%d\n", ch );
   btreenode_insert( root, "res/demo/tp8/R/4.txt", dw);
   btreenode_insert( root, "res/demo/tp8/R/5.txt", dw);
   btreenode_insert( root, "res/demo/tp8/R/6.txt", dw);
-  //btreenode_insert( root, "res/demo/tp8/R/7.txt", dw);
+  btreenode_insert( root, "res/demo/tp8/R/7.txt", dw);
 /*  disk_w_destroy(dw);
   disk_r_destroy(dr);*/
 
 //  return 0;
 
+print_btreenode(stdout, _btreenode_read_file("res/demo/tp8/R-btree/000.node"), 0) ;
+
+/*
 printf("========1=======\n");
-_btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/000.node"));
+_btreenode_print(stdout, );
   printf("===============\n");
 printf("========2=======\n");
 _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/001.node"));
@@ -83,5 +86,5 @@ _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/002.node"));
 printf("========4=======\n");
 _btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/003.node"));
   printf("===============\n");
-
+*/
 }

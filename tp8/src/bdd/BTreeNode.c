@@ -41,15 +41,14 @@ struct btree_node {
 
 static void _ffsync(FILE* file) {
   fflush(file);
-  int fd;
-  fd = fileno(file);
+  int fd= fileno(file);
   fsync(fd);
 }
 
-char btreenode_can_insert_value_in_node(struct btree_node* node) {
+char btreenode_can_insert_value_in_node(const struct btree_node* node) {
   return node->n_value < NODE_MAX;
 }
-char btreenode_node_is_root(struct btree_node* node) {
+char btreenode_node_is_root(const struct btree_node* node) {
   return strcmp(node->parent, "") == 0;
 }
 
@@ -82,10 +81,8 @@ static void _btreenode_store(const struct btree_node* node) {
   fclose(pFile);
 }
 
+struct btree_node* _btreenode_read_file(const char* file) {
 
-
- struct btree_node* _btreenode_read_file(const char* file) {
-int fd;
   struct btree_node* node= (struct btree_node*) malloc( sizeof(struct btree_node));
 
   FILE * stream= fopen(file, "r");
@@ -116,7 +113,6 @@ int fd;
   }
 
   _ffsync(stream);
-
   fclose(stream);
 
   strcpy(node->savefile, file);
@@ -211,7 +207,6 @@ struct btree_node* btreenode_slit_root(struct btree_node* root, struct diskWrite
   strncpy(right->parent, root->savefile, PATH_MAX );
   root->n_value++;
   root->isLeaf= 0;
-strncpy(root->parent, "", PATH_MAX       );
 
 
   _btreenode_store(root);

@@ -41,8 +41,11 @@ int main(int argc, char** argv){
   struct btree_node* root= btreenode_create(dw);
 
   for(int i=0; i< disk_r_count(dr); i++) {
+    printf("Insertion de %s.\n", disk_r_item_path(dr, i));
     btreenode_insert( root, disk_r_item_path(dr, i) , dw );
+    printf("B+tree:\n");
+    print_btree(stdout, root);
+    printf("\n");
   }
 
-  print_btree(stdout, root);
 }

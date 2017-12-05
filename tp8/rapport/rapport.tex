@@ -31,6 +31,28 @@
     si un programme plante, l'arbre est toujour conservé sur disque et peux être relu à tout moment
 \end{itemize}
 
+\section{Cahier des Charges}
+
+Pour ce TP il nous a été demandé de créer une structure de type B+Tree
+de degré 3, chaque nœud du B+Tree aura un index correspondant à la plus petite
+valeur (exemple: CD pour 1.txt, GD pour 2.txt) de chaque block de R.
+La Structure B+tree devra ensuite être présente en mémoire et sur disque dans le
+répertoire (Dans la demonstration res/demo/R-Btree)
+
+\begin{itemize}
+  \item Planning : nous avons pu achever notre Tp en 4 jours
+  \item Prérequis : Un dossier R contenant 9 fichiers Triés (res/demo/R).
+  \item Outils :
+  \begin{itemize}
+    \item Vim et Atom pour l’édition de code.
+    \item Make + Gcc pour la chaine de compilation.
+    \item Doxygen pour la documentation.
+    \item LaTex pour le rapport.
+    \item Git pour gestion de version et la communication avec l’équipe de travail
+  \end{itemize}
+\end{itemize}
+
+
 \section{Etape de creation de B+Tree}
 
 \includegraphics[width=0.8\textwidth]{btree-1.png}
@@ -54,7 +76,7 @@
 	\item make demo-tp5 : Lancer la démo tp5
   \item make demo-tp6 : Lancer la démo tp6
   \item make demo-tp7 : Lancer la démo tp7
-  \item \colorbox{yellow}{ make demo-tp8 : Lancer la démo tp8 (creation + recherche dans un B+tree) (Nouveau)}
+  \item \colorbox{yellow}{make demo-tp8 : Lancer la démo tp8 (creation + recherche dans un B+tree) (Nouveau)}
 	\item make rm-rs : Supprime le fichier res/RS.txt et res/disk/RS.txt
   \item make gen-tp5 : Génération de R pour tp5
   \item make gen-tp6 : Génération de R et S pour tp5

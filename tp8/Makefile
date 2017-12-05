@@ -135,6 +135,11 @@ demo-tp7: bin/demo/tp7-disk-sort-merge rm-rs
 	./bin/demo/tp7-disk-sort-merge
 	@echo "Démonstration terminé"
 
+demo-tp8: bin/demo/tp8-btree-create bin/demo/tp8-btree-search rm-rs
+	./bin/demo/tp8-btree-create
+	./bin/demo/tp8-btree-search
+	@echo "Démonstration terminé"
+
 # Supression de RS.txt
 rm-rs:
 	@find . -path '*/RS*/*' -delete

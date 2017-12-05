@@ -18,6 +18,7 @@
 
 #include "../bdd/diskSortMerge.h"
 #include "../bdd/BTree.h"
+#include <limits.h>
 
 // input disk config
 static const char* _file_r= "res/demo/tp8/R";
@@ -49,6 +50,13 @@ int main(int argc, char** argv){
   }
 
   printf("Génération de l'arbre %s terminé.\n", _path_output);
+
+
+  char search[PATH_MAX];
+
+  btreenode_search(root, "LE", search) ;
+    printf("Search LE: %s\n", search);
+
 
 
 }

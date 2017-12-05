@@ -297,3 +297,31 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
     }
   }
 }
+
+void btreenode_search(struct btree_node* root, const char* value, char* file) {
+
+  root= _btreenode_read_file(root->savefile);
+  struct btree_node* current= root;
+
+
+  int index=0;
+
+  while(1)
+  {
+    for(index=0; index < current->n_value; index++)
+      if(strcmp(value, current->key[ index ] ) < 0)
+        break;
+
+    if(index > 0)
+      index--;
+
+    if(current->isLeaf == 0)
+      current= _btreenode_read_file(current->value[ index ]);
+    else
+    {
+      strncpy(file, current->value[ index ], PATH_MAX );
+      return;
+    }
+  }
+
+}

@@ -120,11 +120,20 @@ struct btree_node* _btreenode_read_file(const char* file) {
   return node;
 }
 
-void print_btreenode(FILE* stream, const struct btree_node* node, int tab) {
+void print_btreenode(FILE* stream, const struct btree_node* node, int tab, char last, char parent_last) {
   node= _btreenode_read_file(node->savefile);
 
-  for(int i=0; i< tab; i++)
-    fprintf(stream, "\t");
+  for(int i=0; i< tab; i++) {
+    if(i == tab -1)
+      if(last)
+        fprintf(stream, "└── ");
+      else
+        fprintf(stream, "├── ");
+    else if(parent_last)
+    fprintf(stream, "│   ");
+    else
+    fprintf(stream, "    ");
+  }
 
   for(int i=0; i< node->n_value; i++) {
     if(i > 0)
@@ -136,14 +145,15 @@ void print_btreenode(FILE* stream, const struct btree_node* node, int tab) {
   if(!node->isLeaf) {
     for(int i=0; i< node->n_value; i++) {
       struct btree_node* current= _btreenode_read_file(node->value[i]);
-        print_btreenode(stream ,current, tab+1);
+        print_btreenode(stream ,current, tab+1, i ==  node->n_value-1, !last );
     }
   }
 }
 
+void print_btree(FILE* stream, const struct btree_node* node) {
+  print_btreenode(stream, node, 0, 0, 0);
 
-
-
+}
 
 struct btree_node* btreenode_create(struct diskWriter* dw) {
 
@@ -159,15 +169,11 @@ struct btree_node* btreenode_create(struct diskWriter* dw) {
     strcpy(node->key[i], "");
     strcpy(node->value[i], "");
   }
+
   _btreenode_store(node);
+
   return node;
 }
-
-
-
-
-
-
 
 void btreenode_move_value(struct btree_node* dst, int idx_dst, struct btree_node* source, int idx_source) {
   strncpy(dst->key[idx_dst],   source->key[idx_source]  , BUF_DATA_LENGHT);
@@ -231,19 +237,12 @@ struct btree_node* btreenode_slit_root(struct btree_node* root, struct diskWrite
   return right;
 }
 
-
-
 void btreenode_insert_value_in_node(struct btree_node* node, const char* key, const char* value) {
   strncpy(node->key[node->n_value], key, BUF_DATA_LENGHT);
   strncpy(node->value[node->n_value], value, PATH_MAX);
   node->n_value++;
-
-
-
-
   _btreenode_store(node);
 }
-
 
 void btreenode_insert(struct btree_node* root, const char* filepath, struct diskWriter* dw)
 {

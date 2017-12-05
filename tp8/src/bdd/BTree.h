@@ -21,9 +21,7 @@
 struct btree_node* btreenode_create(struct diskWriter* dw);
 
 void btreenode_insert(struct btree_node* root, const char* filepath, struct diskWriter* dw);
- void _btreenode_print(FILE* stream, const struct btree_node* node);
-  struct btree_node* _btreenode_read_file(const char* file) ;
 
+void print_btree(FILE* stream, const struct btree_node* node);
 
-  void print_btreenode(FILE* stream, const struct btree_node* node, int tab);
 #endif

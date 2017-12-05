@@ -44,5 +44,5 @@ int main(int argc, char** argv){
     btreenode_insert( root, disk_r_item_path(dr, i) , dw );
   }
 
-  print_btreenode(stdout, root, 0);
+  print_btree(stdout, root);
 }

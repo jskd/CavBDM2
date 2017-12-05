@@ -24,8 +24,14 @@
 static const char* _file_r= "res/demo/tp8/R";
 static const char* _path_output="res/demo/tp8/R-btree";
 
-int main(int argc, char** argv){
+static void _search_demo(struct btree_node* root, const char* key) {
+  char search[PATH_MAX];
+  btreenode_search(root, key, search) ;
+  printf("Search %s: %s\n", key, search);
 
+}
+
+int main(int argc, char** argv){
 
  struct diskReader* dr= disk_r_create(_file_r);
   if(dr == NULL) {
@@ -51,12 +57,10 @@ int main(int argc, char** argv){
 
   printf("Génération de l'arbre %s terminé.\n", _path_output);
 
-
-  char search[PATH_MAX];
-
-  btreenode_search(root, "LE", search) ;
-    printf("Search LE: %s\n", search);
-
-
+  printf("\nExemple de recherche dans l'index:\n");
+  _search_demo(root, "LE");
+  _search_demo(root, "ZE");
+  _search_demo(root, "BH");
+  _search_demo(root, "NB");
 
 }

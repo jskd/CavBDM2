@@ -121,6 +121,9 @@ struct btree_node* _btreenode_read_file(const char* file) {
 }
 
 
+
+
+
 struct btree_node* btreenode_create(struct diskWriter* dw) {
 
   struct btree_node* node= (struct btree_node*) malloc( sizeof(struct btree_node));
@@ -228,9 +231,11 @@ void btreenode_insert_value_in_node(struct btree_node* node, const char* key, co
 
 
 
-void btreenode_insert_node(struct btree_node* root, struct btree_node* child) {
 
-  btreenode_insert_value_in_node(root, child->key[0], child->savefile);
+
+
+void btreenode_insert_node(struct btree_node* parent, struct btree_node* child) {
+  btreenode_insert_value_in_node(parent, child->key[0], child->savefile);
 }
 
 
@@ -250,6 +255,7 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
 
   while(1) {
 
+    root= _btreenode_read_file(root->savefile);
     struct btree_node* current= root;
 
     while(current->isLeaf != 1) {
@@ -271,8 +277,6 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
       {
         struct btree_node* right= btreenode_slit_leaf(current, dw);
         btreenode_insert_node(root, right);
-        break;
-
       }
     }
 

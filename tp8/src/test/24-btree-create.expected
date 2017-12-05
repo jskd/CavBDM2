@@ -1,0 +1,68 @@
+Insertion de res/test/24/R/0.txt.
+B+tree:
+res/test/24/R-btree/000.node (root)
+└── res/test/24/R/0.txt 
+
+Insertion de res/test/24/R/1.txt.
+B+tree:
+res/test/24/R-btree/000.node (root)
+└── res/test/24/R/0.txt CD res/test/24/R/1.txt 
+
+Insertion de res/test/24/R/2.txt.
+B+tree:
+res/test/24/R-btree/000.node (root)
+└── res/test/24/R/0.txt CD res/test/24/R/1.txt GA res/test/24/R/2.txt 
+
+Insertion de res/test/24/R/3.txt.
+B+tree:
+res/test/24/R-btree/000.node (root)
+└── res/test/24/R-btree/001.node GA res/test/24/R-btree/002.node 
+    ├── res/test/24/R/0.txt CD res/test/24/R/1.txt 
+    └── res/test/24/R/2.txt JE res/test/24/R/3.txt 
+
+Insertion de res/test/24/R/4.txt.
+B+tree:
+res/test/24/R-btree/000.node (root)
+└── res/test/24/R-btree/001.node GA res/test/24/R-btree/002.node 
+    ├── res/test/24/R/0.txt CD res/test/24/R/1.txt 
+    └── res/test/24/R/2.txt JE res/test/24/R/3.txt NA res/test/24/R/4.txt 
+
+Insertion de res/test/24/R/5.txt.
+B+tree:
+res/test/24/R-btree/000.node (root)
+└── res/test/24/R-btree/001.node GA res/test/24/R-btree/002.node NA res/test/24/R-btree/003.node 
+    ├── res/test/24/R/0.txt CD res/test/24/R/1.txt 
+    ├── res/test/24/R/2.txt JE res/test/24/R/3.txt 
+    └── res/test/24/R/4.txt QB res/test/24/R/5.txt 
+
+Insertion de res/test/24/R/6.txt.
+B+tree:
+res/test/24/R-btree/000.node (root)
+└── res/test/24/R-btree/001.node GA res/test/24/R-btree/002.node NA res/test/24/R-btree/003.node 
+    ├── res/test/24/R/0.txt CD res/test/24/R/1.txt 
+    ├── res/test/24/R/2.txt JE res/test/24/R/3.txt 
+    └── res/test/24/R/4.txt QB res/test/24/R/5.txt SF res/test/24/R/6.txt 
+
+Insertion de res/test/24/R/7.txt.
+B+tree:
+res/test/24/R-btree/000.node (root)
+└── res/test/24/R-btree/005.node NA res/test/24/R-btree/006.node 
+    ├── res/test/24/R-btree/001.node GA res/test/24/R-btree/002.node 
+    │   ├── res/test/24/R/0.txt CD res/test/24/R/1.txt 
+    │   └── res/test/24/R/2.txt JE res/test/24/R/3.txt 
+    └── res/test/24/R-btree/003.node SF res/test/24/R-btree/004.node 
+        ├── res/test/24/R/4.txt QB res/test/24/R/5.txt 
+        └── res/test/24/R/6.txt WH res/test/24/R/7.txt 
+
+Insertion de res/test/24/R/8.txt.
+B+tree:
+res/test/24/R-btree/000.node (root)
+└── res/test/24/R-btree/005.node NA res/test/24/R-btree/006.node 
+    ├── res/test/24/R-btree/001.node GA res/test/24/R-btree/002.node 
+    │   ├── res/test/24/R/0.txt CD res/test/24/R/1.txt 
+    │   └── res/test/24/R/2.txt JE res/test/24/R/3.txt 
+    └── res/test/24/R-btree/003.node SF res/test/24/R-btree/004.node 
+        ├── res/test/24/R/4.txt QB res/test/24/R/5.txt 
+        └── res/test/24/R/6.txt WH res/test/24/R/7.txt ZE res/test/24/R/8.txt 
+
+Génération de l'arbre res/test/24/R-btree terminé.

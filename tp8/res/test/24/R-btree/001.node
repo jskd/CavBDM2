@@ -1,0 +1,14 @@
+leaf: 1
+n_value: 2
+key: [
+	AA
+	CD
+	
+]
+value: [
+	res/test/24/R/0.txt
+	res/test/24/R/1.txt
+	
+]
+root: 0
+parent: res/test/24/R-btree/000.node

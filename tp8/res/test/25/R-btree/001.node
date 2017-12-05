@@ -1,0 +1,14 @@
+leaf: 1
+n_value: 2
+key: [
+	AA
+	CD
+	
+]
+value: [
+	res/demo/tp8/R/0.txt
+	res/demo/tp8/R/1.txt
+	
+]
+root: 0
+parent: res/demo/tp8/R-btree/000.node

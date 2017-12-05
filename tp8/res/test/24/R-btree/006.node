@@ -1,0 +1,14 @@
+leaf: 0
+n_value: 2
+key: [
+	NA
+	SF
+	
+]
+value: [
+	res/test/24/R-btree/003.node
+	res/test/24/R-btree/004.node
+	
+]
+root: 0
+parent: res/test/24/R-btree/000.node

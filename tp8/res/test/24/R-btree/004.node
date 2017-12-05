@@ -1,0 +1,14 @@
+leaf: 1
+n_value: 3
+key: [
+	SF
+	WH
+	ZE
+]
+value: [
+	res/test/24/R/6.txt
+	res/test/24/R/7.txt
+	res/test/24/R/8.txt
+]
+root: 0
+parent: res/test/24/R-btree/006.node

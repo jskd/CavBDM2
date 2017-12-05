@@ -1,0 +1,10 @@
+QB
+QC
+QF
+RA
+RB
+RE
+RG
+SA
+SB
+SE

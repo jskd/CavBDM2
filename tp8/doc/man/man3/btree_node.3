@@ -1,0 +1,48 @@
+.TH "btree_node" 3 "Mardi 5 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+btree_node
+.SH SYNOPSIS
+.br
+.PP
+.SS "Attributs publics"
+
+.in +1c
+.ti -1c
+.RI "int \fBisLeaf\fP"
+.br
+.ti -1c
+.RI "char \fBparent\fP [PATH_MAX]"
+.br
+.ti -1c
+.RI "int \fBn_value\fP"
+.br
+.ti -1c
+.RI "char \fBkey\fP [\fBNODE_MAX\fP][\fBBUF_DATA_LENGHT\fP]"
+.br
+.ti -1c
+.RI "char \fBvalue\fP [\fBNODE_MAX\fP][PATH_MAX]"
+.br
+.ti -1c
+.RI "char \fBsavefile\fP [PATH_MAX]"
+.br
+.in -1c
+.SH "Documentation des données membres"
+.PP 
+.SS "int btree_node::isLeaf"
+
+.SS "char btree_node::key[\fBNODE_MAX\fP][\fBBUF_DATA_LENGHT\fP]"
+
+.SS "int btree_node::n_value"
+
+.SS "char btree_node::parent[PATH_MAX]"
+
+.SS "char btree_node::savefile[PATH_MAX]"
+
+.SS "char btree_node::value[\fBNODE_MAX\fP][PATH_MAX]"
+
+
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

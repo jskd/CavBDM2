@@ -1,4 +1,4 @@
-.TH "src/bdd/diskWriter.c" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.TH "src/bdd/diskWriter.c" 3 "Mardi 5 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -44,6 +44,9 @@ src/bdd/diskWriter.c
 .RI "FILE * \fBdisk_w_get_current_f\fP (struct \fBdiskWriter\fP *dw)"
 .br
 .ti -1c
+.RI "char * \fBdisk_w_get_current_path\fP (struct \fBdiskWriter\fP *dw)"
+.br
+.ti -1c
 .RI "void \fBdisk_w_new_f\fP (struct \fBdiskWriter\fP *dw)"
 .br
 .ti -1c
@@ -67,6 +70,8 @@ src/bdd/diskWriter.c
 .SS "void disk_w_destroy (struct \fBdiskWriter\fP * dw)"
 
 .SS "FILE* disk_w_get_current_f (struct \fBdiskWriter\fP * dw)"
+
+.SS "char* disk_w_get_current_path (struct \fBdiskWriter\fP * dw)"
 
 .SS "void disk_w_new_f (struct \fBdiskWriter\fP * dw)"
 

@@ -1,0 +1,175 @@
+.TH "src/bdd/BTree.c" 3 "Mardi 5 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/bdd/BTree.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include 'diskWriter\&.h'\fP
+.br
+\fC#include 'diskReader\&.h'\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <limits\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBbtree_node\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBNODE_MAX\fP   3"
+.br
+.ti -1c
+.RI "#define \fBBUF_DATA_LENGHT\fP   3"
+.br
+.in -1c
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "char \fBbtreenode_can_insert_value_in_node\fP (const struct \fBbtree_node\fP *node)"
+.br
+.RI "Test si l'insertion est possible\&. "
+.ti -1c
+.RI "char \fBbtreenode_node_is_root\fP (const struct \fBbtree_node\fP *node)"
+.br
+.RI "Test si c'est le node root\&. "
+.ti -1c
+.RI "void \fB_btreenode_print\fP (FILE *stream, const struct \fBbtree_node\fP *node)"
+.br
+.RI "Affiche un noeud\&. "
+.ti -1c
+.RI "struct \fBbtree_node\fP * \fB_btreenode_read_file\fP (const char *file)"
+.br
+.RI "Ouvre l'arbre contenu dans un fichier\&. "
+.ti -1c
+.RI "void \fBprint_btreenode\fP (FILE *stream, const struct \fBbtree_node\fP *node, int tab, char last, char parent_last)"
+.br
+.RI "Affiche un noeud\&. "
+.ti -1c
+.RI "void \fBprint_btree\fP (FILE *stream, const struct \fBbtree_node\fP *node)"
+.br
+.RI "Affiche l'arbre\&. "
+.ti -1c
+.RI "struct \fBbtree_node\fP * \fBbtreenode_create\fP (struct \fBdiskWriter\fP *dw)"
+.br
+.RI "Création d'un nouveau noeud\&. "
+.ti -1c
+.RI "void \fBbtreenode_move_value\fP (struct \fBbtree_node\fP *dst, int idx_dst, struct \fBbtree_node\fP *source, int idx_source)"
+.br
+.RI "Deplace une valeur\&. "
+.ti -1c
+.RI "void \fBbtreenode_add_child\fP (struct \fBbtree_node\fP *parent, struct \fBbtree_node\fP *child)"
+.br
+.RI "Ajoute un enfant\&. "
+.ti -1c
+.RI "struct \fBbtree_node\fP * \fBbtreenode_slit_leaf\fP (struct \fBbtree_node\fP *left, struct \fBdiskWriter\fP *dw)"
+.br
+.RI "Return right node\&. "
+.ti -1c
+.RI "struct \fBbtree_node\fP * \fBbtreenode_slit_root\fP (struct \fBbtree_node\fP *root, struct \fBdiskWriter\fP *dw)"
+.br
+.RI "Divise le noeud racine en deux et retourne le noeud de droite\&. "
+.ti -1c
+.RI "void \fBbtreenode_insert_value_in_node\fP (struct \fBbtree_node\fP *node, const char *key, const char *value)"
+.br
+.RI "Insertion d'une valeure dans un noeud\&. "
+.ti -1c
+.RI "void \fBbtreenode_insert\fP (struct \fBbtree_node\fP *root, const char *filepath, struct \fBdiskWriter\fP *dw)"
+.br
+.RI "Insertion d'un noeud\&. "
+.ti -1c
+.RI "void \fBbtreenode_search\fP (struct \fBbtree_node\fP *root, const char *value, char *file)"
+.br
+.RI "Recherche d'un noeud dans l'arbre\&. "
+.ti -1c
+.RI "struct \fBbtree_node\fP * \fBbtree_load\fP (struct \fBdiskReader\fP *dr)"
+.br
+.RI "Chargement d'un B+tree (La racine est uniquement chargé en mémoire) "
+.in -1c
+.SH "Documentation des macros"
+.PP 
+.SS "#define BUF_DATA_LENGHT   3"
+
+.SS "#define NODE_MAX   3"
+
+.SH "Documentation des fonctions"
+.PP 
+.SS "void _btreenode_print (FILE * stream, const struct \fBbtree_node\fP * node)"
+
+.PP
+Affiche un noeud\&. 
+.SS "struct \fBbtree_node\fP* _btreenode_read_file (const char * file)"
+
+.PP
+Ouvre l'arbre contenu dans un fichier\&. 
+.SS "struct \fBbtree_node\fP* btree_load (struct \fBdiskReader\fP * dr)"
+
+.PP
+Chargement d'un B+tree (La racine est uniquement chargé en mémoire) 
+.SS "void btreenode_add_child (struct \fBbtree_node\fP * parent, struct \fBbtree_node\fP * child)"
+
+.PP
+Ajoute un enfant\&. 
+.SS "char btreenode_can_insert_value_in_node (const struct \fBbtree_node\fP * node)"
+
+.PP
+Test si l'insertion est possible\&. 
+.SS "struct \fBbtree_node\fP* btreenode_create (struct \fBdiskWriter\fP * dw)"
+
+.PP
+Création d'un nouveau noeud\&. Creation d'un B+tree\&. 
+.SS "void btreenode_insert (struct \fBbtree_node\fP * root, const char * filepath, struct \fBdiskWriter\fP * dw)"
+
+.PP
+Insertion d'un noeud\&. Insertion d'un block\&. 
+.SS "void btreenode_insert_value_in_node (struct \fBbtree_node\fP * node, const char * key, const char * value)"
+
+.PP
+Insertion d'une valeure dans un noeud\&. 
+.SS "void btreenode_move_value (struct \fBbtree_node\fP * dst, int idx_dst, struct \fBbtree_node\fP * source, int idx_source)"
+
+.PP
+Deplace une valeur\&. 
+.SS "char btreenode_node_is_root (const struct \fBbtree_node\fP * node)"
+
+.PP
+Test si c'est le node root\&. 
+.SS "void btreenode_search (struct \fBbtree_node\fP * root, const char * value, char * file)"
+
+.PP
+Recherche d'un noeud dans l'arbre\&. 
+.SS "struct \fBbtree_node\fP* btreenode_slit_leaf (struct \fBbtree_node\fP * left, struct \fBdiskWriter\fP * dw)"
+
+.PP
+Return right node\&. 
+.SS "struct \fBbtree_node\fP* btreenode_slit_root (struct \fBbtree_node\fP * root, struct \fBdiskWriter\fP * dw)"
+
+.PP
+Divise le noeud racine en deux et retourne le noeud de droite\&. 
+.SS "void print_btree (FILE * stream, const struct \fBbtree_node\fP * node)"
+
+.PP
+Affiche l'arbre\&. Impression d'un B+tree\&. 
+.SS "void print_btreenode (FILE * stream, const struct \fBbtree_node\fP * node, int tab, char last, char parent_last)"
+
+.PP
+Affiche un noeud\&. 
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

@@ -1,0 +1,62 @@
+.TH "src/bdd/BTree.h" 3 "Mardi 5 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/bdd/BTree.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'diskReader\&.h'\fP
+.br
+\fC#include 'diskWriter\&.h'\fP
+.br
+
+.SS "Fonctions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBbtree_node\fP * \fBbtreenode_create\fP (struct \fBdiskWriter\fP *dw)"
+.br
+.RI "Creation d'un B+tree\&. "
+.ti -1c
+.RI "void \fBbtreenode_insert\fP (struct \fBbtree_node\fP *root, const char *filepath, struct \fBdiskWriter\fP *dw)"
+.br
+.RI "Insertion d'un block\&. "
+.ti -1c
+.RI "void \fBbtreenode_search\fP (struct \fBbtree_node\fP *root, const char *value, char *file)"
+.br
+.RI "Recherche d'un noeud dans l'arbre\&. "
+.ti -1c
+.RI "struct \fBbtree_node\fP * \fBbtree_load\fP (struct \fBdiskReader\fP *dw)"
+.br
+.RI "Chargement d'un B+tree (La racine est uniquement chargé en mémoire) "
+.ti -1c
+.RI "void \fBprint_btree\fP (FILE *stream, const struct \fBbtree_node\fP *node)"
+.br
+.RI "Impression d'un B+tree\&. "
+.in -1c
+.SH "Documentation des fonctions"
+.PP 
+.SS "struct \fBbtree_node\fP* btree_load (struct \fBdiskReader\fP * dw)"
+
+.PP
+Chargement d'un B+tree (La racine est uniquement chargé en mémoire) 
+.SS "struct \fBbtree_node\fP* btreenode_create (struct \fBdiskWriter\fP * dw)"
+
+.PP
+Creation d'un B+tree\&. Creation d'un B+tree\&. 
+.SS "void btreenode_insert (struct \fBbtree_node\fP * root, const char * filepath, struct \fBdiskWriter\fP * dw)"
+
+.PP
+Insertion d'un block\&. Insertion d'un block\&. 
+.SS "void btreenode_search (struct \fBbtree_node\fP * root, const char * value, char * file)"
+
+.PP
+Recherche d'un noeud dans l'arbre\&. 
+.SS "void print_btree (FILE * stream, const struct \fBbtree_node\fP * node)"
+
+.PP
+Impression d'un B+tree\&. Impression d'un B+tree\&. 
+.SH "Auteur"
+.PP 
+Généré automatiquement par Doxygen pour CavBDM2 - BDD à partir du code source\&.

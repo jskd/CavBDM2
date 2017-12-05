@@ -1,4 +1,4 @@
-.TH "diskWriter" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.TH "diskWriter" 3 "Mardi 5 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -20,6 +20,9 @@ diskWriter
 .br
 .ti -1c
 .RI "int \fBfile_number\fP"
+.br
+.ti -1c
+.RI "char * \fBcurrent_path\fP"
 .br
 .ti -1c
 .RI "FILE * \fBcurrent_file\fP"
@@ -46,6 +49,8 @@ Remarques :
 .SS "FILE* diskWriter::current_file"
 
 .SS "int diskWriter::current_line"
+
+.SS "char* diskWriter::current_path"
 
 .SS "char* diskWriter::dir"
 

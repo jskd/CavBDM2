@@ -1,4 +1,4 @@
-.TH "src/bdd/diskReader.h" 3 "Vendredi 1 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
+.TH "src/bdd/diskReader.h" 3 "Mardi 5 Décembre 2017" "CavBDM2 - BDD" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -27,6 +27,9 @@ src/bdd/diskReader.h
 .RI "FILE * \fBdisk_r_item\fP (const struct \fBdiskReader\fP *disk, int index)"
 .br
 .ti -1c
+.RI "char * \fBdisk_r_item_path\fP (const struct \fBdiskReader\fP *disk, int index)"
+.br
+.ti -1c
 .RI "void \fBdisk_r_storeContentInTable\fP (const struct \fBdiskReader\fP *disk, struct \fBbuffer\fP *buf, struct \fBtable\fP *tab)"
 .br
 .ti -1c
@@ -44,6 +47,8 @@ src/bdd/diskReader.h
 .SS "void disk_r_dump (FILE * f, struct \fBdiskReader\fP * dr)"
 
 .SS "FILE* disk_r_item (const struct \fBdiskReader\fP * disk, int index)"
+
+.SS "char* disk_r_item_path (const struct \fBdiskReader\fP * disk, int index)"
 
 .SS "void disk_r_storeContentInTable (const struct \fBdiskReader\fP * disk, struct \fBbuffer\fP * buf, struct \fBtable\fP * tab)"
 

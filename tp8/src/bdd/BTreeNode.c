@@ -31,7 +31,7 @@ static const size_t _buf_mode= BUFFER_CHARACTERS;
 #define BUF_DATA_LENGHT 3
 
 struct btree_node {
-  int  isLeaf;
+  int   isLeaf;
   char  parent   [PATH_MAX];
   int   n_value;
   char  key      [NODE_MAX][BUF_DATA_LENGHT];
@@ -225,6 +225,15 @@ void btreenode_insert_value_in_node(struct btree_node* node, const char* key, co
   _btreenode_store(node);
 }
 
+
+
+
+void btreenode_insert_node(struct btree_node* root, struct btree_node* child) {
+
+  btreenode_insert_value_in_node(root, child->key[0], child->savefile);
+}
+
+
 void btreenode_insert(struct btree_node* root, const char* filepath, struct diskWriter* dw)
 {
 
@@ -238,34 +247,34 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
   buffer_get(buf, 0, key);
   buffer_destroy(buf);
 
-  struct btree_node* current= root;
 
-  while(current->isLeaf != 1) {
-      current= _btreenode_read_file(current->value[ current->n_value-1 ] );
-  }
+  while(1) {
 
-
-
-  if(btreenode_can_insert_value_in_node(current)) {
-    btreenode_insert_value_in_node(current, key, filepath);
-  }
-  else
-  {
-
-    if(btreenode_node_is_root(current)) {
-      btreenode_slit_root(current, dw);
-    }
-
-    current= root;
+    struct btree_node* current= root;
 
     while(current->isLeaf != 1) {
         current= _btreenode_read_file(current->value[ current->n_value-1 ] );
     }
-    
-    btreenode_insert_value_in_node(current, key, filepath);
 
+    // Il reste de la place dans la feuille
+    if(btreenode_can_insert_value_in_node(current)) {
+      btreenode_insert_value_in_node(current, key, filepath);
+      break;
+    }
+    else
+    {
+      // La feuille est la racine : slit root
+      if(btreenode_node_is_root(current)) {
+        btreenode_slit_root(current, dw);
+      }
+      else
+      {
+        struct btree_node* right= btreenode_slit_leaf(current, dw);
+        btreenode_insert_node(root, right);
+        break;
 
-
+      }
+    }
 
   }
 

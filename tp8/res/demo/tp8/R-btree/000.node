@@ -1,14 +1,14 @@
 leaf: 0
-n_value: 2
+n_value: 3
 key: [
 	AA
 	GA
-	
+	NA
 ]
 value: [
 	res/demo/tp8/R-btree/001.node
 	res/demo/tp8/R-btree/002.node
-	
+	res/demo/tp8/R-btree/003.node
 ]
 root: 1
 parent: 

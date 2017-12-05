@@ -7,7 +7,7 @@
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{pdfpages}
 \usepackage{alltt}
-
+\usepackage{rotating}
 \title{Concepts Avancés de Bases de données}
 
 \author{Joaquim LEFRANC et Jérôme SKODA}
@@ -18,64 +18,25 @@
 \maketitle
 
 
-\section{Nouveauté depuis le TP6}
+\section{Nouveauté depuis le TP7}
 
 \begin{itemize}
-  \item Make gen-tp7 : Génération du fichier R du tp7 (necessite python3)
-  \item Make demo-tp7 : Démonstration pour le TP7
-  \item Ajout de diskManager (Writer ou Reader) pour la gestion des partition de disque
-  \item Prise en compte de l'ordre alphabétique dans diskManagerReader et diskReader
-  \item Uniformisation des structures et fonctions  d'écriture/lecture sur disques
-  \begin{itemize}
-    \item diskManagerReader : Lecture de partition de disque
-    \item diskManagerWriter : Ecriture de partition de disque
-    \item diskReader : Lecture de disques
-    \item diskWriter : Ecriture de disque
-  \end{itemize}
-  \item Ajout de methode de dump sur les diskReader et diskManagerReader
-  \begin{itemize}
-    \item void disk\_manager\_r\_dump( FILE* f,  struct diskManagerReader* dmr);
-    \item void disk\_r\_dump( FILE* f,  struct diskReader* dr);
-  \end{itemize}
-  \item Ajout de test
+  \item Make demo-tp8 : Démonstration pour le TP8 (Creation et recherche)
+  \item Ajout de fonctions pour créer des B+tree
+  \item Ajout de test : Creation et Recherche sur B+tree
+  \item Man pages généré
+
 \end{itemize}
-
-\section{Comment nous avons perdu betement 2 heures de notre vie}
-
-Lors de ce tp nous avons eu besoin de prendre en compte l'ordre des fichiers
-et nous avons donc choisi d'utiliser la fonction scandir.
-La fonction scandir avec alphasort permet d'obtenir le nom des fichiers contenu
-dans un dossier dans l'ordre alphabétique.
-
-Exemple: 0.txt 1.txt  2.txt  3.txt  4.txt  5.txt  6.txt  7.txt etc.
-
-Cependant, nous n'avons pas prévu le cas d'un merge avec plus de 10 fichier dans
-un bloque...
-
-Car lordre donné est: 0.txt 1.txt \textbf{10.txt} 2.txt  3.txt etc.
-
-Ce qui pose probléme c'est que le fichier 10.txt est fusionné avec le 2.txt
-
-Du coups, nous avons un algorithme qui fonctionnais dans les premiers steps
-(car il y a peu de fichier dans les blocks) puis dégénére dans les derniers
-steps.
-
-Pour résoudre le probléme, il faut ajouter remplacer "\%d" par "\%03d" dans le generateur
-de nom de diskManagerWriter et diskWriter. De cette manière les fichiers
-serront nommé: 000.txt 001.txt 003.txt ... 009.txt 010.txt 011.txt
-
-Ce qui est drole: un fix de 2 caractère pour 2 heures passé.
-Niveau de production exceptionnel!
+\section{Etape de creation de B+Tree}
 
 
-\section{Hiérarchie des disques}
+\includegraphics[width=0.8\textwidth]{btree-1.png}
+\newline
 
-Introduction d'un systeme de gestion des disques, DiskManager.
+\includegraphics[width=0.8\textwidth]{btree-2.png}
 
-Maintenant, il est possible de créer un regroupement de disque avec
-DiskManagerWriter puis acceder à chacun ces disques avec DiskManagerReader.
 
-\includegraphics[width=0.8\textwidth]{block.png}
+\newpage
 
 \section{Comment compiler le projet}
 

@@ -328,3 +328,7 @@ void btreenode_search(struct btree_node* root, const char* value, char* file) {
   }
 
 }
+
+struct btree_node* btree_load(struct diskReader* dr) {
+   return _btreenode_read_file(disk_r_item_path(dr, 0));
+}

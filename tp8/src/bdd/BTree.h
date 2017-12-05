@@ -18,6 +18,9 @@
 #ifndef SRC_BDD_BTREE_H
 #define SRC_BDD_BTREE_H
 
+#include "diskReader.h"
+#include "diskWriter.h"
+
 struct btree_node* btreenode_create(struct diskWriter* dw);
 
 void btreenode_insert(struct btree_node* root, const char* filepath, struct diskWriter* dw);
@@ -25,5 +28,7 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
 void print_btree(FILE* stream, const struct btree_node* node);
 
 void btreenode_search(struct btree_node* root, const char* value, char* file);
+
+struct btree_node* btree_load(struct diskReader* dw);
 
 #endif

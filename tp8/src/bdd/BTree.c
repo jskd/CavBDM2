@@ -166,20 +166,7 @@ struct btree_node* btreenode_create(struct diskWriter* dw) {
 
 
 
-// Return right node
-struct btree_node* btreenode_slit_leaf(struct btree_node* left, struct diskWriter* dw) {
 
-  struct btree_node* right= btreenode_create( dw );
-
-  btreenode_move_value(right, 0, left, 2);
-
-  right->isLeaf= left->isLeaf;
-
-  _btreenode_store(left);
-  _btreenode_store(right);
-
-  return right;
-}
 
 
 void btreenode_move_value(struct btree_node* dst, int idx_dst, struct btree_node* source, int idx_source) {
@@ -206,6 +193,20 @@ void btreenode_add_child(struct btree_node* parent, struct btree_node* child) {
   _btreenode_store(child);
 }
 
+// Return right node
+struct btree_node* btreenode_slit_leaf(struct btree_node* left, struct diskWriter* dw) {
+
+  struct btree_node* right= btreenode_create( dw );
+
+  btreenode_move_value(right, 0, left, 2);
+
+  right->isLeaf= left->isLeaf;
+
+  _btreenode_store(left);
+  _btreenode_store(right);
+
+  return right;
+}
 
 struct btree_node* btreenode_slit_root(struct btree_node* root, struct diskWriter* dw) {
 
@@ -246,22 +247,19 @@ void btreenode_insert_value_in_node(struct btree_node* node, const char* key, co
 
 void btreenode_insert(struct btree_node* root, const char* filepath, struct diskWriter* dw)
 {
-
+  // Lecture de la 1ére valeur du fichier
   struct buffer* buf= buffer_read_file(filepath, _buf_size, _buf_data_lenght, _buf_mode);
   if(buf == NULL) {
     printf("Erreur lors de la lecture de %s.\n", filepath);
     return;
   }
-
   char key[BUF_DATA_LENGHT+1];
   buffer_get(buf, 0, key);
   buffer_destroy(buf);
 
-
-
+  // Relecture de la racine et deplacement jusqu'à la feuille la plus à droite
   root= _btreenode_read_file(root->savefile);
   struct btree_node* current= root;
-
   while(current->isLeaf != 1) {
       current= _btreenode_read_file(current->value[ current->n_value-1 ] );
   }
@@ -270,59 +268,30 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
   if(btreenode_can_insert_value_in_node(current)) {
     btreenode_insert_value_in_node(current, key, filepath);
   }
+  // Pas de place et le noeud courrant est la racine
   else if(btreenode_node_is_root(current))
   {
-    btreenode_slit_root(current, dw);
-
-    root= _btreenode_read_file(root->savefile);
-    struct btree_node* current= root;
-
-    while(current->isLeaf != 1) {
-        current= _btreenode_read_file(current->value[ current->n_value-1 ] );
-    }
-
-    btreenode_insert_value_in_node(current, key, filepath);
+    // Division et ajout à droite
+    struct btree_node* right= btreenode_slit_root(current, dw);
+    btreenode_insert_value_in_node(right, key, filepath);
   }
+  // Pas de place et le noeud courrant n'est pas la racine
   else if(!btreenode_node_is_root(current))
   {
+    // On divise la feuille
+    struct btree_node* right= btreenode_slit_leaf(current, dw);
+    btreenode_insert_value_in_node(right, key, filepath);
 
-     if(btreenode_can_insert_value_in_node(root))
-     {
-       struct btree_node* right= btreenode_slit_leaf(current, dw);
-       btreenode_insert_value_in_node(right, key, filepath);
-       btreenode_add_child(root, right);
-     }
-     else
-     {
-
-       struct btree_node* right= btreenode_slit_leaf(current, dw);
-       btreenode_insert_value_in_node(right, key, filepath);
-
-
-       struct btree_node* right_root= btreenode_slit_root(root, dw);
-
-       btreenode_add_child(right_root, right);
-
-
-       return;
-
-
-    /*   btreenode_slit_root(root, dw);
-
-       root= _btreenode_read_file(root->savefile);
-       struct btree_node* current= root;
-
-       while(current->isLeaf != 1) {
-           current= _btreenode_read_file(current->value[ current->n_value-1 ] );
-       }
-
-       current= _btreenode_read_file(current->parent );
-
-
-       btreenode_insert_value_in_node(current, right->key[0], right->savefile);
-       strncpy(right->parent, root->savefile, PATH_MAX );
-      _btreenode_store(right);*/
-     }
+    // La racine n'est pas pleinne
+    if(btreenode_can_insert_value_in_node(root))
+    {
+      btreenode_add_child(root, right);
+    }
+    // La racine est pleinne
+    else
+    {
+      struct btree_node* right_root= btreenode_slit_root(root, dw);
+      btreenode_add_child(right_root, right);
+    }
   }
-
 }

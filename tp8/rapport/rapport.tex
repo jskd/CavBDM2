@@ -17,26 +17,22 @@
 \begin{document}
 \maketitle
 
-
 \section{Nouveauté depuis le TP7}
 
 \begin{itemize}
-  \item Make demo-tp8 : Démonstration pour le TP8 (Creation et recherche)
   \item Ajout de fonctions pour créer des B+tree
+  \item Ajout de demo : Démonstration pour le TP8 (Creation et recherche)
   \item Ajout de test : Creation et Recherche sur B+tree
-  \item Man pages généré
-
+  \item Man pages généré (dans doc/man3)
 \end{itemize}
-\section{Etape de creation de B+Tree}
 
+\section{Etape de creation de B+Tree}
 
 \includegraphics[width=0.8\textwidth]{btree-1.png}
 \newline
-
 \includegraphics[width=0.8\textwidth]{btree-2.png}
+\newline
 
-
-\newpage
 
 \section{Comment compiler le projet}
 
@@ -52,11 +48,12 @@
 	\item make demo-tp4 : Lancer la démo tp4
 	\item make demo-tp5 : Lancer la démo tp5
   \item make demo-tp6 : Lancer la démo tp6
-  \item \colorbox{yellow}{make demo-tp7 : Lancer la démo tp7 (Nouveau)}
+  \item make demo-tp7 : Lancer la démo tp7
+  \item \colorbox{yellow}{ make demo-tp8 : Lancer la démo tp8 (creation + recherche dans un B+tree) (Nouveau)}
 	\item make rm-rs : Supprime le fichier res/RS.txt et res/disk/RS.txt
   \item make gen-tp5 : Génération de R pour tp5
   \item make gen-tp6 : Génération de R et S pour tp5
-  \item \colorbox{yellow}{make gen-tp7 : Génération de R pour tp7 (Nouveau)}
+  \item make gen-tp7 : Génération de R pour tp7
 \end{itemize}
 
 \section{Arborescence}
@@ -107,7 +104,9 @@ La commande make pour lancer les demo sont: make demo-tp1, make demo-tp2, make d
   \item tp4-hash-join : Hash join
   \item tp5-nested-loop-disk: Nested loop sur disque
   \item tp6 nested loop join + hash join
-  \item \colorbox{yellow}{tp7-disk-sort-merge (Nouveau)}
+  \item tp7-disk-sort-merge
+  \item \colorbox{yellow}{tp8-btree-create (Nouveau)}
+  \item \colorbox{yellow}{tp8-btree-search (Nouveau)}
 \end{itemize}
 
 \section{Test unitaire}
@@ -140,8 +139,10 @@ La commande make pour lancer les test est: make test
   \item 19-buffer-decimal
   \item 20-table-puts
   \item 21-disk-block-hash-join
-  \item \colorbox{yellow}{22-diskManagerReader (Nouveau)}
-  \item \colorbox{yellow}{23-disk-sort-merge (Nouveau)}
+  \item 22-diskManagerReader
+  \item 23-disk-sort-merge
+  \item \colorbox{yellow}{24-btree-create (Nouveau)}
+  \item \colorbox{yellow}{25-btree-search (Nouveau)}
 \end{itemize}
 
 \includegraphics[width=0.8\textwidth]{test.png}

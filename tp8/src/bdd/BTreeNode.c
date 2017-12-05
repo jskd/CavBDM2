@@ -256,6 +256,17 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
       btreenode_slit_root(current, dw);
     }
 
+    current= root;
+
+    while(current->isLeaf != 1) {
+        current= _btreenode_read_file(current->value[ current->n_value-1 ] );
+    }
+    
+    btreenode_insert_value_in_node(current, key, filepath);
+
+
+
+
   }
 
 }

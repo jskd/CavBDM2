@@ -17,8 +17,7 @@
 */
 
 #include "../bdd/diskSortMerge.h"
-#include "../bdd/BTreeLeaf.h"
-#include "../bdd/BTreeNode.h"
+#include "../bdd/BTree.h"
 
 // input disk config
 static const char* _file_r= "res/demo/tp8/R";

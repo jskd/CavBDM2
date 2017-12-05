@@ -15,8 +15,8 @@
  *
  * Remarques :
  */
-#ifndef SRC_BDD_BTREENODE_H
-#define SRC_BDD_BTREENODE_H
+#ifndef SRC_BDD_BTREE_H
+#define SRC_BDD_BTREE_H
 
 struct btree_node* btreenode_create(struct diskWriter* dw);
 

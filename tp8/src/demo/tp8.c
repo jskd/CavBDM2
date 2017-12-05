@@ -38,53 +38,12 @@ int main(int argc, char** argv){
     printf("Erreur lors de la lecture de %s.\n", _path_output);
     return -1;
   }
-/*
-  for(int i=0; i< disk_r_count(dr); i++) {
-    disk_w_new_f(dw);
-    btreeleaf_create( disk_r_item_path(dr, i) , disk_w_get_current_path(dw) );
-  }
 
-
- struct btreeNode *root;
-
-
-insertion(root, 12);
-int ch=0;
-searching(12,&ch, root);
-printf("%d\n", ch );
-*/
-
-;
   struct btree_node* root= btreenode_create(dw);
 
-  btreenode_insert( root, "res/demo/tp8/R/0.txt", dw);
-  btreenode_insert( root, "res/demo/tp8/R/1.txt", dw);
-  btreenode_insert( root, "res/demo/tp8/R/2.txt", dw);
-  btreenode_insert( root, "res/demo/tp8/R/3.txt", dw);
-  btreenode_insert( root, "res/demo/tp8/R/4.txt", dw);
-  btreenode_insert( root, "res/demo/tp8/R/5.txt", dw);
-  btreenode_insert( root, "res/demo/tp8/R/6.txt", dw);
-  btreenode_insert( root, "res/demo/tp8/R/7.txt", dw);
-/*  disk_w_destroy(dw);
-  disk_r_destroy(dr);*/
+  for(int i=0; i< disk_r_count(dr); i++) {
+    btreenode_insert( root, disk_r_item_path(dr, i) , dw );
+  }
 
-//  return 0;
-
-print_btreenode(stdout, _btreenode_read_file("res/demo/tp8/R-btree/000.node"), 0) ;
-
-/*
-printf("========1=======\n");
-_btreenode_print(stdout, );
-  printf("===============\n");
-printf("========2=======\n");
-_btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/001.node"));
-  printf("===============\n");
-printf("========3=======\n");
-_btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/002.node"));
-  printf("===============\n");
-
-printf("========4=======\n");
-_btreenode_print(stdout, _btreenode_read_file("res/demo/tp8/R-btree/003.node"));
-  printf("===============\n");
-*/
+  print_btreenode(stdout, root, 0);
 }

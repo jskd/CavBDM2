@@ -121,6 +121,7 @@ struct btree_node* _btreenode_read_file(const char* file) {
 }
 
 void print_btreenode(FILE* stream, const struct btree_node* node, int tab) {
+  node= _btreenode_read_file(node->savefile);
 
   for(int i=0; i< tab; i++)
     fprintf(stream, "\t");

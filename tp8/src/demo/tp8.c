@@ -48,4 +48,7 @@ int main(int argc, char** argv){
     printf("\n");
   }
 
+  printf("Génération de l'arbre %s terminé.\n", _path_output);
+
+
 }

@@ -129,7 +129,7 @@ void print_btreenode(FILE* stream, const struct btree_node* node, int tab, char 
         fprintf(stream, "└── ");
       else
         fprintf(stream, "├── ");
-    else if(parent_last)
+    else if(parent_last && i == tab -2)
     fprintf(stream, "│   ");
     else
     fprintf(stream, "    ");
@@ -151,7 +151,10 @@ void print_btreenode(FILE* stream, const struct btree_node* node, int tab, char 
 }
 
 void print_btree(FILE* stream, const struct btree_node* node) {
-  print_btreenode(stream, node, 0, 0, 0);
+
+
+fprintf(stream, "%.*s (root)\n", PATH_MAX, node->savefile);
+  print_btreenode(stream, node, 1, 1, 1);
 
 }
 

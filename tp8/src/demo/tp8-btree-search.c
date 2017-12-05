@@ -1,9 +1,9 @@
 /**
-* TP n°: 5
+* TP n°: 8
 *
-* Titre du TP : Nested loop join disk
+* Titre du TP : B+Tree
 *
-* Date : 10 Nov 2017
+* Date : 5 Nec 2017
 *
 * Nom : Lefranc
 * Prenom : Joaquim
@@ -13,9 +13,12 @@
 * Prenom : Jérôme
 * email : contact@jeromeskoda.fr
 *
+* Nom : Bitout
+* Prenom : Cécilia
+* email : bitout.cecelia@gmail.com
+*
 * Remarques :
 */
-
 #include "../bdd/diskSortMerge.h"
 #include "../bdd/BTree.h"
 #include <limits.h>

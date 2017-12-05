@@ -1,9 +1,9 @@
 /**
-* TP n°: 6
+* TP n°: 8
 *
-* Titre du TP :
+* Titre du TP : B+Tree
 *
-* Date : 21/10/17
+* Date : 5 Nec 2017
 *
 * Nom : Lefranc
 * Prenom : Joaquim
@@ -12,6 +12,10 @@
 * Nom : Skoda
 * Prenom : Jérôme
 * email : contact@jeromeskoda.fr
+*
+* Nom : Bitout
+* Prenom : Cécilia
+* email : bitout.cecelia@gmail.com
 *
 * Remarques :
 */
@@ -39,24 +43,32 @@ struct btree_node {
   char  savefile [PATH_MAX];
 };
 
-/* Permet de forcer l'écriture sur le disque */
+/**
+ * @brief Permet de forcer l'écriture sur le disque
+ */
 static void _ffsync(FILE* file) {
   fflush(file);
   int fd= fileno(file);
   fsync(fd);
 }
 
-/* Test si l'insertion est possible */
+/**
+ * @brief Test si l'insertion est possible
+ */
 char btreenode_can_insert_value_in_node(const struct btree_node* node) {
   return node->n_value < NODE_MAX;
 }
 
-/* Test si c'est le node root */
+/**
+ * @brief Test si c'est le node root
+ */
 char btreenode_node_is_root(const struct btree_node* node) {
   return (strcmp(node->parent, "") == 0);
 }
 
-/* Affiche un noeud */
+/**
+ * @brief Affiche un noeud
+ */
 void _btreenode_print(FILE* stream, const struct btree_node* node) {
 
   _ffsync(stream);
@@ -80,14 +92,18 @@ void _btreenode_print(FILE* stream, const struct btree_node* node) {
   _ffsync(stream);
 }
 
-/* Ecrit dans le fichier */
+/**
+ * @brief Ecrit dans le fichier
+ */
 static void _btreenode_store(const struct btree_node* node) {
   FILE * pFile= fopen(node->savefile, "w");
   _btreenode_print(pFile, node);
   fclose(pFile);
 }
 
-/* Ouvre l'arbre contenu dans un fichier */
+/**
+ * @brief Ouvre l'arbre contenu dans un fichier
+ */
 struct btree_node* _btreenode_read_file(const char* file) {
 
   struct btree_node* node= (struct btree_node*) malloc( sizeof(struct btree_node));
@@ -127,7 +143,9 @@ struct btree_node* _btreenode_read_file(const char* file) {
   return node;
 }
 
-/* Affiche un noeud */
+/**
+ * @brief Affiche un noeud
+ */
 void print_btreenode(FILE* stream, const struct btree_node* node, int tab, char last, char parent_last) {
   node= _btreenode_read_file(node->savefile);
 
@@ -158,7 +176,9 @@ void print_btreenode(FILE* stream, const struct btree_node* node, int tab, char 
   }
 }
 
-/* Affiche l'arbre */
+/**
+ * @brief  Affiche l'arbre
+ */
 void print_btree(FILE* stream, const struct btree_node* node) {
 
 fprintf(stream, "%.*s (root)\n", PATH_MAX, node->savefile);
@@ -166,7 +186,9 @@ fprintf(stream, "%.*s (root)\n", PATH_MAX, node->savefile);
 
 }
 
-/* Création d'un nouveau noeud */
+/**
+ * @brief Création d'un nouveau noeud
+ */
 struct btree_node* btreenode_create(struct diskWriter* dw) {
 
   struct btree_node* node= (struct btree_node*) malloc( sizeof(struct btree_node));
@@ -187,7 +209,9 @@ struct btree_node* btreenode_create(struct diskWriter* dw) {
   return node;
 }
 
-/* Deplace une valeur */
+/**
+ * @brief Deplace une valeur
+ */
 void btreenode_move_value(struct btree_node* dst, int idx_dst, struct btree_node* source, int idx_source) {
   strncpy(dst->key[idx_dst],   source->key[idx_source]  , BUF_DATA_LENGHT);
   strncpy(dst->value[idx_dst], source->value[idx_source], PATH_MAX       );
@@ -201,7 +225,9 @@ void btreenode_move_value(struct btree_node* dst, int idx_dst, struct btree_node
   _btreenode_store(dst);
 }
 
-/* Ajoute un enfant */
+/**
+ * @brief Ajoute un enfant
+ */
 void btreenode_add_child(struct btree_node* parent, struct btree_node* child) {
   strncpy(parent->key[parent->n_value],   child->key[0]  , BUF_DATA_LENGHT);
   strncpy(parent->value[parent->n_value], child->savefile, PATH_MAX       );
@@ -213,7 +239,9 @@ void btreenode_add_child(struct btree_node* parent, struct btree_node* child) {
   _btreenode_store(child);
 }
 
-// Return right node
+/**
+ * @brief Return right node
+ */
 struct btree_node* btreenode_slit_leaf(struct btree_node* left, struct diskWriter* dw) {
 
   struct btree_node* right= btreenode_create( dw );
@@ -228,7 +256,9 @@ struct btree_node* btreenode_slit_leaf(struct btree_node* left, struct diskWrite
   return right;
 }
 
-/* Divise le noeud racine en deux et retourne le noeud de droite */
+/**
+ * @brief Divise le noeud racine en deux et retourne le noeud de droite
+ */
 struct btree_node* btreenode_slit_root(struct btree_node* root, struct diskWriter* dw) {
 
   struct btree_node* left= btreenode_create( dw );
@@ -252,7 +282,9 @@ struct btree_node* btreenode_slit_root(struct btree_node* root, struct diskWrite
   return right;
 }
 
-/* Insertion d'une valeure dans un noeud */
+/**
+ * @brief Insertion d'une valeure dans un noeud
+ */
 void btreenode_insert_value_in_node(struct btree_node* node, const char* key, const char* value) {
   strncpy(node->key[node->n_value], key, BUF_DATA_LENGHT);
   strncpy(node->value[node->n_value], value, PATH_MAX);
@@ -260,7 +292,9 @@ void btreenode_insert_value_in_node(struct btree_node* node, const char* key, co
   _btreenode_store(node);
 }
 
-/* Insertion d'un  noeud */
+/**
+ * @brief Insertion d'un  noeud
+ */
 void btreenode_insert(struct btree_node* root, const char* filepath, struct diskWriter* dw)
 {
   // Lecture de la 1ére valeur du fichier
@@ -312,7 +346,9 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
   }
 }
 
-/* Recherche d'un noeud dans l'arbre */
+/**
+ * @brief Recherche d'un noeud dans l'arbre
+ */
 void btreenode_search(struct btree_node* root, const char* value, char* file) {
 
   root= _btreenode_read_file(root->savefile);

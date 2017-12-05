@@ -211,6 +211,10 @@ struct btree_node* btreenode_slit_root(struct btree_node* root, struct diskWrite
   struct btree_node* left= btreenode_create( dw );
   struct btree_node* right= btreenode_create( dw );
 
+  right->isLeaf= root->isLeaf;
+  left->isLeaf= root->isLeaf;
+  root->isLeaf= 0;
+
   btreenode_move_value(left, 0, root, 0);
   btreenode_move_value(left, 1, root, 1);
   btreenode_move_value(right, 0, root, 2);
@@ -263,16 +267,10 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
 
   // Il reste de la place dans la feuille
   if(btreenode_can_insert_value_in_node(current)) {
-    printf("insert 1 %s\n", filepath);
-    printf("current: %s\n", current->savefile);
-
     btreenode_insert_value_in_node(current, key, filepath);
   }
   else if(btreenode_node_is_root(current))
   {
-    printf("insert 2 %s\n", filepath);
-    printf("current: %s\n", current->savefile);
-
     btreenode_slit_root(current, dw);
 
     root= _btreenode_read_file(root->savefile);
@@ -291,15 +289,7 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
      {
        struct btree_node* right= btreenode_slit_leaf(current, dw);
        btreenode_insert_value_in_node(right, key, filepath);
-
-
-
-       printf("insert 3 %s\n", filepath);
-       printf("current: %s\n", root->savefile);
-
-
        btreenode_add_child(root, right);
-
      }
      else
      {
@@ -315,8 +305,6 @@ void btreenode_insert(struct btree_node* root, const char* filepath, struct disk
 
        return;
 
-             printf("insert 4 %s\n", filepath);
-             printf("current: %s\n", current->savefile);
 
     /*   btreenode_slit_root(root, dw);
 
